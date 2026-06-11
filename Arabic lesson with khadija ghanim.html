@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arabic Practice – Jordanian Dialect Verbs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&family=Fira+Mono&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --sand:    #F7F2E8;
+      --parch:   #EDE4CC;
+      --ink:     #1C1A14;
+      --earth:   #6B4F2A;
+      --teal:    #2A7C74;
+      --teal-lt: #DFF0EE;
+      --rust:    #C0452A;
+      --gold:    #C8922A;
+      --muted:   #7A7264;
+      --border:  #C9BFA8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--sand);
+      color: var(--ink);
+      font-family: 'Cairo', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── HERO ── */
+    header {
+      background: var(--teal);
+      color: #fff;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: "ز ك ت ب ش ح ق ن ل ه";
+      position: absolute;
+      top: -10px; left: 0; right: 0;
+      font-family: 'Amiri', serif;
+      font-size: 5rem;
+      color: rgba(255,255,255,0.06);
+      letter-spacing: 2rem;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    header .tag {
+      display: inline-block;
+      background: var(--gold);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 0.25rem 0.85rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    header h1 {
+      font-family: 'Amiri', serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 1rem;
+      opacity: 0.85;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── LAYOUT ── */
+    main { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+
+    section { margin-bottom: 3rem; }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .section-title .dot {
+      width: 10px; height: 10px;
+      background: var(--rust);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .section-title h2 {
+      font-family: 'Amiri', serif;
+      font-size: 1.45rem;
+      color: var(--earth);
+      border-bottom: 2px solid var(--parch);
+      padding-bottom: 0.3rem;
+      flex: 1;
+    }
+
+    /* ── PRONOUN ENDINGS TABLE ── */
+    .pronoun-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.6rem;
+    }
+    .pronoun-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .pronoun-card .en { color: var(--muted); font-size: 0.82rem; }
+    .pronoun-card .ending {
+      font-family: 'Amiri', serif;
+      font-size: 1.3rem;
+      color: var(--teal);
+      font-weight: 700;
+      direction: ltr;
+    }
+
+    /* ── VERB CONJUGATION TABLE ── */
+    .verb-block {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+    .verb-header {
+      background: var(--teal);
+      color: #fff;
+      padding: 0.9rem 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .verb-header .arabic {
+      font-family: 'Amiri', serif;
+      font-size: 1.7rem;
+    }
+    .verb-header .latin { font-size: 0.95rem; opacity: 0.9; font-style: italic; }
+    .verb-header .meaning {
+      background: rgba(255,255,255,0.18);
+      border-radius: 20px;
+      padding: 0.2rem 0.85rem;
+      font-size: 0.85rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th {
+      background: var(--teal-lt);
+      color: var(--teal);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.55rem 1rem;
+      text-align: right;
+    }
+    td {
+      padding: 0.55rem 1rem;
+      border-top: 1px solid var(--parch);
+      vertical-align: middle;
+    }
+    tr:hover td { background: #fafaf6; }
+    td .pronoun { color: var(--muted); font-size: 0.82rem; }
+    td .conj-ar {
+      font-family: 'Amiri', serif;
+      font-size: 1.25rem;
+      color: var(--ink);
+    }
+    td .conj-lat {
+      font-family: 'Fira Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--earth);
+    }
+
+    /* ── VOCAB GRID ── */
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
+    .vocab-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .vocab-card .ar {
+      font-family: 'Amiri', serif;
+      font-size: 1.35rem;
+      color: var(--ink);
+    }
+    .vocab-card .lat {
+      font-family: 'Fira Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--earth);
+    }
+    .vocab-card .en-def { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── PARTICLES BOX ── */
+    .particles-box {
+      background: var(--teal-lt);
+      border: 1px solid #b2d8d4;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.75rem;
+    }
+    .particle-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .particle-item .ar {
+      font-family: 'Amiri', serif;
+      font-size: 1.4rem;
+      color: var(--teal);
+      min-width: 2rem;
+      text-align: center;
+    }
+    .particle-item .info { font-size: 0.85rem; color: var(--ink); }
+    .particle-item .info span { color: var(--muted); font-size: 0.78rem; display: block; }
+
+    /* ── NOTES BOX ── */
+    .note-box {
+      background: #fffbf0;
+      border: 1px solid #e8d9a0;
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      font-size: 0.9rem;
+      color: var(--ink);
+      margin-top: 1rem;
+    }
+    .note-box strong { color: var(--earth); }
+
+    /* ── QUIZ ── */
+    .quiz-block {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .quiz-q {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px dashed var(--border);
+    }
+    .quiz-q:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .quiz-q p { font-weight: 600; margin-bottom: 0.75rem; }
+    .quiz-q .choices { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .quiz-q button {
+      border: 1.5px solid var(--border);
+      background: var(--sand);
+      color: var(--ink);
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.88rem;
+      padding: 0.45rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .quiz-q button:hover { border-color: var(--teal); background: var(--teal-lt); }
+    .quiz-q button.correct { background: #d4f0dc; border-color: #3a9e5f; color: #1a5c33; }
+    .quiz-q button.wrong   { background: #fde8e4; border-color: var(--rust); color: var(--rust); }
+    .quiz-q .feedback { margin-top: 0.5rem; font-size: 0.85rem; display: none; }
+    .quiz-q .feedback.show { display: block; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 2rem 1rem; }
+      th, td { padding: 0.45rem 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header>
+  <div class="tag">اللهجة الأردنية • Jordanian Dialect</div>
+  <h1>الأفعال اليومية<br><span style="font-size:0.55em;opacity:0.85">Everyday Verbs & Conjugation</span></h1>
+  <p>Past-tense verb conjugations, useful expressions, and key vocabulary from daily life</p>
+</header>
+
+<main>
+
+  <!-- SECTION 1: PRONOUN ENDINGS -->
+  <section>
+    <div class="section-title"><div class="dot"></div><h2>Past-Tense Pronoun Endings (اللواحق)</h2></div>
+    <div class="pronoun-grid">
+      <div class="pronoun-card"><span class="en">I (أنا)</span>       <span class="ending">-it</span></div>
+      <div class="pronoun-card"><span class="en">You m. (أنت)</span>  <span class="ending">-it</span></div>
+      <div class="pronoun-card"><span class="en">You f. (أنتِ)</span> <span class="ending">-ti</span></div>
+      <div class="pronoun-card"><span class="en">He (هو)</span>        <span class="ending">— (no ending)</span></div>
+      <div class="pronoun-card"><span class="en">She (هي)</span>       <span class="ending">-at</span></div>
+      <div class="pronoun-card"><span class="en">We (نحنا)</span>      <span class="ending">-na</span></div>
+      <div class="pronoun-card"><span class="en">You pl. (أنتو)</span><span class="ending">-tu</span></div>
+      <div class="pronoun-card"><span class="en">They (هُما)</span>    <span class="ending">-u</span></div>
+    </div>
+    <div class="note-box">
+      <strong>Note:</strong> For hollow verbs (verbs with و or ي in the root like زار، نام، باع، قام), the vowel in the stem changes when endings are added. Watch the tables below!
+    </div>
+  </section>
+
+  <!-- SECTION 2: VERB CONJUGATIONS -->
+  <section>
+    <div class="section-title"><div class="dot"></div><h2>Verb Conjugation Tables (تصريف الأفعال)</h2></div>
+
+    <!-- زار -->
+    <div class="verb-block">
+      <div class="verb-header">
+        <span class="arabic">زار</span>
+        <span class="latin">zār</span>
+        <span class="meaning">to visit – زيارة</span>
+      </div>
+      <table>
+        <thead><tr><th>Pronoun</th><th>Arabic</th><th>Transliteration</th></tr></thead>
+        <tbody>
+          <tr><td class="pronoun">أنا</td><td class="conj-ar">زُرْت</td><td class="conj-lat">zurit</td></tr>
+          <tr><td class="pronoun">أنت</td><td class="conj-ar">زُرْت</td><td class="conj-lat">zurit</td></tr>
+          <tr><td class="pronoun">أنتِ</td><td class="conj-ar">زُرْتِ</td><td class="conj-lat">zurti</td></tr>
+          <tr><td class="pronoun">هو</td><td class="conj-ar">زار</td><td class="conj-lat">zār</td></tr>
+          <tr><td class="pronoun">هي</td><td class="conj-ar">زارت</td><td class="conj-lat">zārat</td></tr>
+          <tr><td class="pronoun">نحنا</td><td class="conj-ar">زُرْنا</td><td class="conj-lat">zurna</td></tr>
+          <tr><td class="pronoun">أنتو</td><td class="conj-ar">زُرْتو</td><td class="conj-lat">zurtu</td></tr>
+          <tr><td class="pronoun">هُما</td><td class="conj-ar">زاروا</td><td class="conj-lat">zāru</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- حكى -->
+    <div class="verb-block">
+      <div class="verb-header">
+        <span class="arabic">حكى</span>
+        <span class="latin">haka</span>
+        <span class="meaning">to talk / tell</span>
+      </div>
+      <table>
+        <thead><tr><th>Pronoun</th><th>Arabic</th><th>Transliteration</th></tr></thead>
+        <tbody>
+          <tr><td class="pronoun">أنا</td><td class="conj-ar">حكيت</td><td class="conj-lat">hakeit</td></tr>
+          <tr><td class="pronoun">أنت</td><td class="conj-ar">حكيت</td><td class="conj-lat">hakeit</td></tr>
+          <tr><td class="pronoun">أنتِ</td><td class="conj-ar">حكيتِ</td><td class="conj-lat">hakeiti</td></tr>
+          <tr><td class="pronoun">هو</td><td class="conj-ar">حكى</td><td class="conj-lat">haka</td></tr>
+          <tr><td class="pronoun">هي</td><td class="conj-ar">حكت</td><td class="conj-lat">hakat</td></tr>
+          <tr><td class="pronoun">نحنا</td><td class="conj-ar">حكينا</td><td class="conj-lat">hakeina</td></tr>
+          <tr><td class="pronoun">أنتو</td><td class="conj-ar">حكيتو</td><td class="conj-lat">hakeitu</td></tr>
+          <tr><td class="pronoun">هُما</td><td class="conj-ar">حكوا</td><td class="conj-lat">haku</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- بلّش -->
+    <div class="verb-block">
+      <div class="verb-header">
+        <span class="arabic">بلّش</span>
+        <span class="latin">bellash</span>
+        <span class="meaning">to start / begin</span>
+      </div>
+      <table>
+        <thead><tr><th>Pronoun</th><th>Arabic</th><th>Transliteration</th></tr></thead>
+        <tbody>
+          <tr><td class="pronoun">أنا</td><td class="conj-ar">بلّشت</td><td class="conj-lat">bellashit</td></tr>
+          <tr><td class="pronoun">أنت</td><td class="conj-ar">بلّشت</td><td class="conj-lat">bellashit</td></tr>
+          <tr><td class="pronoun">أنتِ</td><td class="conj-ar">بلّشتِ</td><td class="conj-lat">bellashti</td></tr>
+          <tr><td class="pronoun">هو</td><td class="conj-ar">بلّش</td><td class="conj-lat">bellash</td></tr>
+          <tr><td class="pronoun">هي</td><td class="conj-ar">بلّشت</td><td class="conj-lat">bellashat</td></tr>
+          <tr><td class="pronoun">نحنا</td><td class="conj-ar">بلّشنا</td><td class="conj-lat">bellashna</td></tr>
+          <tr><td class="pronoun">أنتو</td><td class="conj-ar">بلّشتو</td><td class="conj-lat">bellashtu</td></tr>
+          <tr><td class="pronoun">هُما</td><td class="conj-ar">بلّشو</td><td class="conj-lat">bellashu</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- طبخ -->
+    <div class="verb-block">
+      <div class="verb-header">
+        <span class="arabic">طبّخ</span>
+        <span class="latin">tabakh</span>
+        <span class="meaning">to cook – طبخ</span>
+      </div>
+      <table>
+        <thead><tr><th>Pronoun</th><th>Arabic</th><th>Transliteration</th></tr></thead>
+        <tbody>
+          <tr><td class="pronoun">أنا</td><td class="conj-ar">طبّخت</td><td class="conj-lat">tabakhit</td></tr>
+          <tr><td class="pronoun">أنت</td><td class="conj-ar">طبّخت</td><td class="conj-lat">tabakhit</td></tr>
+          <tr><td class="pronoun">أنتِ</td><td class="conj-ar">طبّختِ</td><td class="conj-lat">tabakhti</td></tr>
+          <tr><td class="pronoun">هو</td><td class="conj-ar">طبّخ</td><td class="conj-lat">tabakh</td></tr>
+          <tr><td class="pronoun">هي</td><td class="conj-ar">طبّخت</td><td class="conj-lat">tabakhat</td></tr>
+          <tr><td class="pronoun">نحنا</td><td class="conj-ar">طبّخنا</td><td class="conj-lat">tabakhna</td></tr>
+          <tr><td class="pronoun">أنتو</td><td class="conj-ar">طبّختو</td><td class="conj-lat">tabakhtu</td></tr>
+          <tr><td class="pronoun">هُما</td><td class="conj-ar">طبّخو</td><td class="conj-lat">tabakhu</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- كتب -->
+    <div class="verb-block">
+      <div class="verb-header">
+        <span class="arabic">كتب</span>
+        <span class="latin">katab</span>
+        <span class="meaning">to write – كتابة</span>
+      </div>
+      <table>
+        <thead><tr><th>Pronoun</th><th>Arabic</th><th>Transliteration</th></tr></thead>
+        <tbody>
+          <tr><td class="pronoun">أنا</td><td class="conj-ar">كتبت</td><td class="conj-lat">katabit</td></tr>
+          <tr><td class="pronoun">أنت</td><td class="conj-ar">كتبت</td><td class="conj-lat">katabit</td></tr>
+          <tr><td class="pronoun">أنتِ</td><td class="conj-ar">كتبتِ</td><td class="conj-lat">katabti</td></tr>
+          <tr><td class="pronoun">هو</td><td class="conj-ar">كتب</td><td class="conj-lat">katab</td></tr>
+          <tr><td class="pronoun">هي</td><td class="conj-ar">كتبت</td><td class="conj-lat">katabat</td></tr>
+          <tr><td class="pronoun">نحنا</td><td class="conj-ar">كتبنا</td><td class="conj-lat">katabna</td></tr>
+          <tr><td class="pronoun">أنتو</td><td class="conj-ar">كتبتو</td><td class="conj-lat">katabtu</td></tr>
+          <tr><td class="pronoun">هُما</td><td class="conj-ar">كتبو</td><td class="conj-lat">katabu</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- حضر -->
+    <div class="verb-block">
+      <div class="verb-header">
+        <span class="arabic">حضر</span>
+        <span class="latin">hidir</span>
+        <span class="meaning">to watch</span>
+      </div>
+      <table>
+        <thead><tr><th>Pronoun</th><th>Arabic</th><th>Transliteration</th></tr></thead>
+        <tbody>
+          <tr><td class="pronoun">أنا</td><td class="conj-ar">حضرت</td><td class="conj-lat">hidirit</td></tr>
+          <tr><td class="pronoun">أنت</td><td class="conj-ar">حضرت</td><td class="conj-lat">hidirit</td></tr>
+          <tr><td class="pronoun">أنتِ</td><td class="conj-ar">حضرتِ</td><td class="conj-lat">hidir­ti</td></tr>
+          <tr><td class="pronoun">هو</td><td class="conj-ar">حضر</td><td class="conj-lat">hidir</td></tr>
+          <tr><td class="pronoun">هي</td><td class="conj-ar">حضرت</td><td class="conj-lat">hidrat</td></tr>
+          <tr><td class="pronoun">نحنا</td><td class="conj-ar">حضرنا</td><td class="conj-lat">hidirna</td></tr>
+          <tr><td class="pronoun">أنتو</td><td class="conj-ar">حضرتو</td><td class="conj-lat">hidirtu</td></tr>
+          <tr><td class="pronoun">هُما</td><td class="conj-ar">حضرو</td><td class="conj-lat">hidru</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- نام -->
+    <div class="verb-block">
+      <div class="verb-header">
+        <span class="arabic">نام</span>
+        <span class="latin">nām</span>
+        <span class="meaning">to sleep</span>
+      </div>
+      <table>
+        <thead><tr><th>Pronoun</th><th>Arabic</th><th>Transliteration</th></tr></thead>
+        <tbody>
+          <tr><td class="pronoun">أنا</td><td class="conj-ar">نمت</td><td class="conj-lat">nimit</td></tr>
+          <tr><td class="pronoun">أنت</td><td class="conj-ar">نِمت</td><td class="conj-lat">nimit</td></tr>
+          <tr><td class="pronoun">أنتِ</td><td class="conj-ar">نِمتِ</td><td class="conj-lat">nimti</td></tr>
+          <tr><td class="pronoun">هو</td><td class="conj-ar">نام</td><td class="conj-lat">nām</td></tr>
+          <tr><td class="pronoun">هي</td><td class="conj-ar">نامت</td><td class="conj-lat">nāmat</td></tr>
+          <tr><td class="pronoun">نحنا</td><td class="conj-ar">نِمنا</td><td class="conj-lat">nimna</td></tr>
+          <tr><td class="pronoun">أنتو</td><td class="conj-ar">نِمتو</td><td class="conj-lat">nimtu</td></tr>
+          <tr><td class="pronoun">هُما</td><td class="conj-ar">ناموا</td><td class="conj-lat">nāmu</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- شاف -->
+    <div class="verb-block">
+      <div class="verb-header">
+        <span class="arabic">شاف</span>
+        <span class="latin">shāf</span>
+        <span class="meaning">to see</span>
+      </div>
+      <table>
+        <thead><tr><th>Pronoun</th><th>Arabic</th><th>Transliteration</th></tr></thead>
+        <tbody>
+          <tr><td class="pronoun">أنا</td><td class="conj-ar">شفت</td><td class="conj-lat">shofit</td></tr>
+          <tr><td class="pronoun">أنت</td><td class="conj-ar">شِفت</td><td class="conj-lat">shofit</td></tr>
+          <tr><td class="pronoun">أنتِ</td><td class="conj-ar">شِفتِ</td><td class="conj-lat">shofti</td></tr>
+          <tr><td class="pronoun">هو</td><td class="conj-ar">شاف</td><td class="conj-lat">shāf</td></tr>
+          <tr><td class="pronoun">هي</td><td class="conj-ar">شافت</td><td class="conj-lat">shāfat</td></tr>
+          <tr><td class="pronoun">نحنا</td><td class="conj-ar">شِفنا</td><td class="conj-lat">shofna</td></tr>
+          <tr><td class="pronoun">أنتو</td><td class="conj-ar">شِفتو</td><td class="conj-lat">shoftu</td></tr>
+          <tr><td class="pronoun">هُما</td><td class="conj-ar">شافوا</td><td class="conj-lat">shāfu</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+
+  <!-- SECTION 3: VOCABULARY -->
+  <section>
+    <div class="section-title"><div class="dot"></div><h2>Verb Vocabulary List (قائمة الأفعال)</h2></div>
+    <div class="vocab-grid">
+      <div class="vocab-card"><span class="ar">زار</span><span class="lat">zār</span><span class="en-def">to visit</span></div>
+      <div class="vocab-card"><span class="ar">باع</span><span class="lat">bāʿ</span><span class="en-def">to sell</span></div>
+      <div class="vocab-card"><span class="ar">قام</span><span class="lat">qām</span><span class="en-def">to stand / get up</span></div>
+      <div class="vocab-card"><span class="ar">نام</span><span class="lat">nām</span><span class="en-def">to sleep</span></div>
+      <div class="vocab-card"><span class="ar">شاف</span><span class="lat">shāf</span><span class="en-def">to see</span></div>
+      <div class="vocab-card"><span class="ar">حكى</span><span class="lat">haka</span><span class="en-def">to talk / tell</span></div>
+      <div class="vocab-card"><span class="ar">نمّ</span><span class="lat">naam</span><span class="en-def">to gossip</span></div>
+      <div class="vocab-card"><span class="ar">بلّش</span><span class="lat">bellash</span><span class="en-def">to start / begin</span></div>
+      <div class="vocab-card"><span class="ar">طبّخ</span><span class="lat">tabakh</span><span class="en-def">to cook</span></div>
+      <div class="vocab-card"><span class="ar">كتب</span><span class="lat">katab</span><span class="en-def">to write</span></div>
+      <div class="vocab-card"><span class="ar">قرأ</span><span class="lat">qaraa</span><span class="en-def">to read</span></div>
+      <div class="vocab-card"><span class="ar">لعب</span><span class="lat">laʿib</span><span class="en-def">to play</span></div>
+      <div class="vocab-card"><span class="ar">حضر</span><span class="lat">hidir</span><span class="en-def">to watch</span></div>
+      <div class="vocab-card"><span class="ar">استنى</span><span class="lat">istana</span><span class="en-def">to wait (m.)</span></div>
+      <div class="vocab-card"><span class="ar">استني</span><span class="lat">istani</span><span class="en-def">to wait (f.)</span></div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: PARTICLES & EXPRESSIONS -->
+  <section>
+    <div class="section-title"><div class="dot"></div><h2>Useful Words & Expressions (كلمات مفيدة)</h2></div>
+    <div class="particles-box">
+      <div class="particle-item">
+        <span class="ar">هون</span>
+        <div class="info">here <span>hon – this place</span></div>
+      </div>
+      <div class="particle-item">
+        <span class="ar">هناك</span>
+        <div class="info">there <span>honāk – that place</span></div>
+      </div>
+      <div class="particle-item">
+        <span class="ar">السنة الماضية</span>
+        <div class="info">last year <span>isanih almadya</span></div>
+      </div>
+      <div class="particle-item">
+        <span class="ar">الشهر الماضي</span>
+        <div class="info">last month <span>ishahar almady</span></div>
+      </div>
+      <div class="particle-item">
+        <span class="ar">مع</span>
+        <div class="info">with <span>maʿ – accompaniment</span></div>
+      </div>
+      <div class="particle-item">
+        <span class="ar">و</span>
+        <div class="info">and <span>w – connector</span></div>
+      </div>
+      <div class="particle-item">
+        <span class="ar">بشوفك</span>
+        <div class="info">bashofak <span>see you (m.) / see you (f.) = بشوفك</span></div>
+      </div>
+      <div class="particle-item">
+        <span class="ar">الأسبوع الماضي</span>
+        <div class="info">last week <span>aliyasbu almadi</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: QUICK QUIZ -->
+  <section>
+    <div class="section-title"><div class="dot"></div><h2>Quick Practice (تدرّب)</h2></div>
+    <div class="quiz-block">
+
+      <div class="quiz-q" id="q1">
+        <p>١. How do you say "She visited" in Jordanian dialect?</p>
+        <div class="choices">
+          <button onclick="answer(this,'wrong')">زُرت</button>
+          <button onclick="answer(this,'correct')">زارت</button>
+          <button onclick="answer(this,'wrong')">زُرتو</button>
+          <button onclick="answer(this,'wrong')">زاروا</button>
+        </div>
+        <div class="feedback" id="q1-fb">✅ <strong>زارت</strong> – hiya zārat. The hollow verb keeps its long vowel for هي.</div>
+      </div>
+
+      <div class="quiz-q" id="q2">
+        <p>٢. Which ending do you add to a verb for "We" (نحنا)?</p>
+        <div class="choices">
+          <button onclick="answer(this,'wrong')">-at</button>
+          <button onclick="answer(this,'wrong')">-ti</button>
+          <button onclick="answer(this,'correct')">-na</button>
+          <button onclick="answer(this,'wrong')">-u</button>
+        </div>
+        <div class="feedback" id="q2-fb">✅ <strong>-na</strong> is the ending for نحنا. Example: كتبنا (katabna) – we wrote.</div>
+      </div>
+
+      <div class="quiz-q" id="q3">
+        <p>٣. What does بلّش (bellash) mean?</p>
+        <div class="choices">
+          <button onclick="answer(this,'wrong')">to cook</button>
+          <button onclick="answer(this,'wrong')">to sell</button>
+          <button onclick="answer(this,'correct')">to start</button>
+          <button onclick="answer(this,'wrong')">to sleep</button>
+        </div>
+        <div class="feedback" id="q3-fb">✅ <strong>بلّش</strong> means "to start / begin". Very common in Jordanian dialect!</div>
+      </div>
+
+      <div class="quiz-q" id="q4">
+        <p>٤. "هون" means:</p>
+        <div class="choices">
+          <button onclick="answer(this,'correct')">here</button>
+          <button onclick="answer(this,'wrong')">there</button>
+          <button onclick="answer(this,'wrong')">with</button>
+          <button onclick="answer(this,'wrong')">last week</button>
+        </div>
+        <div class="feedback" id="q4-fb">✅ <strong>هون</strong> = here. هناك = there.</div>
+      </div>
+
+      <div class="quiz-q" id="q5">
+        <p>٥. Conjugate حكى for "I" (أنا):</p>
+        <div class="choices">
+          <button onclick="answer(this,'wrong')">حكى</button>
+          <button onclick="answer(this,'wrong')">حكت</button>
+          <button onclick="answer(this,'correct')">حكيت</button>
+          <button onclick="answer(this,'wrong')">حكينا</button>
+        </div>
+        <div class="feedback" id="q5-fb">✅ <strong>حكيت</strong> (hakeit) – I talked/told.</div>
+      </div>
+
+    </div>
+
+    <!-- SCORE PANEL -->
+    <div id="score-panel" style="display:none; margin-top:1.5rem; background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.5rem; text-align:center;">
+      <div id="score-emoji" style="font-size:3rem; margin-bottom:0.5rem;"></div>
+      <div id="score-text" style="font-family:'Amiri',serif; font-size:1.6rem; font-weight:700; color:var(--teal); margin-bottom:0.3rem;"></div>
+      <div id="score-sub" style="font-size:0.9rem; color:var(--muted); margin-bottom:1rem;"></div>
+      <button onclick="resetQuiz()" style="background:var(--teal);color:#fff;border:none;border-radius:8px;padding:0.55rem 1.4rem;font-family:'Cairo',sans-serif;font-size:0.9rem;cursor:pointer;">Try Again ↺</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>Arabic Practice · Jordanian Dialect · اللهجة الأردنية<br><span style="margin-top:0.4rem;display:block;font-weight:700;color:var(--earth)">Done by Khadija Ghanim</span></footer>
+
+<script>
+  const TOTAL = 5;
+  let answered = 0;
+  let score = 0;
+
+  function answer(btn, type) {
+    const qDiv = btn.closest('.quiz-q');
+    if (qDiv.dataset.done) return;
+    qDiv.dataset.done = '1';
+
+    const buttons = qDiv.querySelectorAll('button');
+    buttons.forEach(b => {
+      b.style.pointerEvents = 'none';
+      if (b.getAttribute('onclick').includes("'correct'")) b.classList.add('correct');
+    });
+    if (type === 'wrong') btn.classList.add('wrong');
+
+    const fb = qDiv.querySelector('.feedback');
+    fb.classList.add('show');
+
+    if (type === 'correct') score++;
+    answered++;
+
+    if (answered === TOTAL) showScore();
+  }
+
+  function showScore() {
+    const panel = document.getElementById('score-panel');
+    const pct = (score / TOTAL) * 100;
+    let emoji, msg;
+    if (pct === 100)      { emoji = '🌟'; msg = 'Perfect! ممتاز!'; }
+    else if (pct >= 80)   { emoji = '😊'; msg = 'Great job! أحسنت!'; }
+    else if (pct >= 60)   { emoji = '🙂'; msg = 'Good try! كمّل!'; }
+    else                  { emoji = '📚'; msg = 'Keep studying! راجع الدرس!'; }
+
+    document.getElementById('score-emoji').textContent = emoji;
+    document.getElementById('score-text').textContent = score + ' / ' + TOTAL;
+    document.getElementById('score-sub').textContent = msg;
+    panel.style.display = 'block';
+    panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function resetQuiz() {
+    answered = 0; score = 0;
+    document.querySelectorAll('.quiz-q').forEach(q => {
+      delete q.dataset.done;
+      q.querySelectorAll('button').forEach(b => {
+        b.classList.remove('correct','wrong');
+        b.style.pointerEvents = '';
+      });
+      q.querySelector('.feedback').classList.remove('show');
+    });
+    document.getElementById('score-panel').style.display = 'none';
+  }
+</script>
+</body>
+</html>
