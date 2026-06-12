@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arabic Feelings & Expressions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&family=Fira+Mono&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --sand: #F7F2E8;
+      --parch: #EDE4CC;
+      --ink: #1C1A14;
+      --earth: #6B4F2A;
+      --teal: #2A7C74;
+      --teal-lt: #DFF0EE;
+      --rust: #C0452A;
+      --gold: #C8922A;
+      --muted: #7A7264;
+      --border: #C9BFA8;
+      --purple: #6B4E8A;
+      --purple-lt: #EDE8F5;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--sand); color: var(--ink); font-family: 'Cairo', sans-serif; font-size: 15px; line-height: 1.7; }
+
+    header {
+      background: var(--teal);
+      color: #fff;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: "😊 😢 😤 😍 😴 😰 😳";
+      position: absolute; top: 0; left: 0; right: 0;
+      font-size: 4rem; opacity: 0.08; pointer-events: none;
+      letter-spacing: 1rem;
+    }
+    header .tag {
+      display: inline-block; background: var(--gold); color: #fff;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+      padding: 0.25rem 0.85rem; border-radius: 20px; margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    header h1 { font-family: 'Amiri', serif; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; margin-bottom: 0.4rem; }
+    header p { font-size: 0.95rem; opacity: 0.85; }
+
+    main { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+    section { margin-bottom: 3rem; }
+
+    .section-title { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; }
+    .section-title .dot { width: 10px; height: 10px; background: var(--rust); border-radius: 50%; flex-shrink: 0; }
+    .section-title h2 { font-family: 'Amiri', serif; font-size: 1.45rem; color: var(--earth); border-bottom: 2px solid var(--parch); padding-bottom: 0.3rem; flex: 1; }
+
+    /* FEELINGS GRID */
+    .feelings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; }
+    .feeling-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 12px;
+      padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: 0.2rem;
+      border-top: 4px solid var(--teal);
+      transition: box-shadow 0.15s;
+    }
+    .feeling-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+    .feeling-card .emoji { font-size: 1.8rem; margin-bottom: 0.2rem; }
+    .feeling-card .ar { font-family: 'Amiri', serif; font-size: 1.4rem; color: var(--ink); }
+    .feeling-card .ar-f { font-family: 'Amiri', serif; font-size: 1.1rem; color: var(--muted); }
+    .feeling-card .lat { font-family: 'Fira Mono', monospace; font-size: 0.78rem; color: var(--earth); }
+    .feeling-card .en { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
+
+    /* CONJUGATION TABLE */
+    .verb-block { background: #fff; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1.5rem; overflow: hidden; }
+    .verb-header { background: var(--purple); color: #fff; padding: 0.9rem 1.4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .verb-header .arabic { font-family: 'Amiri', serif; font-size: 1.7rem; }
+    .verb-header .latin { font-size: 0.95rem; opacity: 0.9; font-style: italic; }
+    .verb-header .meaning { background: rgba(255,255,255,0.18); border-radius: 20px; padding: 0.2rem 0.85rem; font-size: 0.85rem; }
+    table { width: 100%; border-collapse: collapse; }
+    th { background: var(--purple-lt); color: var(--purple); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.55rem 1rem; text-align: right; }
+    td { padding: 0.55rem 1rem; border-top: 1px solid var(--parch); vertical-align: middle; }
+    tr:hover td { background: #fafaf6; }
+    td .pronoun { color: var(--muted); font-size: 0.82rem; }
+    td .conj-ar { font-family: 'Amiri', serif; font-size: 1.25rem; color: var(--ink); }
+    td .conj-lat { font-family: 'Fira Mono', monospace; font-size: 0.82rem; color: var(--earth); }
+
+    /* EXAMPLE SENTENCES */
+    .examples-box { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .example-row { padding: 0.85rem 1.25rem; border-bottom: 1px solid var(--parch); display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: center; }
+    .example-row:last-child { border-bottom: none; }
+    .example-row .ar-sent { font-family: 'Amiri', serif; font-size: 1.2rem; direction: rtl; }
+    .example-row .lat-sent { font-size: 0.82rem; color: var(--earth); font-family: 'Fira Mono', monospace; direction: ltr; }
+    .example-row .en-sent { font-size: 0.85rem; color: var(--muted); direction: ltr; }
+    .ex-right { direction: rtl; }
+    .ex-left { direction: ltr; }
+
+    /* NOTE BOX */
+    .note-box { background: #fffbf0; border: 1px solid #e8d9a0; border-left: 4px solid var(--gold); border-radius: 8px; padding: 1rem 1.25rem; font-size: 0.9rem; color: var(--ink); margin-top: 1rem; direction: ltr; }
+    .note-box strong { color: var(--earth); }
+
+    /* QUIZ */
+    .quiz-block { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+    .quiz-q { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px dashed var(--border); direction: ltr; }
+    .quiz-q:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .quiz-q p { font-weight: 600; margin-bottom: 0.75rem; font-size: 0.95rem; }
+    .quiz-q .choices { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .quiz-q button {
+      border: 1.5px solid var(--border); background: var(--sand); color: var(--ink);
+      font-family: 'Cairo', sans-serif; font-size: 0.88rem;
+      padding: 0.45rem 1rem; border-radius: 6px; cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .quiz-q button:hover { border-color: var(--teal); background: var(--teal-lt); }
+    .quiz-q button.correct { background: #d4f0dc; border-color: #3a9e5f; color: #1a5c33; }
+    .quiz-q button.wrong { background: #fde8e4; border-color: var(--rust); color: var(--rust); }
+    .quiz-q .feedback { margin-top: 0.5rem; font-size: 0.85rem; display: none; }
+    .quiz-q .feedback.show { display: block; }
+
+    /* MATCH GAME */
+    .match-game { direction: ltr; }
+    .match-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .match-col h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; text-align: center; }
+    .match-item {
+      background: var(--sand); border: 1.5px solid var(--border); border-radius: 8px;
+      padding: 0.55rem 0.75rem; margin-bottom: 0.4rem; cursor: pointer;
+      font-size: 0.88rem; text-align: center; transition: all 0.15s;
+      font-family: 'Cairo', sans-serif; user-select: none;
+    }
+    .match-item.ar-item { font-family: 'Amiri', serif; font-size: 1.15rem; direction: rtl; }
+    .match-item.selected { border-color: var(--teal); background: var(--teal-lt); }
+    .match-item.matched-correct { background: #d4f0dc; border-color: #3a9e5f; color: #1a5c33; cursor: default; }
+    .match-item.matched-wrong { background: #fde8e4; border-color: var(--rust); animation: shake 0.3s; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
+    #match-feedback { font-size: 0.88rem; margin-top: 0.5rem; min-height: 1.4rem; }
+    #match-score { font-weight: 700; color: var(--teal); }
+    #match-reset { display: none; background: var(--teal); color: #fff; border: none; border-radius: 8px; padding: 0.5rem 1.2rem; font-family: 'Cairo', sans-serif; font-size: 0.88rem; cursor: pointer; margin-top: 0.75rem; }
+
+    /* SCORE PANEL */
+    #score-panel { display:none; margin-top:1.5rem; background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.5rem; text-align:center; }
+    #score-emoji { font-size:3rem; margin-bottom:0.5rem; }
+    #score-text { font-family:'Amiri',serif; font-size:1.6rem; font-weight:700; color:var(--teal); margin-bottom:0.3rem; }
+    #score-sub { font-size:0.9rem; color:var(--muted); margin-bottom:1rem; }
+    #retry-btn { background:var(--teal);color:#fff;border:none;border-radius:8px;padding:0.55rem 1.4rem;font-family:'Cairo',sans-serif;font-size:0.9rem;cursor:pointer; }
+
+    footer { text-align: center; padding: 1.5rem; font-size: 0.78rem; color: var(--muted); border-top: 1px solid var(--border); }
+    @media (max-width: 600px) { .example-row { grid-template-columns: 1fr; } th, td { padding: 0.45rem 0.6rem; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="tag">اللهجة الأردنية • Feelings & Expressions</div>
+  <h1>المشاعر والتعبيرات<br><span style="font-size:0.55em;opacity:0.85">How Are You Feeling?</span></h1>
+  <p>Adjectives, conjugations, and everyday expressions about feelings</p>
+</header>
+
+<main>
+
+  <!-- SECTION 1: FEELINGS VOCABULARY -->
+  <section>
+    <div class="section-title"><div class="dot"></div><h2>المشاعر والصفات – Feelings & Adjectives</h2></div>
+    <div class="feelings-grid">
+
+      <div class="feeling-card">
+        <span class="emoji">😊</span>
+        <span class="ar">مبسوط</span><span class="ar-f">مبسوطة</span>
+        <span class="lat">mabsut / mabsuta</span>
+        <span class="en">happy</span>
+      </div>
+
+      <div class="feeling-card">
+        <span class="emoji">😢</span>
+        <span class="ar">زهقان</span><span class="ar-f">زهقانة</span>
+        <span class="lat">zhqan / zhqaneh</span>
+        <span class="en">bored / fed up</span>
+      </div>
+
+      <div class="feeling-card">
+        <span class="emoji">😤</span>
+        <span class="ar">متضايق</span><span class="ar-f">متضايقة</span>
+        <span class="lat">mtdaiq / mtdaiqa</span>
+        <span class="en">upset / annoyed</span>
+      </div>
+
+      <div class="feeling-card">
+        <span class="emoji">😰</span>
+        <span class="ar">خايف</span><span class="ar-f">خايفة</span>
+        <span class="lat">khayf / khayfa</span>
+        <span class="en">scared / afraid</span>
+      </div>
+
+      <div class="feeling-card">
+        <span class="emoji">😳</span>
+        <span class="ar">خجول</span><span class="ar-f">خجولة</span>
+        <span class="lat">khajol / khajolih</span>
+        <span class="en">shy (permanent trait)</span>
+      </div>
+
+      <div class="feeling-card" style="border-top-color:var(--rust)">
+        <span class="emoji">😳</span>
+        <span class="ar">خجلان</span><span class="ar-f">خجلانة</span>
+        <span class="lat">khajlan / khajlanih</span>
+        <span class="en">shy (in this moment)</span>
+      </div>
+
+      <div class="feeling-card">
+        <span class="emoji">🥳</span>
+        <span class="ar">متحمس</span><span class="ar-f">متحمسة</span>
+        <span class="lat">mit-hamis / mit-hamsih</span>
+        <span class="en">excited / enthusiastic</span>
+      </div>
+
+      <div class="feeling-card">
+        <span class="emoji">😫</span>
+        <span class="ar">تعبان</span><span class="ar-f">تعبانة</span>
+        <span class="lat">taaban / taabanih</span>
+        <span class="en">tired</span>
+      </div>
+
+      <div class="feeling-card">
+        <span class="emoji">😔</span>
+        <span class="ar">مآسب</span><span class="ar-f"></span>
+        <span class="lat">maasib</span>
+        <span class="en">sad / unfortunate</span>
+      </div>
+
+      <div class="feeling-card">
+        <span class="emoji">😵</span>
+        <span class="ar">حاسس</span><span class="ar-f">حاسة</span>
+        <span class="lat">hasih / has</span>
+        <span class="en">I feel (sensing)</span>
+      </div>
+
+      <div class="feeling-card">
+        <span class="emoji">🥵</span>
+        <span class="ar">عطشان</span><span class="ar-f">عطشانة</span>
+        <span class="lat">aatshan / aatshanih</span>
+        <span class="en">thirsty</span>
+      </div>
+
+      <div class="feeling-card">
+        <span class="emoji">🍽️</span>
+        <span class="ar">جوعان</span><span class="ar-f">جوعانة</span>
+        <span class="lat">joaan / joaanih</span>
+        <span class="en">hungry</span>
+      </div>
+
+    </div>
+
+    <div class="note-box" style="margin-top:1rem">
+      <strong>Note – m. vs f.:</strong> In Jordanian dialect, adjectives change ending for female. Add <strong>-ih / -a / -nih</strong> for feminine.
+      Example: هو مبسوط (he is happy) → هي مبسوطة (she is happy)
+    </div>
+  </section>
+
+  <!-- SECTION 2: WILL BE – رح يكون -->
+  <section>
+    <div class="section-title"><div class="dot"></div><h2>رح يكون – Will Be</h2></div>
+    <div class="verb-block">
+      <div class="verb-header">
+        <span class="arabic">رح + يكون</span>
+        <span class="latin">rh + ykun</span>
+        <span class="meaning">will be – المستقبل</span>
+      </div>
+      <table>
+        <thead><tr><th>Pronoun</th><th>Arabic</th><th>Transliteration</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="pronoun">أنا</td><td class="conj-ar">رح أكون</td><td class="conj-lat">rh akun</td><td style="font-size:0.82rem;color:var(--muted)">I will be</td></tr>
+          <tr><td class="pronoun">أنتِ</td><td class="conj-ar">رح تكوني</td><td class="conj-lat">rh tkuni</td><td style="font-size:0.82rem;color:var(--muted)">you (f.) will be</td></tr>
+          <tr><td class="pronoun">أنت</td><td class="conj-ar">رح تكون</td><td class="conj-lat">rh tkun</td><td style="font-size:0.82rem;color:var(--muted)">you (m.) will be</td></tr>
+          <tr><td class="pronoun">أنتو</td><td class="conj-ar">رح تكونوا</td><td class="conj-lat">rh tkunuu</td><td style="font-size:0.82rem;color:var(--muted)">you (pl.) will be</td></tr>
+          <tr><td class="pronoun">إحنا</td><td class="conj-ar">رح نكون</td><td class="conj-lat">rh nkun</td><td style="font-size:0.82rem;color:var(--muted)">we will be</td></tr>
+          <tr><td class="pronoun">هُما</td><td class="conj-ar">رح يكونوا</td><td class="conj-lat">rh ykunu</td><td style="font-size:0.82rem;color:var(--muted)">they will be</td></tr>
+          <tr><td class="pronoun">هو</td><td class="conj-ar">رح يكون</td><td class="conj-lat">rh ykun</td><td style="font-size:0.82rem;color:var(--muted)">he will be</td></tr>
+          <tr><td class="pronoun">هي</td><td class="conj-ar">رح تكون</td><td class="conj-lat">rh tkun</td><td style="font-size:0.82rem;color:var(--muted)">she will be</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note-box">
+      <strong>رح</strong> (rh) is the future marker in Jordanian dialect, equivalent to "will". It always comes before the verb. كل إشي رح يكون تمام = Everything will be fine.
+    </div>
+  </section>
+
+  <!-- SECTION 3: BECAUSE – عشان -->
+  <section>
+    <div class="section-title"><div class="dot"></div><h2>عشاني / عشانك – Because (of me/you…)</h2></div>
+    <div class="verb-block">
+      <div class="verb-header">
+        <span class="arabic">عشان + ضمير</span>
+        <span class="latin">aashann + pronoun</span>
+        <span class="meaning">because I am / because you are…</span>
+      </div>
+      <table>
+        <thead><tr><th>Meaning</th><th>Arabic</th><th>Transliteration</th></tr></thead>
+        <tbody>
+          <tr><td class="pronoun">because I am</td><td class="conj-ar">عشاني</td><td class="conj-lat">aashanni</td></tr>
+          <tr><td class="pronoun">because you are (f.)</td><td class="conj-ar">عشانك</td><td class="conj-lat">aashannik</td></tr>
+          <tr><td class="pronoun">because you are (m.)</td><td class="conj-ar">عشانك</td><td class="conj-lat">aashannak</td></tr>
+          <tr><td class="pronoun">because you all are</td><td class="conj-ar">عشانكم</td><td class="conj-lat">aashannkum</td></tr>
+          <tr><td class="pronoun">because we are</td><td class="conj-ar">عشانّا</td><td class="conj-lat">aashanna</td></tr>
+          <tr><td class="pronoun">because she is</td><td class="conj-ar">عشانها</td><td class="conj-lat">aashannha</td></tr>
+          <tr><td class="pronoun">because he is</td><td class="conj-ar">عشانه</td><td class="conj-lat">aashanu</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 4: USEFUL EXPRESSIONS -->
+  <section>
+    <div class="section-title"><div class="dot"></div><h2>تعبيرات مفيدة – Useful Expressions</h2></div>
+    <div class="examples-box">
+      <div style="background:var(--teal-lt);padding:0.6rem 1.25rem;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div style="font-size:0.78rem;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.08em;direction:ltr">Arabic / Transliteration</div>
+        <div style="font-size:0.78rem;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.08em;direction:ltr">English</div>
+      </div>
+
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">شو مالك؟</div><div class="lat-sent">shu maalik?</div></div>
+        <div class="ex-left"><div class="en-sent">What's wrong with you?</div></div>
+      </div>
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">شو صار؟</div><div class="lat-sent">shu sar?</div></div>
+        <div class="ex-left"><div class="en-sent">What happened?</div></div>
+      </div>
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">في إشي؟</div><div class="lat-sent">fi ishi?</div></div>
+        <div class="ex-left"><div class="en-sent">Is there something (wrong)?</div></div>
+      </div>
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">ليش هيك؟</div><div class="lat-sent">lish heek?</div></div>
+        <div class="ex-left"><div class="en-sent">Why like this? / Why so?</div></div>
+      </div>
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">بتعرفي ليش أنا متحمسة اليوم؟</div><div class="lat-sent">btaarafi lish ana mthamsih alyom?</div></div>
+        <div class="ex-left"><div class="en-sent">Do you know why I'm excited today?</div></div>
+      </div>
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">ما بعرف / مش عارفة</div><div class="lat-sent">ma baaraf / mish aarih</div></div>
+        <div class="ex-left"><div class="en-sent">I don't know</div></div>
+      </div>
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">أنا متحمسة عشاني بدي أروح على السينما</div><div class="lat-sent">ana mit-hamsih ashanni bdi aruh ala alcinema</div></div>
+        <div class="ex-left"><div class="en-sent">I'm excited because I want to go to the cinema</div></div>
+      </div>
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">أنا متحمسة عشاني رح أروح على المطعم مع صاحبتي</div><div class="lat-sent">ana mit-hamsih aashanni rh aruh ala almataam maa sahbti</div></div>
+        <div class="ex-left"><div class="en-sent">I'm excited because I will go to the restaurant with my friend</div></div>
+      </div>
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">أنا مش خايفة بس شوية متضايقة</div><div class="lat-sent">ana mish khayfa bs shway matdayqa</div></div>
+        <div class="ex-left"><div class="en-sent">I'm not scared but a little upset</div></div>
+      </div>
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">ألسا حاسة إنك خجلانة اليوم في إشي؟</div><div class="lat-sent">alyssa hasih inik khajolih alyom fi ishi?</div></div>
+        <div class="ex-left"><div class="en-sent">I sense you're shy today, is there something?</div></div>
+      </div>
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">لا لا بس أنا ما بدي أحكي كتير</div><div class="lat-sent">la la bs ana ma bdi akhi kteer</div></div>
+        <div class="ex-left"><div class="en-sent">No no, I just don't want to talk much</div></div>
+      </div>
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">أنتِ جوعانة؟ أكلتِ إشي؟</div><div class="lat-sent">inti joaanih? akalti ishi?</div></div>
+        <div class="ex-left"><div class="en-sent">Are you hungry? Did you eat anything?</div></div>
+      </div>
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">كل إشي رح يكون تمام</div><div class="lat-sent">kul ishi rh ykun tamam</div></div>
+        <div class="ex-left"><div class="en-sent">Everything will be fine</div></div>
+      </div>
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">عشان هيك أنتِ تعبانة</div><div class="lat-sent">aashan heek inti taabanih</div></div>
+        <div class="ex-left"><div class="en-sent">That's why you're tired</div></div>
+      </div>
+      <div class="example-row">
+        <div class="ex-right"><div class="ar-sent">مش عارفة ليش هيك</div><div class="lat-sent">mish aarfih lish heek</div></div>
+        <div class="ex-left"><div class="en-sent">I genuinely don't know why it's like this</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: QUIZ -->
+  <section>
+    <div class="section-title"><div class="dot"></div><h2>اختبار – Multiple Choice Quiz</h2></div>
+    <div class="quiz-block">
+
+      <div class="quiz-q" id="q1">
+        <p>١. What does "mabsut / mabsuta" mean?</p>
+        <div class="choices">
+          <button onclick="ans(this,'wrong')">scared</button>
+          <button onclick="ans(this,'correct')">happy</button>
+          <button onclick="ans(this,'wrong')">bored</button>
+          <button onclick="ans(this,'wrong')">tired</button>
+        </div>
+        <div class="feedback" id="q1-fb">✅ <strong>مبسوط/مبسوطة</strong> = happy!</div>
+      </div>
+
+      <div class="quiz-q" id="q2">
+        <p>٢. "رح تكوني" is used for which pronoun?</p>
+        <div class="choices">
+          <button onclick="ans(this,'wrong')">أنا</button>
+          <button onclick="ans(this,'wrong')">هو</button>
+          <button onclick="ans(this,'correct')">أنتِ (f.)</button>
+          <button onclick="ans(this,'wrong')">إحنا</button>
+        </div>
+        <div class="feedback" id="q2-fb">✅ <strong>رح تكوني</strong> = you (female) will be</div>
+      </div>
+
+      <div class="quiz-q" id="q3">
+        <p>٣. How do you say "I'm excited because I want to go to the cinema"?</p>
+        <div class="choices">
+          <button onclick="ans(this,'wrong')">أنا خايفة عشاني بدي أروح</button>
+          <button onclick="ans(this,'correct')">أنا متحمسة عشاني بدي أروح على السينما</button>
+          <button onclick="ans(this,'wrong')">أنا تعبانة عشاني رحت على السينما</button>
+          <button onclick="ans(this,'wrong')">أنا متضايقة من السينما</button>
+        </div>
+        <div class="feedback" id="q3-fb">✅ <strong>أنا متحمسة عشاني بدي أروح على السينما</strong></div>
+      </div>
+
+      <div class="quiz-q" id="q4">
+        <p>٤. What is the difference between "khajol" and "khajlan"?</p>
+        <div class="choices">
+          <button onclick="ans(this,'wrong')">They mean the same thing</button>
+          <button onclick="ans(this,'correct')">Khajol = permanent trait, Khajlan = shy right now</button>
+          <button onclick="ans(this,'wrong')">Khajol is feminine, Khajlan is masculine</button>
+          <button onclick="ans(this,'wrong')">Khajlan is more polite</button>
+        </div>
+        <div class="feedback" id="q4-fb">✅ <strong>خجول</strong> = naturally shy person, <strong>خجلان</strong> = feeling shy at this moment</div>
+      </div>
+
+      <div class="quiz-q" id="q5">
+        <p>٥. "fi ishi?" means:</p>
+        <div class="choices">
+          <button onclick="ans(this,'wrong')">What happened?</button>
+          <button onclick="ans(this,'wrong')">I don't know</button>
+          <button onclick="ans(this,'correct')">Is there something (wrong)?</button>
+          <button onclick="ans(this,'wrong')">Why so?</button>
+        </div>
+        <div class="feedback" id="q5-fb">✅ <strong>في إشي؟</strong> = Is there something? / Is something wrong?</div>
+      </div>
+
+      <div class="quiz-q" id="q6">
+        <p>٦. How do you say "because she is" in Jordanian?</p>
+        <div class="choices">
+          <button onclick="ans(this,'wrong')">aashanni</button>
+          <button onclick="ans(this,'wrong')">aashanna</button>
+          <button onclick="ans(this,'correct')">aashannha</button>
+          <button onclick="ans(this,'wrong')">aashannak</button>
+        </div>
+        <div class="feedback" id="q6-fb">✅ <strong>عشانها</strong> = because she is</div>
+      </div>
+
+      <div class="quiz-q" id="q7">
+        <p>٧. "كل إشي رح يكون تمام" means:</p>
+        <div class="choices">
+          <button onclick="ans(this,'wrong')">Everything was fine</button>
+          <button onclick="ans(this,'correct')">Everything will be fine</button>
+          <button onclick="ans(this,'wrong')">Everything is fine now</button>
+          <button onclick="ans(this,'wrong')">Not everything is fine</button>
+        </div>
+        <div class="feedback" id="q7-fb">✅ <strong>رح يكون</strong> = will be (future tense with رح)</div>
+      </div>
+
+      <div class="quiz-q" id="q8">
+        <p>٨. Which word means "thirsty" (masculine)?</p>
+        <div class="choices">
+          <button onclick="ans(this,'wrong')">joaan</button>
+          <button onclick="ans(this,'wrong')">taaban</button>
+          <button onclick="ans(this,'correct')">aatshan</button>
+          <button onclick="ans(this,'wrong')">zhqan</button>
+        </div>
+        <div class="feedback" id="q8-fb">✅ <strong>عطشان</strong> (aatshan) = thirsty. جوعان = hungry!</div>
+      </div>
+
+      <div class="quiz-q" id="q9">
+        <p>٩. "ma baaraf" means:</p>
+        <div class="choices">
+          <button onclick="ans(this,'wrong')">I am tired</button>
+          <button onclick="ans(this,'correct')">I don't know</button>
+          <button onclick="ans(this,'wrong')">I feel sad</button>
+          <button onclick="ans(this,'wrong')">I'm not coming</button>
+        </div>
+        <div class="feedback" id="q9-fb">✅ <strong>ما بعرف</strong> = I don't know. Also: مش عارفة (mish aarih)</div>
+      </div>
+
+      <div class="quiz-q" id="q10">
+        <p>١٠. How do you say "We will be" using رح?</p>
+        <div class="choices">
+          <button onclick="ans(this,'wrong')">رح يكونوا</button>
+          <button onclick="ans(this,'wrong')">رح أكون</button>
+          <button onclick="ans(this,'correct')">رح نكون</button>
+          <button onclick="ans(this,'wrong')">رح تكوني</button>
+        </div>
+        <div class="feedback" id="q10-fb">✅ <strong>رح نكون</strong> (rh nkun) = We will be</div>
+      </div>
+
+    </div>
+
+    <div id="score-panel">
+      <div id="score-emoji"></div>
+      <div id="score-text"></div>
+      <div id="score-sub"></div>
+      <button id="retry-btn" onclick="resetQuiz()">Try Again ↺</button>
+    </div>
+  </section>
+
+  <!-- SECTION 6: MATCH GAME -->
+  <section>
+    <div class="section-title"><div class="dot"></div><h2>لعبة التوصيل – Match the Words</h2></div>
+    <div class="quiz-block match-game">
+      <p style="font-size:0.88rem;color:var(--muted);margin-bottom:1rem;direction:ltr">Click a word on the left, then its matching meaning on the right.</p>
+      <div class="match-cols">
+        <div>
+          <h4>Arabic</h4>
+          <div id="match-left"></div>
+        </div>
+        <div>
+          <h4>English</h4>
+          <div id="match-right"></div>
+        </div>
+      </div>
+      <div id="match-feedback">Score: <span id="match-score">0</span> / 8</div>
+      <button id="match-reset" onclick="initMatch()">Play Again ↺</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>Arabic Practice · Jordanian Dialect · اللهجة الأردنية<br><span style="margin-top:0.4rem;display:block;font-weight:700;color:var(--earth)">Done by Khadija Ghanim</span></footer>
+
+<script>
+  // ── QUIZ ──
+  const TOTAL_Q = 10;
+  let qAnswered = 0, qScore = 0;
+
+  function ans(btn, type) {
+    const qDiv = btn.closest('.quiz-q');
+    if (qDiv.dataset.done) return;
+    qDiv.dataset.done = '1';
+    qDiv.querySelectorAll('button').forEach(b => {
+      b.style.pointerEvents = 'none';
+      if (b.getAttribute('onclick').includes("'correct'")) b.classList.add('correct');
+    });
+    if (type === 'wrong') btn.classList.add('wrong');
+    qDiv.querySelector('.feedback').classList.add('show');
+    if (type === 'correct') qScore++;
+    qAnswered++;
+    if (qAnswered === TOTAL_Q) showScore();
+  }
+
+  function showScore() {
+    const panel = document.getElementById('score-panel');
+    const pct = qScore / TOTAL_Q;
+    let emoji, msg;
+    if (pct === 1)       { emoji = '🌟'; msg = 'Perfect! ممتاز!'; }
+    else if (pct >= 0.8) { emoji = '😊'; msg = 'Great job! أحسنت!'; }
+    else if (pct >= 0.6) { emoji = '🙂'; msg = 'Good try! كمّل!'; }
+    else                 { emoji = '📚'; msg = 'Review the lesson! راجع الدرس!'; }
+    document.getElementById('score-emoji').textContent = emoji;
+    document.getElementById('score-text').textContent = qScore + ' / ' + TOTAL_Q;
+    document.getElementById('score-sub').textContent = msg;
+    panel.style.display = 'block';
+    panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function resetQuiz() {
+    qAnswered = 0; qScore = 0;
+    document.querySelectorAll('.quiz-q').forEach(q => {
+      delete q.dataset.done;
+      q.querySelectorAll('button').forEach(b => { b.classList.remove('correct','wrong'); b.style.pointerEvents = ''; });
+      q.querySelector('.feedback').classList.remove('show');
+    });
+    document.getElementById('score-panel').style.display = 'none';
+  }
+
+  // ── MATCH GAME ──
+  const MATCH_PAIRS = [
+    { ar: 'مبسوط', en: 'happy' },
+    { ar: 'خايف', en: 'scared' },
+    { ar: 'تعبان', en: 'tired' },
+    { ar: 'متحمس', en: 'excited' },
+    { ar: 'زهقان', en: 'bored' },
+    { ar: 'عطشان', en: 'thirsty' },
+    { ar: 'جوعان', en: 'hungry' },
+    { ar: 'خجلان', en: 'shy (now)' },
+  ];
+
+  let selectedLeft = null, selectedRight = null, matchScore = 0, matchDone = 0;
+
+  function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+  function initMatch() {
+    selectedLeft = null; selectedRight = null; matchScore = 0; matchDone = 0;
+    document.getElementById('match-score').textContent = '0';
+    document.getElementById('match-reset').style.display = 'none';
+
+    const leftArr = shuffle(MATCH_PAIRS);
+    const rightArr = shuffle(MATCH_PAIRS);
+
+    const leftEl = document.getElementById('match-left');
+    const rightEl = document.getElementById('match-right');
+    leftEl.innerHTML = ''; rightEl.innerHTML = '';
+
+    leftArr.forEach(p => {
+      const d = document.createElement('div');
+      d.className = 'match-item ar-item';
+      d.textContent = p.ar;
+      d.dataset.key = p.ar;
+      d.onclick = () => pickLeft(d);
+      leftEl.appendChild(d);
+    });
+
+    rightArr.forEach(p => {
+      const d = document.createElement('div');
+      d.className = 'match-item';
+      d.textContent = p.en;
+      d.dataset.key = MATCH_PAIRS.find(x => x.en === p.en).ar;
+      d.onclick = () => pickRight(d);
+      rightEl.appendChild(d);
+    });
+  }
+
+  function pickLeft(el) {
+    if (el.classList.contains('matched-correct')) return;
+    document.querySelectorAll('#match-left .match-item').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedLeft = el;
+    if (selectedRight) checkMatch();
+  }
+
+  function pickRight(el) {
+    if (el.classList.contains('matched-correct')) return;
+    document.querySelectorAll('#match-right .match-item').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedRight = el;
+    if (selectedLeft) checkMatch();
+  }
+
+  function checkMatch() {
+    const correct = selectedLeft.dataset.key === selectedRight.dataset.key;
+    if (correct) {
+      selectedLeft.classList.remove('selected'); selectedLeft.classList.add('matched-correct'); selectedLeft.onclick = null;
+      selectedRight.classList.remove('selected'); selectedRight.classList.add('matched-correct'); selectedRight.onclick = null;
+      matchScore++; matchDone++;
+      document.getElementById('match-score').textContent = matchScore;
+      if (matchDone === MATCH_PAIRS.length) {
+        document.getElementById('match-feedback').innerHTML = '🌟 All matched! <span id="match-score">' + matchScore + '</span> / 8';
+        document.getElementById('match-reset').style.display = 'inline-block';
+      }
+    } else {
+      selectedLeft.classList.add('matched-wrong');
+      selectedRight.classList.add('matched-wrong');
+      setTimeout(() => {
+        selectedLeft.classList.remove('matched-wrong', 'selected');
+        selectedRight.classList.remove('matched-wrong', 'selected');
+        selectedLeft = null; selectedRight = null;
+      }, 600);
+      return;
+    }
+    selectedLeft = null; selectedRight = null;
+  }
+
+  initMatch();
+</script>
+</body>
+</html>
