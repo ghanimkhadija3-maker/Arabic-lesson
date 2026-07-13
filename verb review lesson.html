@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مراجعة الفعل: الماضي والمضارع | Verb Review: Past &amp; Present</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#123033;
+    --ink-light:#1c464b;
+    --paper:#F1E9D2;
+    --paper-soft:#F8F2E2;
+    --gold:#C9A227;
+    --coral:#B5533C;
+    --text-dark:#1B2A4A;
+    --good:#3E7C59;
+    --bad:#B5533C;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text-dark);
+    font-family:'Inter',sans-serif;
+    line-height:1.7;
+  }
+  .ar{font-family:'Amiri',serif;}
+  h1,h2,h3{font-family:'Reem Kufi',sans-serif; font-weight:700; margin:0;}
+  .en-heading{font-family:'Fraunces',serif; font-weight:600;}
+
+  /* HERO */
+  .hero{
+    background:radial-gradient(ellipse at top, var(--ink-light), var(--ink) 70%);
+    color:var(--paper-soft);
+    padding:70px 20px 90px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .root-letters{
+    font-family:'Amiri',serif;
+    font-size:clamp(3rem, 12vw, 6rem);
+    letter-spacing:0.4em;
+    color:var(--gold);
+    margin-bottom:10px;
+    direction:rtl;
+  }
+  .root-letters span{display:inline-block; opacity:0; animation:sprout 0.8s ease forwards;}
+  .root-letters span:nth-child(1){animation-delay:.1s;}
+  .root-letters span:nth-child(2){animation-delay:.35s;}
+  .root-letters span:nth-child(3){animation-delay:.6s;}
+  @keyframes sprout{
+    from{opacity:0; transform:translateY(20px) scale(.7);}
+    to{opacity:1; transform:translateY(0) scale(1);}
+  }
+  .hero h1{font-size:clamp(1.8rem,4vw,2.8rem); margin-bottom:8px;}
+  .hero .sub-en{font-family:'Fraunces',serif; font-style:italic; color:#d8cba8; font-size:1.1rem;}
+  .hero p.tagline{max-width:600px; margin:18px auto 0; color:#cddcd9; font-size:.98rem;}
+
+  section{max-width:900px; margin:0 auto; padding:50px 20px;}
+  .card{
+    background:var(--paper-soft);
+    border:1px solid #d8c9a3;
+    border-radius:6px;
+    padding:28px 24px;
+    margin-bottom:24px;
+    box-shadow:0 2px 10px rgba(18,48,51,0.06);
+  }
+  .section-title{display:flex; align-items:center; gap:14px; margin-bottom:24px;}
+  .section-title .tag{
+    font-family:'Amiri',serif; font-size:2rem; color:var(--gold);
+  }
+  .section-title h2{font-size:1.5rem; color:var(--ink);}
+  .section-title .en{font-family:'Fraunces',serif; font-style:italic; font-size:.95rem; color:#7a7160; display:block; font-weight:400;}
+
+  .rule-box{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  @media(max-width:640px){.rule-box{grid-template-columns:1fr;}}
+  .rule-col{
+    background:var(--paper);
+    border-right:4px solid var(--gold);
+    padding:16px 18px;
+    border-radius:4px;
+  }
+  .rule-col.past{border-right-color:var(--coral);}
+  .rule-col h3{font-size:1.15rem; margin-bottom:8px; color:var(--ink);}
+  .rule-col .en-heading{display:block; font-size:.85rem; font-style:italic; color:#7a7160; margin-bottom:10px;}
+  .rule-col p{margin:6px 0; font-size:.93rem;}
+  .rule-col .ar{font-size:1.05rem;}
+
+  table{width:100%; border-collapse:collapse; margin-top:10px; font-size:.92rem;}
+  th,td{padding:10px 8px; text-align:center; border-bottom:1px solid #ddd0ac;}
+  th{background:var(--ink); color:var(--paper-soft); font-family:'Reem Kufi',sans-serif; font-weight:500;}
+  td.ar{font-family:'Amiri',serif; font-size:1.15rem; color:var(--ink);}
+  td.en{font-family:'Inter',sans-serif; color:#5c5546; font-size:.85rem;}
+  tr:nth-child(even){background:#ece1c4;}
+
+  .verb-tabs{display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;}
+  .verb-tab-btn{
+    padding:8px 18px; border-radius:20px; border:1px solid var(--ink);
+    background:transparent; color:var(--ink); cursor:pointer; font-family:'Inter',sans-serif;
+    font-weight:600; font-size:.9rem;
+  }
+  .verb-tab-btn.active{background:var(--ink); color:var(--paper-soft);}
+  .verb-panel{display:none;}
+  .verb-panel.active{display:block;}
+  .tense-toggle{display:flex; gap:10px; margin:14px 0;}
+  .tense-btn{
+    flex:1; padding:10px; border-radius:6px; border:2px solid var(--gold); background:var(--paper-soft);
+    cursor:pointer; font-family:'Reem Kufi',sans-serif; font-size:1rem; color:var(--ink);
+  }
+  .tense-btn.past-btn{border-color:var(--coral);}
+  .tense-btn.active{background:var(--gold); color:var(--ink); }
+  .tense-btn.past-btn.active{background:var(--coral); color:#fff;}
+  .tense-table{display:none;}
+  .tense-table.active{display:table;}
+
+  /* practice */
+  .practice-item{
+    background:var(--paper); border-radius:6px; padding:16px 18px; margin-bottom:14px;
+    display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
+  }
+  .practice-item .phrase{flex:1; min-width:220px;}
+  .practice-item .phrase .ar{font-size:1.3rem; display:block; color:var(--ink);}
+  .practice-item .phrase .en{font-size:.85rem; color:#7a7160; font-style:italic;}
+  .practice-buttons{display:flex; gap:8px;}
+  .choice-btn{
+    padding:8px 16px; border-radius:20px; border:2px solid var(--ink); background:transparent;
+    cursor:pointer; font-weight:600; font-size:.85rem; color:var(--ink); transition:all .2s;
+  }
+  .choice-btn:hover{background:var(--ink); color:#fff;}
+  .choice-btn.correct{background:var(--good); border-color:var(--good); color:#fff;}
+  .choice-btn.incorrect{background:var(--bad); border-color:var(--bad); color:#fff;}
+  .feedback-icon{font-weight:700; margin-inline-start:8px;}
+
+  /* quiz */
+  #quiz-area .q-block{
+    background:var(--paper); border-radius:6px; padding:18px 20px; margin-bottom:16px;
+    border-left:4px solid var(--gold);
+  }
+  .q-num{font-family:'Reem Kufi',sans-serif; color:var(--gold); font-size:.85rem; letter-spacing:1px;}
+  .q-phrase{font-size:1.35rem; margin:6px 0 4px; color:var(--ink);}
+  .q-phrase-en{font-size:.85rem; color:#7a7160; font-style:italic; margin-bottom:12px;}
+  .q-options{display:flex; gap:10px; flex-wrap:wrap;}
+  #submit-quiz{
+    display:block; margin:20px auto 0; padding:14px 40px; border-radius:30px; border:none;
+    background:var(--ink); color:var(--paper-soft); font-family:'Reem Kufi',sans-serif; font-size:1.1rem;
+    cursor:pointer; transition:transform .15s;
+  }
+  #submit-quiz:hover{transform:scale(1.03);}
+  #submit-quiz:disabled{opacity:.4; cursor:not-allowed;}
+
+  #result-panel{
+    display:none; text-align:center; padding:40px 24px; border-radius:10px;
+    background:var(--ink); color:var(--paper-soft); margin-top:20px;
+  }
+  #result-panel .score-circle{
+    width:140px; height:140px; border-radius:50%; border:6px solid var(--gold);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 20px;
+    font-family:'Reem Kufi',sans-serif; font-size:2.2rem;
+  }
+  #result-panel .grade-msg{font-size:1.3rem; margin-bottom:6px;}
+  #result-panel .grade-msg-en{font-family:'Fraunces',serif; font-style:italic; color:#cddcd9;}
+
+  footer{text-align:center; padding:30px; color:#7a7160; font-size:.8rem;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="root-letters"><span>ك</span><span>ت</span><span>ب</span></div>
+  <h1>مراجعة الفعل: الماضي والمضارع</h1>
+  <div class="sub-en">Verb Review: Past &amp; Present Tense</div>
+  <p class="tagline">كل فعل عربي ينمو من جذر ثلاثي، تمامًا كما تنمو الأغصان من الجذور. اليوم سنراجع كيف يتحوّل الجذر إلى فعل ماضٍ وفعل مضارع.<br>
+  <span style="font-family:'Fraunces',serif; font-style:italic;">Every Arabic verb grows from a three-letter root, just like branches grow from roots. Today we'll review how that root becomes a past-tense verb and a present-tense verb.</span></p>
+</div>
+
+<section>
+
+  <!-- RULES -->
+  <div class="card">
+    <div class="section-title">
+      <span class="tag">١</span>
+      <div><h2>القاعدة<span class="en">The Rule</span></h2></div>
+    </div>
+    <div class="rule-box">
+      <div class="rule-col past">
+        <h3 class="ar">الفعل الماضي</h3>
+        <span class="en-heading">The Past Tense</span>
+        <p>يدل على حدث <b>انتهى ووقع</b> في الزمن الماضي.</p>
+        <p style="color:#7a7160; font-size:.85rem;">Refers to an action that <b>already happened and is finished</b>.</p>
+        <p><b>البناء:</b> <span class="ar">جذر الفعل + لاحقة (تُ / تَ / تِ / نا / تم / وا)</span></p>
+        <p style="color:#7a7160; font-size:.85rem;">Formed by adding a <b>suffix</b> to the root: e.g. كتب<b>تُ</b> (I wrote)</p>
+      </div>
+      <div class="rule-col">
+        <h3 class="ar">الفعل المضارع</h3>
+        <span class="en-heading">The Present Tense</span>
+        <p>يدل على حدث <b>يقع الآن أو بشكل معتاد</b>، أو في المستقبل.</p>
+        <p style="color:#7a7160; font-size:.85rem;">Refers to an action happening <b>now, habitually, or in the future</b>.</p>
+        <p><b>البناء:</b> <span class="ar">سابقة (أ / تَ / يَ / نَ) + جذر الفعل</span></p>
+        <p style="color:#7a7160; font-size:.85rem;">Formed by adding a <b>prefix</b> to the root: e.g. <b>أ</b>كتب (I write)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONJUGATION -->
+  <div class="card">
+    <div class="section-title">
+      <span class="tag">٢</span>
+      <div><h2>الجدول الكامل للتصريف<span class="en">Full Conjugation Tables</span></h2></div>
+    </div>
+
+    <div class="verb-tabs">
+      <button class="verb-tab-btn active" data-verb="katab">كَتَبَ — to write</button>
+      <button class="verb-tab-btn" data-verb="dhahab">ذَهَبَ — to go</button>
+    </div>
+
+    <!-- verb: katab -->
+    <div class="verb-panel active" id="panel-katab">
+      <div class="tense-toggle">
+        <button class="tense-btn active" data-target="katab-present">مضارع · Present</button>
+        <button class="tense-btn past-btn" data-target="katab-past">ماضٍ · Past</button>
+      </div>
+      <table class="tense-table active" id="katab-present">
+        <tr><th>الضمير</th><th>الفعل</th><th>English</th></tr>
+        <tr><td class="ar">أنا</td><td class="ar">أَكْتُب</td><td class="en">I write</td></tr>
+        <tr><td class="ar">أنتَ</td><td class="ar">تَكْتُب</td><td class="en">you (m.) write</td></tr>
+        <tr><td class="ar">أنتِ</td><td class="ar">تَكْتُبِين</td><td class="en">you (f.) write</td></tr>
+        <tr><td class="ar">هو</td><td class="ar">يَكْتُب</td><td class="en">he writes</td></tr>
+        <tr><td class="ar">هي</td><td class="ar">تَكْتُب</td><td class="en">she writes</td></tr>
+        <tr><td class="ar">نحن</td><td class="ar">نَكْتُب</td><td class="en">we write</td></tr>
+        <tr><td class="ar">أنتم</td><td class="ar">تَكْتُبُون</td><td class="en">you (pl.) write</td></tr>
+        <tr><td class="ar">هم</td><td class="ar">يَكْتُبُون</td><td class="en">they write</td></tr>
+      </table>
+      <table class="tense-table" id="katab-past">
+        <tr><th>الضمير</th><th>الفعل</th><th>English</th></tr>
+        <tr><td class="ar">أنا</td><td class="ar">كَتَبْتُ</td><td class="en">I wrote</td></tr>
+        <tr><td class="ar">أنتَ</td><td class="ar">كَتَبْتَ</td><td class="en">you (m.) wrote</td></tr>
+        <tr><td class="ar">أنتِ</td><td class="ar">كَتَبْتِ</td><td class="en">you (f.) wrote</td></tr>
+        <tr><td class="ar">هو</td><td class="ar">كَتَبَ</td><td class="en">he wrote</td></tr>
+        <tr><td class="ar">هي</td><td class="ar">كَتَبَتْ</td><td class="en">she wrote</td></tr>
+        <tr><td class="ar">نحن</td><td class="ar">كَتَبْنَا</td><td class="en">we wrote</td></tr>
+        <tr><td class="ar">أنتم</td><td class="ar">كَتَبْتُم</td><td class="en">you (pl.) wrote</td></tr>
+        <tr><td class="ar">هم</td><td class="ar">كَتَبُوا</td><td class="en">they wrote</td></tr>
+      </table>
+    </div>
+
+    <!-- verb: dhahab -->
+    <div class="verb-panel" id="panel-dhahab">
+      <div class="tense-toggle">
+        <button class="tense-btn active" data-target="dhahab-present">مضارع · Present</button>
+        <button class="tense-btn past-btn" data-target="dhahab-past">ماضٍ · Past</button>
+      </div>
+      <table class="tense-table active" id="dhahab-present">
+        <tr><th>الضمير</th><th>الفعل</th><th>English</th></tr>
+        <tr><td class="ar">أنا</td><td class="ar">أَذْهَب</td><td class="en">I go</td></tr>
+        <tr><td class="ar">أنتَ</td><td class="ar">تَذْهَب</td><td class="en">you (m.) go</td></tr>
+        <tr><td class="ar">أنتِ</td><td class="ar">تَذْهَبِين</td><td class="en">you (f.) go</td></tr>
+        <tr><td class="ar">هو</td><td class="ar">يَذْهَب</td><td class="en">he goes</td></tr>
+        <tr><td class="ar">هي</td><td class="ar">تَذْهَب</td><td class="en">she goes</td></tr>
+        <tr><td class="ar">نحن</td><td class="ar">نَذْهَب</td><td class="en">we go</td></tr>
+        <tr><td class="ar">أنتم</td><td class="ar">تَذْهَبُون</td><td class="en">you (pl.) go</td></tr>
+        <tr><td class="ar">هم</td><td class="ar">يَذْهَبُون</td><td class="en">they go</td></tr>
+      </table>
+      <table class="tense-table" id="dhahab-past">
+        <tr><th>الضمير</th><th>الفعل</th><th>English</th></tr>
+        <tr><td class="ar">أنا</td><td class="ar">ذَهَبْتُ</td><td class="en">I went</td></tr>
+        <tr><td class="ar">أنتَ</td><td class="ar">ذَهَبْتَ</td><td class="en">you (m.) went</td></tr>
+        <tr><td class="ar">أنتِ</td><td class="ar">ذَهَبْتِ</td><td class="en">you (f.) went</td></tr>
+        <tr><td class="ar">هو</td><td class="ar">ذَهَبَ</td><td class="en">he went</td></tr>
+        <tr><td class="ar">هي</td><td class="ar">ذَهَبَتْ</td><td class="en">she went</td></tr>
+        <tr><td class="ar">نحن</td><td class="ar">ذَهَبْنَا</td><td class="en">we went</td></tr>
+        <tr><td class="ar">أنتم</td><td class="ar">ذَهَبْتُم</td><td class="en">you (pl.) went</td></tr>
+        <tr><td class="ar">هم</td><td class="ar">ذَهَبُوا</td><td class="en">they went</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- PRACTICE -->
+  <div class="card">
+    <div class="section-title">
+      <span class="tag">٣</span>
+      <div><h2>تدريب سريع<span class="en">Quick Practice</span></h2></div>
+    </div>
+    <p style="font-size:.9rem; color:#5c5546;">اضغطي على الزمن الصحيح لكل جملة. <span style="font-style:italic;">Click the correct tense for each sentence.</span></p>
+    <div id="practice-list"></div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="card">
+    <div class="section-title">
+      <span class="tag">٤</span>
+      <div><h2>الامتحان النهائي<span class="en">Final Quiz</span></h2></div>
+    </div>
+    <p style="font-size:.9rem; color:#5c5546;">حدّدي زمن كل جملة: ماضٍ أم مضارع؟ ثم اضغطي "إنهاء الامتحان" لرؤية نتيجتك.<br>
+    <span style="font-style:italic;">Identify the tense of each sentence: past or present? Then click "Finish Quiz" to see your score.</span></p>
+    <div id="quiz-area"></div>
+    <button id="submit-quiz">إنهاء الامتحان · Finish Quiz</button>
+
+    <div id="result-panel">
+      <div class="score-circle" id="score-circle">0/10</div>
+      <div class="grade-msg" id="grade-msg"></div>
+      <div class="grade-msg-en" id="grade-msg-en"></div>
+    </div>
+  </div>
+
+</section>
+
+<footer>مراجعة الفعل الماضي والمضارع · Past &amp; Present Tense Review</footer>
+
+<script>
+// ---- verb tab switching ----
+document.querySelectorAll('.verb-tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.verb-tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.verb-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.verb).classList.add('active');
+  });
+});
+// ---- tense toggle within each verb panel ----
+document.querySelectorAll('.tense-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const panel = btn.closest('.verb-panel');
+    panel.querySelectorAll('.tense-btn').forEach(b=>b.classList.remove('active'));
+    panel.querySelectorAll('.tense-table').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.target).classList.add('active');
+  });
+});
+
+// ---- practice section ----
+const practiceData = [
+  {ar:"هي تكتبُ رسالةً جميلةً", en:"She writes a beautiful letter.", answer:"present"},
+  {ar:"ذهبنا إلى السينما أمس", en:"We went to the cinema yesterday.", answer:"past"},
+  {ar:"يذهبُ الطلابُ إلى المكتبة كلَّ يوم", en:"The students go to the library every day.", answer:"present"},
+  {ar:"كتبتِ الواجبَ بسرعة", en:"You (f.) wrote the homework quickly.", answer:"past"},
+];
+const practiceList = document.getElementById('practice-list');
+practiceData.forEach((item,i)=>{
+  const div = document.createElement('div');
+  div.className='practice-item';
+  div.innerHTML = `
+    <div class="phrase">
+      <span class="ar">${item.ar}</span>
+      <span class="en">${item.en}</span>
+    </div>
+    <div class="practice-buttons">
+      <button class="choice-btn" data-choice="past">ماضٍ · Past</button>
+      <button class="choice-btn" data-choice="present">مضارع · Present</button>
+    </div>`;
+  div.querySelectorAll('.choice-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const buttons = div.querySelectorAll('.choice-btn');
+      buttons.forEach(b=>b.disabled=true);
+      if(btn.dataset.choice === item.answer){
+        btn.classList.add('correct');
+        btn.innerHTML += ' <span class="feedback-icon">✓</span>';
+      } else {
+        btn.classList.add('incorrect');
+        btn.innerHTML += ' <span class="feedback-icon">✗</span>';
+        buttons.forEach(b=>{ if(b.dataset.choice===item.answer){ b.classList.add('correct'); b.innerHTML += ' <span class="feedback-icon">✓</span>'; } });
+      }
+    });
+  });
+  practiceList.appendChild(div);
+});
+
+// ---- quiz section ----
+const quizData = [
+  {ar:"كتبتُ الرسالة أمس", en:"I wrote the letter yesterday.", answer:"past"},
+  {ar:"يذهبُ أحمد إلى المدرسة", en:"Ahmad goes to school.", answer:"present"},
+  {ar:"نحن نكتبُ الواجب الآن", en:"We are writing the homework now.", answer:"present"},
+  {ar:"ذهبوا إلى السوق صباحًا", en:"They went to the market in the morning.", answer:"past"},
+  {ar:"هي تذهبُ إلى الجامعة كلَّ صباح", en:"She goes to university every morning.", answer:"present"},
+  {ar:"كتبنا رسالةً طويلة", en:"We wrote a long letter.", answer:"past"},
+  {ar:"أنتِ تكتبين بخطٍّ جميل", en:"You (f.) write beautifully.", answer:"present"},
+  {ar:"ذهبتَ إلى المكتبة أمس", en:"You (m.) went to the library yesterday.", answer:"past"},
+  {ar:"يكتبون الدرسَ الآن", en:"They are writing the lesson now.", answer:"present"},
+  {ar:"ذهبتُ إلى البيت مساءً", en:"I went home in the evening.", answer:"past"},
+];
+const quizArea = document.getElementById('quiz-area');
+const userAnswers = new Array(quizData.length).fill(null);
+
+quizData.forEach((item,i)=>{
+  const block = document.createElement('div');
+  block.className='q-block';
+  block.innerHTML = `
+    <div class="q-num">السؤال ${i+1} · Question ${i+1}</div>
+    <div class="q-phrase ar">${item.ar}</div>
+    <div class="q-phrase-en">${item.en}</div>
+    <div class="q-options">
+      <button class="choice-btn" data-q="${i}" data-choice="past">ماضٍ · Past</button>
+      <button class="choice-btn" data-q="${i}" data-choice="present">مضارع · Present</button>
+    </div>`;
+  block.querySelectorAll('.choice-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      block.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('active-choice'));
+      btn.style.background = 'var(--ink)';
+      btn.style.color = '#fff';
+      block.querySelectorAll('.choice-btn').forEach(b=>{ if(b!==btn){ b.style.background='transparent'; b.style.color='var(--ink)'; }});
+      userAnswers[i] = btn.dataset.choice;
+    });
+  });
+  quizArea.appendChild(block);
+});
+
+document.getElementById('submit-quiz').addEventListener('click', ()=>{
+  if(userAnswers.includes(null)){
+    alert('من فضلك أجيبي عن كل الأسئلة أولاً.\nPlease answer every question first.');
+    return;
+  }
+  // lock and grade
+  let score = 0;
+  document.querySelectorAll('.q-block').forEach((block,i)=>{
+    const correct = quizData[i].answer;
+    block.querySelectorAll('.choice-btn').forEach(btn=>{
+      btn.disabled = true;
+      if(btn.dataset.choice === correct){
+        btn.classList.add('correct');
+        btn.style.background=''; btn.style.color='';
+      } else if(btn.dataset.choice === userAnswers[i] && userAnswers[i] !== correct){
+        btn.classList.add('incorrect');
+        btn.style.background=''; btn.style.color='';
+      } else {
+        btn.style.background=''; btn.style.color='';
+      }
+    });
+    if(userAnswers[i] === correct) score++;
+  });
+
+  document.getElementById('submit-quiz').disabled = true;
+  const panel = document.getElementById('result-panel');
+  panel.style.display = 'block';
+  document.getElementById('score-circle').textContent = score + '/10';
+
+  let msgAr, msgEn;
+  const pct = score/10;
+  if(pct >= 0.9){ msgAr='ممتاز! إتقان رائع للزمنين 🌿'; msgEn='Excellent! Wonderful mastery of both tenses.'; }
+  else if(pct >= 0.7){ msgAr='جيد جدًا! فهم قوي، مع بعض المراجعة البسيطة'; msgEn='Very good! Strong understanding, just a little review needed.'; }
+  else if(pct >= 0.5){ msgAr='جيد، يحتاج الأمر مزيدًا من التدريب'; msgEn='Good — a bit more practice will help.'; }
+  else { msgAr='لا بأس، راجعي الجدول أعلاه وحاولي مرة أخرى'; msgEn="That's okay — review the tables above and try again."; }
+  document.getElementById('grade-msg').textContent = msgAr;
+  document.getElementById('grade-msg-en').textContent = msgEn;
+  panel.scrollIntoView({behavior:'smooth', block:'center'});
+});
+</script>
+</body>
+</html>
