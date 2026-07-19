@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>البيت 🏠 - حصة تفاعلية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#EADFC4;
+    --sand-deep:#DDCBA0;
+    --ink:#2B2620;
+    --wood:#6B4226;
+    --wood-light:#8B5E3C;
+    --bedroom:#6B7A4C;
+    --bedroom-light:#DCE3CC;
+    --kitchen:#B5482A;
+    --kitchen-light:#F0D3C4;
+    --bathroom:#2E7C7C;
+    --bathroom-light:#CFE6E3;
+    --living:#C9932E;
+    --living-light:#F3E1B8;
+    --sky:#4A7C9E;
+    --white:#FCF9F1;
+    --shadow: 0 6px 18px rgba(43,38,32,0.18);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Tajawal', sans-serif;
+    line-height:1.7;
+    padding-bottom:60px;
+  }
+  h1,h2,h3, .display{
+    font-family:'Aref Ruqaa', serif;
+  }
+  .hero{
+    background:
+      linear-gradient(180deg, rgba(74,124,158,0.15), rgba(74,124,158,0) 40%),
+      var(--sand);
+    text-align:center;
+    padding:38px 20px 26px;
+    border-bottom:4px solid var(--wood);
+  }
+  .hero h1{
+    font-size:clamp(2.2rem, 6vw, 3.4rem);
+    margin:0 0 6px;
+    color:var(--wood);
+  }
+  .hero p{
+    font-size:1.1rem;
+    margin:4px 0;
+    color:#4a4237;
+  }
+  .hero .note{
+    font-size:0.95rem;
+    color:var(--sky);
+    font-weight:700;
+  }
+
+  section{
+    max-width:920px;
+    margin:34px auto;
+    padding:0 18px;
+  }
+  .section-title{
+    font-size:1.7rem;
+    color:var(--wood);
+    border-bottom:3px dotted var(--wood-light);
+    padding-bottom:8px;
+    margin-bottom:18px;
+  }
+
+  /* ---------- FLOOR PLAN ---------- */
+  .house-wrap{
+    background:var(--white);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:22px;
+    border:3px solid var(--wood);
+  }
+  .roofline{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 6px 14px;
+    font-size:1rem;
+    color:var(--wood);
+    font-weight:700;
+  }
+  .roofline span{
+    background:var(--sand-deep);
+    padding:6px 12px;
+    border-radius:20px;
+    display:flex;
+    gap:6px;
+    align-items:center;
+  }
+  .floorplan{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr;
+    gap:10px;
+    height:380px;
+  }
+  .room{
+    border-radius:14px;
+    border:3px solid transparent;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    font-size:1.3rem;
+    font-weight:700;
+    color:var(--ink);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    position:relative;
+  }
+  .room .icon{font-size:2.4rem;}
+  .room:hover{transform:translateY(-3px); box-shadow:var(--shadow);}
+  .room.active{
+    border-color:var(--ink);
+    box-shadow:var(--shadow);
+  }
+  .room[data-room="bedroom"]{background:var(--bedroom-light);}
+  .room[data-room="living"]{background:var(--living-light);}
+  .room[data-room="kitchen"]{background:var(--kitchen-light);}
+  .room[data-room="bathroom"]{background:var(--bathroom-light);}
+  .room .tag{
+    position:absolute;
+    top:8px;
+    right:10px;
+    font-size:0.75rem;
+    background:rgba(255,255,255,0.7);
+    padding:2px 8px;
+    border-radius:10px;
+  }
+  .garden-strip{
+    margin-top:14px;
+    display:flex;
+    justify-content:center;
+    gap:26px;
+    flex-wrap:wrap;
+    background:#DDE9CE;
+    border-radius:12px;
+    padding:12px;
+    font-weight:700;
+  }
+  .garden-strip .g-item{display:flex; align-items:center; gap:6px;}
+
+  /* ---------- VOCAB DRAWER ---------- */
+  .drawer{
+    margin-top:20px;
+    border-radius:16px;
+    padding:20px;
+    display:none;
+    box-shadow:var(--shadow);
+    border:3px solid var(--ink);
+  }
+  .drawer.show{display:block;}
+  .drawer h3{margin-top:0; font-size:1.6rem;}
+  .vocab-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(160px,1fr));
+    gap:12px;
+    margin-top:12px;
+  }
+  .vocab-card{
+    background:var(--white);
+    border-radius:12px;
+    padding:14px;
+    text-align:center;
+    border:2px solid rgba(0,0,0,0.08);
+  }
+  .vocab-card .em{font-size:2rem; display:block; margin-bottom:4px;}
+  .vocab-card .ar{font-family:'Aref Ruqaa', serif; font-size:1.5rem; display:block;}
+  .vocab-card .tr{color:#6b6255; font-size:0.85rem; display:block; margin:2px 0;}
+  .vocab-card .en{font-style:italic; font-size:0.85rem; color:#5a5347;}
+  .prompt{
+    text-align:center;
+    color:#7a7263;
+    font-size:1rem;
+    margin-top:10px;
+  }
+
+  /* ---------- SORTING GAME ---------- */
+  .game-wrap{
+    background:var(--white);
+    border-radius:18px;
+    padding:22px;
+    box-shadow:var(--shadow);
+    border:3px solid var(--wood);
+  }
+  .score-line{
+    text-align:center;
+    font-weight:900;
+    font-size:1.15rem;
+    margin-bottom:14px;
+    color:var(--wood);
+  }
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    margin-bottom:22px;
+    min-height:48px;
+  }
+  .chip{
+    background:var(--sand-deep);
+    border:2px solid var(--wood-light);
+    border-radius:24px;
+    padding:9px 16px;
+    font-family:'Aref Ruqaa', serif;
+    font-size:1.15rem;
+    cursor:pointer;
+    transition:transform .12s ease, background .12s ease;
+  }
+  .chip:hover{transform:scale(1.05);}
+  .chip.selected{background:var(--sky); color:white; border-color:var(--sky);}
+  .chip.placed{display:none;}
+  .drop-zones{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
+    gap:14px;
+  }
+  .zone{
+    border-radius:14px;
+    padding:12px;
+    min-height:110px;
+    border:3px dashed rgba(0,0,0,0.2);
+  }
+  .zone h4{margin:0 0 8px; text-align:center; font-family:'Aref Ruqaa', serif; font-size:1.2rem;}
+  .zone[data-zone="bedroom"]{background:var(--bedroom-light);}
+  .zone[data-zone="living"]{background:var(--living-light);}
+  .zone[data-zone="kitchen"]{background:var(--kitchen-light);}
+  .zone[data-zone="bathroom"]{background:var(--bathroom-light);}
+  .zone .placed-item{
+    background:rgba(255,255,255,0.75);
+    border-radius:10px;
+    padding:5px 10px;
+    margin:4px auto;
+    text-align:center;
+    font-family:'Aref Ruqaa', serif;
+  }
+  .shake{animation:shake .4s;}
+  @keyframes shake{
+    20%{transform:translateX(-6px);}
+    40%{transform:translateX(6px);}
+    60%{transform:translateX(-4px);}
+    80%{transform:translateX(4px);}
+  }
+  .game-msg{
+    text-align:center;
+    margin-top:16px;
+    font-weight:700;
+    min-height:24px;
+  }
+
+  /* ---------- QUIZ ---------- */
+  .quiz-wrap{
+    background:var(--white);
+    border-radius:18px;
+    padding:22px;
+    box-shadow:var(--shadow);
+    border:3px solid var(--wood);
+  }
+  .q{
+    margin-bottom:24px;
+    padding-bottom:18px;
+    border-bottom:1px dashed #ccc2ab;
+  }
+  .q:last-child{border-bottom:none;}
+  .q p.qtext{font-size:1.15rem; font-weight:700; margin-bottom:10px;}
+  .options{display:flex; flex-wrap:wrap; gap:10px;}
+  .opt{
+    background:var(--sand);
+    border:2px solid var(--wood-light);
+    border-radius:10px;
+    padding:9px 16px;
+    cursor:pointer;
+    font-family:'Aref Ruqaa', serif;
+    font-size:1.1rem;
+  }
+  .opt.correct{background:#B8D9A0; border-color:#5c8a3a;}
+  .opt.wrong{background:#EFB3A6; border-color:#B5482A;}
+  .quiz-score{
+    text-align:center;
+    font-weight:900;
+    font-size:1.2rem;
+    margin-top:12px;
+    color:var(--wood);
+  }
+
+  footer{
+    text-align:center;
+    color:#8a8171;
+    font-size:0.9rem;
+    margin-top:40px;
+  }
+
+  @media (max-width:520px){
+    .floorplan{height:auto;}
+    .room{min-height:150px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>البيت 🏠</h1>
+  <p>حصة تفاعلية: تعرّفي على غرف البيت والأثاث اللي فيها</p>
+  <p class="note">اضغطي على كل غرفة في المخطط لتشوفي الكلمات الخاصة فيها 👇</p>
+</div>
+
+<section>
+  <h2 class="section-title">🗺️ مخطط البيت</h2>
+  <div class="house-wrap">
+    <div class="roofline">
+      <span>🚪 باب <small style="opacity:.7">bāb</small></span>
+      <span>🪟 شباك <small style="opacity:.7">shubbāk</small></span>
+      <span>🏚️ سقف <small style="opacity:.7">saqf</small></span>
+    </div>
+    <div class="floorplan">
+      <div class="room" data-room="bedroom">
+        <span class="tag">غرفة النوم</span>
+        <span class="icon">🛏️</span>
+        غرفة النوم
+      </div>
+      <div class="room" data-room="living">
+        <span class="tag">الصالة</span>
+        <span class="icon">🛋️</span>
+        الصالة
+      </div>
+      <div class="room" data-room="kitchen">
+        <span class="tag">المطبخ</span>
+        <span class="icon">🍳</span>
+        المطبخ
+      </div>
+      <div class="room" data-room="bathroom">
+        <span class="tag">الحمام</span>
+        <span class="icon">🛁</span>
+        الحمام
+      </div>
+    </div>
+    <div class="garden-strip">
+      <span class="g-item">🌳 حديقة <small>ḥadīqah</small></span>
+    </div>
+  </div>
+
+  <p class="prompt" id="drawerPrompt">👆 اضغطي على أي غرفة لتبدئي</p>
+  <div class="drawer" id="drawer">
+    <h3 id="drawerTitle"></h3>
+    <div class="vocab-grid" id="drawerGrid"></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">🎯 لعبة: رتّبي الأثاث في غرفته الصح</h2>
+  <div class="game-wrap">
+    <p class="prompt">اضغطي على كلمة، بعدين اضغطي على الغرفة اللي تعتقدي إنها تنتمي لها</p>
+    <div class="score-line">النتيجة: <span id="gameScore">0</span> / <span id="gameTotal">0</span></div>
+    <div class="chips" id="chips"></div>
+    <div class="drop-zones">
+      <div class="zone" data-zone="bedroom"><h4>🛏️ غرفة النوم</h4><div class="placed" id="placed-bedroom"></div></div>
+      <div class="zone" data-zone="living"><h4>🛋️ الصالة</h4><div class="placed" id="placed-living"></div></div>
+      <div class="zone" data-zone="kitchen"><h4>🍳 المطبخ</h4><div class="placed" id="placed-kitchen"></div></div>
+      <div class="zone" data-zone="bathroom"><h4>🛁 الحمام</h4><div class="placed" id="placed-bathroom"></div></div>
+    </div>
+    <div class="game-msg" id="gameMsg"></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">📝 اختبار قصير</h2>
+  <div class="quiz-wrap" id="quiz"></div>
+</section>
+
+<footer>صُمّمت هذه الحصة لتعليم مفردات "البيت" — تدربي واستمتعي! 🏡</footer>
+
+<script>
+const vocab = {
+  bedroom: {
+    title: "غرفة النوم — Bedroom",
+    items: [
+      {ar:"سرير", tr:"sarīr", en:"bed", em:"🛏️"},
+      {ar:"خزانة", tr:"khizānah", en:"closet", em:"🚪"},
+      {ar:"وسادة", tr:"wisādah", en:"pillow", em:"🛌"},
+      {ar:"بطانية", tr:"baṭṭāniyyah", en:"blanket", em:"🧣"},
+    ]
+  },
+  living: {
+    title: "الصالة — Living room",
+    items: [
+      {ar:"كنبة", tr:"kanabah", en:"sofa", em:"🛋️"},
+      {ar:"تلفزيون", tr:"tilfizyōn", en:"TV", em:"📺"},
+      {ar:"طاولة قهوة", tr:"ṭāwilat qahwah", en:"coffee table", em:"☕"},
+    ]
+  },
+  kitchen: {
+    title: "المطبخ — Kitchen",
+    items: [
+      {ar:"طاولة", tr:"ṭāwilah", en:"table", em:"🍽️"},
+      {ar:"كرسي", tr:"kursi", en:"chair", em:"🪑"},
+      {ar:"ثلاجة", tr:"thallājah", en:"fridge", em:"🧊"},
+      {ar:"فرن", tr:"furn", en:"oven", em:"🔥"},
+    ]
+  },
+  bathroom: {
+    title: "الحمام — Bathroom",
+    items: [
+      {ar:"مرآة", tr:"mir'āh", en:"mirror", em:"🪞"},
+      {ar:"دش", tr:"dushsh", en:"shower", em:"🚿"},
+      {ar:"مغسلة", tr:"maghsalah", en:"sink", em:"🚰"},
+    ]
+  }
+};
+
+// ---- floor plan interaction ----
+const rooms = document.querySelectorAll('.room');
+const drawer = document.getElementById('drawer');
+const drawerTitle = document.getElementById('drawerTitle');
+const drawerGrid = document.getElementById('drawerGrid');
+const drawerPrompt = document.getElementById('drawerPrompt');
+
+rooms.forEach(r => {
+  r.addEventListener('click', () => {
+    rooms.forEach(x => x.classList.remove('active'));
+    r.classList.add('active');
+    const key = r.dataset.room;
+    const data = vocab[key];
+    drawerTitle.textContent = data.title;
+    drawerGrid.innerHTML = data.items.map(it => `
+      <div class="vocab-card">
+        <span class="em">${it.em}</span>
+        <span class="ar">${it.ar}</span>
+        <span class="tr">${it.tr}</span>
+        <span class="en">${it.en}</span>
+      </div>
+    `).join('');
+    drawer.classList.add('show');
+    drawerPrompt.style.display = 'none';
+  });
+});
+
+// ---- sorting game ----
+let gameItems = [];
+Object.keys(vocab).forEach(room => {
+  vocab[room].items.forEach(it => gameItems.push({...it, room}));
+});
+// shuffle
+gameItems.sort(() => Math.random() - 0.5);
+
+document.getElementById('gameTotal').textContent = gameItems.length;
+let score = 0;
+let selectedChip = null;
+
+const chipsWrap = document.getElementById('chips');
+gameItems.forEach((it, idx) => {
+  const chip = document.createElement('div');
+  chip.className = 'chip';
+  chip.textContent = `${it.em} ${it.ar}`;
+  chip.dataset.idx = idx;
+  chip.addEventListener('click', () => {
+    if (chip.classList.contains('placed')) return;
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+    chip.classList.add('selected');
+    selectedChip = {chip, data: it};
+  });
+  chipsWrap.appendChild(chip);
+});
+
+document.querySelectorAll('.zone').forEach(zone => {
+  zone.addEventListener('click', () => {
+    if (!selectedChip) return;
+    const zoneKey = zone.dataset.zone;
+    const gameMsg = document.getElementById('gameMsg');
+    if (selectedChip.data.room === zoneKey) {
+      score++;
+      document.getElementById('gameScore').textContent = score;
+      selectedChip.chip.classList.add('placed');
+      const placedDiv = document.getElementById('placed-' + zoneKey);
+      const p = document.createElement('div');
+      p.className = 'placed-item';
+      p.textContent = `${selectedChip.data.em} ${selectedChip.data.ar}`;
+      placedDiv.appendChild(p);
+      gameMsg.textContent = '✅ صحيح! أحسنتِ';
+      gameMsg.style.color = '#4a6b2e';
+    } else {
+      zone.classList.add('shake');
+      setTimeout(() => zone.classList.remove('shake'), 400);
+      gameMsg.textContent = '❌ حاولي مرة ثانية';
+      gameMsg.style.color = '#B5482A';
+    }
+    selectedChip.chip.classList.remove('selected');
+    selectedChip = null;
+  });
+});
+
+// ---- quiz ----
+const questions = [
+  {
+    q: "وين نحط الطعام لنحافظ عليه بارد؟",
+    options: ["فرن", "ثلاجة", "خزانة"],
+    correct: "ثلاجة"
+  },
+  {
+    q: "وين ننام في الليل؟",
+    options: ["سرير", "كرسي", "كنبة"],
+    correct: "سرير"
+  },
+  {
+    q: "شو نستخدم عشان نشوف وجهنا؟",
+    options: ["مرآة", "طاولة", "شباك"],
+    correct: "مرآة"
+  },
+  {
+    q: "وين نجلس ونتفرج على التلفزيون؟",
+    options: ["الحمام", "الصالة", "المطبخ"],
+    correct: "الصالة"
+  },
+  {
+    q: "شو نفتحه ونسكره عشان ندخل البيت؟",
+    options: ["شباك", "سقف", "باب"],
+    correct: "باب"
+  },
+  {
+    q: "وين نستحم؟",
+    options: ["دش", "فرن", "كنبة"],
+    correct: "دش"
+  }
+];
+
+const quizWrap = document.getElementById('quiz');
+let quizScore = 0;
+let answered = 0;
+
+questions.forEach((item, i) => {
+  const qDiv = document.createElement('div');
+  qDiv.className = 'q';
+  qDiv.innerHTML = `<p class="qtext">${i+1}. ${item.q}</p>
+    <div class="options">
+      ${item.options.map(o => `<div class="opt" data-correct="${o === item.correct}">${o}</div>`).join('')}
+    </div>`;
+  quizWrap.appendChild(qDiv);
+
+  qDiv.querySelectorAll('.opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      if (qDiv.dataset.done) return;
+      qDiv.dataset.done = "1";
+      const isCorrect = opt.dataset.correct === "true";
+      qDiv.querySelectorAll('.opt').forEach(o => {
+        if (o.dataset.correct === "true") o.classList.add('correct');
+        else if (o === opt) o.classList.add('wrong');
+      });
+      if (isCorrect) quizScore++;
+      answered++;
+      updateQuizScore();
+    });
+  });
+});
+
+const scoreP = document.createElement('p');
+scoreP.className = 'quiz-score';
+scoreP.id = 'quizScoreLine';
+quizWrap.appendChild(scoreP);
+
+function updateQuizScore(){
+  document.getElementById('quizScoreLine').textContent =
+    `النتيجة: ${quizScore} / ${questions.length} ${answered === questions.length ? '🎉 خلصتِ الاختبار!' : ''}`;
+}
+updateQuizScore();
+</script>
+</body>
+</html>
