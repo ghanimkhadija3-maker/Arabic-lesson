@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الجذر والأوزان | Root & Patterns</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12211f;
+    --panel:#183330;
+    --panel-2:#1f3d39;
+    --brass:#c9a227;
+    --brass-soft:#e3c975;
+    --teal:#5fb0a3;
+    --ivory:#f4efe2;
+    --ivory-dim:#c9c2ae;
+    --error:#c9705a;
+    --good:#7fae6f;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 15% 10%, #1c3835 0%, transparent 45%),
+      radial-gradient(circle at 85% 90%, #1a3330 0%, transparent 45%),
+      var(--ink);
+    color:var(--ivory);
+    font-family:'Cairo',sans-serif;
+    line-height:1.9;
+  }
+  .eng{ font-family:'Space Grotesk',sans-serif; direction:ltr; color:var(--ivory-dim); font-size:0.92rem; }
+  h1,h2,h3{ font-family:'Amiri',serif; }
+  .wrap{ max-width:960px; margin:0 auto; padding:2.5rem 1.25rem 5rem; }
+
+  header{ text-align:center; padding:2rem 0 3rem; position:relative; }
+  header h1{ font-size:2.6rem; color:var(--brass-soft); margin:0 0 .3rem; letter-spacing:.02em; }
+  header .eng{ font-size:1.05rem; letter-spacing:.06em; text-transform:uppercase; }
+  .loom{
+    margin:2rem auto 0; display:flex; justify-content:center; gap:.6rem; flex-wrap:wrap;
+  }
+  .loom .letter{
+    width:56px; height:56px; border:2px solid var(--brass); border-radius:10px;
+    display:flex; align-items:center; justify-content:center; font-size:1.6rem;
+    font-family:'Amiri',serif; color:var(--brass-soft); background:var(--panel);
+    animation: rise .6s ease both;
+  }
+  .loom .letter:nth-child(2){animation-delay:.12s;}
+  .loom .letter:nth-child(3){animation-delay:.24s;}
+  @keyframes rise{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+  .loom-caption{ text-align:center; margin-top:.7rem; color:var(--ivory-dim); font-size:.9rem;}
+
+  section{ margin:3.2rem 0; }
+  .section-eyebrow{ font-family:'Space Grotesk',sans-serif; color:var(--teal); font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; margin-bottom:.4rem;}
+  section h2{ font-size:1.9rem; color:var(--brass-soft); margin:0 0 .2rem;}
+  .subtitle-eng{ margin-bottom:1.4rem; }
+  p{ font-size:1.08rem; }
+
+  .card{
+    background:var(--panel); border:1px solid #2a4844; border-radius:var(--radius);
+    padding:1.4rem 1.6rem; margin:1rem 0;
+  }
+  .pattern-box{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+  .wazn{
+    font-family:'Amiri',serif; font-size:1.7rem; color:var(--brass-soft);
+    border:1px dashed var(--brass); border-radius:8px; padding:.3rem .9rem; background:#12211f;
+  }
+
+  table{ width:100%; border-collapse:collapse; margin:1rem 0; font-size:1.02rem; }
+  th,td{ padding:.65rem .5rem; border-bottom:1px solid #2a4844; text-align:center; vertical-align:middle;}
+  th{ color:var(--teal); font-weight:600; font-size:.85rem; font-family:'Space Grotesk',sans-serif; text-transform:uppercase; letter-spacing:.05em;}
+  td.arword{ font-family:'Amiri',serif; font-size:1.25rem; color:var(--ivory); }
+  td.eng-cell{ font-family:'Space Grotesk',sans-serif; color:var(--ivory-dim); font-size:.92rem; }
+
+  .vocab-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1rem; margin-top:1.2rem;}
+  .vcard{
+    background:var(--panel-2); border-radius:var(--radius); padding:1.1rem 1.2rem;
+    border-inline-start:4px solid var(--brass);
+  }
+  .vcard .num{ font-family:'Space Grotesk',sans-serif; color:var(--brass); font-size:.78rem; }
+  .vcard .ar{ font-family:'Amiri',serif; font-size:1.5rem; color:var(--ivory); margin:.2rem 0;}
+  .vcard .en{ font-family:'Space Grotesk',sans-serif; color:var(--teal); font-size:.9rem; margin-bottom:.5rem;}
+  .vcard .sentence{ font-size:.95rem; color:var(--ivory-dim); border-top:1px solid #33544e; padding-top:.5rem; margin-top:.4rem;}
+
+  /* Quiz */
+  #quiz .qcard{ background:var(--panel); border-radius:var(--radius); padding:1.3rem 1.5rem; margin-bottom:1.1rem; border:1px solid #2a4844;}
+  .qtitle{ font-size:1.1rem; margin-bottom:.8rem; }
+  .qtitle .eng{ display:block; margin-top:.15rem; }
+  .options{ display:grid; gap:.55rem; }
+  .opt{
+    background:#12211f; border:1px solid #2a4844; color:var(--ivory);
+    padding:.65rem .9rem; border-radius:10px; cursor:pointer; text-align:start;
+    font-family:'Cairo',sans-serif; font-size:1rem; transition:.15s;
+  }
+  .opt:hover{ border-color:var(--brass); }
+  .opt.correct{ background:rgba(127,174,111,.18); border-color:var(--good); }
+  .opt.wrong{ background:rgba(201,112,90,.18); border-color:var(--error); }
+  .opt[disabled]{ cursor:default; }
+
+  #examScore{
+    text-align:center; font-family:'Amiri',serif; font-size:1.5rem; color:var(--brass-soft);
+    margin:1.5rem 0; min-height:2rem;
+  }
+  .btn{
+    display:block; margin:1.4rem auto 0; background:var(--brass); color:#12211f;
+    border:none; padding:.8rem 2rem; border-radius:30px; font-weight:700; font-size:1rem;
+    cursor:pointer; font-family:'Cairo',sans-serif;
+  }
+  .btn:hover{ background:var(--brass-soft); }
+
+  footer{ text-align:center; color:var(--ivory-dim); font-size:.85rem; margin-top:3rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="section-eyebrow">درس في الصرف العربي</div>
+    <h1>الجذر والأوزان</h1>
+    <div class="eng">The Root &amp; Its Patterns — Place, Time &amp; Instrument Nouns</div>
+    <div class="loom">
+      <div class="letter">ك</div><div class="letter">ت</div><div class="letter">ب</div>
+    </div>
+    <div class="loom-caption eng">one root, many words: k-t-b → the idea of "writing"</div>
+  </header>
+
+  <!-- 1: THE ROOT -->
+  <section>
+    <div class="section-eyebrow">١ · الأساس</div>
+    <h2>الجذر (The Root)</h2>
+    <p class="subtitle-eng eng">Most Arabic words are built from a three-letter root that carries the core meaning. Every word from the same root is a relative — they share meaning and often shape.</p>
+    <div class="card">
+      <p>خذ الجذر <span class="arword" style="font-family:'Amiri',serif; font-size:1.3rem; color:var(--brass-soft)">ك‑ت‑ب</span> ومعناه العام "الكتابة". من هذا الجذر نحصل على:</p>
+      <table>
+        <tr><th>Word</th><th>Meaning</th><th>Type</th></tr>
+        <tr><td class="arword">كَتَبَ</td><td class="eng-cell">he wrote</td><td class="eng-cell">verb</td></tr>
+        <tr><td class="arword">كِتاب</td><td class="eng-cell">book</td><td class="eng-cell">noun</td></tr>
+        <tr><td class="arword">كاتِب</td><td class="eng-cell">writer</td><td class="eng-cell">active participle</td></tr>
+        <tr><td class="arword">مَكْتَب</td><td class="eng-cell">office / desk</td><td class="eng-cell">noun of place</td></tr>
+        <tr><td class="arword">مَكْتَبة</td><td class="eng-cell">library</td><td class="eng-cell">noun of place</td></tr>
+      </table>
+      <p class="eng">Today's lesson focuses on the last group: words built to mean <b>a place</b>, <b>a time</b>, or <b>a tool</b> — all derived from a root using a fixed template (وزن).</p>
+    </div>
+  </section>
+
+  <!-- 2: PLACE & TIME -->
+  <section>
+    <div class="section-eyebrow">٢ · اسم المكان والزمان</div>
+    <h2>اسم المكان والزمان (Noun of Place &amp; Time)</h2>
+    <p class="eng subtitle-eng">Same pattern is used for "the place where X happens" and "the time when X happens." From a regular triliteral verb, two shapes are common:</p>
+    <div class="card">
+      <div class="pattern-box">
+        <span class="wazn">مَفْعَل</span>
+        <span class="eng">most verbs — middle letter takes <i>fatha</i></span>
+      </div>
+      <div class="pattern-box" style="margin-top:.6rem;">
+        <span class="wazn">مَفْعِل</span>
+        <span class="eng">verbs whose present-tense middle letter takes <i>kasra</i></span>
+      </div>
+      <div class="pattern-box" style="margin-top:.6rem;">
+        <span class="wazn">مَفْعَلة</span>
+        <span class="eng">feminine ending — often for enclosed / building-like places</span>
+      </div>
+    </div>
+    <table>
+      <tr><th>Root</th><th>Verb</th><th>Derived Word</th><th>Meaning</th></tr>
+      <tr><td class="arword">س‑ب‑ح</td><td class="arword">سَبَحَ</td><td class="arword">مَسْبَح</td><td class="eng-cell">pool</td></tr>
+      <tr><td class="arword">ل‑ع‑ب</td><td class="arword">لَعِبَ</td><td class="arword">مَلْعَب</td><td class="eng-cell">playground / field</td></tr>
+      <tr><td class="arword">ط‑ب‑خ</td><td class="arword">طَبَخَ</td><td class="arword">مَطْبَخ</td><td class="eng-cell">kitchen</td></tr>
+      <tr><td class="arword">ك‑ت‑ب</td><td class="arword">كَتَبَ</td><td class="arword">مَكْتَبة</td><td class="eng-cell">library</td></tr>
+      <tr><td class="arword">و‑ق‑ف</td><td class="arword">وَقَفَ</td><td class="arword">مَوْقِف</td><td class="eng-cell">stop / parking spot</td></tr>
+      <tr><td class="arword">غ‑ر‑ب</td><td class="arword">غَرَبَ</td><td class="arword">مَغْرِب</td><td class="eng-cell">sunset (time/place the sun sets)</td></tr>
+    </table>
+  </section>
+
+  <!-- 3: INSTRUMENT -->
+  <section>
+    <div class="section-eyebrow">٣ · اسم الآلة</div>
+    <h2>اسم الآلة (Noun of Instrument)</h2>
+    <p class="eng subtitle-eng">The word for "the tool used to do X." Four common shapes — the last one is the modern pattern used for machines.</p>
+    <div class="card">
+      <div class="pattern-box"><span class="wazn">مِفْعَل</span><span class="eng">e.g. مِفْتاح — key</span></div>
+      <div class="pattern-box" style="margin-top:.6rem;"><span class="wazn">مِفْعَلة</span><span class="eng">e.g. مِكْنَسة — broom</span></div>
+      <div class="pattern-box" style="margin-top:.6rem;"><span class="wazn">مِفْعال</span><span class="eng">e.g. مِنْشار — saw</span></div>
+      <div class="pattern-box" style="margin-top:.6rem;"><span class="wazn">فَعّالة</span><span class="eng">modern machines, e.g. غَسّالة — washing machine</span></div>
+    </div>
+    <table>
+      <tr><th>Root</th><th>Verb/Idea</th><th>Instrument</th><th>Meaning</th></tr>
+      <tr><td class="arword">ف‑ت‑ح</td><td class="arword">فَتَحَ</td><td class="arword">مِفْتاح</td><td class="eng-cell">key</td></tr>
+      <tr><td class="arword">ك‑ن‑س</td><td class="arword">كَنَسَ</td><td class="arword">مِكْنَسة</td><td class="eng-cell">broom</td></tr>
+      <tr><td class="arword">ن‑ظ‑ر</td><td class="arword">نَظَرَ</td><td class="arword">مِنْظار</td><td class="eng-cell">binoculars</td></tr>
+      <tr><td class="arword">غ‑س‑ل</td><td class="arword">غَسَلَ</td><td class="arword">غَسّالة</td><td class="eng-cell">washing machine</td></tr>
+      <tr><td class="arword">ث‑ل‑ج</td><td class="arword">ثَلْج</td><td class="arword">ثَلّاجة</td><td class="eng-cell">refrigerator</td></tr>
+      <tr><td class="arword">س‑م‑ع</td><td class="arword">سَمِعَ</td><td class="arword">سَمّاعة</td><td class="eng-cell">headphone / speaker</td></tr>
+    </table>
+  </section>
+
+  <!-- 4: conversational phrases -->
+  <section>
+    <div class="section-eyebrow">٤ · للحفظ والحديث</div>
+    <h2>عبارات يومية للمحادثة</h2>
+    <p class="eng subtitle-eng">Everyday conversational phrases to memorize — useful in almost any conversation, at an intermediate level.</p>
+    <div class="vocab-grid" id="vocabGrid"></div>
+  </section>
+
+  <!-- 5: EXAM -->
+  <section id="quiz">
+    <div class="section-eyebrow">٥ · التقييم</div>
+    <h2>امتحان تفاعلي</h2>
+    <p class="eng subtitle-eng">Covers the root idea, both patterns, and the vocabulary above.</p>
+    <div id="quizBody"></div>
+    <div id="examScore"></div>
+    <button class="btn" id="checkBtn">تحقّق من إجاباتي · Check my answers</button>
+  </section>
+
+  <footer class="eng">Root &amp; Pattern Lesson · Modern Standard Arabic</footer>
+</div>
+
+<script>
+const vocab = [
+  {en:"I’m not sure yet.", ar:"لست متأكدة بعد."},
+  {en:"By the way…", ar:"بالمناسبة…"},
+  {en:"What do you mean?", ar:"ماذا تقصد؟"},
+  {en:"I totally agree.", ar:"أوافق تمامًا."},
+  {en:"I hope so.", ar:"أتمنى ذلك."},
+  {en:"Sounds good.", ar:"يبدو جيدًا."},
+  {en:"I didn’t expect that.", ar:"لم أتوقع ذلك."},
+  {en:"To be honest…", ar:"بصراحة…"},
+  {en:"That’s interesting.", ar:"هذا مثير للاهتمام."},
+  {en:"No worries.", ar:"لا تقلق / لا بأس."},
+  {en:"I’ll think about it.", ar:"سأفكر بالأمر."},
+  {en:"Are you serious?", ar:"هل أنت جاد؟"},
+  {en:"I’m proud of you.", ar:"أنا فخورة بك."},
+  {en:"Take your time.", ar:"خذ وقتك."},
+  {en:"I’m getting tired.", ar:"بدأت أشعر بالتعب."},
+  {en:"It’s worth trying.", ar:"يستحق المحاولة."}
+];
+
+const grid = document.getElementById('vocabGrid');
+vocab.forEach((v,i)=>{
+  const c = document.createElement('div');
+  c.className='vcard';
+  c.innerHTML = `<div class="num">${i+1}</div>
+    <div class="ar">${v.ar}</div>
+    <div class="en">${v.en}</div>`;
+  grid.appendChild(c);
+});
+
+const questions = [
+  {
+    q:"ما معنى الجذر «ك‑ت‑ب»؟",
+    qe:"What does the root k-t-b mean?",
+    opts:["الكتابة / writing","السباحة / swimming","الفتح / opening"],
+    correct:0
+  },
+  {
+    q:"من الجذر «ل‑ع‑ب»، ما اسم المكان؟",
+    qe:"From the root l-ʿ-b, what is the noun of place?",
+    opts:["مِلعاب","مَلْعَب","لاعِب"],
+    correct:1
+  },
+  {
+    q:"أي وزن يُستخدم عادةً للآلات الحديثة مثل الغسّالة والثلّاجة؟",
+    qe:"Which pattern is used for modern machines like washing machine / fridge?",
+    opts:["مِفْعَل","فَعّالة","مَفْعِل"],
+    correct:1
+  },
+  {
+    q:"«مِفتاح» مشتقّة من أي جذر؟",
+    qe:"\"Miftāḥ\" (key) is derived from which root?",
+    opts:["ف‑ت‑ح","ك‑ت‑ب","س‑م‑ع"],
+    correct:0
+  },
+  {
+    q:"أي كلمة تعني «مكان الوقوف / محطة»؟",
+    qe:"Which word means \"stop / place to park\"?",
+    opts:["مَطْبَخ","مَوْقِف","مِنْظار"],
+    correct:1
+  },
+  {
+    q:"«مَكْتَبة» تدل على:",
+    qe:"\"Maktaba\" indicates:",
+    opts:["اسم آلة / instrument noun","اسم مكان / noun of place","فعل ماضٍ / past-tense verb"],
+    correct:1
+  },
+  {
+    q:"أكمل: جيب ____، الأرض وسخة.",
+    qe:"Complete: Bring the ____, the floor is dirty.",
+    opts:["المِكْنَسة","المَسْبَح","المَغْرِب"],
+    correct:0
+  },
+  {
+    q:"كيف نقول \"To be honest…\"؟",
+    qe:"How do you say \"To be honest…\"?",
+    opts:["بالمناسبة…","بصراحة…","أتمنى ذلك."],
+    correct:1
+  },
+  {
+    q:"ماذا تعني عبارة «هل أنت جاد؟»؟",
+    qe:"What does \"hal anta jādd?\" mean?",
+    opts:["I’m proud of you.","Are you serious?","No worries."],
+    correct:1
+  },
+  {
+    q:"أي عبارة تُستخدم لتشجيع شخص على عدم الاستعجال؟",
+    qe:"Which phrase encourages someone not to rush?",
+    opts:["خذ وقتك.","بدأت أشعر بالتعب.","يستحق المحاولة."],
+    correct:0
+  }
+];
+
+const qBody = document.getElementById('quizBody');
+questions.forEach((qu,qi)=>{
+  const card = document.createElement('div');
+  card.className='qcard';
+  card.innerHTML = `<div class="qtitle">${qi+1}. ${qu.q}<span class="eng">${qu.qe}</span></div>
+    <div class="options" data-qindex="${qi}"></div>`;
+  const optsWrap = card.querySelector('.options');
+  qu.opts.forEach((o,oi)=>{
+    const b = document.createElement('button');
+    b.className='opt';
+    b.textContent = o;
+    b.dataset.oindex = oi;
+    b.addEventListener('click', ()=>{
+      if(optsWrap.dataset.locked) return;
+      optsWrap.dataset.locked = "1";
+      optsWrap.dataset.chosen = oi;
+      [...optsWrap.children].forEach((btn,bi)=>{
+        btn.disabled = true;
+        if(bi === qu.correct) btn.classList.add('correct');
+        else if(bi == oi) btn.classList.add('wrong');
+      });
+    });
+    optsWrap.appendChild(b);
+  });
+  qBody.appendChild(card);
+});
+
+document.getElementById('checkBtn').addEventListener('click', ()=>{
+  let score = 0;
+  document.querySelectorAll('.options').forEach((wrap,qi)=>{
+    if(wrap.dataset.chosen !== undefined && parseInt(wrap.dataset.chosen)===questions[qi].correct){
+      score++;
+    }
+    if(!wrap.dataset.locked){
+      wrap.dataset.locked="1";
+      [...wrap.children].forEach((btn,bi)=>{
+        btn.disabled = true;
+        if(bi===questions[qi].correct) btn.classList.add('correct');
+      });
+    }
+  });
+  document.getElementById('examScore').textContent = `النتيجة: ${score} / ${questions.length}`;
+});
+</script>
+</body>
+</html>
