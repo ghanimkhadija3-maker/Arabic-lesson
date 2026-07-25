@@ -267,7 +267,7 @@
   <div class="hint-bubble">👆 دُوسي على أشياء الحديقة!</div>
 
   <!-- Tree -->
-  <button class="scene-item" id="it-tree" data-ar="شجرة" data-en="Tree" data-emoji="🌳" aria-label="شجرة">
+  <button class="scene-item" id="it-tree" data-ar="شجرة" data-en="Tree" data-translit="shajara" data-emoji="🌳" aria-label="شجرة">
     <svg viewBox="0 0 100 130" width="100%">
       <rect x="42" y="70" width="16" height="55" fill="#8D6449" rx="4"/>
       <circle cx="50" cy="55" r="40" fill="#3F9142"/>
@@ -277,7 +277,7 @@
   </button>
 
   <!-- Bird -->
-  <button class="scene-item" id="it-bird" data-ar="عصفور" data-en="Bird" data-emoji="🐦" aria-label="عصفور">
+  <button class="scene-item" id="it-bird" data-ar="عصفور" data-en="Bird" data-translit="asfour" data-emoji="🐦" aria-label="عصفور">
     <svg viewBox="0 0 60 40" width="100%">
       <ellipse cx="30" cy="22" rx="18" ry="13" fill="#4F7CFF"/>
       <circle cx="46" cy="15" r="8" fill="#4F7CFF"/>
@@ -287,7 +287,7 @@
   </button>
 
   <!-- Flowers -->
-  <button class="scene-item" id="it-flower1" data-ar="وردة" data-en="Flower" data-emoji="🌸" aria-label="وردة">
+  <button class="scene-item" id="it-flower1" data-ar="وردة" data-en="Flower" data-translit="warda" data-emoji="🌸" aria-label="وردة">
     <svg viewBox="0 0 50 60" width="100%">
       <rect x="23" y="30" width="4" height="28" fill="#3F9142"/>
       <g fill="#FF6F91">
@@ -299,7 +299,7 @@
       <circle cx="25" cy="21" r="7" fill="#FFC93C"/>
     </svg>
   </button>
-  <button class="scene-item" id="it-flower2" data-ar="وردة" data-en="Flower" data-emoji="🌼" aria-label="وردة">
+  <button class="scene-item" id="it-flower2" data-ar="وردة" data-en="Flower" data-translit="warda" data-emoji="🌼" aria-label="وردة">
     <svg viewBox="0 0 50 60" width="100%">
       <rect x="23" y="30" width="4" height="28" fill="#3F9142"/>
       <g fill="#FFFFFF">
@@ -313,7 +313,7 @@
   </button>
 
   <!-- Swing -->
-  <button class="scene-item" id="it-swing" data-ar="مرجوحة" data-en="Swing" data-emoji="🎡" aria-label="مرجوحة">
+  <button class="scene-item" id="it-swing" data-ar="مرجوحة" data-en="Swing" data-translit="marjoha" data-emoji="🎡" aria-label="مرجوحة">
     <svg viewBox="0 0 140 120" width="100%">
       <line x1="10" y1="10" x2="10" y2="100" stroke="#7A5238" stroke-width="6"/>
       <line x1="130" y1="10" x2="130" y2="100" stroke="#7A5238" stroke-width="6"/>
@@ -335,7 +335,7 @@
   </button>
 
   <!-- Ball -->
-  <button class="scene-item" id="it-ball" data-ar="كرة" data-en="Ball" data-emoji="⚽" aria-label="كرة">
+  <button class="scene-item" id="it-ball" data-ar="كرة" data-en="Ball" data-translit="kora" data-emoji="⚽" aria-label="كرة">
     <svg viewBox="0 0 50 50" width="100%">
       <circle cx="25" cy="25" r="23" fill="#fff" stroke="#2B3A2E" stroke-width="2"/>
       <polygon points="25,12 33,18 30,27 20,27 17,18" fill="#2B3A2E"/>
@@ -439,16 +439,16 @@
     </div>
     <div class="greet-card">
       <ul class="homework-list">
-        <li>مرجوحة</li>
+        <li>مرجوحة (marjoha)</li>
         <li>سحسيلة (sahsileh)</li>
-        <li>كرة</li>
-        <li>شجرة</li>
-        <li>وردة</li>
-        <li>عصفور</li>
-        <li>أركض</li>
-        <li>أقفز</li>
-        <li>ألعب</li>
-        <li>أجلس</li>
+        <li>كرة (kora)</li>
+        <li>شجرة (shajara)</li>
+        <li>وردة (warda)</li>
+        <li>عصفور (asfour)</li>
+        <li>أركض (arkod)</li>
+        <li>أقفز (aqfez)</li>
+        <li>ألعب (al'ab)</li>
+        <li>أجلس (ajles)</li>
       </ul>
     </div>
   </section>
@@ -477,16 +477,16 @@ document.querySelectorAll('.scene-item').forEach(function(el){
 
 /* ---------- Vocabulary flashcards ---------- */
 var vocab = [
-  {ar:'مرجوحة', en:'Swing', emoji:'🎡'},
+  {ar:'مرجوحة', en:'Swing', emoji:'🎡', translit:'marjoha'},
   {ar:'سحسيلة', en:'Slide', emoji:'🛝', translit:'sahsileh'},
-  {ar:'كرة', en:'Ball', emoji:'⚽'},
-  {ar:'شجرة', en:'Tree', emoji:'🌳'},
-  {ar:'وردة', en:'Flower', emoji:'🌸'},
-  {ar:'عصفور', en:'Bird', emoji:'🐦'},
-  {ar:'أركض', en:'Run', emoji:'🏃'},
-  {ar:'أقفز', en:'Jump', emoji:'🤸'},
-  {ar:'ألعب', en:'Play', emoji:'🎮'},
-  {ar:'أجلس', en:'Sit', emoji:'🪑'}
+  {ar:'كرة', en:'Ball', emoji:'⚽', translit:'kora'},
+  {ar:'شجرة', en:'Tree', emoji:'🌳', translit:'shajara'},
+  {ar:'وردة', en:'Flower', emoji:'🌸', translit:'warda'},
+  {ar:'عصفور', en:'Bird', emoji:'🐦', translit:'asfour'},
+  {ar:'أركض', en:'Run', emoji:'🏃', translit:'arkod'},
+  {ar:'أقفز', en:'Jump', emoji:'🤸', translit:'aqfez'},
+  {ar:'ألعب', en:'Play', emoji:'🎮', translit:"al'ab"},
+  {ar:'أجلس', en:'Sit', emoji:'🪑', translit:'ajles'}
 ];
 var vocabGrid = document.getElementById('vocabGrid');
 vocab.forEach(function(w){
