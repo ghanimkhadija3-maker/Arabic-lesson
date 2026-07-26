@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حصة الحيوانات 🐾</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#7ec8f2;
+    --sky-bottom:#d9f2ff;
+    --grass:#6fb84c;
+    --grass-dark:#4f9a37;
+    --sun:#ffd35e;
+    --barn:#d9564a;
+    --barn-dark:#a83a32;
+    --wood:#8a5a35;
+    --cream:#fff8ea;
+    --ink:#3a2e1f;
+    --accent:#ff8a3d;
+    --accent2:#4aa8d8;
+    --star:#ffcb3d;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Cairo',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+  }
+  h1,h2,h3,.display{
+    font-family:'Lalezar',cursive;
+    font-weight:400;
+  }
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    height:min(78vh,620px);
+    overflow:hidden;
+    background:linear-gradient(var(--sky-top),var(--sky-bottom) 70%);
+  }
+  .sun{
+    position:absolute; top:8%; left:8%;
+    width:90px;height:90px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #fff2c0, var(--sun));
+    box-shadow:0 0 60px 20px rgba(255,211,94,.55);
+    animation:pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+  .cloud{position:absolute;opacity:.9;animation:drift linear infinite;}
+  .cloud svg{width:120px;}
+  @keyframes drift{from{transform:translateX(-150px)}to{transform:translateX(110vw)}}
+  .hills{
+    position:absolute;bottom:0;left:0;width:100%;height:45%;
+    background:var(--grass);
+    border-radius:50% 50% 0 0 / 25% 25% 0 0;
+  }
+  .hills::before{
+    content:"";position:absolute;top:-6%;left:0;width:100%;height:60%;
+    background:var(--grass-dark);
+    border-radius:50% 50% 0 0/30% 30% 0 0;
+    opacity:.35;
+  }
+  .barn{
+    position:absolute;bottom:14%;right:6%;width:130px;
+    filter:drop-shadow(0 6px 6px rgba(0,0,0,.15));
+  }
+  .hero-title{
+    position:absolute; top:6%; width:100%; text-align:center;
+    font-size:clamp(2rem,6vw,3.4rem);
+    color:var(--ink);
+    text-shadow:0 2px 0 #fff, 0 4px 10px rgba(0,0,0,.1);
+    z-index:5;
+  }
+  .hero-sub{
+    position:absolute; top:20%; width:100%; text-align:center;
+    font-size:1.05rem; color:#2d4a22; z-index:5;
+  }
+  .stickers{
+    position:absolute; bottom:0; left:0; width:100%; height:45%;
+    display:flex; align-items:flex-end; justify-content:space-evenly;
+    padding-bottom:6%;
+    z-index:4;
+  }
+  .sticker{
+    font-size:clamp(2.1rem,5vw,3.2rem);
+    cursor:pointer;
+    background:none;border:none;
+    transition:transform .15s ease;
+    filter:drop-shadow(0 4px 3px rgba(0,0,0,.2));
+  }
+  .sticker:hover{transform:translateY(-8px) scale(1.15);}
+  .sticker:active{transform:scale(.9);}
+  .hint{
+    position:absolute; bottom:2%; width:100%; text-align:center;
+    font-size:.85rem; color:#2d4a22; z-index:5; opacity:.8;
+  }
+
+  /* popup card */
+  .popup-wrap{
+    position:fixed; inset:0; background:rgba(50,40,20,.45);
+    display:none; align-items:center; justify-content:center; z-index:50;
+    padding:1rem;
+  }
+  .popup-wrap.show{display:flex;}
+  .popup{
+    background:var(--cream); border-radius:28px; padding:2rem 2.4rem;
+    text-align:center; max-width:320px; width:100%;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+    border:5px solid var(--accent);
+    animation:pop .28s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+  .popup .emoji{font-size:4rem;}
+  .popup .word{font-family:'Lalezar';font-size:2rem;margin:.2rem 0;}
+  .popup .rom{color:var(--accent2);font-style:italic;font-size:1.05rem;}
+  .popup .eng{color:#666;font-size:1rem;margin-top:.2rem;}
+  .popup button{
+    margin-top:1rem; border:none; background:var(--accent);
+    color:#fff; padding:.5rem 1.4rem; border-radius:999px;
+    font-family:'Cairo';font-weight:700;cursor:pointer;font-size:.95rem;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{ max-width:900px; margin:0 auto; padding:3rem 1.2rem; }
+  .section-title{
+    font-size:2rem; text-align:center; margin-bottom:.3rem;
+  }
+  .section-sub{ text-align:center; color:#7a6a52; margin-bottom:2rem; font-size:.95rem;}
+  .eyebrow{
+    display:block; text-align:center; font-family:'Cairo'; font-weight:800;
+    letter-spacing:.06em; color:var(--accent); font-size:.8rem; margin-bottom:.4rem;
+  }
+
+  /* flashcards */
+  .grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    gap:14px;
+  }
+  .flip-card{ perspective:900px; height:150px; cursor:pointer; }
+  .flip-inner{
+    position:relative; width:100%; height:100%; transition:transform .5s;
+    transform-style:preserve-3d;
+  }
+  .flip-card.flipped .flip-inner{ transform:rotateY(180deg); }
+  .flip-front,.flip-back{
+    position:absolute; inset:0; backface-visibility:hidden;
+    border-radius:18px; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; padding:.5rem;
+  }
+  .flip-front{ background:#fff; border:3px solid var(--grass); }
+  .flip-front .emoji{ font-size:2.6rem; }
+  .flip-back{
+    background:var(--accent); color:#fff; transform:rotateY(180deg);
+    text-align:center;
+  }
+  .flip-back .word{ font-family:'Lalezar'; font-size:1.4rem; }
+  .flip-back .rom{ font-size:.85rem; opacity:.9; font-style:italic; }
+  .flip-back .eng{ font-size:.85rem; opacity:.9; }
+
+  /* sentence accordion */
+  .sent-card{
+    background:#fff; border-radius:16px; padding:1rem 1.2rem; margin-bottom:.7rem;
+    border-inset-start:6px solid var(--accent2); box-shadow:0 3px 10px rgba(0,0,0,.05);
+    cursor:pointer; border-right:6px solid var(--accent2);
+  }
+  .sent-card .ar{ font-size:1.15rem; font-weight:700;}
+  .sent-detail{ display:none; margin-top:.4rem; color:#666; font-size:.9rem; }
+  .sent-card.open .sent-detail{ display:block; }
+  .sent-detail .rom{ color:var(--accent2); font-style:italic; }
+
+  /* question bubbles */
+  .qbubble{
+    background:#fff3e0; border-radius:20px 20px 20px 4px; padding:.9rem 1.2rem;
+    margin-bottom:.7rem; max-width:520px;
+  }
+  .qbubble .rom{ display:block; color:var(--accent2); font-style:italic; font-size:.85rem; margin-top:.2rem;}
+  .qbubble .eng{ display:block; color:#888; font-size:.85rem; }
+
+  /* guessing game */
+  .guess-card{
+    background:#eef8ec; border:2px dashed var(--grass); border-radius:20px;
+    padding:1.4rem; margin-bottom:1rem; text-align:center;
+  }
+  .guess-clues{ font-size:1.05rem; line-height:2; }
+  .reveal-btn{
+    margin-top:.6rem; border:none; background:var(--grass-dark); color:#fff;
+    padding:.5rem 1.3rem; border-radius:999px; cursor:pointer; font-family:'Cairo';font-weight:700;
+  }
+  .guess-answer{ display:none; font-size:1.8rem; margin-top:.6rem; font-family:'Lalezar'; color:var(--barn-dark);}
+  .guess-card.revealed .guess-answer{ display:block; }
+
+  /* matching game */
+  .match-wrap{ display:flex; gap:2rem; justify-content:center; flex-wrap:wrap;}
+  .match-col{ display:flex; flex-direction:column; gap:.6rem; }
+  .match-item{
+    background:#fff; border:3px solid #ddd; border-radius:14px; padding:.6rem 1rem;
+    cursor:pointer; font-size:1.1rem; min-width:120px; text-align:center;
+    transition:all .15s;
+  }
+  .match-item.emoji-item{ font-size:2rem; }
+  .match-item.selected{ border-color:var(--accent); background:#fff3e8; }
+  .match-item.correct{ border-color:var(--grass); background:#eaf7e6; }
+  .match-item.wrong{ animation:shake .3s; border-color:#e05555; }
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+  /* true false */
+  .tf-card{
+    background:#fff; border-radius:16px; padding:1rem 1.2rem; margin-bottom:.8rem;
+    box-shadow:0 3px 10px rgba(0,0,0,.05);
+  }
+  .tf-card .ar{ font-weight:700; font-size:1.05rem; margin-bottom:.5rem; }
+  .tf-buttons button{
+    border:none; border-radius:999px; padding:.4rem 1.2rem; margin-inline-end:.5rem;
+    cursor:pointer; font-family:'Cairo'; font-weight:700;
+  }
+  .btn-true{ background:#dff2d8; color:#2e7d32; }
+  .btn-false{ background:#fdded9; color:#c62828; }
+  .tf-feedback{ margin-top:.5rem; font-size:.9rem; display:none; }
+  .tf-feedback.show{ display:block; }
+
+  /* drawing corner */
+  .draw-wrap{ text-align:center; }
+  canvas{ background:#fff; border-radius:18px; border:3px solid var(--grass); touch-action:none; max-width:100%; }
+  .draw-tools{ margin:.7rem 0; display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap;}
+  .swatch{ width:30px;height:30px;border-radius:50%;cursor:pointer;border:3px solid #fff;box-shadow:0 0 0 2px #ddd; }
+  .swatch.active{ box-shadow:0 0 0 2px var(--ink); }
+  .draw-tools button.clear{
+    border:none; background:var(--barn); color:#fff; border-radius:999px; padding:.4rem 1rem; cursor:pointer;font-family:'Cairo';font-weight:700;
+  }
+
+  /* homework */
+  .hw-list{ list-style:none; padding:0; max-width:500px; margin:0 auto; }
+  .hw-list li{
+    background:#fff; border-radius:14px; padding:.8rem 1rem; margin-bottom:.6rem;
+    display:flex; align-items:center; gap:.6rem; box-shadow:0 3px 10px rgba(0,0,0,.05);
+  }
+  .hw-list input{ width:20px;height:20px; accent-color:var(--accent);}
+  .hw-list li.done span{ text-decoration:line-through; opacity:.5;}
+
+  /* progress bar (stars) */
+  .progress-bar{
+    position:sticky; top:0; z-index:30; background:var(--ink); color:#fff;
+    padding:.5rem 1rem; display:flex; align-items:center; justify-content:center; gap:.4rem;
+    font-family:'Cairo'; font-weight:700; font-size:.9rem;
+  }
+  .stars{ display:flex; gap:2px; }
+  .star{ font-size:1.1rem; opacity:.25; transition:opacity .2s;}
+  .star.on{ opacity:1; }
+
+  footer{ text-align:center; padding:2rem; color:#a0937c; font-size:.85rem; }
+  @media (max-width:480px){ .barn{ width:90px; right:2%; } }
+</style>
+</head>
+<body>
+
+<div class="progress-bar">
+  <span>⭐ نجومك:</span>
+  <div class="stars" id="starTrack"></div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="cloud" style="top:12%; animation-duration:38s;"><svg viewBox="0 0 100 40"><ellipse cx="30" cy="25" rx="28" ry="14" fill="white"/><ellipse cx="60" cy="18" rx="20" ry="12" fill="white"/></svg></div>
+  <div class="cloud" style="top:28%; animation-duration:52s; animation-delay:-20s;"><svg viewBox="0 0 100 40"><ellipse cx="30" cy="25" rx="22" ry="11" fill="white"/><ellipse cx="55" cy="20" rx="16" ry="10" fill="white"/></svg></div>
+  <div class="sun"></div>
+  <h1 class="hero-title">🌈 حصة الحيوانات</h1>
+  <p class="hero-sub">دوسي على كل حيوان تسمعي اسمه! (Tap each animal to hear its name)</p>
+  <svg class="barn" viewBox="0 0 100 90">
+    <polygon points="50,5 95,35 5,35" fill="#a83a32"/>
+    <rect x="15" y="35" width="70" height="45" fill="#d9564a"/>
+    <rect x="42" y="55" width="16" height="25" fill="#5a3a22"/>
+    <polygon points="50,10 85,32 15,32" fill="#c24b41"/>
+  </svg>
+  <div class="hills"></div>
+  <div class="stickers" id="stickerRow"></div>
+  <p class="hint">أنا بحب... / أنا ما بحب... — استخدمي "هاد" و"هاي"!</p>
+</div>
+
+<div class="popup-wrap" id="popup">
+  <div class="popup">
+    <div class="emoji" id="popEmoji"></div>
+    <div class="word" id="popWord"></div>
+    <div class="rom" id="popRom"></div>
+    <div class="eng" id="popEng"></div>
+    <button onclick="closePopup()">تمام! 👍</button>
+  </div>
+</div>
+
+<!-- FLASHCARDS -->
+<section id="cardsSection">
+  <span class="eyebrow">المفردات · Vocabulary</span>
+  <h2 class="section-title" style="text-align:center">🐾 10 كلمات جديدة</h2>
+  <p class="section-sub">دوسي على البطاقة تشوفي الكلمة وطريقة لفظها (Tap a card to flip it)</p>
+  <div class="grid" id="flashGrid"></div>
+</section>
+
+<!-- SENTENCES -->
+<section>
+  <span class="eyebrow">جمل · Sentences</span>
+  <h2 class="section-title" style="text-align:center">🗣️ جمل يومية</h2>
+  <p class="section-sub">دوسي على الجملة تشوفي اللفظ والمعنى</p>
+  <div id="sentList"></div>
+</section>
+
+<!-- QUESTIONS -->
+<section>
+  <span class="eyebrow">أسئلة · Questions</span>
+  <h2 class="section-title" style="text-align:center">❓ احكي معي</h2>
+  <div id="qList"></div>
+</section>
+
+<!-- GUESSING GAME -->
+<section>
+  <span class="eyebrow">لعبة · Game</span>
+  <h2 class="section-title" style="text-align:center">🎲 لعبة التخمين</h2>
+  <p class="section-sub">اقرالها التلميحات وخليها تخمّن، بعدين دوسي "بيّن الجواب"</p>
+  <div id="guessList"></div>
+</section>
+
+<!-- MATCHING GAME -->
+<section>
+  <span class="eyebrow">لعبة · Game</span>
+  <h2 class="section-title" style="text-align:center">🃏 وصّلي كل صورة باسمها</h2>
+  <p class="section-sub" id="matchStatus">دوسي على الصورة وبعدين على الاسم الصح</p>
+  <div class="match-wrap">
+    <div class="match-col" id="matchEmojis"></div>
+    <div class="match-col" id="matchWords"></div>
+  </div>
+</section>
+
+<!-- ANIMAL SOUNDS ACTIVITY -->
+<section>
+  <span class="eyebrow">نشاط · Activity</span>
+  <h2 class="section-title" style="text-align:center">🙈 قلّدي الحيوان</h2>
+  <p class="section-sub">سوّي صوت أو حركة الحيوان واسأليها: <b>شو هاد الحيوان؟</b> <i>(shū hād el-ḥayawān?)</i> — "What animal is this?"</p>
+  <div class="grid" id="soundGrid"></div>
+</section>
+
+<!-- TRUE / FALSE -->
+<section>
+  <span class="eyebrow">نشاط · Activity</span>
+  <h2 class="section-title" style="text-align:center">✅❌ صح ولا غلط؟</h2>
+  <div id="tfList"></div>
+</section>
+
+<!-- DRAWING CORNER -->
+<section class="draw-wrap">
+  <span class="eyebrow">نشاط الرسم · Drawing</span>
+  <h2 class="section-title">🎨 ارسمي حيوانك المفضل</h2>
+  <p class="section-sub">وبعدها وصفيه: هاد أرنب · لونه أبيض · صغير · أنا بحبه</p>
+  <canvas id="board" width="360" height="280"></canvas>
+  <div class="draw-tools">
+    <div class="swatch active" style="background:#3a2e1f" data-color="#3a2e1f"></div>
+    <div class="swatch" style="background:#d9564a" data-color="#d9564a"></div>
+    <div class="swatch" style="background:#ff8a3d" data-color="#ff8a3d"></div>
+    <div class="swatch" style="background:#6fb84c" data-color="#6fb84c"></div>
+    <div class="swatch" style="background:#4aa8d8" data-color="#4aa8d8"></div>
+    <div class="swatch" style="background:#ffd35e" data-color="#ffd35e"></div>
+    <button class="clear" onclick="clearBoard()">امسحي 🧽</button>
+  </div>
+</section>
+
+<!-- HOMEWORK -->
+<section>
+  <span class="eyebrow">واجب · Homework</span>
+  <h2 class="section-title" style="text-align:center">📝 واجبي</h2>
+  <p class="section-sub">احفظي الكلمات العشر وكوّني ثلاث جمل، وحطي ✓ لما تخلصي كل وحدة</p>
+  <ul class="hw-list">
+    <li onclick="toggleHw(this)"><input type="checkbox"><span>أنا بحب... (I like...)</span></li>
+    <li onclick="toggleHw(this)"><input type="checkbox"><span>هاد... (This is... - masc.)</span></li>
+    <li onclick="toggleHw(this)"><input type="checkbox"><span>هاي... (This is... - fem.)</span></li>
+  </ul>
+</section>
+
+<footer>هذه الحصة مناسبة للأطفال لأنها تعتمد على الصور، والأسئلة القصيرة، واللعب 🐾</footer>
+
+<script>
+const animals = [
+  {ar:"بسة", emoji:"🐱", rom:"bisseh", en:"cat"},
+  {ar:"كلب", emoji:"🐶", rom:"kalb", en:"dog"},
+  {ar:"حصان", emoji:"🐴", rom:"ḥṣān", en:"horse"},
+  {ar:"بقرة", emoji:"🐄", rom:"ba'ara", en:"cow"},
+  {ar:"خروف", emoji:"🐑", rom:"kharoof", en:"sheep"},
+  {ar:"دجاجة", emoji:"🐔", rom:"djeje", en:"chicken"},
+  {ar:"عصفور", emoji:"🐦", rom:"aṣfoor", en:"bird"},
+  {ar:"سمكة", emoji:"🐟", rom:"samakeh", en:"fish"},
+  {ar:"أرنب", emoji:"🐰", rom:"arnab", en:"rabbit"},
+  {ar:"سلحفاة", emoji:"🐢", rom:"saliḥfeh", en:"turtle"},
+];
+
+let stars = 0;
+const TOTAL_STARS = 8;
+function renderStars(){
+  const track = document.getElementById('starTrack');
+  track.innerHTML = "";
+  for(let i=0;i<TOTAL_STARS;i++){
+    const s = document.createElement('span');
+    s.className = 'star' + (i < stars ? ' on' : '');
+    s.textContent = '⭐';
+    track.appendChild(s);
+  }
+}
+function earnStar(){
+  if(stars < TOTAL_STARS){ stars++; renderStars(); }
+}
+renderStars();
+
+// hero stickers
+const stickerRow = document.getElementById('stickerRow');
+animals.forEach(a=>{
+  const btn = document.createElement('button');
+  btn.className = 'sticker';
+  btn.textContent = a.emoji;
+  btn.onclick = ()=>openPopup(a);
+  stickerRow.appendChild(btn);
+});
+let seenStickers = new Set();
+function openPopup(a){
+  document.getElementById('popEmoji').textContent = a.emoji;
+  document.getElementById('popWord').textContent = a.ar;
+  document.getElementById('popRom').textContent = a.rom;
+  document.getElementById('popEng').textContent = a.en + ' · ' + (a.en);
+  document.getElementById('popEng').textContent = a.en.charAt(0).toUpperCase()+a.en.slice(1);
+  document.getElementById('popup').classList.add('show');
+  if(!seenStickers.has(a.ar)){ seenStickers.add(a.ar); if(seenStickers.size===animals.length) earnStar(); }
+  try{
+    const u = new SpeechSynthesisUtterance(a.ar);
+    u.lang = 'ar-JO';
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function closePopup(){ document.getElementById('popup').classList.remove('show'); }
+
+// flashcards
+const flashGrid = document.getElementById('flashGrid');
+animals.forEach(a=>{
+  const card = document.createElement('div');
+  card.className = 'flip-card';
+  card.innerHTML = `<div class="flip-inner">
+    <div class="flip-front"><div class="emoji">${a.emoji}</div></div>
+    <div class="flip-back"><div class="word">${a.ar}</div><div class="rom">${a.rom}</div><div class="eng">${a.en}</div></div>
+  </div>`;
+  card.onclick = ()=>{ card.classList.toggle('flipped'); earnStar(); };
+  flashGrid.appendChild(card);
+});
+
+// sentences
+const sentences = [
+  {ar:"هاي بسة.", rom:"hayy bisseh", en:"This is a cat."},
+  {ar:"هاد كلب.", rom:"hād kalb", en:"This is a dog."},
+  {ar:"هاي بقرة.", rom:"hayy ba'ara", en:"This is a cow."},
+  {ar:"هاد حصان.", rom:"hād ḥṣān", en:"This is a horse."},
+  {ar:"أنا بحب البسس.", rom:"ana baḥebb el-bsas", en:"I like cats."},
+  {ar:"أنا بحب الخيل.", rom:"ana baḥebb el-khayl", en:"I like horses."},
+  {ar:"أنا ما بحب الكلاب.", rom:"ana ma baḥebb el-klāb", en:"I don't like dogs."},
+  {ar:"العصفور صغير.", rom:"el-aṣfoor zghīr", en:"The bird is small."},
+  {ar:"السمكة بالميّ.", rom:"es-samakeh bel-mayy", en:"The fish is in the water."},
+  {ar:"الأرنب سريع.", rom:"el-arnab sarī'", en:"The rabbit is fast."},
+];
+const sentList = document.getElementById('sentList');
+sentences.forEach(s=>{
+  const card = document.createElement('div');
+  card.className = 'sent-card';
+  card.innerHTML = `<div class="ar">${s.ar}</div><div class="sent-detail"><span class="rom">${s.rom}</span> — ${s.en}</div>`;
+  card.onclick = ()=>card.classList.toggle('open');
+  sentList.appendChild(card);
+});
+
+// questions
+const questions = [
+  {ar:"شو هاد؟", rom:"shū hād?", en:"What is this? (masc.)"},
+  {ar:"هاي شو؟", rom:"hayy shū?", en:"What is this? (fem.)"},
+  {ar:"بتحبي البسس؟", rom:"bteḥebbi el-bsas?", en:"Do you like cats?"},
+  {ar:"شو حيوانك المفضل؟", rom:"shū ḥayawānek el-mfaddal?", en:"What's your favorite animal?"},
+  {ar:"عندكم كلب بالبيت؟", rom:"'andkom kalb bel-bēt?", en:"Do you have a dog at home?"},
+  {ar:"بتحبي الخيل ولا البسس؟", rom:"bteḥebbi el-khayl walla el-bsas?", en:"Do you like horses or cats?"},
+];
+const qList = document.getElementById('qList');
+questions.forEach(q=>{
+  const b = document.createElement('div');
+  b.className = 'qbubble';
+  b.innerHTML = `${q.ar}<span class="rom">${q.rom}</span><span class="eng">${q.en}</span>`;
+  qList.appendChild(b);
+});
+
+// guessing game
+const guesses = [
+  {clues:["بيطير (byṭīr) — it flies","صغير (zghīr) — it's small","عنده جناحين ('indo jenaḥēn) — it has two wings"], answer:"عصفور 🐦"},
+  {clues:["بيعطينا حليب (byi'ṭīna ḥalīb) — it gives us milk","كبير (kbīr) — it's big","بالمزرعة (bel-mazra'a) — on the farm"], answer:"بقرة 🐄"},
+  {clues:["عيشته بطيئة كتير ('īshto baṭī'a ktīr) — it lives very slowly","عنده بيت عالظهر ('indo bēt 'al-ḍahr) — it has a house on its back","بيمشي شوي شوي (byimshi shwayy shwayy) — it walks little by little"], answer:"سلحفاة 🐢"},
+  {clues:["بيعيش بالميّ (byi'īsh bel-mayy) — it lives in water","ما عنده رجلين (ma 'indo rejlēn) — it has no legs","بيسبح كل الوقت (byisbaḥ kell el-wa't) — it swims all the time"], answer:"سمكة 🐟"},
+];
+const guessList = document.getElementById('guessList');
+guesses.forEach(g=>{
+  const card = document.createElement('div');
+  card.className = 'guess-card';
+  card.innerHTML = `<div class="guess-clues">أنا بفكر بحيوان...<br>${g.clues.join('<br>')}</div>
+    <button class="reveal-btn">بيّن الجواب</button>
+    <div class="guess-answer">${g.answer}</div>`;
+  card.querySelector('.reveal-btn').onclick = ()=>{ card.classList.add('revealed'); earnStar(); };
+  guessList.appendChild(card);
+});
+
+// matching game
+const shuffledEmojis = [...animals].sort(()=>Math.random()-0.5);
+const shuffledWords = [...animals].sort(()=>Math.random()-0.5);
+const matchEmojis = document.getElementById('matchEmojis');
+const matchWords = document.getElementById('matchWords');
+let selectedEmoji = null;
+let matchedCount = 0;
+shuffledEmojis.forEach(a=>{
+  const el = document.createElement('div');
+  el.className = 'match-item emoji-item';
+  el.textContent = a.emoji;
+  el.dataset.ar = a.ar;
+  el.onclick = ()=>{
+    if(el.classList.contains('correct')) return;
+    document.querySelectorAll('.match-item.emoji-item').forEach(x=>x.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedEmoji = el;
+  };
+  matchEmojis.appendChild(el);
+});
+shuffledWords.forEach(a=>{
+  const el = document.createElement('div');
+  el.className = 'match-item';
+  el.textContent = a.ar;
+  el.dataset.ar = a.ar;
+  el.onclick = ()=>{
+    if(el.classList.contains('correct') || !selectedEmoji) return;
+    if(selectedEmoji.dataset.ar === el.dataset.ar){
+      selectedEmoji.classList.add('correct'); el.classList.add('correct');
+      selectedEmoji.classList.remove('selected');
+      matchedCount++;
+      document.getElementById('matchStatus').textContent = `${matchedCount} / ${animals.length} 🎉`;
+      if(matchedCount === animals.length) earnStar();
+    } else {
+      el.classList.add('wrong');
+      setTimeout(()=>el.classList.remove('wrong'), 300);
+    }
+    selectedEmoji = null;
+  };
+  matchWords.appendChild(el);
+});
+
+// sound/action activity cards
+const soundGrid = document.getElementById('soundGrid');
+animals.slice(0,6).forEach(a=>{
+  const c = document.createElement('div');
+  c.className = 'flip-card';
+  c.innerHTML = `<div class="flip-inner"><div class="flip-front"><div class="emoji">${a.emoji}</div></div>
+    <div class="flip-back"><div class="word">${a.ar}؟</div></div></div>`;
+  c.onclick = ()=>c.classList.toggle('flipped');
+  soundGrid.appendChild(c);
+});
+
+// true/false
+const tfs = [
+  {ar:"السمكة بتطير.", correct:false, why:"غلط! السمكة بتسبح (The fish swims, it doesn't fly)"},
+  {ar:"البقرة بتعطينا حليب.", correct:true, why:"صح! (Correct — the cow gives us milk)"},
+  {ar:"الأرنب بطيء.", correct:false, why:"غلط! الأرنب سريع (The rabbit is fast, not slow)"},
+];
+const tfList = document.getElementById('tfList');
+tfs.forEach(t=>{
+  const card = document.createElement('div');
+  card.className = 'tf-card';
+  card.innerHTML = `<div class="ar">${t.ar}</div>
+    <div class="tf-buttons">
+      <button class="btn-true">صح</button>
+      <button class="btn-false">غلط</button>
+    </div>
+    <div class="tf-feedback">${t.why}</div>`;
+  const feedback = card.querySelector('.tf-feedback');
+  card.querySelector('.btn-true').onclick = ()=>{ feedback.classList.add('show'); if(t.correct) earnStar(); };
+  card.querySelector('.btn-false').onclick = ()=>{ feedback.classList.add('show'); if(!t.correct) earnStar(); };
+  tfList.appendChild(card);
+});
+
+// drawing
+const canvas = document.getElementById('board');
+const ctx = canvas.getContext('2d');
+let drawing = false, color = '#3a2e1f';
+function pos(e){
+  const r = canvas.getBoundingClientRect();
+  const t = e.touches ? e.touches[0] : e;
+  return {x:(t.clientX-r.left)*(canvas.width/r.width), y:(t.clientY-r.top)*(canvas.height/r.height)};
+}
+function start(e){ drawing = true; const p = pos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); e.preventDefault(); }
+function move(e){ if(!drawing) return; const p = pos(e); ctx.lineTo(p.x,p.y); ctx.strokeStyle=color; ctx.lineWidth=6; ctx.lineCap='round'; ctx.stroke(); e.preventDefault(); }
+function end(){ drawing = false; earnStar(); }
+canvas.addEventListener('mousedown', start);
+canvas.addEventListener('mousemove', move);
+window.addEventListener('mouseup', end);
+canvas.addEventListener('touchstart', start);
+canvas.addEventListener('touchmove', move);
+canvas.addEventListener('touchend', end);
+document.querySelectorAll('.swatch').forEach(s=>{
+  s.onclick = ()=>{ document.querySelectorAll('.swatch').forEach(x=>x.classList.remove('active')); s.classList.add('active'); color = s.dataset.color; };
+});
+function clearBoard(){ ctx.clearRect(0,0,canvas.width,canvas.height); }
+
+// homework
+function toggleHw(li){
+  li.classList.toggle('done');
+  li.querySelector('input').checked = li.classList.contains('done');
+  if(li.classList.contains('done')) earnStar();
+}
+</script>
+</body>
+</html>
