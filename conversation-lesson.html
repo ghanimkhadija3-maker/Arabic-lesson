@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بدء الحديث | Starting the Conversation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@500;700&family=Tajawal:wght@400;500;700;800&family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a1513;
+    --bg-alt:#0f1e1b;
+    --paper:#f6efe2;
+    --paper-dim:#ece2d0;
+    --ink:#1c2b27;
+    --ink-soft:#33423d;
+    --amber:#e3982f;
+    --amber-deep:#b96f28;
+    --sage:#a9cbae;
+    --sage-deep:#7fa285;
+    --line: rgba(246,239,226,0.16);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(217,142,63,0.10), transparent 40%),
+      radial-gradient(circle at 88% 92%, rgba(143,174,148,0.10), transparent 40%),
+      var(--bg);
+    color:var(--paper);
+    font-family:'Tajawal', sans-serif;
+    line-height:1.9;
+  }
+  .en{
+    font-family:'Inter', sans-serif;
+    direction:ltr;
+    display:block;
+    color:var(--ink-soft);
+    font-size:0.86rem;
+    margin-top:4px;
+  }
+  h1,h2,h3{font-family:'Markazi Text', serif; font-weight:700;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 20px 90px;}
+
+  /* HERO — phone chat mockup */
+  .hero{padding:64px 20px 40px; text-align:center;}
+  .eyebrow{
+    font-family:'Inter',sans-serif; letter-spacing:.14em; text-transform:uppercase;
+    font-size:.72rem; color:var(--sage); margin-bottom:14px;
+  }
+  .hero h1{font-size:3rem; margin:0 0 6px; color:var(--paper);}
+  .hero .en-title{font-family:'Fraunces',serif; font-style:italic; color:var(--sage); font-size:1.3rem; margin-bottom:26px;}
+  .meta-row{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:40px;}
+  .pill{
+    border:1px solid var(--line); border-radius:999px; padding:6px 16px;
+    font-family:'Inter',sans-serif; font-size:.78rem; color:var(--paper); direction:ltr;
+  }
+
+  .phone{
+    max-width:380px; margin:0 auto; background:var(--bg-alt);
+    border:1px solid var(--line); border-radius:28px; padding:10px;
+    box-shadow:0 30px 60px rgba(0,0,0,0.45);
+  }
+  .phone-head{
+    display:flex; align-items:center; gap:10px; padding:10px 12px;
+    border-bottom:1px solid var(--line);
+  }
+  .avatar{
+    width:36px;height:36px;border-radius:50%;
+    background:linear-gradient(135deg,var(--amber),var(--sage));
+    flex-shrink:0;
+  }
+  .phone-head .name{font-weight:700; font-size:.95rem;}
+  .phone-head .status{font-family:'Inter',sans-serif; direction:ltr; font-size:.7rem; color:var(--sage); text-align:left;}
+  .thread{padding:16px 10px; display:flex; flex-direction:column; gap:10px;}
+  .bubble{max-width:78%; padding:10px 14px; border-radius:16px; font-size:.92rem;}
+  .bubble .en{margin-top:3px; font-size:.72rem; opacity:.85;}
+  .bubble.them{align-self:flex-start; background:var(--paper); color:var(--ink); border-bottom-left-radius:4px;}
+  .bubble.me{align-self:flex-end; background:var(--amber); color:#2a1a08; border-bottom-right-radius:4px;}
+  .bubble.me .en{color:#4a3319;}
+
+  /* SECTION SCAFFOLDING */
+  section{margin-top:56px;}
+  .divider{
+    display:flex; align-items:center; gap:14px; margin:0 0 22px; direction:ltr;
+  }
+  .divider .num{
+    font-family:'Fraunces',serif; font-style:italic; color:var(--amber); font-size:1.5rem; flex-shrink:0;
+  }
+  .divider .line{flex:1; height:1px; background:var(--line);}
+  .divider .time{font-family:'Inter',sans-serif; font-size:.72rem; color:var(--sage);}
+  section h2{font-size:1.9rem; margin:0 0 4px; color:var(--paper);}
+  section .h2-en{font-family:'Fraunces',serif; font-style:italic; color:var(--sage); font-size:1.05rem; margin-bottom:18px;}
+  .intro-text{color:#d8cfbf; font-size:1rem; max-width:640px;}
+
+  /* PHRASE CARDS */
+  .phrase-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px; margin-top:20px;}
+  .phrase-card{
+    background:var(--paper); color:var(--ink); border-radius:14px; padding:16px 18px;
+    cursor:pointer; position:relative; border:1px solid transparent;
+    transition:transform .15s ease, border-color .15s ease;
+  }
+  .phrase-card:hover{transform:translateY(-3px); border-color:var(--amber);}
+  .phrase-card .ar{font-size:1.25rem; font-weight:700; margin-bottom:4px;}
+  .phrase-card .when{font-size:.82rem; color:var(--ink-soft); margin-top:8px; border-top:1px dashed var(--paper-dim); padding-top:8px;}
+  .phrase-card .when .en{margin-top:2px;}
+  .tap-hint{font-family:'Inter',sans-serif; font-size:.65rem; font-weight:600; color:#6b7d74; position:absolute; top:14px; left:14px; direction:ltr;}
+
+  /* EXCHANGE EXAMPLES */
+  .exchange{margin-bottom:22px; background:var(--bg-alt); border:1px solid var(--line); border-radius:16px; padding:16px 18px;}
+  .exchange .q{color:var(--sage); font-weight:700; margin-bottom:8px;}
+  .exchange .q .en{color:#9db8a0;}
+  .exchange .a{background:var(--paper); color:var(--ink); border-radius:12px; padding:10px 14px; display:inline-block;}
+  .exchange .a b{color:var(--amber-deep);}
+  .exchange .a .en{color:var(--ink-soft);}
+
+  /* QUIZ */
+  .quiz-item{background:var(--bg-alt); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin-bottom:14px;}
+  .quiz-item .sent{font-size:1.05rem; margin-bottom:2px;}
+  .quiz-item .sent .en{margin-bottom:10px;}
+  .choices{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+  .choice-btn{
+    font-family:'Tajawal',sans-serif; background:transparent; border:1px solid var(--line);
+    color:var(--amber); padding:7px 14px; border-radius:999px; cursor:pointer; font-size:.88rem; font-weight:700;
+    transition:all .15s ease;
+  }
+  .choice-btn:hover{border-color:var(--sage);}
+  .choice-btn.correct{background:var(--sage); border-color:var(--sage); color:#10231a; font-weight:700;}
+  .choice-btn.wrong{background:#7a3b34; border-color:#7a3b34; color:#fbe9e6;}
+  .choice-btn[disabled]{cursor:default;}
+  .feedback{font-family:'Inter',sans-serif; font-size:.8rem; margin-top:8px; min-height:16px; direction:ltr;}
+
+  /* CHALLENGE TIMER */
+  .challenge-box{
+    background:linear-gradient(135deg, rgba(217,142,63,.14), rgba(143,174,148,.10));
+    border:1px solid var(--line); border-radius:18px; padding:24px 26px;
+  }
+  .timer-display{font-family:'Fraunces',serif; font-size:2.6rem; color:var(--amber); direction:ltr;}
+  .start-btn{
+    font-family:'Inter',sans-serif; background:var(--amber); color:#2a1a08; border:none;
+    padding:11px 26px; border-radius:999px; font-weight:600; cursor:pointer; margin-top:12px; font-size:.9rem;
+  }
+  .start-btn:hover{background:var(--amber-deep);}
+  .checklist{list-style:none; padding:0; margin:18px 0 0; display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:8px;}
+  .checklist li{
+    background:rgba(246,239,226,0.06); border:1px solid var(--line); border-radius:10px;
+    padding:9px 12px; cursor:pointer; font-size:.92rem; display:flex; align-items:center; gap:8px;
+  }
+  .checklist li.done{background:rgba(143,174,148,.2); border-color:var(--sage); text-decoration:line-through; color:var(--sage);}
+  .box-en{margin-top:2px;}
+
+  /* HOMEWORK / VOCAB */
+  .footer-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media(max-width:640px){.footer-grid{grid-template-columns:1fr;}}
+  .footer-card{background:var(--bg-alt); border:1px solid var(--line); border-radius:16px; padding:20px 22px;}
+  .footer-card h3{margin:0 0 6px; font-size:1.3rem;}
+  .footer-card .h3-en{font-family:'Fraunces',serif; font-style:italic; color:var(--sage); font-size:.9rem; margin-bottom:12px;}
+  .vocab-tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .vocab-tags span{background:var(--paper); color:var(--ink); border-radius:8px; padding:5px 12px; font-size:.9rem;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">Conversation Practice · Lesson 1</div>
+  <h1>كيف أبدأ الحديث؟</h1>
+  <div class="en-title">How Do I Start a Conversation?</div>
+  <div class="meta-row">
+    <span class="pill">50 minutes</span>
+    <span class="pill">Level: Advanced</span>
+    <span class="pill">100% speaking</span>
+  </div>
+
+  <div class="phone">
+    <div class="phone-head">
+      <div class="avatar"></div>
+      <div>
+        <div class="name">محادثة اليوم</div>
+        <div class="status">Today's conversation · online</div>
+      </div>
+    </div>
+    <div class="thread">
+      <div class="bubble them">هل تحب السفر؟<span class="en">Do you like traveling?</span></div>
+      <div class="bubble me">في الحقيقة، أحب السفر كثيرًا.<span class="en">Actually, I love traveling a lot.</span></div>
+      <div class="bubble them">وما رأيك في العمل عن بُعد؟<span class="en">And what do you think about remote work?</span></div>
+      <div class="bubble me">بصراحة، أعتقد أنه يمنحنا حرية أكبر.<span class="en">Honestly, I think it gives us more freedom.</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- OBJECTIVES -->
+  <section>
+    <div class="divider"><span class="num">٠</span><span class="line"></span><span class="time">5 min</span></div>
+    <h2>الهدف من الدرس</h2>
+    <div class="h2-en">Lesson Objectives</div>
+    <p class="intro-text">
+      بنهاية الحصة، ستكون قادرًا على بدء أي حديث بشكل طبيعي، باستخدام عبارات افتتاحية بدل الدخول في الجملة مباشرة، والتعبير عن رأيك بأسلوب راقٍ ومهذب — كما يفعل المتحدث الأصلي في نقاش حقيقي عن العمل، السفر، أو أي موضوع يومي.
+      <span class="en">By the end of this session, you'll open any conversation naturally, use lead-in expressions instead of jumping straight into a sentence, and voice your opinion the way a native speaker would in a real discussion about work, travel, or everyday topics.</span>
+    </p>
+  </section>
+
+  <!-- WARM UP -->
+  <section>
+    <div class="divider"><span class="num">١</span><span class="line"></span><span class="time">5 min</span></div>
+    <h2>إحماء سريع</h2>
+    <div class="h2-en">Warm-up</div>
+    <p class="intro-text">أجب عن الأسئلة التالية بجملة واحدة مباشرة — سنعود إليها بعد قليل لنُحسّنها.
+      <span class="en">Answer each question in one direct sentence — we'll come back and upgrade them shortly.</span>
+    </p>
+    <ul>
+      <li>كيف كان أسبوعك؟ <span class="en">How was your week?</span></li>
+      <li>ما آخر شيء تعلّمته؟ <span class="en">What's the last thing you learned?</span></li>
+      <li>هل تفضّل العمل الحر أم الوظيفة الثابتة؟ <span class="en">Do you prefer freelancing or a fixed job?</span></li>
+    </ul>
+  </section>
+
+  <!-- PHRASES -->
+  <section>
+    <div class="divider"><span class="num">٢</span><span class="line"></span><span class="time">10 min</span></div>
+    <h2>العبارات الافتتاحية</h2>
+    <div class="h2-en">Lead-in Expressions — tap a card to see when to use it</div>
+    <div class="phrase-grid" id="phraseGrid"></div>
+  </section>
+
+  <!-- EXAMPLES -->
+  <section>
+    <div class="divider"><span class="num">٣</span><span class="line"></span><span class="time">8 min</span></div>
+    <h2>أمثلة حيّة</h2>
+    <div class="h2-en">Live Examples</div>
+    <div id="examples"></div>
+  </section>
+
+  <!-- QUIZ -->
+  <section>
+    <div class="divider"><span class="num">٤</span><span class="line"></span><span class="time">7 min</span></div>
+    <h2>اختر العبارة المناسبة</h2>
+    <div class="h2-en">Pick the Right Expression</div>
+    <div id="quiz"></div>
+  </section>
+
+  <!-- CONVERSATION DRILL -->
+  <section>
+    <div class="divider"><span class="num">٥</span><span class="line"></span><span class="time">10 min</span></div>
+    <h2>تدريب محادثة</h2>
+    <div class="h2-en">Conversation Drill</div>
+    <p class="intro-text">اطرحي على الطالب الأسئلة التالية شفهيًا — ويجب أن تبدأ كل إجابة بعبارة افتتاحية مختلفة.
+      <span class="en">Ask these questions aloud — every answer must open with a different lead-in expression.</span>
+    </p>
+    <ul>
+      <li>ما رأيك في الذكاء الاصطناعي؟ <span class="en">What's your opinion on AI?</span></li>
+      <li>هل من الأفضل العيش في مدينة كبيرة أم بلدة صغيرة؟ <span class="en">Is it better to live in a big city or a small town?</span></li>
+      <li>كيف تغيّرت خططك خلال السنة الماضية؟ <span class="en">How have your plans changed over the past year?</span></li>
+      <li>ما أهم درس تعلّمته من عملك؟ <span class="en">What's the most important lesson you learned from your work?</span></li>
+    </ul>
+  </section>
+
+  <!-- FINAL CHALLENGE -->
+  <section>
+    <div class="divider"><span class="num">٦</span><span class="line"></span><span class="time">5 min</span></div>
+    <h2>التحدي النهائي</h2>
+    <div class="h2-en">Final Challenge — talk for 5 minutes about yourself</div>
+    <div class="challenge-box">
+      <p class="intro-text" style="margin-top:0">استخدم خمس عبارات على الأقل من القائمة خلال الخمس دقائق. اضغط على كل عبارة استخدمتها فعليًا.
+        <span class="en box-en">Use at least five expressions during the five minutes. Tap each one as you actually use it.</span>
+      </p>
+      <div class="timer-display" id="timerDisplay">05:00</div>
+      <button class="start-btn" id="startBtn">ابدأ · Start</button>
+      <ul class="checklist" id="checklist"></ul>
+    </div>
+  </section>
+
+  <!-- HOMEWORK + VOCAB -->
+  <section class="footer-grid">
+    <div class="footer-card">
+      <h3>الواجب</h3>
+      <div class="h3-en">Homework</div>
+      <p style="margin:0">اكتب فقرة من 8–10 جمل عن نفسك، مستخدمًا ست عبارات من الدرس على الأقل، كل عبارة مرة واحدة.
+        <span class="en">Write a paragraph of 8–10 sentences about yourself, using at least six of today's expressions, each once.</span>
+      </p>
+    </div>
+    <div class="footer-card">
+      <h3>كلمات جديدة</h3>
+      <div class="h3-en">New Vocabulary</div>
+      <div class="vocab-tags">
+        <span>الحقيقة</span><span>الرأي</span><span>وجهة النظر</span><span>البداية</span>
+        <span>الصراحة</span><span>التجربة</span><span>الفكرة</span><span>الحوار</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const phrases = [
+  {ar:"في الحقيقة", en:"Actually", when:"عندما نريد قول الحقيقة", whenEn:"When we want to state a fact"},
+  {ar:"بصراحة", en:"Honestly", when:"عند التعبير عن الرأي بجرأة", whenEn:"When voicing an opinion candidly"},
+  {ar:"أعتقد أنّ", en:"I think...", when:"لإبداء رأي شخصي", whenEn:"To share a personal opinion"},
+  {ar:"في رأيي", en:"In my opinion", when:"للرأي الشخصي المباشر", whenEn:"For a direct personal opinion"},
+  {ar:"من وجهة نظري", en:"From my point of view", when:"رأي أكثر رسمية", whenEn:"A more formal opinion"},
+  {ar:"كما تعلم", en:"As you know", when:"عندما يعرف الطرف الآخر الموضوع", whenEn:"When the listener already knows the topic"},
+  {ar:"قبل كل شيء", en:"First of all", when:"لبدء الكلام", whenEn:"To open a statement"},
+  {ar:"في البداية", en:"At first", when:"عند سرد قصة أو تجربة", whenEn:"When narrating a story or experience"},
+];
+
+const grid = document.getElementById('phraseGrid');
+phrases.forEach(p=>{
+  const card = document.createElement('div');
+  card.className='phrase-card';
+  card.innerHTML = `<span class="tap-hint">tap</span>
+    <div class="ar">${p.ar}<span class="en">${p.en}</span></div>
+    <div class="when" style="display:none">${p.when}<span class="en">${p.whenEn}</span></div>`;
+  card.addEventListener('click', ()=>{
+    const w = card.querySelector('.when');
+    w.style.display = w.style.display === 'none' ? 'block' : 'none';
+  });
+  grid.appendChild(card);
+});
+
+const examples = [
+  {q:"هل تحب السفر؟", qEn:"Do you like traveling?", a:"في الحقيقة", rest:"، أحب السفر كثيرًا.", aEn:"Actually, I love traveling a lot."},
+  {q:"هل تحب الطبخ؟", qEn:"Do you like cooking?", a:"بصراحة", rest:"، لا أحب الطبخ.", aEn:"Honestly, I don't like cooking."},
+  {q:"هل العربية صعبة؟", qEn:"Is Arabic difficult?", a:"أعتقد أنّ", rest:" العربية جميلة لكنها تحتاج إلى ممارسة.", aEn:"I think Arabic is beautiful but it needs practice."},
+  {q:"ما أفضل مدينة زرتها؟", qEn:"What's the best city you've visited?", a:"في رأيي", rest:"، عمّان مدينة رائعة.", aEn:"In my opinion, Amman is a wonderful city."},
+  {q:"كيف كانت بداية تعلّمك للعربية؟", qEn:"How was the start of your Arabic learning?", a:"في البداية", rest:"، كنت لا أفهم شيئًا، لكن الآن أصبحت أفهم أكثر.", aEn:"At first, I didn't understand anything, but now I understand much more."},
+];
+
+const exWrap = document.getElementById('examples');
+examples.forEach(e=>{
+  const div = document.createElement('div');
+  div.className='exchange';
+  div.innerHTML = `<div class="q">${e.q}<span class="en">${e.qEn}</span></div>
+    <div class="a"><b>${e.a}</b>${e.rest}<span class="en">${e.aEn}</span></div>`;
+  exWrap.appendChild(div);
+});
+
+const quizData = [
+  {sent:"أنا أحب القهوة أكثر من الشاي.", sentEn:"I like coffee more than tea.", answer:"في رأيي", options:["في رأيي","كما تعلم","قبل كل شيء"]},
+  {sent:"لا أحب الاستيقاظ مبكرًا.", sentEn:"I don't like waking up early.", answer:"بصراحة", options:["في البداية","بصراحة","من وجهة نظري"]},
+  {sent:"كنت خائفًا من العربية ثم أصبحت مرتاحًا لها.", sentEn:"I was afraid of Arabic, then became comfortable with it.", answer:"في البداية", options:["في الحقيقة","قبل كل شيء","في البداية"]},
+  {sent:"أنت تعرف أنّني أعمل في الصيدلة.", sentEn:"You know that I work in pharmacy.", answer:"كما تعلم", options:["كما تعلم","بصراحة","أعتقد أنّ"]},
+  {sent:"أريد أن أشكرك على وقتك.", sentEn:"I want to thank you for your time.", answer:"قبل كل شيء", options:["في البداية","قبل كل شيء","في رأيي"]},
+];
+
+const quizWrap = document.getElementById('quiz');
+quizData.forEach((q,i)=>{
+  const div = document.createElement('div');
+  div.className='quiz-item';
+  const opts = q.options.map(o=>`<button class="choice-btn" data-correct="${o===q.answer}">${o}</button>`).join('');
+  div.innerHTML = `<div class="sent">${q.sent}<span class="en">${q.sentEn}</span></div>
+    <div class="choices">${opts}</div>
+    <div class="feedback"></div>`;
+  quizWrap.appendChild(div);
+  div.querySelectorAll('.choice-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const fb = div.querySelector('.feedback');
+      const correct = btn.dataset.correct === 'true';
+      div.querySelectorAll('.choice-btn').forEach(b=>b.disabled=true);
+      btn.classList.add(correct?'correct':'wrong');
+      if(!correct){
+        div.querySelectorAll('.choice-btn').forEach(b=>{ if(b.dataset.correct==='true') b.classList.add('correct'); });
+      }
+      fb.textContent = correct ? 'Correct!' : 'Not quite — check the highlighted answer.';
+    });
+  });
+});
+
+const checklistData = ["في الحقيقة","بصراحة","أعتقد أنّ","في رأيي","من وجهة نظري","كما تعلم","قبل كل شيء","في البداية"];
+const checklistEl = document.getElementById('checklist');
+checklistData.forEach(p=>{
+  const li = document.createElement('li');
+  li.textContent = p;
+  li.addEventListener('click', ()=> li.classList.toggle('done'));
+  checklistEl.appendChild(li);
+});
+
+let timerInterval, secondsLeft = 300;
+const timerDisplay = document.getElementById('timerDisplay');
+document.getElementById('startBtn').addEventListener('click', function(){
+  clearInterval(timerInterval);
+  secondsLeft = 300;
+  updateTimer();
+  this.textContent = 'جارٍ الآن... Running';
+  this.disabled = true;
+  timerInterval = setInterval(()=>{
+    secondsLeft--;
+    updateTimer();
+    if(secondsLeft<=0){
+      clearInterval(timerInterval);
+      timerDisplay.textContent = "انتهى! Time's up";
+      document.getElementById('startBtn').textContent = 'أعد المحاولة · Try Again';
+      document.getElementById('startBtn').disabled = false;
+    }
+  },1000);
+});
+function updateTimer(){
+  const m = String(Math.floor(secondsLeft/60)).padStart(2,'0');
+  const s = String(secondsLeft%60).padStart(2,'0');
+  timerDisplay.textContent = `${m}:${s}`;
+}
+</script>
+</body>
+</html>
