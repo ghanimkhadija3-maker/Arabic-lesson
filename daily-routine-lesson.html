@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الروتين اليومي — My Daily Routine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Mada:wght@400;500;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#FFD9A0;
+    --sky-mid:#FFC1CC;
+    --sky-low:#BFE3F0;
+    --sun:#FFB703;
+    --sun-dark:#F08C21;
+    --ink:#28324A;
+    --coral:#FB6F92;
+    --card:#FFFDF9;
+    --line: rgba(40,50,74,0.12);
+    --good:#3A9D5D;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Mada','Quicksand',sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 85% 8%, rgba(255,255,255,0.55) 0, rgba(255,255,255,0) 32%),
+      linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 45%, var(--sky-low) 100%);
+    min-height:100vh;
+    padding-bottom:60px;
+  }
+  .arabic{font-family:'Baloo 2', 'Mada', sans-serif;}
+  h1,h2,h3{font-family:'Baloo 2', sans-serif; margin:0;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 20px;}
+
+  /* HERO — Day Wheel */
+  .hero{padding:38px 0 10px; text-align:center; position:relative;}
+  .eyebrow{
+    font-family:'Quicksand',sans-serif; letter-spacing:.12em; text-transform:uppercase;
+    font-size:13px; color:var(--sun-dark); font-weight:700; direction:ltr;
+  }
+  h1.title{font-size:clamp(30px,5vw,44px); margin-top:6px; color:var(--ink);}
+  .subtitle{font-family:'Quicksand',sans-serif; color:#5b6480; margin-top:8px; font-size:15px;}
+
+  .wheel-box{position:relative; width:min(360px,80vw); height:min(360px,80vw); margin:34px auto 10px;}
+  .wheel-ring{
+    position:absolute; inset:0; border-radius:50%;
+    background: conic-gradient(from -90deg, #FFD9A0, #FFB4A2, #BFE3F0, #FFD9A0);
+    opacity:.35;
+  }
+  .wheel-center{
+    position:absolute; inset:22%; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #FFF6E5, var(--card));
+    box-shadow: 0 10px 30px rgba(40,50,74,0.18), inset 0 0 0 2px rgba(255,183,3,.25);
+    display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center;
+    padding:10px;
+  }
+  #wheelWord{font-size:26px; font-weight:700;}
+  #wheelSub{font-family:'Quicksand',sans-serif; font-size:12px; color:#7a8199; margin-top:4px; direction:ltr;}
+  .wheel-dot{
+    position:absolute; width:52px; height:52px; border-radius:50%;
+    background:var(--card); border:2px solid rgba(255,255,255,.8);
+    display:flex; align-items:center; justify-content:center; font-size:22px;
+    box-shadow:0 4px 12px rgba(40,50,74,.18); cursor:pointer; transition:transform .15s ease;
+  }
+  .wheel-dot:hover{transform:scale(1.12);}
+  .wheel-dot.active{background:var(--sun); box-shadow:0 0 0 4px rgba(255,183,3,.3), 0 4px 14px rgba(240,140,33,.4);}
+  .hint{font-family:'Quicksand',sans-serif; font-size:12.5px; color:#7a8199; margin-top:6px;}
+
+  /* SECTIONS */
+  section{margin-top:46px;}
+  .sec-head{display:flex; align-items:baseline; gap:10px; margin-bottom:16px;}
+  .sec-num{
+    font-family:'Quicksand',sans-serif; font-weight:700; font-size:13px; color:#fff;
+    background:var(--coral); border-radius:999px; padding:3px 11px; direction:ltr;
+  }
+  .sec-title{font-size:22px;}
+  .sec-title-en{font-family:'Quicksand',sans-serif; font-size:13px; color:#7a8199; direction:ltr;}
+
+  /* Vocabulary flip cards */
+  .vocab-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px;}
+  .flip-card{perspective:800px; height:120px; cursor:pointer;}
+  .flip-inner{position:relative; width:100%; height:100%; transition:transform .5s; transform-style:preserve-3d;}
+  .flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+  .flip-face{
+    position:absolute; inset:0; backface-visibility:hidden; border-radius:16px;
+    display:flex; align-items:center; justify-content:center; flex-direction:column;
+    padding:10px; text-align:center;
+    box-shadow:0 6px 16px rgba(40,50,74,.10); border:1px solid var(--line);
+  }
+  .flip-front{background:var(--card);}
+  .flip-front .num{position:absolute; top:8px; inset-inline-start:10px; font-size:11px; color:#c9ccd8; font-family:'Quicksand',sans-serif;}
+  .flip-front .word{font-size:19px; font-weight:700;}
+  .flip-back{background:linear-gradient(160deg,#FFF3DC,#FFE3E9); transform:rotateY(180deg);}
+  .flip-back .translit{font-family:'Quicksand',sans-serif; font-weight:700; font-size:14px; color:var(--sun-dark); direction:ltr;}
+  .flip-back .en{font-family:'Quicksand',sans-serif; font-size:13px; color:var(--ink); margin-top:5px; direction:ltr;}
+
+  /* Sentence list */
+  .sent-list{display:flex; flex-direction:column; gap:10px;}
+  .sent-row{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:13px 16px; cursor:pointer; transition:box-shadow .15s ease;
+  }
+  .sent-row:hover{box-shadow:0 6px 16px rgba(40,50,74,.10);}
+  .sent-ar{font-size:18px; font-weight:600;}
+  .sent-extra{
+    max-height:0; overflow:hidden; transition:max-height .25s ease;
+    font-family:'Quicksand',sans-serif; direction:ltr; text-align:left;
+  }
+  .sent-row.open .sent-extra{max-height:80px; margin-top:8px;}
+  .sent-extra .translit{color:var(--sun-dark); font-weight:700; font-size:14px;}
+  .sent-extra .en{color:#5b6480; font-size:13.5px; margin-top:2px;}
+  .toggle-icon{float:left; font-family:'Quicksand',sans-serif; color:#c9ccd8; font-size:13px;}
+
+  /* Questions */
+  .q-list{display:flex; flex-direction:column; gap:10px;}
+
+  /* Ordering game */
+  .order-game{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:20px;}
+  .chip-pool{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;}
+  .chip{
+    background:#fff; border:2px solid var(--sun); border-radius:12px; padding:9px 14px;
+    font-size:16px; font-weight:600; cursor:pointer; user-select:none; transition:opacity .15s, transform .15s;
+  }
+  .chip.used{opacity:.25; pointer-events:none;}
+  .chip:active{transform:scale(.95);}
+  .answer-row{
+    min-height:52px; border:2px dashed var(--line); border-radius:12px; padding:8px 10px;
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:14px;
+  }
+  .answer-row .chip{background:linear-gradient(160deg,#FFF3DC,#FFE3E9); border-color:var(--coral); cursor:default;}
+  .game-btns{display:flex; gap:10px; flex-wrap:wrap;}
+  .btn{
+    font-family:'Quicksand',sans-serif; font-weight:700; border:none; border-radius:999px;
+    padding:10px 20px; cursor:pointer; font-size:14px;
+  }
+  .btn-check{background:var(--coral); color:#fff;}
+  .btn-reset{background:#fff; color:var(--ink); border:1px solid var(--line);}
+  #orderFeedback{font-family:'Quicksand',sans-serif; margin-top:10px; font-weight:700; direction:ltr;}
+  #orderFeedback.good{color:var(--good);}
+  #orderFeedback.bad{color:var(--coral);}
+
+  /* Role play */
+  .dialogue{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:20px;}
+  .line{display:flex; gap:12px; margin-bottom:14px; align-items:flex-start;}
+  .avatar{
+    width:38px; height:38px; border-radius:50%; flex-shrink:0; display:flex; align-items:center;
+    justify-content:center; font-size:18px; color:#fff; font-weight:700;
+  }
+  .avatar.teacher{background:var(--sun-dark);}
+  .avatar.student{background:var(--coral);}
+  .line-body{flex:1;}
+  .line-role{font-family:'Quicksand',sans-serif; font-size:11.5px; color:#7a8199; direction:ltr;}
+  .line-ar{font-size:17px; font-weight:600; margin-top:2px;}
+  .line-reveal{
+    font-family:'Quicksand',sans-serif; font-size:13px; color:#7a8199; direction:ltr;
+    max-height:0; overflow:hidden; transition:max-height .2s ease;
+  }
+  .line.open .line-reveal{max-height:40px; margin-top:4px;}
+  .line-btn{
+    font-family:'Quicksand',sans-serif; font-size:12px; color:var(--sun-dark); background:none;
+    border:none; cursor:pointer; padding:0; margin-top:3px; font-weight:700;
+  }
+
+  /* Speed challenge */
+  .speed-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:14px;}
+  .speed-card{
+    background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px 10px;
+    text-align:center; cursor:pointer;
+  }
+  .speed-card .em{font-size:26px; display:block;}
+  .speed-ar{font-size:17px; font-weight:700; margin-top:6px;}
+  .speed-back{
+    font-family:'Quicksand',sans-serif; direction:ltr; font-size:12.5px; margin-top:6px;
+    display:none; color:#5b6480;
+  }
+  .speed-back .translit{color:var(--sun-dark); font-weight:700;}
+  .speed-card.shown .speed-back{display:block;}
+
+  /* Simon Says */
+  .simon-box{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:22px; text-align:center;}
+  .simon-stage{
+    background:linear-gradient(160deg,#FFF3DC,#FFE3E9); border-radius:16px; padding:34px 16px;
+    min-height:90px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+  }
+  .simon-placeholder{font-size:17px; color:#7a8199; font-weight:600;}
+  #simonText.arabic{font-size:24px; font-weight:700; color:var(--ink);}
+  #simonText.simon-prefix{color:var(--coral);}
+  .simon-emoji{font-size:34px;}
+  #simonFeedback{font-family:'Quicksand',sans-serif; font-weight:700; margin-top:12px; min-height:20px; direction:ltr;}
+  #simonFeedback.good{color:var(--good);}
+  #simonFeedback.bad{color:var(--coral);}
+  #simonScore{font-family:'Quicksand',sans-serif; font-size:13px; color:#7a8199; margin-top:8px; direction:ltr;}
+
+  /* Homework */
+  .homework{background:linear-gradient(160deg,#FFF3DC,#FFE3E9); border-radius:20px; padding:24px;}
+  .hw-item{display:flex; align-items:center; gap:10px; padding:7px 0; font-size:16px;}
+  .hw-item input{width:18px; height:18px; accent-color:var(--coral);}
+  .hw-cols{display:grid; grid-template-columns:1fr 1fr; gap:0 24px;}
+  @media (max-width:560px){.hw-cols{grid-template-columns:1fr;}}
+
+  footer{text-align:center; margin-top:50px; font-family:'Quicksand',sans-serif; color:#8a91a8; font-size:12.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">Lesson · الروتين اليومي</div>
+    <h1 class="title">🌞 حصة: الروتين اليومي</h1>
+    <div class="subtitle">My Daily Routine — انقري على دولاب اليوم لسماع كل كلمة</div>
+
+    <div class="wheel-box">
+      <div class="wheel-ring"></div>
+      <div class="wheel-center">
+        <div id="wheelWord" class="arabic">أصحى</div>
+        <div id="wheelSub">AS-ha — I wake up</div>
+      </div>
+      <div id="wheelDots"></div>
+    </div>
+    <div class="hint">👆 اضغطي على كل دائرة لتشوفي الكلمة</div>
+  </div>
+
+  <!-- GOAL -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">1</span>
+      <h2 class="sec-title arabic">الهدف</h2>
+      <span class="sec-title-en">Goal</span>
+    </div>
+    <ul style="font-size:16px; line-height:2;">
+      <li>التحدث عن الأنشطة اليومية <span style="font-family:'Quicksand'; color:#7a8199; font-size:13px;">(Talk about daily activities)</span></li>
+      <li>استخدام: أنا + فعل <span style="font-family:'Quicksand'; color:#7a8199; font-size:13px;">(Use: I + verb)</span></li>
+      <li>الإجابة عن سؤال: شو بتعمل؟ <span style="font-family:'Quicksand'; color:#7a8199; font-size:13px;">(Answer: what do you do?)</span></li>
+    </ul>
+  </section>
+
+  <!-- VOCAB -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">2</span>
+      <h2 class="sec-title arabic">الكلمات الجديدة</h2>
+      <span class="sec-title-en">New Words — tap to flip</span>
+    </div>
+    <div class="vocab-grid" id="vocabGrid"></div>
+  </section>
+
+  <!-- SENTENCES -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">3</span>
+      <h2 class="sec-title arabic">الجمل</h2>
+      <span class="sec-title-en">Sentences — tap to reveal</span>
+    </div>
+    <div class="sent-list" id="sentList"></div>
+  </section>
+
+  <!-- QUESTIONS -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">4</span>
+      <h2 class="sec-title arabic">الأسئلة</h2>
+      <span class="sec-title-en">Questions</span>
+    </div>
+    <div class="q-list sent-list" id="qList"></div>
+  </section>
+
+  <!-- ORDERING GAME -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">5</span>
+      <h2 class="sec-title arabic">🎲 لعبة الترتيب</h2>
+      <span class="sec-title-en">Put the routine in order</span>
+    </div>
+    <div class="order-game">
+      <p style="font-family:'Quicksand'; font-size:13.5px; color:#7a8199; direction:ltr; margin-top:0;">Tap the words below in the order they happen in the morning, then check your answer.</p>
+      <div class="answer-row" id="answerRow"></div>
+      <div class="chip-pool" id="chipPool"></div>
+      <div class="game-btns">
+        <button class="btn btn-check" onclick="checkOrder()">تأكيد ✓ Check</button>
+        <button class="btn btn-reset" onclick="resetOrder()">إعادة ↺ Reset</button>
+      </div>
+      <div id="orderFeedback"></div>
+    </div>
+  </section>
+
+  <!-- ROLE PLAY -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">6</span>
+      <h2 class="sec-title arabic">🎭 تمثيل</h2>
+      <span class="sec-title-en">Role-play — tap "meaning" to reveal</span>
+    </div>
+    <div class="dialogue" id="dialogue"></div>
+  </section>
+
+  <!-- SPEED CHALLENGE -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">7</span>
+      <h2 class="sec-title arabic">🎵 تحدي السرعة</h2>
+      <span class="sec-title-en">Speed challenge — say it, act it out!</span>
+    </div>
+    <p style="font-family:'Quicksand'; font-size:13.5px; color:#7a8199; direction:ltr;">Say a command and have her act it out. Tap a card to check the pronunciation. Then switch roles — she gives you the orders!</p>
+    <div class="speed-grid" id="speedGrid"></div>
+  </section>
+
+  <!-- SIMON SAYS -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">8</span>
+      <h2 class="sec-title arabic">🕵️ سايمن قال</h2>
+      <span class="sec-title-en">Simon Says</span>
+    </div>
+    <p style="font-family:'Quicksand'; font-size:13.5px; color:#7a8199; direction:ltr;">Tap "New Round." If the command starts with "سايمن قال" (Simon says), she should do the action. If it doesn't, she should stay still! Guess right to win the round.</p>
+    <div class="simon-box">
+      <div class="simon-stage" id="simonStage">
+        <div class="simon-placeholder arabic" id="simonText">اضغطي "دور جديد" لتبدأ 🕵️</div>
+        <div class="simon-emoji" id="simonEmoji"></div>
+      </div>
+      <div class="game-btns" style="margin-top:16px;">
+        <button class="btn btn-check" id="simonDoBtn" onclick="simonAnswer(true)" disabled>✅ بعملها — I'll do it</button>
+        <button class="btn btn-reset" id="simonSkipBtn" onclick="simonAnswer(false)" disabled>🙅 ما بعملها — Not doing it</button>
+      </div>
+      <div class="game-btns" style="margin-top:10px;">
+        <button class="btn btn-reset" onclick="simonNewRound()">🔄 دور جديد — New Round</button>
+      </div>
+      <div id="simonFeedback"></div>
+      <div id="simonScore">النقاط · Score: 0 / 0</div>
+    </div>
+  </section>
+
+  <!-- HOMEWORK -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">9</span>
+      <h2 class="sec-title arabic">🏡 واجب</h2>
+      <span class="sec-title-en">Homework</span>
+    </div>
+    <div class="homework">
+      <p style="margin-top:0; font-size:15.5px;">تحفظ الكلمات العشر، وتقول 5 جمل عن يومها:</p>
+      <div class="hw-cols">
+        <div>
+          <div class="hw-item"><input type="checkbox"><span class="arabic">أنا بصحى الساعة سبعة.</span></div>
+          <div class="hw-item"><input type="checkbox"><span class="arabic">أنا بآكل فطور.</span></div>
+          <div class="hw-item"><input type="checkbox"><span class="arabic">أنا بدرس.</span></div>
+        </div>
+        <div>
+          <div class="hw-item"><input type="checkbox"><span class="arabic">أنا بلعب مع صاحباتي.</span></div>
+          <div class="hw-item"><input type="checkbox"><span class="arabic">أنا بنام بالليل.</span></div>
+        </div>
+      </div>
+      <p style="font-family:'Quicksand'; font-size:12.5px; color:#7a8199; direction:ltr; margin-bottom:0;">I wake up at 7 · I eat breakfast · I study · I play with my friends · I sleep at night</p>
+    </div>
+  </section>
+
+  <footer>هذه الحصة تعتمد على التكرار والحركة والتمثيل 🌞</footer>
+</div>
+
+<script>
+const vocab = [
+  {ar:"أصحى", translit:"AS-ha", en:"I wake up", emoji:"⏰"},
+  {ar:"أغسل وجهي", translit:"AGH-sil WEJ-hee", en:"I wash my face", emoji:"🧼"},
+  {ar:"أفرشي سناني", translit:"af-RA-shee sna-NEE", en:"I brush my teeth", emoji:"🪥"},
+  {ar:"آكل فطور", translit:"AA-kul fu-TOOR", en:"I eat breakfast", emoji:"🥞"},
+  {ar:"أشرب", translit:"ASH-rab", en:"I drink", emoji:"🥛"},
+  {ar:"ألبس", translit:"AL-bas", en:"I get dressed", emoji:"👕"},
+  {ar:"أدرس", translit:"AD-rus", en:"I study", emoji:"📖"},
+  {ar:"ألعب", translit:"AL-'ab", en:"I play", emoji:"🎈"},
+  {ar:"أنام", translit:"a-NAAM", en:"I sleep", emoji:"🌙"},
+  {ar:"أقرأ", translit:"AQ-ra", en:"I read", emoji:"📚"},
+];
+
+const sentences = [
+  {ar:"أنا بصحى الصبح.", translit:"Ana bSha is-sobh.", en:"I wake up in the morning."},
+  {ar:"أنا بغسل وجهي.", translit:"Ana baghsil wijhi.", en:"I wash my face."},
+  {ar:"أنا بفرشي سناني.", translit:"Ana bfarshi snani.", en:"I brush my teeth."},
+  {ar:"أنا بآكل فطور.", translit:"Ana bakol futoor.", en:"I eat breakfast."},
+  {ar:"أنا بشرب حليب.", translit:"Ana bashrab haleeb.", en:"I drink milk."},
+  {ar:"أنا بلبس ملابسي.", translit:"Ana balbas malabsi.", en:"I get dressed (wear my clothes)."},
+  {ar:"أنا بدرس.", translit:"Ana badrus.", en:"I study."},
+  {ar:"أنا بلعب.", translit:"Ana bal'ab.", en:"I play."},
+  {ar:"أنا بقرأ قصة.", translit:"Ana baqra qissah.", en:"I read a story."},
+  {ar:"أنا بنام بالليل.", translit:"Ana banaam bil-layl.", en:"I sleep at night."},
+];
+
+const questions = [
+  {ar:"شو بتعملي الصبح؟", translit:"Shu bteemli is-sobh?", en:"What do you do in the morning?"},
+  {ar:"شو بتاكلي بالفطور؟", translit:"Shu btakli bil-futoor?", en:"What do you eat for breakfast?"},
+  {ar:"شو بتحبي تشربي؟", translit:"Shu bthibbi tishrabi?", en:"What do you like to drink?"},
+  {ar:"إمتى بتلعبي؟", translit:"Emta bteel'abi?", en:"When do you play?"},
+  {ar:"إمتى بتنامي؟", translit:"Emta btnami?", en:"When do you sleep?"},
+  {ar:"بتحبي تقري قصص؟", translit:"Bthibbi teqri qisas?", en:"Do you like reading stories?"},
+];
+
+const orderWords = ["أصحى","أغسل وجهي","أفرشي سناني","آكل فطور","ألبس","أدرس","ألعب","أنام"];
+let correctOrder = [...orderWords];
+let shuffled = [...orderWords].sort(()=>Math.random()-0.5);
+let currentAnswer = [];
+
+const dialogue = [
+  {role:"teacher", ar:"شو بتعملي أول ما تصحي؟", translit:"Shu bteemli awwal ma tsahi?", en:"What do you do first when you wake up?"},
+  {role:"student", ar:"بصحى.", translit:"bSha.", en:"I wake up."},
+  {role:"teacher", ar:"وبعدين؟", translit:"w ba'dein?", en:"And then?"},
+  {role:"student", ar:"بغسل وجهي.", translit:"bghasel wijhi.", en:"I wash my face."},
+  {role:"teacher", ar:"وبعدين؟", translit:"w ba'dein?", en:"And then?"},
+  {role:"student", ar:"بفرشي سناني.", translit:"bfarshi snani.", en:"I brush my teeth."},
+];
+
+const speed = [
+  {ar:"اقرأي!", translit:"iq-RA-ee!", en:"Read!", emoji:"📖"},
+  {ar:"العبي!", translit:"il-'A-bi!", en:"Play!", emoji:"🎈"},
+  {ar:"اشربي!", translit:"esh-rabi!", en:"Drink!", emoji:"🥤"},
+  {ar:"نامي!", translit:"naa-mi!", en:"Sleep!", emoji:"😴"},
+  {ar:"البسي!", translit:"el-basi!", en:"Get dressed!", emoji:"👗"},
+  {ar:"اغسلي وجهك!", translit:"egh-sili wijhek!", en:"Wash your face!", emoji:"🧽"},
+];
+
+// --- Day wheel ---
+const wheelBox = document.querySelector('.wheel-box');
+const wheelDots = document.getElementById('wheelDots');
+const radius = wheelBox.offsetWidth ? wheelBox.offsetWidth*0.42 : 150;
+vocab.forEach((w,i)=>{
+  const angle = (i/vocab.length)*2*Math.PI - Math.PI/2;
+  const dot = document.createElement('div');
+  dot.className = 'wheel-dot' + (i===0?' active':'');
+  dot.style.left = `calc(50% + ${Math.cos(angle)*radius}px - 26px)`;
+  dot.style.top = `calc(50% + ${Math.sin(angle)*radius}px - 26px)`;
+  dot.textContent = w.emoji;
+  dot.onclick = ()=>{
+    document.querySelectorAll('.wheel-dot').forEach(d=>d.classList.remove('active'));
+    dot.classList.add('active');
+    document.getElementById('wheelWord').textContent = w.ar;
+    document.getElementById('wheelSub').textContent = `${w.translit} — ${w.en}`;
+  };
+  wheelDots.appendChild(dot);
+});
+
+// --- Vocab flip cards ---
+const vocabGrid = document.getElementById('vocabGrid');
+vocab.forEach((w,i)=>{
+  const card = document.createElement('div');
+  card.className = 'flip-card';
+  card.innerHTML = `
+    <div class="flip-inner">
+      <div class="flip-face flip-front"><span class="num">${i+1}</span><span class="word arabic">${w.ar}</span></div>
+      <div class="flip-face flip-back">
+        <div class="translit">${w.translit}</div>
+        <div class="en">${w.en}</div>
+      </div>
+    </div>`;
+  card.onclick = ()=> card.classList.toggle('flipped');
+  vocabGrid.appendChild(card);
+});
+
+// --- Sentences ---
+const sentList = document.getElementById('sentList');
+sentences.forEach(s=>{
+  const row = document.createElement('div');
+  row.className = 'sent-row';
+  row.innerHTML = `
+    <span class="toggle-icon">tap</span>
+    <div class="sent-ar arabic">${s.ar}</div>
+    <div class="sent-extra">
+      <div class="translit">${s.translit}</div>
+      <div class="en">${s.en}</div>
+    </div>`;
+  row.onclick = ()=> row.classList.toggle('open');
+  sentList.appendChild(row);
+});
+
+// --- Questions ---
+const qList = document.getElementById('qList');
+questions.forEach(q=>{
+  const row = document.createElement('div');
+  row.className = 'sent-row';
+  row.innerHTML = `
+    <span class="toggle-icon">tap</span>
+    <div class="sent-ar arabic">${q.ar}</div>
+    <div class="sent-extra">
+      <div class="translit">${q.translit}</div>
+      <div class="en">${q.en}</div>
+    </div>`;
+  row.onclick = ()=> row.classList.toggle('open');
+  qList.appendChild(row);
+});
+
+// --- Ordering game ---
+const chipPool = document.getElementById('chipPool');
+const answerRow = document.getElementById('answerRow');
+function renderPool(){
+  chipPool.innerHTML = '';
+  shuffled.forEach(word=>{
+    const chip = document.createElement('div');
+    chip.className = 'chip arabic';
+    chip.textContent = word;
+    if(currentAnswer.includes(word)) chip.classList.add('used');
+    chip.onclick = ()=>{
+      if(currentAnswer.includes(word)) return;
+      currentAnswer.push(word);
+      renderPool();
+      renderAnswer();
+    };
+    chipPool.appendChild(chip);
+  });
+}
+function renderAnswer(){
+  answerRow.innerHTML = '';
+  currentAnswer.forEach(word=>{
+    const chip = document.createElement('div');
+    chip.className = 'chip arabic';
+    chip.textContent = word;
+    answerRow.appendChild(chip);
+  });
+}
+function checkOrder(){
+  const fb = document.getElementById('orderFeedback');
+  const isCorrect = JSON.stringify(currentAnswer) === JSON.stringify(correctOrder);
+  if(currentAnswer.length < correctOrder.length){
+    fb.textContent = 'Keep going — pick all the words in order!';
+    fb.className = '';
+  } else if(isCorrect){
+    fb.textContent = '🎉 صح! Perfect order!';
+    fb.className = 'good';
+  } else {
+    fb.textContent = '❌ Not quite — try again!';
+    fb.className = 'bad';
+  }
+}
+function resetOrder(){
+  currentAnswer = [];
+  shuffled = [...orderWords].sort(()=>Math.random()-0.5);
+  document.getElementById('orderFeedback').textContent = '';
+  document.getElementById('orderFeedback').className = '';
+  renderPool();
+  renderAnswer();
+}
+renderPool();
+renderAnswer();
+
+// --- Dialogue ---
+const dialogueBox = document.getElementById('dialogue');
+dialogue.forEach(d=>{
+  const line = document.createElement('div');
+  line.className = 'line';
+  const isTeacher = d.role === 'teacher';
+  line.innerHTML = `
+    <div class="avatar ${d.role}">${isTeacher ? '👩‍🏫' : '🧒'}</div>
+    <div class="line-body">
+      <div class="line-role">${isTeacher ? 'Teacher' : 'Student'}</div>
+      <div class="line-ar arabic">${d.ar}</div>
+      <button class="line-btn">show meaning ▾</button>
+      <div class="line-reveal">${d.translit} — ${d.en}</div>
+    </div>`;
+  line.querySelector('.line-btn').onclick = ()=>{
+    line.classList.toggle('open');
+    line.querySelector('.line-btn').textContent = line.classList.contains('open') ? 'hide meaning ▴' : 'show meaning ▾';
+  };
+  dialogueBox.appendChild(line);
+});
+
+// --- Simon Says ---
+const simonCommands = [
+  {ar:"صحّي!", translit:"SAH-hee!", en:"Wake up!", emoji:"⏰"},
+  {ar:"اغسلي وجهك!", translit:"IGH-sili WEJ-hek!", en:"Wash your face!", emoji:"🧼"},
+  {ar:"فرّشي سنانك!", translit:"FAR-shee sna-NEK!", en:"Brush your teeth!", emoji:"🪥"},
+  {ar:"كلي فطور!", translit:"KU-lee fu-TOOR!", en:"Eat breakfast!", emoji:"🥞"},
+  {ar:"اشربي!", translit:"ISH-rabi!", en:"Drink!", emoji:"🥛"},
+  {ar:"البسي!", translit:"IL-basi!", en:"Get dressed!", emoji:"👕"},
+  {ar:"ادرسي!", translit:"ID-rasi!", en:"Study!", emoji:"📖"},
+  {ar:"العبي!", translit:"IL-'abi!", en:"Play!", emoji:"🎈"},
+  {ar:"اقري قصة!", translit:"IQ-ri qissah!", en:"Read a story!", emoji:"📚"},
+  {ar:"نامي!", translit:"NA-mi!", en:"Sleep!", emoji:"🌙"},
+];
+let simonState = null; // {command, isSimon}
+let simonScore = 0, simonTotal = 0;
+
+function simonNewRound(){
+  const cmd = simonCommands[Math.floor(Math.random()*simonCommands.length)];
+  const isSimon = Math.random() < 0.65;
+  simonState = {cmd, isSimon};
+  const textEl = document.getElementById('simonText');
+  textEl.className = 'arabic';
+  textEl.textContent = (isSimon ? 'سايمن قال: ' : '') + cmd.ar;
+  document.getElementById('simonEmoji').textContent = cmd.emoji;
+  document.getElementById('simonDoBtn').disabled = false;
+  document.getElementById('simonSkipBtn').disabled = false;
+  const fb = document.getElementById('simonFeedback');
+  fb.textContent = '';
+  fb.className = '';
+}
+
+function simonAnswer(chosenDo){
+  if(!simonState) return;
+  const {cmd, isSimon} = simonState;
+  const correct = (isSimon && chosenDo) || (!isSimon && !chosenDo);
+  simonTotal++;
+  if(correct) simonScore++;
+  const fb = document.getElementById('simonFeedback');
+  const detail = `${cmd.translit} — ${cmd.en}`;
+  if(correct){
+    fb.textContent = isSimon ? `🎉 صح! Yes — Simon said it, do it! (${detail})` : `🎉 صح! Right — no "Simon says," stay still! (${detail})`;
+    fb.className = 'good';
+  } else {
+    fb.textContent = isSimon ? `❌ Oops — Simon DID say it! (${detail})` : `❌ Oops — Simon did NOT say it! (${detail})`;
+    fb.className = 'bad';
+  }
+  document.getElementById('simonScore').textContent = `النقاط · Score: ${simonScore} / ${simonTotal}`;
+  document.getElementById('simonDoBtn').disabled = true;
+  document.getElementById('simonSkipBtn').disabled = true;
+}
+
+// --- Speed challenge ---
+const speedGrid = document.getElementById('speedGrid');
+speed.forEach(s=>{
+  const card = document.createElement('div');
+  card.className = 'speed-card';
+  card.innerHTML = `
+    <span class="em">${s.emoji}</span>
+    <div class="speed-ar arabic">${s.ar}</div>
+    <div class="speed-back"><span class="translit">${s.translit}</span><br>${s.en}</div>`;
+  card.onclick = ()=> card.classList.toggle('shown');
+  speedGrid.appendChild(card);
+});
+</script>
+</body>
+</html>
