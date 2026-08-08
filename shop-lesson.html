@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>في الدكّان — حصة اللهجة الأردنية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rakkas&family=Cairo:wght@400;600;700;800&family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fff7ec;
+    --cream-2:#ffefda;
+    --plum:#3a2a3d;
+    --mango:#f2a13a;
+    --mango-2:#e88f1f;
+    --cherry:#d6483c;
+    --cherry-2:#b8382e;
+    --mint:#4fb0a5;
+    --mint-2:#3a8f86;
+    --paper:#fffdf8;
+    --line:rgba(58,42,61,0.14);
+    --shadow:0 10px 26px rgba(58,42,61,0.14);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--plum);
+    font-family:'Cairo', sans-serif;
+    line-height:1.65;
+  }
+  .en{font-family:'Nunito', sans-serif; direction:ltr; unicode-bidi:isolate;}
+  .translit{
+    font-family:'Baloo 2', sans-serif;
+    direction:ltr;
+    unicode-bidi:isolate;
+    color:var(--mint-2);
+    font-weight:700;
+    font-size:.82rem;
+    letter-spacing:.02em;
+  }
+  h1,h2,.disp{font-family:'Rakkas', serif; font-weight:400;}
+
+  /* ---------- HERO / AWNING ---------- */
+  .hero{position:relative; padding-bottom:10px;}
+  .awning{
+    width:100%; height:120px; display:block;
+  }
+  .hero-content{
+    background:linear-gradient(180deg, var(--cherry) 0%, var(--cherry-2) 100%);
+    text-align:center;
+    padding:8px 20px 46px;
+    color:var(--paper);
+  }
+  .sign{
+    display:inline-block;
+    background:var(--paper);
+    color:var(--cherry-2);
+    padding:14px 34px;
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    transform:rotate(-2deg);
+    margin-top:-58px;
+    position:relative;
+  }
+  .sign h1{font-size:clamp(1.9rem,5vw,2.8rem); margin:0;}
+  .sign .en{display:block; font-size:.78rem; color:var(--mint-2); font-weight:700; margin-top:2px;}
+  .hero-sub{max-width:520px; margin:18px auto 0; font-size:.95rem;}
+  .hero-sub .en{display:block; opacity:.85; font-size:.78rem; margin-top:4px;}
+
+  .goals{
+    max-width:600px;
+    margin:26px auto 0;
+    background:var(--paper);
+    border-radius:16px;
+    padding:18px 22px;
+    box-shadow:var(--shadow);
+    text-align:right;
+  }
+  .goals h3{margin:0 0 10px; font-family:'Cairo',sans-serif; font-weight:800; font-size:1.05rem; color:var(--cherry-2);}
+  .goals ul{margin:0; padding-inline-start:20px; font-size:.92rem;}
+  .goals li{margin-bottom:6px;}
+
+  main{max-width:960px; margin:0 auto; padding:40px 18px 20px;}
+  section{margin-bottom:52px;}
+  .sec-head{display:flex; align-items:baseline; gap:10px; margin-bottom:18px;}
+  .sec-head h2{font-size:1.7rem; margin:0; color:var(--cherry-2);}
+  .sec-head .en{font-size:.78rem; color:#9c8f7a;}
+
+  /* ---------- VOCAB SHELF ---------- */
+  .shelf{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:14px;
+  }
+  .item{
+    background:var(--paper);
+    border-radius:16px;
+    border:2px dashed var(--line);
+    padding:16px 10px;
+    text-align:center;
+    box-shadow:var(--shadow);
+  }
+  .item .emoji{font-size:2rem; margin-bottom:6px;}
+  .item .ar{font-family:'Rakkas',serif; font-size:1.3rem; color:var(--plum);}
+  .item .translit{display:block; margin:3px 0;}
+  .item .en{font-size:.8rem; color:var(--mint-2); font-weight:700;}
+
+  /* ---------- EXPRESSIONS ---------- */
+  .bubbles{display:flex; flex-direction:column; gap:12px;}
+  .bubble{
+    background:var(--paper);
+    border-radius:16px;
+    padding:14px 18px;
+    box-shadow:var(--shadow);
+    max-width:520px;
+    position:relative;
+  }
+  .bubble.mint{border-inline-start:5px solid var(--mint);}
+  .bubble.mango{border-inline-start:5px solid var(--mango);}
+  .bubble .ar{font-family:'Rakkas',serif; font-size:1.25rem;}
+  .bubble .translit{display:block; margin:4px 0 2px;}
+  .bubble .en{font-size:.85rem; color:#7a6d5c;}
+
+  /* ---------- ROLE PLAY CHAT ---------- */
+  .chatbox{
+    background:var(--paper);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    padding:22px 18px;
+    max-width:620px;
+    margin:0 auto;
+  }
+  .chat-log{display:flex; flex-direction:column; gap:14px; min-height:120px;}
+  .msg{
+    max-width:80%;
+    padding:12px 16px;
+    border-radius:18px;
+    animation:pop .35s ease;
+  }
+  @keyframes pop{from{opacity:0; transform:translateY(6px) scale(.97);} to{opacity:1; transform:none;}}
+  .msg .who{font-size:.7rem; font-weight:800; margin-bottom:3px;}
+  .msg .ar{font-family:'Rakkas',serif; font-size:1.15rem;}
+  .msg .translit{display:block; margin:3px 0 1px; font-size:.76rem;}
+  .msg .en{font-size:.78rem;}
+  .msg.teacher{
+    align-self:flex-start;
+    background:var(--cream-2);
+    border-bottom-right-radius:4px;
+  }
+  .msg.teacher .who{color:var(--mango-2);}
+  .msg.child{
+    align-self:flex-end;
+    background:#e8f5f3;
+    border-bottom-left-radius:4px;
+    text-align:right;
+  }
+  .msg.child .who{color:var(--mint-2);}
+  .chat-controls{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:18px;
+  }
+  .btn{
+    font-family:'Cairo',sans-serif;
+    font-weight:700;
+    border:none;
+    border-radius:999px;
+    padding:10px 22px;
+    cursor:pointer;
+    font-size:.9rem;
+    transition:.2s;
+  }
+  .btn.primary{background:var(--cherry); color:var(--paper);}
+  .btn.primary:hover{background:var(--cherry-2);}
+  .btn.ghost{background:transparent; border:1.5px solid var(--line); color:var(--plum);}
+  .btn.ghost:hover{border-color:var(--mint);}
+  .btn:disabled{opacity:.4; cursor:default;}
+  .swap-note{
+    text-align:center;
+    font-size:.78rem;
+    color:#9c8f7a;
+    margin-top:10px;
+  }
+
+  /* ---------- SENTENCE BUILDER GAME ---------- */
+  .builder{
+    background:var(--paper);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    padding:24px 20px;
+    max-width:640px;
+    margin:0 auto;
+    text-align:center;
+  }
+  .builder .step-label{font-size:.8rem; color:#9c8f7a; margin-bottom:10px; font-weight:700;}
+  .item-row, .want-row{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:20px;
+  }
+  .pick{
+    background:var(--cream-2);
+    border:2px solid transparent;
+    border-radius:14px;
+    padding:10px 14px;
+    cursor:pointer;
+    font-family:'Cairo',sans-serif;
+    font-size:.95rem;
+    text-align:center;
+    transition:.15s;
+  }
+  .pick .emoji{font-size:1.5rem; display:block;}
+  .pick.selected{border-color:var(--mint); background:#e8f5f3;}
+  .want-pick.selected.want{border-color:var(--mango); background:#fdeecb;}
+  .want-pick.selected.dontwant{border-color:var(--cherry); background:#fbe3e0;}
+  .result{
+    background:var(--plum);
+    color:var(--paper);
+    border-radius:16px;
+    padding:20px;
+    min-height:70px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+  }
+  .result .ar{font-family:'Rakkas',serif; font-size:1.5rem; color:#ffe9c7;}
+  .result .translit{color:#9fd8d0;}
+  .result .en{font-size:.85rem; color:#d9d2c2;}
+  .result.empty{color:#8a7f8c; font-size:.85rem; font-family:'Cairo',sans-serif;}
+
+  /* ---------- CHALLENGE PATH ---------- */
+  .path{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    max-width:720px;
+    margin:0 auto;
+  }
+  .chip{
+    background:var(--mango);
+    color:var(--paper);
+    font-family:'Cairo',sans-serif;
+    font-weight:700;
+    padding:10px 18px;
+    border-radius:999px;
+    font-size:.92rem;
+  }
+  .arrow{color:var(--cherry); font-size:1.1rem;}
+
+  /* ---------- HOMEWORK ---------- */
+  .worksheet{
+    background:var(--paper);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:24px 26px;
+    max-width:560px;
+    margin:0 auto;
+  }
+  .worksheet .line{
+    font-family:'Cairo',sans-serif;
+    font-size:1.05rem;
+    padding:12px 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .worksheet .line:last-child{border-bottom:none;}
+  .worksheet .blank{
+    display:inline-block;
+    min-width:110px;
+    border-bottom:2px dotted var(--mint-2);
+    margin:0 4px;
+  }
+  .worksheet .en{display:block; font-size:.75rem; color:#9c8f7a; margin-top:2px;}
+
+  footer{text-align:center; padding:20px; font-size:.72rem; color:#9c8f7a; font-family:'Nunito',sans-serif;}
+
+  @media(max-width:520px){
+    .msg{max-width:90%;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <svg class="awning" viewBox="0 0 960 120" preserveAspectRatio="none">
+    <defs>
+      <pattern id="stripes" width="80" height="120" patternUnits="userSpaceOnUse">
+        <rect width="40" height="120" fill="#d6483c"/>
+        <rect x="40" width="40" height="120" fill="#fff7ec"/>
+      </pattern>
+    </defs>
+    <rect width="960" height="90" fill="url(#stripes)"/>
+    <path d="M0,90 L0,110 Q40,130 80,110 L80,90 Z" fill="#d6483c"/>
+    <path d="M80,90 L80,110 Q120,130 160,110 L160,90 Z" fill="#fff7ec"/>
+    <path d="M160,90 L160,110 Q200,130 240,110 L240,90 Z" fill="#d6483c"/>
+    <path d="M240,90 L240,110 Q280,130 320,110 L320,90 Z" fill="#fff7ec"/>
+    <path d="M320,90 L320,110 Q360,130 400,110 L400,90 Z" fill="#d6483c"/>
+    <path d="M400,90 L400,110 Q440,130 480,110 L480,90 Z" fill="#fff7ec"/>
+    <path d="M480,90 L480,110 Q520,130 560,110 L560,90 Z" fill="#d6483c"/>
+    <path d="M560,90 L560,110 Q600,130 640,110 L640,90 Z" fill="#fff7ec"/>
+    <path d="M640,90 L640,110 Q680,130 720,110 L720,90 Z" fill="#d6483c"/>
+    <path d="M720,90 L720,110 Q760,130 800,110 L800,90 Z" fill="#fff7ec"/>
+    <path d="M800,90 L800,110 Q840,130 880,110 L880,90 Z" fill="#d6483c"/>
+    <path d="M880,90 L880,110 Q920,130 960,110 L960,90 Z" fill="#fff7ec"/>
+  </svg>
+  <div class="hero-content">
+    <div class="sign">
+      <h1>🛍️ في الدكّان</h1>
+      <span class="en">At the Shop — Jordanian Dialect for Kids</span>
+    </div>
+    <p class="hero-sub">حصة اللهجة الأردنية — نتعلّم كيف نطلب أشياء ونسأل عن السعر
+      <span class="en">Learn to ask for things and ask about prices</span>
+    </p>
+  </div>
+</div>
+
+<div class="goals">
+  <h3>🎯 أهداف الحصة <span class="en" style="font-weight:600;">· Goals</span></h3>
+  <ul>
+    <li>تطلب أشياء من الدكان <span class="en">— ask for things at the shop</span></li>
+    <li>تسأل عن السعر <span class="en">— ask about the price</span></li>
+    <li>تستخدم بدي / ما بدي / عندك؟ / قديش؟ <span class="en">— use "I want / I don't want / do you have / how much"</span></li>
+    <li>تعمل محادثة قصيرة باللهجة الأردنية <span class="en">— hold a short Jordanian conversation</span></li>
+  </ul>
+</div>
+
+<main>
+
+  <section id="vocab">
+    <div class="sec-head"><h2>🧃 كلمات جديدة</h2><span class="en">New words</span></div>
+    <div class="shelf" id="vocabShelf"></div>
+  </section>
+
+  <section id="expr">
+    <div class="sec-head"><h2>🗣️ تعبيرات مهمة</h2><span class="en">Key expressions</span></div>
+    <div class="bubbles" id="exprBubbles"></div>
+  </section>
+
+  <section id="roleplay">
+    <div class="sec-head"><h2>🎭 لعبة الدكان</h2><span class="en">Role play — shop game</span></div>
+    <div class="chatbox">
+      <div class="chat-log" id="chatLog"></div>
+      <div class="chat-controls">
+        <button class="btn primary" id="nextBtn">التالي ⟵</button>
+        <button class="btn ghost" id="resetChatBtn">من البداية</button>
+      </div>
+      <p class="swap-note">بعد ما تخلّصوا، بدّلوا الأدوار: خلّيها هي صاحبة الدكان وأنتِ الزبونة! <span class="en">Now swap roles — she's the shopkeeper, you're the customer!</span></p>
+    </div>
+  </section>
+
+  <section id="game">
+    <div class="sec-head"><h2>🎲 لعبة "بدي / ما بدي"</h2><span class="en">Sentence builder</span></div>
+    <div class="builder">
+      <div class="step-label">١. اختاري إشي <span class="en">· pick something</span></div>
+      <div class="item-row" id="itemRow"></div>
+      <div class="step-label">٢. بدك ولا ما بدك؟ <span class="en">· want it or not?</span></div>
+      <div class="want-row" id="wantRow">
+        <div class="pick want-pick" data-want="yes">بدي 👍</div>
+        <div class="pick want-pick" data-want="no">ما بدي 🙅</div>
+      </div>
+      <div class="result empty" id="builderResult">اختاري إشي وبعدين قولي بدك ولا لأ 🌸</div>
+    </div>
+  </section>
+
+  <section id="challenge">
+    <div class="sec-head"><h2>⭐ تحدي صغير</h2><span class="en">Mini challenge</span></div>
+    <p style="text-align:center; margin-bottom:16px;" class="en" style="color:#9c8f7a; font-size:.85rem;">Make a full conversation using this path, in order:</p>
+    <div class="path">
+      <span class="chip">مرحبا</span><span class="arrow">←</span>
+      <span class="chip">بدي…</span><span class="arrow">←</span>
+      <span class="chip">عندك…؟</span><span class="arrow">←</span>
+      <span class="chip">قديش؟</span><span class="arrow">←</span>
+      <span class="chip">غالي / رخيص</span><span class="arrow">←</span>
+      <span class="chip">شكرًا</span>
+    </div>
+  </section>
+
+  <section id="homework">
+    <div class="sec-head"><h2>📝 الواجب</h2><span class="en">Homework</span></div>
+    <div class="worksheet">
+      <p style="margin-top:0; font-size:.88rem; color:#7a6d5c;">اختاري ٥ أشياء من البيت واكتبي جملة لكل وحدة:
+        <span class="en" style="display:block; font-size:.75rem; color:#9c8f7a;">Pick 5 things from home and write a sentence for each.</span>
+      </p>
+      <div class="line">بدي <span class="blank"></span>.<span class="en">I want ____.</span></div>
+      <div class="line">ما بدي <span class="blank"></span>.<span class="en">I don't want ____.</span></div>
+      <div class="line">عندك <span class="blank"></span>؟<span class="en">Do you have ____?</span></div>
+      <div class="line">قديش <span class="blank"></span>؟<span class="en">How much is ____?</span></div>
+      <div class="line">هاد غالي / رخيص.<span class="en">This is expensive / cheap.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>في الدكّان 🛍️ — حصة اللهجة الأردنية للأطفال</footer>
+
+<script>
+const VOCAB = [
+  {emoji:"🏪", ar:"دكّان", translit:"dek-KAN", en:"Shop"},
+  {emoji:"💰", ar:"مصاري", translit:"mas-A-ri", en:"Money"},
+  {emoji:"🛍️", ar:"كيس", translit:"kees", en:"Bag"},
+  {emoji:"🍫", ar:"شوكولاتة", translit:"sho-ko-LA-ta", en:"Chocolate"},
+  {emoji:"🍪", ar:"بسكويت", translit:"bas-KWEET", en:"Biscuits"},
+  {emoji:"🧃", ar:"عصير", translit:"a-SEER", en:"Juice"},
+  {emoji:"💧", ar:"مي", translit:"mai", en:"Water"},
+  {emoji:"🥛", ar:"حليب", translit:"ha-LEEB", en:"Milk"},
+  {emoji:"🍬", ar:"علكة", translit:"IL-keh", en:"Gum"},
+  {emoji:"🍟", ar:"شبس", translit:"shibs", en:"Chips"},
+  {emoji:"💸", ar:"غالي", translit:"GHA-li", en:"Expensive"},
+  {emoji:"🪙", ar:"رخيص", translit:"r-KHEES", en:"Cheap"},
+];
+
+const EXPR = [
+  {ar:"بدي شوكولاتة.", translit:"BID-di sho-ko-LA-ta.", en:"I want chocolate.", tone:"mint"},
+  {ar:"ما بدي عصير.", translit:"MA BID-di a-SEER.", en:"I don't want juice.", tone:"mango"},
+  {ar:"عندك شبس؟", translit:"AAN-dak shibs?", en:"Do you have chips?", tone:"mint"},
+  {ar:"قديش هاد؟", translit:"ad-DEESH had?", en:"How much is this?", tone:"mango"},
+  {ar:"قديش سعره؟", translit:"ad-DEESH si-ru?", en:"How much does it cost?", tone:"mint"},
+  {ar:"غالي!", translit:"GHA-li!", en:"It's expensive!", tone:"mango"},
+  {ar:"رخيص!", translit:"r-KHEES!", en:"It's cheap!", tone:"mint"},
+  {ar:"بدي كيس، لو سمحت.", translit:"BID-di kees, law sa-MAHT.", en:"I want a bag, please.", tone:"mango"},
+  {ar:"خلص، شكرًا.", translit:"KHA-las, SHUK-ran.", en:"That's all, thank you.", tone:"mint"},
+];
+
+const DIALOGUE = [
+  {who:"teacher", ar:"مرحبا، شو بدك؟", translit:"MAR-ha-ba, shoo BID-dik?", en:"Hi, what do you want?"},
+  {who:"child", ar:"بدي عصير وشوكولاتة.", translit:"BID-di a-SEER wu sho-ko-LA-ta.", en:"I want juice and chocolate."},
+  {who:"teacher", ar:"أي عصير بدك؟", translit:"Ay a-SEER BID-dik?", en:"Which juice do you want?"},
+  {who:"child", ar:"بدي عصير برتقال.", translit:"BID-di a-SEER bur-tu-AL.", en:"I want orange juice."},
+  {who:"teacher", ar:"بدك إشي ثاني؟", translit:"BID-dik ee-shee THA-ni?", en:"Do you want anything else?"},
+  {who:"child", ar:"آه، بدي شبس.", translit:"Aah, BID-di shibs.", en:"Yes, I want chips."},
+  {who:"teacher", ar:"طيب، قديش معك مصاري؟", translit:"TAY-yib, ad-DEESH MA-ak mas-A-ri?", en:"Ok, how much money do you have?"},
+  {who:"child", ar:"معي دينار. 😄", translit:"MA-ee dee-NAR.", en:"I have one dinar."},
+];
+
+const GAME_ITEMS = [
+  {emoji:"🍎", ar:"تفاحة", translit:"tuf-FA-ha", en:"apple"},
+  {emoji:"🥛", ar:"حليب", translit:"ha-LEEB", en:"milk"},
+  {emoji:"🍫", ar:"شوكولاتة", translit:"sho-ko-LA-ta", en:"chocolate"},
+  {emoji:"🍟", ar:"شبس", translit:"shibs", en:"chips"},
+  {emoji:"🧃", ar:"عصير", translit:"a-SEER", en:"juice"},
+  {emoji:"💧", ar:"مي", translit:"mai", en:"water"},
+  {emoji:"🍪", ar:"بسكويت", translit:"bas-KWEET", en:"biscuits"},
+  {emoji:"🍬", ar:"علكة", translit:"IL-keh", en:"gum"},
+];
+
+// ---- render vocab ----
+const shelf = document.getElementById('vocabShelf');
+VOCAB.forEach(v=>{
+  const d = document.createElement('div');
+  d.className = 'item';
+  d.innerHTML = `
+    <div class="emoji">${v.emoji}</div>
+    <div class="ar">${v.ar}</div>
+    <span class="translit">${v.translit}</span>
+    <div class="en">${v.en}</div>
+  `;
+  shelf.appendChild(d);
+});
+
+// ---- render expressions ----
+const bubbles = document.getElementById('exprBubbles');
+EXPR.forEach(e=>{
+  const d = document.createElement('div');
+  d.className = 'bubble ' + e.tone;
+  d.innerHTML = `
+    <div class="ar">${e.ar}</div>
+    <span class="translit">${e.translit}</span>
+    <div class="en">${e.en}</div>
+  `;
+  bubbles.appendChild(d);
+});
+
+// ---- role play chat ----
+const chatLog = document.getElementById('chatLog');
+const nextBtn = document.getElementById('nextBtn');
+const resetChatBtn = document.getElementById('resetChatBtn');
+let chatIndex = 0;
+
+function renderNextMsg(){
+  if(chatIndex >= DIALOGUE.length){
+    nextBtn.disabled = true;
+    nextBtn.textContent = "خلصنا! 🎉";
+    return;
+  }
+  const m = DIALOGUE[chatIndex];
+  const div = document.createElement('div');
+  div.className = 'msg ' + m.who;
+  div.innerHTML = `
+    <div class="who">${m.who === 'teacher' ? 'المعلّمة 👩‍🏫' : 'الطفلة 🧒'}</div>
+    <div class="ar">${m.ar}</div>
+    <span class="translit">${m.translit}</span>
+    <div class="en">${m.en}</div>
+  `;
+  chatLog.appendChild(div);
+  chatIndex++;
+  if(chatIndex >= DIALOGUE.length){
+    nextBtn.disabled = true;
+    nextBtn.textContent = "خلصنا! 🎉";
+  }
+}
+
+function resetChat(){
+  chatLog.innerHTML = '';
+  chatIndex = 0;
+  nextBtn.disabled = false;
+  nextBtn.textContent = "التالي ⟵";
+}
+
+nextBtn.addEventListener('click', renderNextMsg);
+resetChatBtn.addEventListener('click', resetChat);
+renderNextMsg(); // show first line to start
+
+// ---- sentence builder game ----
+const itemRow = document.getElementById('itemRow');
+const wantRow = document.getElementById('wantRow');
+const builderResult = document.getElementById('builderResult');
+let selectedItem = null;
+let selectedWant = null;
+
+GAME_ITEMS.forEach(it=>{
+  const d = document.createElement('div');
+  d.className = 'pick item-pick';
+  d.innerHTML = `<span class="emoji">${it.emoji}</span>${it.ar}`;
+  d.addEventListener('click', ()=>{
+    document.querySelectorAll('.item-pick').forEach(x=>x.classList.remove('selected'));
+    d.classList.add('selected');
+    selectedItem = it;
+    updateBuilder();
+  });
+  itemRow.appendChild(d);
+});
+
+document.querySelectorAll('.want-pick').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.want-pick').forEach(x=>x.classList.remove('selected','want','dontwant'));
+    btn.classList.add('selected', btn.dataset.want === 'yes' ? 'want' : 'dontwant');
+    selectedWant = btn.dataset.want;
+    updateBuilder();
+  });
+});
+
+function updateBuilder(){
+  if(!selectedItem || !selectedWant){
+    builderResult.className = 'result empty';
+    builderResult.textContent = 'اختاري إشي وبعدين قولي بدك ولا لأ 🌸';
+    return;
+  }
+  const ar = selectedWant === 'yes' ? `بدي ${selectedItem.ar}.` : `ما بدي ${selectedItem.ar}.`;
+  const translit = selectedWant === 'yes' ? `BID-di ${selectedItem.translit}.` : `MA BID-di ${selectedItem.translit}.`;
+  const en = selectedWant === 'yes' ? `I want ${selectedItem.en}.` : `I don't want ${selectedItem.en}.`;
+  builderResult.className = 'result';
+  builderResult.innerHTML = `
+    <div class="ar">${ar}</div>
+    <span class="translit">${translit}</span>
+    <div class="en">${en}</div>
+  `;
+}
+</script>
+</body>
+</html>
