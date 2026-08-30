@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كيف حاسّة اليوم؟</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2B2E4A;
+    --paper:#FFF9F0;
+    --sun:#FFCB47;
+    --coral:#FF6F59;
+    --rain:#4A7C9E;
+    --storm:#6C5B7B;
+    --fog:#A9B4C0;
+    --mint:#7FD1AE;
+    --card-shadow: 0 6px 0 rgba(43,46,74,0.12);
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    font-family:'Baloo 2', sans-serif;
+    color:var(--ink);
+    background: linear-gradient(180deg, #BFE3F0 0%, #EAF6EC 45%, var(--paper) 100%);
+    transition: background 1s ease;
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  .latin{
+    font-family:'Fredoka', sans-serif;
+  }
+
+  .pron{
+    display:block;
+    font-family:'Fredoka', sans-serif;
+    font-size:0.78rem;
+    color:var(--rain);
+    font-style:italic;
+    margin-top:2px;
+    direction:ltr;
+    text-align:right;
+  }
+
+  /* ---------- weather layer ---------- */
+  #weather-layer{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    overflow:hidden;
+    transition: opacity 0.6s ease;
+  }
+  .sun{
+    position:absolute; top:-60px; left:-60px;
+    width:180px; height:180px; border-radius:50%;
+    background:radial-gradient(circle, #FFE9A8 0%, var(--sun) 60%, transparent 72%);
+    opacity:0;
+    transition: opacity 0.8s ease;
+  }
+  body[data-mood="happy"] .sun, body[data-mood="veryhappy"] .sun, body[data-mood="excited"] .sun{opacity:1;}
+
+  .cloud{
+    position:absolute;
+    background:#fff;
+    border-radius:50px;
+    opacity:0;
+    transition:opacity 0.8s ease;
+  }
+  body[data-mood="bored"] .cloud, body[data-mood="tired"] .cloud, body[data-mood="sad"] .cloud{opacity:0.85;}
+  .cloud1{width:140px; height:50px; top:12%; left:10%;}
+  .cloud2{width:110px; height:42px; top:20%; left:60%;}
+
+  .raindrop{
+    position:absolute; top:-20px; width:2px; height:18px;
+    background:linear-gradient(var(--rain), transparent);
+    opacity:0; animation:fall 1.1s linear infinite;
+  }
+  body[data-mood="sad"] .raindrop{opacity:0.7;}
+
+  @keyframes fall{
+    to{ transform:translateY(110vh); }
+  }
+
+  .bolt{
+    position:absolute; top:10%; font-size:2.4rem; opacity:0;
+    animation:flash 1.6s infinite;
+  }
+  body[data-mood="angry"] .bolt, body[data-mood="surprised"] .bolt{opacity:1;}
+  @keyframes flash{ 0%,100%{opacity:0.15;} 8%{opacity:1;} 12%{opacity:0.15;} }
+
+  .star{
+    position:absolute; color:#fff; font-size:1rem; opacity:0;
+    transition:opacity 0.8s ease;
+    animation:twinkle 2.2s ease-in-out infinite;
+  }
+  body[data-mood="sleepy"] .star{opacity:1;}
+  @keyframes twinkle{ 0%,100%{opacity:0.3;} 50%{opacity:1;} }
+
+  .fogband{
+    position:absolute; left:0; right:0; height:80px;
+    background:linear-gradient(90deg, transparent, var(--fog), transparent);
+    opacity:0; transition:opacity 0.8s ease;
+  }
+  body[data-mood="scared"] .fogband{opacity:0.6;}
+
+  /* ---------- layout ---------- */
+  .wrap{ position:relative; z-index:1; max-width:760px; margin:0 auto; padding:22px 16px 60px; }
+
+  header.hero{
+    text-align:center;
+    padding:26px 14px 20px;
+  }
+  header.hero h1{
+    font-size:2rem; margin:0 0 4px; font-weight:800;
+    color:var(--ink);
+  }
+  header.hero .sub{
+    font-family:'Fredoka',sans-serif; color:var(--rain); font-size:0.95rem; direction:ltr;
+  }
+  header.hero .goal{
+    margin-top:14px; background:#fff; border-radius:16px; padding:12px 16px;
+    box-shadow:var(--card-shadow); display:inline-block; font-size:1rem;
+  }
+
+  section{ margin-top:30px; }
+  section h2{
+    font-size:1.35rem; font-weight:700; margin-bottom:12px;
+    display:flex; align-items:center; gap:8px;
+  }
+
+  /* vocab */
+  .vocab-grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:10px;
+  }
+  .vocab-card{
+    background:#fff; border-radius:16px; padding:12px; box-shadow:var(--card-shadow);
+    text-align:center; cursor:pointer; border:2px solid transparent;
+    transition:transform .15s ease, border-color .15s ease;
+  }
+  .vocab-card:hover{ transform:translateY(-3px); border-color:var(--sun); }
+  .vocab-card .ar{ font-size:1.15rem; font-weight:700; }
+  .vocab-card .en{ font-family:'Fredoka',sans-serif; font-size:0.85rem; color:var(--coral); margin-top:2px; }
+  .vocab-card .emoji{ font-size:1.6rem; display:block; margin-bottom:4px; }
+
+  /* sentences */
+  .sentence-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
+  .sentence-list li{
+    background:#fff; border-radius:14px; padding:12px 16px; box-shadow:var(--card-shadow);
+    font-size:1.08rem;
+  }
+
+  /* questions - chat bubbles */
+  .qa{ display:flex; flex-direction:column; gap:10px; }
+  .bubble{
+    background:#fff; border-radius:16px 16px 4px 16px; padding:10px 14px;
+    box-shadow:var(--card-shadow); max-width:90%; align-self:flex-start;
+    font-size:1.02rem;
+  }
+  .bubble .num{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:22px; height:22px; border-radius:50%; background:var(--mint); color:#fff;
+    font-size:0.8rem; margin-left:8px; font-family:'Fredoka',sans-serif;
+  }
+
+  /* acting game - flip cards */
+  .act-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:14px; }
+  .flip-card{ perspective:800px; height:120px; cursor:pointer; }
+  .flip-inner{
+    position:relative; width:100%; height:100%; text-align:center;
+    transition:transform .5s; transform-style:preserve-3d;
+  }
+  .flip-card.flipped .flip-inner{ transform:rotateY(180deg); }
+  .flip-front,.flip-back{
+    position:absolute; inset:0; backface-visibility:hidden;
+    border-radius:16px; display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--card-shadow); flex-direction:column; padding:8px;
+  }
+  .flip-front{ background:#fff; font-size:2.2rem; }
+  .flip-back{ background:var(--coral); color:#fff; transform:rotateY(180deg); font-size:0.95rem; font-weight:700; }
+  .flip-back .pron{ color:#FFE9E4; }
+
+  /* mood picker - signature activity */
+  .mood-picker{
+    background:#fff; border-radius:20px; padding:20px; box-shadow:var(--card-shadow);
+  }
+  .mood-options{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:16px; }
+  .mood-btn{
+    font-size:1.8rem; background:var(--paper); border:2px solid transparent;
+    border-radius:50%; width:56px; height:56px; cursor:pointer;
+    transition:transform .15s ease, border-color .15s ease;
+  }
+  .mood-btn:hover{ transform:scale(1.1); }
+  .mood-btn.selected{ border-color:var(--coral); transform:scale(1.15); }
+
+  .sentence-builder{
+    text-align:center; font-size:1.2rem; font-weight:700; line-height:2;
+  }
+  .sentence-builder select{
+    font-family:'Baloo 2',sans-serif; font-size:1rem; padding:6px 10px;
+    border-radius:10px; border:2px solid var(--mint); background:#fff; margin:0 4px;
+  }
+  #builtSentence{
+    margin-top:14px; background:var(--paper); border-radius:14px; padding:14px;
+    font-size:1.15rem; min-height:30px;
+  }
+  #builtSentence .pron{ font-size:0.9rem; margin-top:6px; }
+
+  /* homework */
+  .homework{
+    background:linear-gradient(135deg, var(--mint), #5FBF9A);
+    color:#fff; border-radius:20px; padding:20px;
+  }
+  .homework h2{ color:#fff; }
+  .homework .script{
+    background:rgba(255,255,255,0.15); border-radius:14px; padding:16px; font-size:1.05rem;
+    line-height:2.1;
+  }
+  .homework .script .pron{ color:#EAFFF6; }
+  .blank{ border-bottom:2px dashed #fff; padding:0 6px; }
+
+  footer{ text-align:center; margin-top:36px; font-family:'Fredoka',sans-serif; color:var(--rain); font-size:0.85rem; }
+
+  @media (max-width:420px){
+    header.hero h1{ font-size:1.6rem; }
+    .vocab-grid{ grid-template-columns:repeat(2,1fr); }
+  }
+</style>
+</head>
+<body data-mood="">
+
+<div id="weather-layer">
+  <div class="sun"></div>
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="fogband" style="top:35%;"></div>
+  <div class="bolt" style="left:20%;">⚡</div>
+  <div class="bolt" style="left:70%; animation-delay:.6s;">⚡</div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <h1>😊 كيف حاسّة اليوم؟</h1>
+    <div class="sub">How do you feel today? — Jordanian dialect lesson</div>
+    <div class="goal">🎯 الهدف: تتعلمي تحكي عن شعورك وتوصفي حالك وحال غيرك</div>
+  </header>
+
+  <!-- VOCAB -->
+  <section>
+    <h2>💬 كلمات جديدة <span class="latin" style="font-size:0.9rem;color:var(--rain)">New words</span></h2>
+    <div class="vocab-grid" id="vocabGrid"></div>
+  </section>
+
+  <!-- SENTENCES -->
+  <section>
+    <h2>🗣️ جمل بسيطة</h2>
+    <ul class="sentence-list" id="sentenceList"></ul>
+  </section>
+
+  <!-- QUESTIONS -->
+  <section>
+    <h2>❓ أسئلة للمحادثة</h2>
+    <div class="qa" id="qaList"></div>
+  </section>
+
+  <!-- ACTING GAME -->
+  <section>
+    <h2>🎭 لعبة التمثيل <span class="latin" style="font-size:0.85rem;color:var(--rain)">(tap a face)</span></h2>
+    <p style="font-size:0.95rem;color:var(--rain)">اعملي وجه وهو/هي يخمّن ايش شعورك! بعدين بدّلوا الأدوار.</p>
+    <div class="act-grid" id="actGrid"></div>
+  </section>
+
+  <!-- MOOD ACTIVITY -->
+  <section>
+    <h2>🎨 نشاط: مزاجي اليوم</h2>
+    <div class="mood-picker">
+      <div class="mood-options" id="moodOptions"></div>
+      <div class="sentence-builder">
+        أنا اليوم <select id="moodWord"></select> لأنه <select id="reasonWord"></select>
+      </div>
+      <div id="builtSentence"></div>
+    </div>
+  </section>
+
+  <!-- HOMEWORK -->
+  <section class="homework">
+    <h2>🏠 واجب صغير</h2>
+    <p style="font-size:0.95rem;">سجّلي voice note مدتها 30 ثانية، واقرأي هاي الجملة وعبّي الفراغات بمشاعرك الحقيقية:</p>
+    <div class="script">
+      مرحبا! اليوم أنا <span class="blank">____</span>.
+      أنا حاسّة حالي <span class="blank">____</span> لأنه <span class="blank">____</span>.
+      ولما أكون <span class="blank">____</span>، بحب <span class="blank">____</span>.
+      <span class="pron">Marhaba! El-yōm ana ____. Ana hāsseh hāli ____ la2anno ____. W lamma akūn ____, bhibb ____.</span>
+    </div>
+  </section>
+
+  <footer>يلا نحكي! 🌷 Jordanian Arabic — Feelings &amp; Emotions</footer>
+</div>
+
+<script>
+const vocab = [
+  {ar:"مبسوطة", en:"Happy", pron:"mabsouta", emoji:"😊"},
+  {ar:"زعلانة", en:"Sad", pron:"za3laneh", emoji:"😢"},
+  {ar:"معصّبة", en:"Angry", pron:"m3assabeh", emoji:"😡"},
+  {ar:"خايفة", en:"Scared", pron:"khayfeh", emoji:"😨"},
+  {ar:"تعبانة", en:"Tired", pron:"ta3baneh", emoji:"😩"},
+  {ar:"نعسانة", en:"Sleepy", pron:"na3saneh", emoji:"😴"},
+  {ar:"جوعانة", en:"Hungry", pron:"jo3aneh", emoji:"🍽️"},
+  {ar:"عطشانة", en:"Thirsty", pron:"3atshaneh", emoji:"🥤"},
+  {ar:"متحمسة", en:"Excited", pron:"mit-hammiseh", emoji:"🤩"},
+  {ar:"زهقانة", en:"Bored", pron:"zahqaneh", emoji:"🥱"},
+  {ar:"مستغربة", en:"Surprised", pron:"mustaghribeh", emoji:"😲"},
+  {ar:"مبسوطة كتير", en:"Very happy", pron:"mabsouta ktīr", emoji:"😁"},
+];
+
+const vocabGrid = document.getElementById('vocabGrid');
+vocab.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.innerHTML = `<span class="emoji">${v.emoji}</span><div class="ar">${v.ar}</div><div class="en latin">${v.en}</div><span class="pron">${v.pron}</span>`;
+  vocabGrid.appendChild(card);
+});
+
+const sentences = [
+  {ar:"أنا اليوم مبسوطة.", pron:"Ana el-yōm mabsouta.", en:"I am happy today."},
+  {ar:"أنا شوي تعبانة.", pron:"Ana shway ta3baneh.", en:"I'm a little tired."},
+  {ar:"أنا جوعانة.", pron:"Ana jo3aneh.", en:"I'm hungry."},
+  {ar:"أنا عطشانة.", pron:"Ana 3atshaneh.", en:"I'm thirsty."},
+  {ar:"أنا متحمسة للمدرسة.", pron:"Ana mit-hammiseh lil-madraseh.", en:"I'm excited for school."},
+  {ar:"أنا خايفة من الكلب.", pron:"Ana khayfeh min el-kalb.", en:"I'm scared of the dog."},
+  {ar:"أنا زهقانة، بدي ألعب.", pron:"Ana zahqaneh, biddi al3ab.", en:"I'm bored, I want to play."},
+  {ar:"ليش إنتِ زعلانة؟", pron:"Lēsh inti za3laneh?", en:"Why are you sad?"},
+  {ar:"لأني تعبانة.", pron:"La2anni ta3baneh.", en:"Because I'm tired."},
+];
+const sentenceList = document.getElementById('sentenceList');
+sentences.forEach(s=>{
+  const li = document.createElement('li');
+  li.innerHTML = `${s.ar} <span class="pron">${s.pron} — <span class="latin">${s.en}</span></span>`;
+  sentenceList.appendChild(li);
+});
+
+const questions = [
+  {ar:"كيفك اليوم؟", pron:"Kīfik el-yōm?", en:"How are you today?"},
+  {ar:"كيف حاسّة حالك؟", pron:"Kīf hāsseh hālik?", en:"How do you feel?"},
+  {ar:"ليش مبسوطة؟", pron:"Lēsh mabsouta?", en:"Why are you happy?"},
+  {ar:"شو بعملك مبسوطة؟", pron:"Shū bi3milik mabsouta?", en:"What makes you happy?"},
+  {ar:"إمتى بتزعلي؟", pron:"Ēmta bitiz3ali?", en:"When do you get sad?"},
+  {ar:"من شو بتخافي؟", pron:"Min shū bitkhāfi?", en:"What are you scared of?"},
+  {ar:"شو بتعملي لما تكوني زهقانة؟", pron:"Shū bit3imli lamma tikūni zahqaneh?", en:"What do you do when you're bored?"},
+  {ar:"شو بعملك متحمسة؟", pron:"Shū bi3milik mit-hammiseh?", en:"What makes you excited?"},
+  {ar:"إمتى بتحسي حالك تعبانة؟", pron:"Ēmta bithissi hālik ta3baneh?", en:"When do you feel tired?"},
+  {ar:"شو أكتر إشي بحسسك بالسعادة؟", pron:"Shū aktar ishi bihassisik bis-sa3adeh?", en:"What makes you feel happiest?"},
+];
+const qaList = document.getElementById('qaList');
+questions.forEach((q,i)=>{
+  const b = document.createElement('div');
+  b.className='bubble';
+  b.innerHTML = `<span class="num">${i+1}</span>${q.ar} <span class="pron">${q.pron} — <span class="latin">${q.en}</span></span>`;
+  qaList.appendChild(b);
+});
+
+const acts = [
+  {emoji:"😢", ar:"إنتِ زعلانة!", pron:"Inti za3laneh!", en:"You're sad!"},
+  {emoji:"😴", ar:"إنتِ نعسانة!", pron:"Inti na3saneh!", en:"You're sleepy!"},
+  {emoji:"😡", ar:"إنتِ معصبة!", pron:"Inti m3assabeh!", en:"You're angry!"},
+  {emoji:"😨", ar:"إنتِ خايفة!", pron:"Inti khayfeh!", en:"You're scared!"},
+  {emoji:"😁", ar:"إنتِ مبسوطة!", pron:"Inti mabsouta!", en:"You're happy!"},
+];
+const actGrid = document.getElementById('actGrid');
+acts.forEach(a=>{
+  const card = document.createElement('div');
+  card.className='flip-card';
+  card.innerHTML = `<div class="flip-inner">
+      <div class="flip-front">${a.emoji}</div>
+      <div class="flip-back">${a.ar}<span class="pron">${a.pron}</span><span class="latin" style="font-weight:400;font-size:0.8rem;">${a.en}</span></div>
+    </div>`;
+  card.addEventListener('click', ()=> card.classList.toggle('flipped'));
+  actGrid.appendChild(card);
+});
+
+// mood picker / weather signature
+const moods = [
+  {key:"happy", emoji:"😊", ar:"مبسوطة", pron:"mabsouta", en:"happy"},
+  {key:"sad", emoji:"😢", ar:"زعلانة", pron:"za3laneh", en:"sad"},
+  {key:"angry", emoji:"😡", ar:"معصّبة", pron:"m3assabeh", en:"angry"},
+  {key:"sleepy", emoji:"😴", ar:"نعسانة", pron:"na3saneh", en:"sleepy"},
+  {key:"scared", emoji:"😨", ar:"خايفة", pron:"khayfeh", en:"scared"},
+  {key:"excited", emoji:"🤩", ar:"متحمسة", pron:"mit-hammiseh", en:"excited"},
+];
+const reasons = [
+  {ar:"عندي حصة عربي", pron:"3indi hissit 3arabi", en:"I have Arabic class"},
+  {ar:"شفت صحبتي", pron:"shift sahibti", en:"I saw my friend"},
+  {ar:"ضاع لعبتي", pron:"dā3 li3bti", en:"I lost my toy"},
+  {ar:"تأخرت عن المدرسة", pron:"ta2akharet 3an el-madraseh", en:"I was late for school"},
+  {ar:"بدي أنام", pron:"biddi anām", en:"I want to sleep"},
+  {ar:"في عيد ميلاد بكرا", pron:"fī 3īd milād bukra", en:"there's a birthday tomorrow"},
+];
+
+const moodOptions = document.getElementById('moodOptions');
+const moodWord = document.getElementById('moodWord');
+const reasonWord = document.getElementById('reasonWord');
+const builtSentence = document.getElementById('builtSentence');
+
+moods.forEach((m,i)=>{
+  const btn = document.createElement('button');
+  btn.className='mood-btn';
+  btn.textContent = m.emoji;
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.body.setAttribute('data-mood', m.key);
+    moodWord.value = i;
+    updateSentence();
+  });
+  moodOptions.appendChild(btn);
+
+  const opt = document.createElement('option');
+  opt.value = i; opt.textContent = m.ar;
+  moodWord.appendChild(opt);
+});
+
+reasons.forEach((r,i)=>{
+  const opt = document.createElement('option');
+  opt.value = i; opt.textContent = r.ar;
+  reasonWord.appendChild(opt);
+});
+
+function updateSentence(){
+  const m = moods[moodWord.value];
+  const r = reasons[reasonWord.value];
+  builtSentence.innerHTML = `أنا اليوم ${m.ar}، لأنه ${r.ar}.
+    <span class="pron">Ana el-yōm ${m.pron}, la2anno ${r.pron} — <span class="latin">I am ${m.en} today because ${r.en}.</span></span>`;
+}
+moodWord.addEventListener('change', ()=>{
+  const m = moods[moodWord.value];
+  document.querySelectorAll('.mood-btn').forEach((b,i)=>b.classList.toggle('selected', i==moodWord.value));
+  document.body.setAttribute('data-mood', m.key);
+  updateSentence();
+});
+reasonWord.addEventListener('change', updateSentence);
+
+// init
+document.body.setAttribute('data-mood','happy');
+document.querySelectorAll('.mood-btn')[0].classList.add('selected');
+updateSentence();
+
+// stars for sleepy mode
+const weatherLayer = document.getElementById('weather-layer');
+for(let i=0;i<18;i++){
+  const s = document.createElement('div');
+  s.className='star';
+  s.style.top = (Math.random()*50)+'%';
+  s.style.left = (Math.random()*100)+'%';
+  s.style.animationDelay = (Math.random()*2)+'s';
+  s.textContent='✦';
+  weatherLayer.appendChild(s);
+}
+// raindrops
+for(let i=0;i<24;i++){
+  const d = document.createElement('div');
+  d.className='raindrop';
+  d.style.left = (Math.random()*100)+'%';
+  d.style.animationDelay = (Math.random()*1.1)+'s';
+  weatherLayer.appendChild(d);
+}
+</script>
+</body>
+</html>
