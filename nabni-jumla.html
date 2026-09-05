@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نبني جملة!</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Traditional Arabic', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #fff6e5, #eaf6ff);
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  .container { max-width: 750px; margin: 0 auto; }
+  h1 {
+    text-align: center;
+    color: #d1495b;
+    font-size: 2.2em;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #4a7a8c;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .note {
+    background: #eaf6ff;
+    border-right: 5px solid #2e86ab;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+  }
+  .prompt-emoji {
+    text-align: center;
+    font-size: 3.5em;
+    margin-bottom: 10px;
+  }
+  .answer-area {
+    min-height: 90px;
+    background: #f9f9f9;
+    border: 3px dashed #52b788;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px;
+    margin: 15px 0;
+  }
+  .answer-word {
+    background: #d8f3dc;
+    border: 2px solid #52b788;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 1.7em;
+    cursor: pointer;
+  }
+  .word-bank {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 15px 0;
+  }
+  .word-tile {
+    background: #fff3cd;
+    border: 3px solid #f4d35e;
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-size: 1.7em;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+  .word-tile:hover { background: #f4d35e; transform: scale(1.06); }
+  .word-tile.used { opacity: 0.3; pointer-events: none; }
+
+  .btn-row { display: flex; justify-content: center; gap: 15px; margin-top: 18px; flex-wrap: wrap; }
+  .action-btn {
+    font-size: 1.2em;
+    padding: 10px 24px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    color: white;
+  }
+  .btn-check { background: #2a9d8f; }
+  .btn-clear { background: #e76f51; }
+  .btn-next { background: #2e86ab; display: none; }
+  .btn-listen { background: #f4a261; }
+
+  .feedback {
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-top: 15px;
+    min-height: 35px;
+  }
+  .en-hint {
+    text-align: center;
+    color: #888;
+    font-size: 1.05em;
+    margin-top: 6px;
+  }
+  .score-box {
+    text-align: center;
+    font-size: 1.4em;
+    background: #fff3cd;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 10px;
+  }
+  .progress {
+    text-align: center;
+    color: #777;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🧩 نبني جملة!</h1>
+  <p class="subtitle">اضغطي على الكلمات بالترتيب الصحيح لتكوين جملة</p>
+
+  <div class="card">
+    <div class="note">💡 اُنظري إلى الصورة، ثم اضغطي على الكلمات بالترتيب الصحيح لبناء الجملة. اضغطي على كلمة في الجملة لحذفها إن أخطأتِ.</div>
+
+    <div class="progress" id="progress"></div>
+    <div class="prompt-emoji" id="promptEmoji"></div>
+
+    <div class="answer-area" id="answerArea"></div>
+
+    <div class="word-bank" id="wordBank"></div>
+
+    <div class="btn-row">
+      <button class="action-btn btn-listen" onclick="listenAnswer()">🔊 استمعي</button>
+      <button class="action-btn btn-clear" onclick="clearAnswer()">🔄 امسحي</button>
+      <button class="action-btn btn-check" onclick="checkAnswer()">✅ تحققي</button>
+      <button class="action-btn btn-next" id="nextBtn" onclick="nextRound()">➡️ التالي</button>
+    </div>
+
+    <div class="feedback" id="feedback"></div>
+    <div class="en-hint" id="enHint"></div>
+  </div>
+
+  <div class="card" id="finalCard" style="display:none; text-align:center;">
+    <h2>🎉 أحسنتِ!</h2>
+    <div class="score-box" id="scoreBox"></div>
+  </div>
+</div>
+
+<script>
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ar-SA';
+    u.rate = 0.65;
+    speechSynthesis.speak(u);
+  }
+}
+
+// Each round: correct word order, extra distractor words, emoji, English meaning
+const rounds = [
+  {
+    words: ['القِطَّةُ', 'تَنَامُ'],
+    distractors: ['يَلْعَبُ'],
+    emoji: '🐱',
+    en: 'The cat sleeps.'
+  },
+  {
+    words: ['الوَلَدُ', 'يَلْعَبُ', 'بِالكُرَةِ'],
+    distractors: ['تَنَامُ'],
+    emoji: '⚽',
+    en: 'The boy plays with the ball.'
+  },
+  {
+    words: ['السَّمَكَةُ', 'فِي', 'المَاءِ'],
+    distractors: ['البَيْتِ'],
+    emoji: '🐟',
+    en: 'The fish is in the water.'
+  },
+  {
+    words: ['الأَرْنَبُ', 'يَأْكُلُ', 'الجَزَرَ'],
+    distractors: ['العَسَلَ'],
+    emoji: '🐰',
+    en: 'The rabbit eats the carrot.'
+  },
+  {
+    words: ['الطُّيُورُ', 'تُغَرِّدُ', 'فَوْقَ', 'الشَّجَرَةِ'],
+    distractors: ['تَحْتَ'],
+    emoji: '🐦',
+    en: 'The birds sing above the tree.'
+  },
+  {
+    words: ['المَوْزُ', 'لَوْنُهُ', 'أَصْفَرُ'],
+    distractors: ['أَخْضَرُ'],
+    emoji: '🍌',
+    en: 'The banana is yellow.'
+  },
+  {
+    words: ['المِصْبَاحُ', 'يُنِيرُ', 'الغُرْفَةَ'],
+    distractors: ['يُطْفِئُ'],
+    emoji: '💡',
+    en: 'The lamp lights up the room.'
+  },
+  {
+    words: ['فِي', 'الشِّتَاءِ', 'نَلْبَسُ', 'مِعْطَفًا'],
+    distractors: ['الصَّيْفِ'],
+    emoji: '🧥',
+    en: 'In winter we wear a coat.'
+  }
+];
+
+let currentRound = 0;
+let score = 0;
+let currentAnswer = [];
+let shuffledBank = [];
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function loadRound() {
+  const r = rounds[currentRound];
+  currentAnswer = [];
+  shuffledBank = shuffle([...r.words, ...r.distractors]);
+
+  document.getElementById('progress').textContent = `الجملة ${currentRound + 1} من ${rounds.length}`;
+  document.getElementById('promptEmoji').textContent = r.emoji;
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('enHint').textContent = '';
+  document.getElementById('nextBtn').style.display = 'none';
+
+  renderAnswerArea();
+  renderWordBank();
+}
+
+function renderAnswerArea() {
+  const area = document.getElementById('answerArea');
+  area.innerHTML = '';
+  currentAnswer.forEach((word, idx) => {
+    const span = document.createElement('span');
+    span.className = 'answer-word';
+    span.textContent = word;
+    span.onclick = () => removeWord(idx);
+    area.appendChild(span);
+  });
+}
+
+function renderWordBank() {
+  const bank = document.getElementById('wordBank');
+  bank.innerHTML = '';
+  shuffledBank.forEach((word, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'word-tile';
+    btn.textContent = word;
+    btn.id = 'tile-' + idx;
+    btn.onclick = () => addWord(word, btn);
+    bank.appendChild(btn);
+  });
+}
+
+function addWord(word, btn) {
+  currentAnswer.push(word);
+  btn.classList.add('used');
+  renderAnswerArea();
+}
+
+function removeWord(idx) {
+  const word = currentAnswer[idx];
+  currentAnswer.splice(idx, 1);
+  renderAnswerArea();
+  const tiles = document.querySelectorAll('.word-tile');
+  for (const tile of tiles) {
+    if (tile.textContent === word && tile.classList.contains('used')) {
+      tile.classList.remove('used');
+      break;
+    }
+  }
+}
+
+function clearAnswer() {
+  currentAnswer = [];
+  renderAnswerArea();
+  document.querySelectorAll('.word-tile').forEach(t => t.classList.remove('used'));
+  document.getElementById('feedback').textContent = '';
+}
+
+function listenAnswer() {
+  const text = currentAnswer.join(' ');
+  if (text) speak(text);
+}
+
+function checkAnswer() {
+  const r = rounds[currentRound];
+  const feedback = document.getElementById('feedback');
+  const enHint = document.getElementById('enHint');
+  const correct = currentAnswer.length === r.words.length &&
+    currentAnswer.every((w, i) => w === r.words[i]);
+
+  if (correct) {
+    feedback.textContent = '✅ أحسنتِ! جملة صحيحة';
+    feedback.style.color = '#2d6a4f';
+    enHint.textContent = r.en;
+    score++;
+    document.getElementById('nextBtn').style.display = 'inline-block';
+    speak(r.words.join(' '));
+  } else {
+    feedback.textContent = '❌ حاولي مرة أخرى، تأكدي من الترتيب';
+    feedback.style.color = '#d1495b';
+  }
+}
+
+function nextRound() {
+  currentRound++;
+  if (currentRound >= rounds.length) {
+    document.querySelector('.card').style.display = 'none';
+    document.getElementById('finalCard').style.display = 'block';
+    document.getElementById('scoreBox').innerHTML = `⭐ نتيجتك: ${score} من ${rounds.length} ⭐`;
+  } else {
+    loadRound();
+  }
+}
+
+loadRound();
+</script>
+</body>
+</html>
