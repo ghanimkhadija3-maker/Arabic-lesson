@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المواصلات والطلعة — حصة اللهجة الأردنية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Changa:wght@600;700;800&family=Cairo:wght@400;600;700;800&family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky:#8fd1ea;
+    --sky-2:#c9ecf7;
+    --asphalt:#31373d;
+    --asphalt-2:#20262b;
+    --sun:#ffc94a;
+    --grass:#6bbf6f;
+    --grass-2:#519956;
+    --line-white:#fff9e8;
+    --paper:#fffdf6;
+    --ink:#24303a;
+    --border:rgba(36,48,58,0.14);
+    --shadow:0 10px 26px rgba(36,48,58,0.16);
+    --road-red:#d6483c;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--sky-2);
+    color:var(--ink);
+    font-family:'Cairo', sans-serif;
+    line-height:1.65;
+  }
+  .en{font-family:'Nunito', sans-serif; direction:ltr; unicode-bidi:isolate;}
+  .translit{
+    font-family:'Baloo 2', sans-serif;
+    direction:ltr;
+    unicode-bidi:isolate;
+    color:var(--grass-2);
+    font-weight:700;
+    font-size:.82rem;
+  }
+  h1,h2,.disp{font-family:'Changa', sans-serif; font-weight:700;}
+
+  /* ---------- HERO ROAD ---------- */
+  .hero{position:relative; overflow:hidden; background:linear-gradient(180deg, var(--sky) 0%, var(--sky-2) 75%);}
+  .hero-sky-deco{position:absolute; inset:0; pointer-events:none;}
+  .hero-content{position:relative; text-align:center; padding:50px 20px 0;}
+  .hero-content h1{font-size:clamp(2rem,5vw,3rem); color:var(--asphalt); margin:0 0 6px;}
+  .hero-content h1 .em{font-size:.9em;}
+  .hero-content .sub{max-width:520px; margin:0 auto; font-size:.95rem; color:#3d4a52;}
+  .hero-content .sub .en{display:block; font-size:.78rem; color:#5a6b74; margin-top:4px;}
+  .road-scene{width:100%; height:150px; display:block; margin-top:24px;}
+
+  .goal{
+    max-width:600px;
+    margin:-8px auto 0;
+    background:var(--paper);
+    border-radius:16px;
+    padding:16px 22px;
+    box-shadow:var(--shadow);
+    text-align:center;
+    position:relative;
+    z-index:2;
+    font-size:.95rem;
+  }
+  .goal .en{display:block; font-size:.78rem; color:#7d8890; margin-top:4px;}
+
+  main{max-width:960px; margin:0 auto; padding:44px 18px 20px;}
+  section{margin-bottom:54px;}
+  .sec-head{display:flex; align-items:baseline; gap:10px; margin-bottom:18px;}
+  .sec-head h2{font-size:1.65rem; margin:0; color:var(--asphalt);}
+  .sec-head .en{font-size:.78rem; color:#7d8890;}
+
+  /* ---------- VOCAB SIGNS ---------- */
+  .signs{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:14px;
+  }
+  .sign-card{
+    background:var(--paper);
+    border-radius:12px;
+    border:3px solid var(--asphalt);
+    padding:14px 8px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .sign-card::before{
+    content:"";
+    position:absolute; top:6px; left:6px; right:6px; bottom:6px;
+    border:2px dashed var(--sun);
+    border-radius:8px;
+    pointer-events:none;
+  }
+  .sign-card .emoji{font-size:1.8rem; margin-bottom:4px;}
+  .sign-card .ar{font-family:'Changa',sans-serif; font-size:1.15rem;}
+  .sign-card .translit{display:block; margin:3px 0;}
+  .sign-card .en{font-size:.78rem; color:var(--grass-2); font-weight:700;}
+
+  /* ---------- EXPRESSIONS ---------- */
+  .bubbles{display:flex; flex-direction:column; gap:12px;}
+  .bubble{
+    background:var(--paper);
+    border-radius:16px;
+    padding:14px 18px;
+    box-shadow:var(--shadow);
+    max-width:520px;
+    border-inline-start:5px solid var(--grass);
+  }
+  .bubble:nth-child(even){border-inline-start-color:var(--sun);}
+  .bubble .ar{font-family:'Changa',sans-serif; font-size:1.2rem;}
+  .bubble .translit{display:block; margin:4px 0 2px;}
+  .bubble .en{font-size:.85rem; color:#7d8890;}
+
+  /* ---------- CHAT ---------- */
+  .chatbox{
+    background:var(--paper);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    padding:22px 18px;
+    max-width:620px;
+    margin:0 auto;
+  }
+  .chat-log{display:flex; flex-direction:column; gap:14px; min-height:120px;}
+  .msg{max-width:80%; padding:12px 16px; border-radius:18px; animation:pop .35s ease;}
+  @keyframes pop{from{opacity:0; transform:translateY(6px) scale(.97);} to{opacity:1; transform:none;}}
+  .msg .who{font-size:.7rem; font-weight:800; margin-bottom:3px;}
+  .msg .ar{font-family:'Changa',sans-serif; font-size:1.1rem;}
+  .msg .translit{display:block; margin:3px 0 1px; font-size:.76rem;}
+  .msg .en{font-size:.78rem;}
+  .msg.teacher{align-self:flex-start; background:#eaf6fb; border-bottom-right-radius:4px;}
+  .msg.teacher .who{color:#3a8fb0;}
+  .msg.child{align-self:flex-end; background:#eaf8ea; border-bottom-left-radius:4px; text-align:right;}
+  .msg.child .who{color:var(--grass-2);}
+  .chat-controls{display:flex; justify-content:center; gap:10px; margin-top:18px;}
+  .btn{font-family:'Cairo',sans-serif; font-weight:700; border:none; border-radius:999px; padding:10px 22px; cursor:pointer; font-size:.9rem; transition:.2s;}
+  .btn.primary{background:var(--road-red); color:var(--paper);}
+  .btn.primary:hover{background:#b8382e;}
+  .btn.ghost{background:transparent; border:1.5px solid var(--border); color:var(--ink);}
+  .btn.ghost:hover{border-color:var(--grass);}
+  .btn:disabled{opacity:.4; cursor:default;}
+
+  /* ---------- WHERE TO GO GAME ---------- */
+  .places{display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-bottom:20px;}
+  .place-card{
+    background:var(--paper);
+    border-radius:14px;
+    padding:14px 16px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+    border:2px solid transparent;
+    min-width:110px;
+    transition:.15s;
+  }
+  .place-card.active{border-color:var(--grass);}
+  .place-card .emoji{font-size:1.7rem;}
+  .place-card .ar{font-family:'Changa',sans-serif; font-size:1rem; margin-top:4px;}
+  .place-card .en{font-size:.7rem; color:#7d8890;}
+  .answer-box{
+    background:var(--asphalt);
+    color:var(--paper);
+    border-radius:16px;
+    padding:20px;
+    max-width:560px;
+    margin:0 auto;
+    min-height:70px;
+    text-align:center;
+  }
+  .answer-box.empty{color:#9aa5ab; font-family:'Cairo',sans-serif; font-size:.88rem; display:flex; align-items:center; justify-content:center;}
+  .answer-box .transport-line{font-family:'Changa',sans-serif; font-size:1.3rem; color:var(--sun); margin-bottom:4px;}
+  .answer-box .translit{color:#9fe0a3;}
+  .answer-box .en{color:#d9d2c2; font-size:.82rem; margin-bottom:12px;}
+  .reason-row{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:10px;}
+  .reason-chip{
+    background:rgba(255,255,255,0.08);
+    border:1.5px solid rgba(255,255,255,0.25);
+    color:var(--paper);
+    border-radius:999px;
+    padding:7px 14px;
+    font-size:.82rem;
+    cursor:pointer;
+    font-family:'Cairo',sans-serif;
+  }
+  .reason-chip.selected{background:var(--sun); color:var(--asphalt-2); border-color:var(--sun); font-weight:700;}
+  .final-sentence{
+    margin-top:14px;
+    padding-top:12px;
+    border-top:1px dashed rgba(255,255,255,0.25);
+    font-family:'Changa',sans-serif;
+    font-size:1.05rem;
+    color:#fff;
+  }
+
+  /* ---------- ROUTE BUILDER ---------- */
+  .route-builder{
+    background:var(--paper);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    padding:24px 20px;
+    max-width:640px;
+    margin:0 auto;
+    text-align:center;
+  }
+  .map-wrap{background:var(--sky-2); border-radius:16px; padding:10px; margin-bottom:16px;}
+  svg.map{width:100%; height:200px; display:block;}
+  .dir-controls{display:flex; justify-content:center; gap:10px; margin-bottom:14px; flex-wrap:wrap;}
+  .dir-btn{
+    font-family:'Cairo',sans-serif;
+    font-weight:700;
+    background:var(--grass);
+    color:var(--paper);
+    border:none;
+    border-radius:12px;
+    padding:12px 16px;
+    font-size:.95rem;
+    cursor:pointer;
+    min-width:90px;
+  }
+  .dir-btn.right{background:#4a9dd6;}
+  .dir-btn.left{background:#d6a24a;}
+  .route-controls{display:flex; justify-content:center; gap:10px; margin-bottom:16px;}
+  .route-sentence{
+    background:var(--sky-2);
+    border-radius:14px;
+    padding:16px;
+    min-height:60px;
+    font-family:'Changa',sans-serif;
+    font-size:1.05rem;
+  }
+  .route-sentence .translit,.route-sentence .en{display:block; font-family:'Baloo 2','Nunito',sans-serif; font-size:.8rem; margin-top:6px;}
+  .route-sentence.empty{font-family:'Cairo',sans-serif; font-size:.85rem; color:#7d8890;}
+
+  /* ---------- CHALLENGE ---------- */
+  .challenge-card{
+    background:var(--paper);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:22px 26px;
+    max-width:560px;
+    margin:0 auto;
+    border-inline-start:6px solid var(--grass);
+  }
+  .challenge-card .line{font-family:'Cairo',sans-serif; font-size:1rem; padding:10px 0; border-bottom:1px dashed var(--border);}
+  .challenge-card .line:last-child{border-bottom:none;}
+  .challenge-card .blank{display:inline-block; min-width:100px; border-bottom:2px dotted var(--grass-2); margin:0 4px;}
+  .challenge-card .en{display:block; font-size:.72rem; color:#7d8890; margin-top:2px;}
+
+  /* ---------- HOMEWORK ---------- */
+  .homework-card{
+    background:var(--paper);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:24px 26px;
+    max-width:560px;
+    margin:0 auto;
+    text-align:center;
+    border-inline-start:6px solid var(--sun);
+  }
+  .homework-card .en{font-size:.78rem; color:#7d8890;}
+  .word-bank{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:16px;}
+  .word-bank .chip{background:var(--sky-2); border-radius:999px; padding:8px 16px; font-family:'Changa',sans-serif; font-size:.92rem;}
+
+  footer{text-align:center; padding:20px; font-size:.72rem; color:#7d8890; font-family:'Nunito',sans-serif;}
+
+  @media(max-width:520px){ .msg{max-width:90%;} }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <h1><span class="em">🚌</span> المواصلات والطلعة</h1>
+    <p class="sub">حصة اللهجة الأردنية — نحكي عن طريقنا ومواصلاتنا
+      <span class="en">Jordanian dialect — talking about transportation and getting around</span>
+    </p>
+  </div>
+  <svg class="road-scene" viewBox="0 0 960 150" preserveAspectRatio="none">
+    <rect x="0" y="0" width="960" height="150" fill="none"/>
+    <rect x="0" y="60" width="960" height="90" fill="#31373d"/>
+    <rect x="0" y="55" width="960" height="8" fill="#519956"/>
+    <g fill="#fff9e8">
+      <rect x="20" y="100" width="50" height="8" rx="4"/>
+      <rect x="110" y="100" width="50" height="8" rx="4"/>
+      <rect x="200" y="100" width="50" height="8" rx="4"/>
+      <rect x="290" y="100" width="50" height="8" rx="4"/>
+      <rect x="380" y="100" width="50" height="8" rx="4"/>
+      <rect x="470" y="100" width="50" height="8" rx="4"/>
+      <rect x="560" y="100" width="50" height="8" rx="4"/>
+      <rect x="650" y="100" width="50" height="8" rx="4"/>
+      <rect x="740" y="100" width="50" height="8" rx="4"/>
+      <rect x="830" y="100" width="50" height="8" rx="4"/>
+      <rect x="920" y="100" width="50" height="8" rx="4"/>
+    </g>
+    <text x="480" y="45" text-anchor="middle" font-size="46">🚗💨</text>
+  </svg>
+</div>
+
+<div class="goal">
+  🎯 <strong>هدف الحصة:</strong> تتعلم الطفلة كيف تحكي عن طريقها ومواصلاتها باستخدام كلمات أردنية طبيعية.
+  <span class="en">The child learns to describe her route and transportation using natural Jordanian words.</span>
+</div>
+
+<main>
+
+  <section id="vocab">
+    <div class="sec-head"><h2>🚗 كلمات جديدة</h2><span class="en">New words</span></div>
+    <div class="signs" id="signGrid"></div>
+  </section>
+
+  <section id="expr">
+    <div class="sec-head"><h2>🗣️ تعبيرات أردنية</h2><span class="en">Jordanian expressions</span></div>
+    <div class="bubbles" id="exprBubbles"></div>
+  </section>
+
+  <section id="roleplay">
+    <div class="sec-head"><h2>🎭 رايحين عالسوق</h2><span class="en">Role play — heading to the market</span></div>
+    <div class="chatbox">
+      <div class="chat-log" id="chatLog"></div>
+      <div class="chat-controls">
+        <button class="btn primary" id="nextBtn">التالي ⟵</button>
+        <button class="btn ghost" id="resetChatBtn">من البداية</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="game">
+    <div class="sec-head"><h2>🎮 لعبة "وين نروح؟"</h2><span class="en">Where should we go?</span></div>
+    <div class="places" id="placesRow"></div>
+    <div class="answer-box empty" id="answerBox">اضغطي على مكان لتشوفي كيف نروح 🚙</div>
+  </section>
+
+  <section id="route">
+    <div class="sec-head"><h2>🗺️ اعملي طريقك</h2><span class="en">Build your route</span></div>
+    <div class="route-builder">
+      <div class="map-wrap">
+        <svg class="map" id="mapSvg" viewBox="0 0 400 200"></svg>
+      </div>
+      <div class="dir-controls">
+        <button class="dir-btn" data-dir="straight">⬆️ دغري</button>
+        <button class="dir-btn right" data-dir="right">↪️ يمين</button>
+        <button class="dir-btn left" data-dir="left">↩️ شمال</button>
+      </div>
+      <div class="route-controls">
+        <button class="btn ghost" id="undoBtn">↩ تراجع</button>
+        <button class="btn ghost" id="clearBtn">🗑 مسح</button>
+      </div>
+      <div class="route-sentence empty" id="routeSentence">اضغطي على الأسهم عشان تبني طريقك 🧭</div>
+    </div>
+  </section>
+
+  <section id="challenge">
+    <div class="sec-head"><h2>⭐ تحدي المحادثة</h2><span class="en">Talk about a real outing</span></div>
+    <div class="challenge-card">
+      <div class="line">اليوم بدي أروح على <span class="blank"></span>.<span class="en">Today I want to go to ____.</span></div>
+      <div class="line">بروح بـ <span class="blank"></span>.<span class="en">I'll go by ____.</span></div>
+      <div class="line">المكان قريب / بعيد.<span class="en">The place is near / far.</span></div>
+      <div class="line">أول إشي بروح دغري، وبعدين بلف يمين.<span class="en">First I go straight, then I turn right.</span></div>
+    </div>
+  </section>
+
+  <section id="homework">
+    <div class="sec-head"><h2>🏠 الواجب</h2><span class="en">Homework</span></div>
+    <div class="homework-card">
+      <p style="margin-top:0;">ترسم خريطة صغيرة من البيت → مكان تختاره، وتحاول تشرحلك الطريق باللهجة الأردنية
+        <span class="en" style="display:block; margin-top:4px;">Draw a small map from home to a place of her choice, then explain the route in Jordanian dialect.</span>
+      </p>
+      <div class="word-bank">
+        <span class="chip">دغري</span>
+        <span class="chip">يمين</span>
+        <span class="chip">شمال</span>
+        <span class="chip">قريب</span>
+        <span class="chip">بعيد</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>المواصلات والطلعة 🚌 — حصة اللهجة الأردنية للأطفال</footer>
+
+<script>
+const VOCAB = [
+  {emoji:"🚗", ar:"سيارة", translit:"see-YA-ra", en:"Car"},
+  {emoji:"🚌", ar:"باص", translit:"baas", en:"Bus"},
+  {emoji:"🚕", ar:"تكسي", translit:"TAK-si", en:"Taxi"},
+  {emoji:"🛣️", ar:"شارع", translit:"SHA-ri'", en:"Street"},
+  {emoji:"🔄", ar:"دوّار", translit:"DAW-war", en:"Roundabout"},
+  {emoji:"🚦", ar:"إشارة", translit:"i-SHA-ra", en:"Traffic light"},
+  {emoji:"🛤️", ar:"طريق", translit:"ta-REEQ", en:"Road"},
+  {emoji:"🚏", ar:"محطة", translit:"ma-HAT-ta", en:"Station"},
+  {emoji:"➡️", ar:"يمين", translit:"ya-MEEN", en:"Right"},
+  {emoji:"⬅️", ar:"شمال", translit:"shi-MAL", en:"Left"},
+  {emoji:"⬆️", ar:"دغري", translit:"DUGH-ri", en:"Straight"},
+  {emoji:"📍", ar:"قريب", translit:"qa-REEB", en:"Near"},
+  {emoji:"🌍", ar:"بعيد", translit:"ba-EED", en:"Far"},
+];
+
+const EXPR = [
+  {ar:"وين بدنا نروح؟", translit:"WAYN BID-na n-ROOH?", en:"Where should we go?"},
+  {ar:"بدنا نروح عالسوق.", translit:"BID-na n-ROOH al-SOOQ.", en:"We want to go to the market."},
+  {ar:"كيف بدنا نروح؟", translit:"KEEF BID-na n-ROOH?", en:"How should we go?"},
+  {ar:"بالباص.", translit:"bil-BAAS.", en:"By bus."},
+  {ar:"خلينا نروح بالسيارة.", translit:"kha-LEE-na n-ROOH bis-say-YA-ra.", en:"Let's go by car."},
+  {ar:"لفّي يمين.", translit:"LIF-fi ya-MEEN.", en:"Turn right."},
+  {ar:"لفّي شمال.", translit:"LIF-fi shi-MAL.", en:"Turn left."},
+  {ar:"روحي دغري.", translit:"ROO-hi DUGH-ri.", en:"Go straight."},
+  {ar:"المكان قريب.", translit:"al-ma-KAN qa-REEB.", en:"The place is near."},
+  {ar:"المكان بعيد شوي.", translit:"al-ma-KAN ba-EED shway.", en:"The place is a little far."},
+  {ar:"وين أقرب محطة؟", translit:"WAYN AQ-rab ma-HAT-ta?", en:"Where's the nearest station?"},
+];
+
+const DIALOGUE = [
+  {who:"teacher", ar:"وين بدنا نروح اليوم؟", translit:"WAYN BID-na n-ROOH al-YOM?", en:"Where should we go today?"},
+  {who:"child", ar:"بدنا نروح عالسوق.", translit:"BID-na n-ROOH al-SOOQ.", en:"We want to go to the market."},
+  {who:"teacher", ar:"كيف بدنا نروح؟", translit:"KEEF BID-na n-ROOH?", en:"How should we go?"},
+  {who:"child", ar:"بالسيارة.", translit:"bis-say-YA-ra.", en:"By car."},
+  {who:"teacher", ar:"طيب، وين نلف؟", translit:"TAY-yib, WAYN NLIFF?", en:"Ok, where do we turn?"},
+  {who:"child", ar:"نلف يمين.", translit:"NLIFF ya-MEEN.", en:"We turn right."},
+  {who:"teacher", ar:"وبعدين؟", translit:"wu-ba'-DAYN?", en:"And then?"},
+  {who:"child", ar:"نروح دغري.", translit:"n-ROOH DUGH-ri.", en:"We go straight."},
+  {who:"teacher", ar:"وصلنا! 😍", translit:"wi-SIL-na!", en:"We arrived!"},
+  {who:"child", ar:"يييي! خلينا ننزل!", translit:"yeeeh! kha-LEE-na NIN-zil!", en:"Yay! Let's get out!"},
+];
+
+const PLACES = [
+  {emoji:"🏫", ar:"المدرسة", translit:"al-MAD-ra-sa", en:"School",
+    transports:[{icon:"🚌", ar:"بالباص", translit:"bil-BAAS", en:"by bus"}]},
+  {emoji:"🏪", ar:"الدكان", translit:"ad-dik-KAN", en:"The shop",
+    transports:[{icon:"🚗", ar:"بالسيارة", translit:"bis-say-YA-ra", en:"by car"},{icon:"🚶", ar:"مشي", translit:"MASH-i", en:"on foot"}]},
+  {emoji:"🏥", ar:"المستشفى", translit:"al-mus-tash-FA", en:"Hospital",
+    transports:[{icon:"🚕", ar:"بالتكسي", translit:"bit-TAK-si", en:"by taxi"}]},
+  {emoji:"🌳", ar:"الحديقة", translit:"al-ha-DEE-qa", en:"Park",
+    transports:[{icon:"🚶", ar:"مشي", translit:"MASH-i", en:"on foot"}]},
+];
+
+const REASONS = [
+  {ar:"لأنه قريب", translit:"la-AN-no qa-REEB", en:"because it's near"},
+  {ar:"لأنه بعيد", translit:"la-AN-no ba-EED", en:"because it's far"},
+  {ar:"لأنه أسرع", translit:"la-AN-no AS-ra'", en:"because it's faster"},
+];
+
+// ---- vocab ----
+const signGrid = document.getElementById('signGrid');
+VOCAB.forEach(v=>{
+  const d = document.createElement('div');
+  d.className = 'sign-card';
+  d.innerHTML = `<div class="emoji">${v.emoji}</div><div class="ar">${v.ar}</div><span class="translit">${v.translit}</span><div class="en">${v.en}</div>`;
+  signGrid.appendChild(d);
+});
+
+// ---- expressions ----
+const bubbles = document.getElementById('exprBubbles');
+EXPR.forEach(e=>{
+  const d = document.createElement('div');
+  d.className = 'bubble';
+  d.innerHTML = `<div class="ar">${e.ar}</div><span class="translit">${e.translit}</span><div class="en">${e.en}</div>`;
+  bubbles.appendChild(d);
+});
+
+// ---- chat ----
+const chatLog = document.getElementById('chatLog');
+const nextBtn = document.getElementById('nextBtn');
+const resetChatBtn = document.getElementById('resetChatBtn');
+let chatIndex = 0;
+function renderNextMsg(){
+  if(chatIndex >= DIALOGUE.length){ nextBtn.disabled = true; nextBtn.textContent = "وصلنا! 🎉"; return; }
+  const m = DIALOGUE[chatIndex];
+  const div = document.createElement('div');
+  div.className = 'msg ' + m.who;
+  div.innerHTML = `<div class="who">${m.who==='teacher'?'المعلّمة 👩‍🏫':'الطفلة 🧒'}</div><div class="ar">${m.ar}</div><span class="translit">${m.translit}</span><div class="en">${m.en}</div>`;
+  chatLog.appendChild(div);
+  chatIndex++;
+  if(chatIndex >= DIALOGUE.length){ nextBtn.disabled = true; nextBtn.textContent = "وصلنا! 🎉"; }
+}
+function resetChat(){ chatLog.innerHTML=''; chatIndex=0; nextBtn.disabled=false; nextBtn.textContent="التالي ⟵"; }
+nextBtn.addEventListener('click', renderNextMsg);
+resetChatBtn.addEventListener('click', resetChat);
+renderNextMsg();
+
+// ---- where to go game ----
+const placesRow = document.getElementById('placesRow');
+const answerBox = document.getElementById('answerBox');
+let currentPlace = null, currentTransport = null, currentReason = null;
+
+PLACES.forEach(p=>{
+  const d = document.createElement('div');
+  d.className = 'place-card';
+  d.innerHTML = `<div class="emoji">${p.emoji}</div><div class="ar">${p.ar}</div><div class="en">${p.en}</div>`;
+  d.addEventListener('click', ()=>{
+    document.querySelectorAll('.place-card').forEach(x=>x.classList.remove('active'));
+    d.classList.add('active');
+    currentPlace = p; currentTransport = null; currentReason = null;
+    renderAnswer();
+  });
+  placesRow.appendChild(d);
+});
+
+function renderAnswer(){
+  if(!currentPlace){ answerBox.className='answer-box empty'; answerBox.textContent='اضغطي على مكان لتشوفي كيف نروح 🚙'; return; }
+  answerBox.className = 'answer-box';
+  const transportsHtml = currentPlace.transports.map(t=>`${t.icon} ${t.ar}`).join(' / ');
+  const translitHtml = currentPlace.transports.map(t=>t.translit).join(' / ');
+  const enHtml = currentPlace.transports.map(t=>t.en).join(' / ');
+  answerBox.innerHTML = `
+    <div class="transport-line">${transportsHtml}</div>
+    <span class="translit">${translitHtml}</span>
+    <div class="en">${enHtml}</div>
+    <div class="en" style="margin-top:10px; color:#c9d6da;">ليش اخترنا هيك؟ · Why did we choose this?</div>
+    <div class="reason-row" id="reasonRow"></div>
+    <div id="finalSentenceWrap"></div>
+  `;
+  const reasonRow = document.getElementById('reasonRow');
+  REASONS.forEach(r=>{
+    const chip = document.createElement('div');
+    chip.className = 'reason-chip';
+    chip.textContent = r.ar;
+    chip.addEventListener('click', ()=>{
+      document.querySelectorAll('.reason-chip').forEach(c=>c.classList.remove('selected'));
+      chip.classList.add('selected');
+      currentReason = r;
+      renderFinal();
+    });
+    reasonRow.appendChild(chip);
+  });
+}
+
+function renderFinal(){
+  const wrap = document.getElementById('finalSentenceWrap');
+  if(!currentReason){ wrap.innerHTML=''; return; }
+  const t = currentPlace.transports[0];
+  wrap.innerHTML = `
+    <div class="final-sentence">${t.ar}، ${currentReason.ar}.</div>
+    <span class="translit">${t.translit}, ${currentReason.translit}.</span>
+    <div class="en">${t.en}, ${currentReason.en}.</div>
+  `;
+}
+
+// ---- route builder ----
+const mapSvg = document.getElementById('mapSvg');
+const routeSentence = document.getElementById('routeSentence');
+let steps = [];
+
+function drawMap(){
+  mapSvg.innerHTML = '';
+  const ns = "http://www.w3.org/2000/svg";
+  let x = 40, y = 160, heading = -90; // heading in degrees, -90 = up
+  const pathPts = [[x,y]];
+  steps.forEach(s=>{
+    if(s === 'straight'){
+      const rad = heading * Math.PI/180;
+      x += 40*Math.cos(rad);
+      y += 40*Math.sin(rad);
+      pathPts.push([x,y]);
+    } else if(s === 'right'){
+      heading += 90;
+    } else if(s === 'left'){
+      heading -= 90;
+    }
+  });
+  // draw path
+  const poly = document.createElementNS(ns,'polyline');
+  poly.setAttribute('points', pathPts.map(p=>p.join(',')).join(' '));
+  poly.setAttribute('fill','none');
+  poly.setAttribute('stroke','#31373d');
+  poly.setAttribute('stroke-width','6');
+  poly.setAttribute('stroke-linecap','round');
+  poly.setAttribute('stroke-linejoin','round');
+  mapSvg.appendChild(poly);
+  // start marker
+  const start = document.createElementNS(ns,'circle');
+  start.setAttribute('cx',40); start.setAttribute('cy',160); start.setAttribute('r',8);
+  start.setAttribute('fill','#6bbf6f');
+  mapSvg.appendChild(start);
+  const startLabel = document.createElementNS(ns,'text');
+  startLabel.setAttribute('x',40); startLabel.setAttribute('y',180);
+  startLabel.setAttribute('text-anchor','middle'); startLabel.setAttribute('font-size','16');
+  startLabel.textContent = '🏠';
+  mapSvg.appendChild(startLabel);
+  // car at end
+  const carLabel = document.createElementNS(ns,'text');
+  carLabel.setAttribute('x',x); carLabel.setAttribute('y',y-8);
+  carLabel.setAttribute('text-anchor','middle'); carLabel.setAttribute('font-size','24');
+  carLabel.textContent = '🚗';
+  mapSvg.appendChild(carLabel);
+}
+drawMap();
+
+function stepPhrase(s, isFirst){
+  const map = {
+    straight:{ar:'روح دغري', ar2:'بعدين روح دغري', translit:'ROOH DUGH-ri', translit2:"ba'DAYN ROOH DUGH-ri", en:'Go straight', en2:'then go straight'},
+    right:{ar:'لف يمين', ar2:'بعدين لف يمين', translit:'LIFF ya-MEEN', translit2:"ba'DAYN LIFF ya-MEEN", en:'Turn right', en2:'then turn right'},
+    left:{ar:'لف شمال', ar2:'بعدين لف شمال', translit:'LIFF shi-MAL', translit2:"ba'DAYN LIFF shi-MAL", en:'Turn left', en2:'then turn left'},
+  };
+  const m = map[s];
+  return isFirst ? {ar:m.ar, translit:m.translit, en:m.en} : {ar:m.ar2, translit:m.translit2, en:m.en2};
+}
+
+function renderRouteSentence(){
+  if(steps.length === 0){
+    routeSentence.className = 'route-sentence empty';
+    routeSentence.textContent = 'اضغطي على الأسهم عشان تبني طريقك 🧭';
+    return;
+  }
+  routeSentence.className = 'route-sentence';
+  const parts = steps.map((s,i)=>stepPhrase(s, i===0));
+  const arText = parts.map(p=>p.ar).join('، ') + '.';
+  const translitText = parts.map(p=>p.translit).join(', ') + '.';
+  const enText = parts.map(p=>p.en).join(', ') + '.';
+  routeSentence.innerHTML = `${arText}<span class="translit">${translitText}</span><span class="en">${enText}</span>`;
+}
+
+document.querySelectorAll('.dir-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    if(steps.length >= 6) return;
+    steps.push(btn.dataset.dir);
+    drawMap();
+    renderRouteSentence();
+  });
+});
+document.getElementById('undoBtn').addEventListener('click', ()=>{
+  steps.pop(); drawMap(); renderRouteSentence();
+});
+document.getElementById('clearBtn').addEventListener('click', ()=>{
+  steps = []; drawMap(); renderRouteSentence();
+});
+</script>
+</body>
+</html>
