@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حصة القراءة التفاعلية - الكنز المفقود</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1E2A32;
+    --paper:#FFFFFF;
+    --sand:#FBF7EF;
+    --teal:#0F7A76;
+    --teal-dark:#0B5F5C;
+    --gold:#D9A441;
+    --coral:#D8603F;
+    --green:#4C9A6A;
+    --navy:#1B2A3A;
+    --line:#E4DCC8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Cairo',sans-serif;
+    padding-bottom:60px;
+  }
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:28px 20px 34px;
+    text-align:center;
+  }
+  header .icon{width:46px;height:46px;margin-bottom:8px;}
+  header h1{margin:0;font-size:1.5rem;font-weight:800;}
+  header p{margin:6px 0 0;color:var(--gold);font-size:1rem;font-weight:500;}
+  main{max-width:640px;margin:0 auto;padding:0 18px;}
+  section{margin-top:34px;}
+  h2{
+    font-size:1.15rem;font-weight:800;color:var(--teal-dark);
+    margin:0 0 6px;display:flex;align-items:center;gap:8px;
+  }
+  .hint{font-size:0.9rem;color:#5b6b74;margin:0 0 16px;line-height:1.6;}
+  .story-card{
+    background:var(--sand);
+    border:2px dashed var(--gold);
+    border-radius:4px 22px 4px 22px;
+    padding:24px 20px;
+    font-family:'Amiri',serif;
+    font-size:1.5rem;
+    line-height:2.5;
+    color:var(--ink);
+  }
+  .story-card .word{
+    color:var(--teal-dark);
+    cursor:pointer;
+    border-bottom:2px solid var(--gold);
+    padding:0 1px;
+  }
+  .story-card .word.active{background:#EAD9AE55;}
+  #explain{
+    margin-top:14px;background:var(--paper);border:1px solid var(--line);
+    border-right:4px solid var(--teal);border-radius:6px;padding:14px 16px;
+    min-height:26px;font-size:0.98rem;line-height:1.8;
+  }
+  #explain .placeholder{color:#93a0a7;}
+  #explain b{font-family:'Amiri',serif;font-size:1.4rem;color:var(--teal-dark);}
+  #explain .note{display:block;margin-top:4px;color:#3d4c54;}
+
+  .quiz-box{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:20px;}
+  .quiz-top{display:flex;justify-content:space-between;font-size:0.85rem;color:#67757c;margin-bottom:14px;}
+  .quiz-top b{color:var(--teal-dark);}
+  .q-symbol{
+    text-align:center;font-family:'Amiri',serif;font-size:3.2rem;color:var(--ink);
+    margin:6px 0 18px;min-height:60px;
+  }
+  .q-symbol.small{font-size:1.75rem;min-height:44px;}
+  .hl-mark{color:var(--coral);}
+  .q-prompt{text-align:center;font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--navy);line-height:1.6;}
+  .options{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .options.stacked{grid-template-columns:1fr;}
+  .opt{
+    font-family:'Cairo',sans-serif;font-size:0.98rem;font-weight:700;padding:14px 10px;
+    border-radius:8px;border:2px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;
+  }
+  .opt.correct{border-color:var(--green);background:#EAF6EF;color:var(--green);}
+  .opt.wrong{border-color:var(--coral);background:#FBEBE7;color:var(--coral);}
+  .opt:disabled{cursor:default;}
+  .feedback{text-align:center;min-height:24px;margin-top:14px;font-weight:700;}
+  .feedback.ok{color:var(--green);}
+  .feedback.no{color:var(--coral);}
+  .next-btn{
+    display:block;margin:16px auto 0;background:var(--teal);color:#fff;border:none;
+    padding:11px 26px;border-radius:24px;font-family:'Cairo',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;
+  }
+  .summary{text-align:center;padding:10px 0;}
+  .summary .badge{font-size:3rem;margin-bottom:6px;}
+  .summary h3{color:var(--teal-dark);margin:0 0 4px;}
+  .summary p{color:#5b6b74;margin:0 0 18px;}
+  .restart{
+    background:var(--gold);color:var(--navy);border:none;padding:11px 26px;
+    border-radius:24px;font-weight:800;font-family:'Cairo',sans-serif;cursor:pointer;
+  }
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="24" cy="24" r="20" stroke="#D9A441" stroke-width="2.5"/>
+    <path d="M31 17L20 20L17 31L28 28L31 17Z" fill="#D9A441"/>
+    <circle cx="24" cy="24" r="2.5" fill="#fff"/>
+  </svg>
+  <h1>حَصَّةُ القِراءةِ التَّفاعُلِيَّة</h1>
+  <p>قِصَّةُ الكَنزِ المَفقود · قِراءةٌ وَحَرَكات</p>
+</header>
+
+<main>
+
+  <section>
+    <h2>١. اقرأ القصّة</h2>
+    <p class="hint">اضغط على أيّ كلمة مُلوَّنة لتتعرّف على معناها وحركاتها.</p>
+    <div class="story-card" id="story"></div>
+    <div id="explain"><span class="placeholder">اضغط على كلمة من القصّة لتظهر هنا معلومات عنها…</span></div>
+  </section>
+
+  <section>
+    <h2>٢. أسئلة الاستيعاب</h2>
+    <p class="hint">أجب عن الأسئلة التالية بناءً على ما فهمته من القصّة.</p>
+    <div class="quiz-box" id="comp-box">
+      <div class="quiz-top">
+        <span>السؤال <b id="comp-qnum">١</b> من <b id="comp-qtotal"></b></span>
+        <span>النقاط: <b id="comp-score">٠</b></span>
+      </div>
+      <div class="q-prompt" id="comp-qprompt"></div>
+      <div class="options stacked" id="comp-options"></div>
+      <div class="feedback" id="comp-feedback"></div>
+      <button class="next-btn hidden" id="comp-nextBtn">التالي ←</button>
+    </div>
+    <div class="quiz-box summary hidden" id="comp-summaryBox">
+      <div class="badge" id="comp-badgeIcon">🏆</div>
+      <h3 id="comp-summaryTitle"></h3>
+      <p id="comp-summaryText"></p>
+      <button class="restart" id="comp-restartBtn">أعِد المحاولة</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>٣. تَحَدّي الحَرَكات</h2>
+    <p class="hint">اختر اسم الحركة الصحيح لكلّ سؤال. حظًّا موفّقًا!</p>
+    <div class="quiz-box" id="hrk-box">
+      <div class="quiz-top">
+        <span>السؤال <b id="hrk-qnum">١</b> من <b id="hrk-qtotal"></b></span>
+        <span>النقاط: <b id="hrk-score">٠</b></span>
+      </div>
+      <div class="q-symbol" id="hrk-qsymbol"></div>
+      <div class="q-prompt" id="hrk-qprompt"></div>
+      <div class="options" id="hrk-options"></div>
+      <div class="feedback" id="hrk-feedback"></div>
+      <button class="next-btn hidden" id="hrk-nextBtn">التالي ←</button>
+    </div>
+    <div class="quiz-box summary hidden" id="hrk-summaryBox">
+      <div class="badge" id="hrk-badgeIcon">🏆</div>
+      <h3 id="hrk-summaryTitle"></h3>
+      <p id="hrk-summaryText"></p>
+      <button class="restart" id="hrk-restartBtn">أعِد المحاولة</button>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// ---------- Story ----------
+const storyHTML = `فِي صَبَاحٍ <span class="word" data-key="مُشْمِسٍ">مُشْمِسٍ</span>، خَرَجَ الوَلَدُ <span class="word" data-key="يَاسِرُ">يَاسِرُ</span> مِنْ بَيْتِهِ لِيَسْتَكْشِفَ الغَابَةَ القَرِيبَةَ. حَمَلَ حَقِيبَتَهُ الصَّغِيرَةَ وَ<span class="word" data-key="خَرِيطَةً">خَرِيطَةً</span> قَدِيمَةً وَجَدَهَا فِي مَكْتَبَةِ جَدِّهِ. قَالَتِ الخَرِيطَةُ إِنَّ <span class="word" data-key="كَنْزًا">كَنْزًا</span> مَخْفِيًّا يَنْتَظِرُ مَنْ يَجِدُهُ تَحْتَ <span class="word" data-key="الشَّجَرَةِ">الشَّجَرَةِ</span> الكَبِيرَةِ. مَشَى يَاسِرُ بَيْنَ الأَشْجَارِ وَهُوَ يَتَتَبَّعُ العَلَامَاتِ عَلَى الخَرِيطَةِ. وَأَخِيرًا، وَجَدَ <span class="word" data-key="صُنْدُوقًا">صُنْدُوقًا</span> خَشَبِيًّا قَدِيمًا مَدْفُونًا تَحْتَ الجُذُورِ. فَتَحَ الصُّنْدُوقَ <span class="word" data-key="بِفَرَحٍ">بِفَرَحٍ</span>، وَوَجَدَ بِدَاخِلِهِ رِسَالَةً مِنْ جَدِّهِ تَقُولُ: «الكَنْزُ الحَقِيقِيُّ هُوَ حُبُّ المَعْرِفَةِ وَالمُغَامَرَةِ». إِلَى جَانِبِ الرِّسَالَةِ، وَجَدَ يَاسِرُ <span class="word" data-key="دَفْتَرًا">دَفْتَرًا</span> صَغِيرًا مَلِيئًا بِ<span class="word" data-key="رُسُومَاتٍ">رُسُومَاتٍ</span> لِنَبَاتَاتِ وَحَيَوَانَاتِ الغَابَةِ، رَسَمَهَا جَدُّهُ مُنْذُ سَنَوَاتٍ طَوِيلَةٍ. ابْتَسَمَ يَاسِرُ وَقَرَّرَ أَنْ يُكْمِلَ الدَّفْتَرَ بِنَفْسِهِ، فَبَدَأَ يَرْسُمُ كُلَّ مَا يَرَاهُ مِنْ أَشْجَارٍ وَطُيُورٍ وَأَزْهَارٍ. عَادَ إِلَى البَيْتِ مَسَاءً وَأَخْبَرَ عَائِلَتَهُ بِمَا وَجَدَهُ، فَ<span class="word" data-key="شَجَّعَهُ">شَجَّعَهُ</span> وَالِدُهُ عَلَى العَوْدَةِ إِلَى الغَابَةِ كُلَّ <span class="word" data-key="أُسْبُوعٍ">أُسْبُوعٍ</span> لِاسْتِكْشَافِ المَزِيدِ. وَمُنْذُ ذَلِكَ اليَوْمِ، أَصْبَحَ يَاسِرُ يَحْمِلُ الدَّفْتَرَ وَالخَرِيطَةَ فِي كُلِّ مُغَامَرَةٍ جَدِيدَةٍ، بَاحِثًا عَنْ كُنُوزِ المَعْرِفَةِ الَّتِي تَرَكَهَا جَدُّهُ فِي كُلِّ رُكْنٍ مِنَ الغَابَةِ.`;
+
+const wordData = {
+  "مُشْمِسٍ": {meaning:"يومٌ تظهر فيه الشمسُ بوضوح", note:"تحتوي على ضمّة، وسكون، وتنوين كسر في آخرها."},
+  "يَاسِرُ": {meaning:"اسمُ الولدِ بطلِ القصّة", note:"آخرها ضمّة، لأنّه فاعلُ الجملة."},
+  "خَرِيطَةً": {meaning:"رسمٌ يوضّح الطريقَ إلى مكانٍ ما", note:"آخرها فتحة وتنوين فتح، ولذلك تُكتب بعدها ألف."},
+  "كَنْزًا": {meaning:"مالٌ أو أشياءُ ثمينة مخبّأة", note:"عليها تنوين فتح في آخرها."},
+  "الشَّجَرَةِ": {meaning:"نباتٌ كبيرٌ له جذعٌ وأغصان", note:"تحتوي على شَدّة فوق الجيم، والشدّة تعني تكرار الحرف."},
+  "صُنْدُوقًا": {meaning:"وعاءٌ خشبيّ أو معدنيّ لحفظ الأشياء", note:"يحتوي على ضمّتين وسكون، وينتهي بتنوين فتح."},
+  "بِفَرَحٍ": {meaning:"بسعادةٍ كبيرة", note:"الباء عليها كسرة، وآخر الكلمة تنوين كسر."},
+  "دَفْتَرًا": {meaning:"كرّاسة صغيرة للكتابة أو الرسم", note:"آخرها تنوين فتح، مثل خريطة وكنزًا."},
+  "رُسُومَاتٍ": {meaning:"صورٌ مرسومة باليد", note:"أوّلها ضمّة، وآخرها تنوين كسر."},
+  "شَجَّعَهُ": {meaning:"قوّى عزيمته وحثّه على الاستمرار", note:"تحتوي على شدّة فوق الجيم."},
+  "أُسْبُوعٍ": {meaning:"مدّةٌ مدّتها سبعة أيام", note:"أوّلها ضمّة، وآخرها تنوين كسر."}
+};
+
+document.getElementById('story').innerHTML = storyHTML;
+document.querySelectorAll('.word').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    document.querySelectorAll('.word').forEach(w=>w.classList.remove('active'));
+    el.classList.add('active');
+    const d = wordData[el.dataset.key];
+    document.getElementById('explain').innerHTML =
+      `<b>${el.dataset.key}</b> — ${d.meaning}<span class="note">📌 ${d.note}</span>`;
+  });
+});
+
+const toArabicNum = n => n.toString().replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+
+// ---------- Generic quiz engine ----------
+function createQuiz(prefix, questions, showSymbol){
+  const el = id => document.getElementById(`${prefix}-${id}`);
+  let current = 0, score = 0;
+
+  function load(){
+    const q = questions[current];
+    el('qnum').textContent = toArabicNum(current+1);
+    if(showSymbol) el('qsymbol').textContent = q.symbol;
+    el('qprompt').textContent = q.prompt;
+    el('feedback').textContent = '';
+    el('feedback').className = 'feedback';
+    el('nextBtn').classList.add('hidden');
+
+    const box = el('options');
+    box.innerHTML = '';
+    q.options.forEach(opt=>{
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = opt;
+      btn.onclick = () => check(opt, btn, q.answer);
+      box.appendChild(btn);
+    });
+  }
+
+  function check(selected, btn, answer){
+    document.querySelectorAll(`#${prefix}-options .opt`).forEach(b=>{
+      b.disabled = true;
+      if(b.textContent === answer) b.classList.add('correct');
+      else if(b === btn) b.classList.add('wrong');
+    });
+    const fb = el('feedback');
+    if(selected === answer){
+      score++;
+      fb.textContent = 'أحسنت! إجابة صحيحة ✓';
+      fb.className = 'feedback ok';
+    } else {
+      fb.textContent = `إجابة غير صحيحة — الصحيحة هي: ${answer}`;
+      fb.className = 'feedback no';
+    }
+    el('score').textContent = toArabicNum(score);
+    el('nextBtn').classList.remove('hidden');
+    el('nextBtn').textContent = (current === questions.length-1) ? 'عرض النتيجة' : 'التالي ←';
+  }
+
+  function next(){
+    current++;
+    if(current >= questions.length){ summary(); }
+    else { load(); }
+  }
+
+  function summary(){
+    document.getElementById(`${prefix}-box`).classList.add('hidden');
+    const box = document.getElementById(`${prefix}-summaryBox`);
+    box.classList.remove('hidden');
+    const pct = score / questions.length;
+    let icon, title, text;
+    if(pct >= 0.8){ icon='🏆'; title='أداءٌ رائع!'; text=`أجبتَ عن ${toArabicNum(score)} من ${toArabicNum(questions.length)} إجابةٍ صحيحة.`; }
+    else if(pct >= 0.5){ icon='⭐'; title='أداءٌ جيّد!'; text=`أجبتَ عن ${toArabicNum(score)} من ${toArabicNum(questions.length)} إجابةٍ صحيحة. راجع القصّة وحاول مجدَّدًا لتتقن أكثر.`; }
+    else { icon='🧭'; title='ابدأ مِن جديد'; text=`أجبتَ عن ${toArabicNum(score)} من ${toArabicNum(questions.length)}. اقرأ القصّة بتمعُّن ثمّ حاول مجدَّدًا، أنت تستطيع!`; }
+    el('badgeIcon').textContent = icon;
+    el('summaryTitle').textContent = title;
+    el('summaryText').textContent = text;
+  }
+
+  function restart(){
+    current = 0; score = 0;
+    el('score').textContent = '٠';
+    document.getElementById(`${prefix}-summaryBox`).classList.add('hidden');
+    document.getElementById(`${prefix}-box`).classList.remove('hidden');
+    load();
+  }
+
+  document.getElementById(`${prefix}-qtotal`).textContent = toArabicNum(questions.length);
+  document.getElementById(`${prefix}-nextBtn`).onclick = next;
+  document.getElementById(`${prefix}-restartBtn`).onclick = restart;
+  load();
+}
+
+// ---------- Comprehension questions ----------
+const COMP_QUESTIONS = [
+  {prompt:'لماذا خرج ياسر من بيته؟', options:['ليستكشف الغابة القريبة','ليشتري هدية','ليزور صديقه','ليلعب كرة القدم'], answer:'ليستكشف الغابة القريبة'},
+  {prompt:'أين وجد ياسر الخريطة القديمة؟', options:['في مكتبة جدّه','في حقيبة المدرسة','في السوق','تحت السرير'], answer:'في مكتبة جدّه'},
+  {prompt:'أين كان الكنز مخفيًّا بحسب الخريطة؟', options:['تحت الشجرة الكبيرة','في النهر','خلف المنزل','فوق الجبل'], answer:'تحت الشجرة الكبيرة'},
+  {prompt:'ماذا وجد ياسر بداخل الصندوق مع الرسالة؟', options:['دفترًا فيه رسومات','كيسًا من الذهب','خريطة أخرى','مفتاحًا قديمًا'], answer:'دفترًا فيه رسومات'},
+  {prompt:'ما هو الكنز الحقيقي بحسب رسالة الجدّ؟', options:['حبّ المعرفة والمغامرة','المال والذهب','الطعام اللذيذ','الألعاب الجديدة'], answer:'حبّ المعرفة والمغامرة'},
+  {prompt:'على ماذا شجّعه والده بعد أن أخبر عائلته؟', options:['العودة إلى الغابة كلّ أسبوع','البقاء في البيت دائمًا','بيع الدفتر','نسيان المغامرة'], answer:'العودة إلى الغابة كلّ أسبوع'}
+];
+
+// ---------- Harakat challenge questions ----------
+const HRK_QUESTIONS = [
+  {symbol:'بَ', prompt:'ما اسمُ هذه الحركة؟', options:['فتحة','ضمة','كسرة','سكون'], answer:'فتحة'},
+  {symbol:'بُ', prompt:'ما اسمُ هذه الحركة؟', options:['ضمة','فتحة','كسرة','شدة'], answer:'ضمة'},
+  {symbol:'بِ', prompt:'ما اسمُ هذه الحركة؟', options:['كسرة','سكون','فتحة','ضمة'], answer:'كسرة'},
+  {symbol:'بْ', prompt:'ما اسمُ هذه العلامة؟', options:['سكون','شدة','فتحة','تنوين'], answer:'سكون'},
+  {symbol:'بّ', prompt:'ما اسمُ هذه العلامة؟', options:['شدة','سكون','ضمة','كسرة'], answer:'شدة'},
+  {symbol:'الشَّجَرَةِ', prompt:'ما اسمُ الحركة فوق الجيم في هذه الكلمة من القصّة؟', options:['شدة','سكون','ضمة','كسرة'], answer:'شدة'},
+  {symbol:'يَاسِرُ', prompt:'ما اسمُ الحركة في آخر هذه الكلمة؟', options:['ضمة','فتحة','كسرة','تنوين الضم'], answer:'ضمة'},
+  {symbol:'كَنْزًا', prompt:'ما اسمُ الحركة في آخر هذه الكلمة؟', options:['تنوين الفتح','فتحة','تنوين الضم','سكون'], answer:'تنوين الفتح'},
+  {symbol:'مُشْمِسٍ', prompt:'ما اسمُ الحركة في آخر هذه الكلمة؟', options:['تنوين الكسر','كسرة','تنوين الفتح','سكون'], answer:'تنوين الكسر'},
+  {symbol:'دَفْتَرًا', prompt:'ما اسمُ الحركة في آخر هذه الكلمة؟', options:['تنوين الفتح','تنوين الضم','كسرة','سكون'], answer:'تنوين الفتح'}
+];
+
+createQuiz('comp', COMP_QUESTIONS, false);
+createQuiz('hrk', HRK_QUESTIONS, true);
+</script>
+</body>
+</html>
