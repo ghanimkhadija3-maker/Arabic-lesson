@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدرس الثاني - جُمل بسيطة</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Traditional Arabic', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #fff6e5, #eaf6ff);
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  .container { max-width: 750px; margin: 0 auto; }
+  h1 {
+    text-align: center;
+    color: #d1495b;
+    font-size: 2.2em;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #4a7a8c;
+    font-size: 1.25em;
+    margin-bottom: 25px;
+  }
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .card h2 {
+    color: #2e86ab;
+    border-bottom: 3px solid #f4d35e;
+    padding-bottom: 8px;
+  }
+  .sentence-box {
+    background: #f9f9f9;
+    border: 3px solid #f4d35e;
+    border-radius: 15px;
+    padding: 18px 20px;
+    margin: 14px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .sentence-box:hover { background: #fff3cd; transform: scale(1.02); }
+  .sentence-text {
+    font-size: 1.9em;
+    line-height: 1.9;
+  }
+  .sentence-emoji { font-size: 2em; }
+  .note {
+    background: #eaf6ff;
+    border-right: 5px solid #2e86ab;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-size: 1.1em;
+  }
+  .paragraph-box {
+    background: #eafaf1;
+    border: 3px dashed #52b788;
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 1.9em;
+    line-height: 2.4;
+    text-align: right;
+    cursor: pointer;
+  }
+  .paragraph-box:hover { background: #d8f3dc; }
+
+  .quiz-question {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .q-sentence { font-size: 1.7em; margin-bottom: 10px; }
+  .options { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+  .option-btn {
+    font-size: 1.5em;
+    padding: 10px 22px;
+    border-radius: 12px;
+    border: 2px solid #ccc;
+    background: white;
+    cursor: pointer;
+  }
+  .option-btn:hover { background: #eee; }
+  .option-btn.correct { background: #b7e4c7 !important; border-color: #2d6a4f; }
+  .option-btn.wrong { background: #ffb3ab !important; border-color: #d1495b; }
+  .feedback {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 10px;
+    min-height: 30px;
+  }
+  .score-box {
+    text-align: center;
+    font-size: 1.4em;
+    background: #fff3cd;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 15px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📖 الدرس الثاني</h1>
+  <p class="subtitle">جُمل جديدة عن العائلة والمدرسة</p>
+
+  <div class="card">
+    <h2>1️⃣ جُمل قصيرة</h2>
+    <div class="note">💡 اضغطي على الجملة لسماعها، وكرّريها بصوتٍ عالٍ.</div>
+
+    <div class="sentence-box" onclick="speak('أُمِّي تَطْبُخُ الطَّعَامَ.')">
+      <span class="sentence-text">أُمِّي تَطْبُخُ الطَّعَامَ.</span>
+      <span class="sentence-emoji">🍲</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('أَبِي يَقْرَأُ الجَرِيدَةَ.')">
+      <span class="sentence-text">أَبِي يَقْرَأُ الجَرِيدَةَ.</span>
+      <span class="sentence-emoji">📰</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('أَخِي يَذْهَبُ إِلَى المَدْرَسَةِ.')">
+      <span class="sentence-text">أَخِي يَذْهَبُ إِلَى المَدْرَسَةِ.</span>
+      <span class="sentence-emoji">🎒</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('المُعَلِّمَةُ تَكْتُبُ عَلَى اللَّوْحِ.')">
+      <span class="sentence-text">المُعَلِّمَةُ تَكْتُبُ عَلَى اللَّوْحِ.</span>
+      <span class="sentence-emoji">✍️</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('الطُّيُورُ تُغَرِّدُ فَوْقَ الشَّجَرَةِ.')">
+      <span class="sentence-text">الطُّيُورُ تُغَرِّدُ فَوْقَ الشَّجَرَةِ.</span>
+      <span class="sentence-emoji">🐦</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('الشَّمْسُ سَاطِعَةٌ فِي السَّمَاءِ.')">
+      <span class="sentence-text">الشَّمْسُ سَاطِعَةٌ فِي السَّمَاءِ.</span>
+      <span class="sentence-emoji">☀️</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>2️⃣ فقرة قصيرة</h2>
+    <div class="note">💡 اضغطي على الفقرة كاملة لسماعها، ثم اقرئيها جملة جملة.</div>
+    <div class="paragraph-box" onclick="speak('صَبَاحًا تَذْهَبُ سَارَة إِلَى المَدْرَسَةِ. تَحْمِلُ سَارَة حَقِيبَتَهَا الزَّرْقَاءَ. فِي الصَّفِّ تَجْلِسُ سَارَة بِجَانِبِ صَدِيقَتِهَا. المُعَلِّمَةُ تَشْرَحُ دَرْسًا جَدِيدًا.')">
+      صَبَاحًا تَذْهَبُ سَارَة إِلَى المَدْرَسَةِ.<br>
+      تَحْمِلُ سَارَة حَقِيبَتَهَا الزَّرْقَاءَ.<br>
+      فِي الصَّفِّ تَجْلِسُ سَارَة بِجَانِبِ صَدِيقَتِهَا.<br>
+      المُعَلِّمَةُ تَشْرَحُ دَرْسًا جَدِيدًا.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>3️⃣ اختبري نفسك!</h2>
+    <div id="quizArea"></div>
+    <div class="score-box" id="scoreBox" style="display:none;"></div>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <h2>🎉 أحسنتِ!</h2>
+    <p style="font-size:1.2em;">اقرئي كل جملة ثلاث مرات كل يوم، وستصبحين قارئة ماهرة قريباً!</p>
+  </div>
+</div>
+
+<script>
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ar-SA';
+    u.rate = 0.65;
+    speechSynthesis.speak(u);
+  }
+}
+
+const quizData = [
+  { sentence: 'أُمِّي تَطْبُخُ الطَّعَامَ.', options: ['🍲', '📰', '⚽'], correct: '🍲' },
+  { sentence: 'أَخِي يَذْهَبُ إِلَى المَدْرَسَةِ.', options: ['🐦', '🎒', '☀️'], correct: '🎒' },
+  { sentence: 'الطُّيُورُ تُغَرِّدُ فَوْقَ الشَّجَرَةِ.', options: ['🐦', '🍲', '✍️'], correct: '🐦' },
+  { sentence: 'الشَّمْسُ سَاطِعَةٌ فِي السَّمَاءِ.', options: ['📰', '☀️', '🎒'], correct: '☀️' },
+  { sentence: 'المُعَلِّمَةُ تَكْتُبُ عَلَى اللَّوْحِ.', options: ['✍️', '🍲', '🐦'], correct: '✍️' }
+];
+
+let currentQ = 0;
+let score = 0;
+const quizArea = document.getElementById('quizArea');
+const scoreBox = document.getElementById('scoreBox');
+
+function renderQuiz() {
+  if (currentQ >= quizData.length) {
+    quizArea.innerHTML = '';
+    scoreBox.style.display = 'block';
+    scoreBox.innerHTML = `⭐ نتيجتك: ${score} من ${quizData.length} ⭐`;
+    return;
+  }
+  const q = quizData[currentQ];
+  quizArea.innerHTML = `
+    <div class="quiz-question">
+      <div class="q-sentence">${q.sentence}</div>
+      <p>اختاري الصورة المناسبة</p>
+      <div class="options">
+        ${q.options.map(opt => `<button class="option-btn" onclick="checkAnswer(this, '${opt}', '${q.correct}')">${opt}</button>`).join('')}
+      </div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+  `;
+}
+
+function checkAnswer(btn, chosen, correct) {
+  const buttons = document.querySelectorAll('.option-btn');
+  buttons.forEach(b => b.disabled = true);
+  const feedback = document.getElementById('feedback');
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    feedback.textContent = '✅ أحسنتِ! إجابة صحيحة';
+    feedback.style.color = '#2d6a4f';
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    feedback.textContent = `❌ حاولي مرة أخرى.`;
+    feedback.style.color = '#d1495b';
+    buttons.forEach(b => { if (b.textContent === correct) b.classList.add('correct'); });
+  }
+  setTimeout(() => { currentQ++; renderQuiz(); }, 1600);
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
