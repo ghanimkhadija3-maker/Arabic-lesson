@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الجو والسماء والفضاء</title>
+<style>
+  :root{
+    --day-top:#5aa9d6;
+    --day-bot:#f4c95d;
+    --dusk-top:#2b3a67;
+    --dusk-bot:#e8734a;
+    --night:#0e1a3a;
+    --night-deep:#050b1e;
+    --star:#ffe382;
+    --cloud:#f4f7fb;
+    --ink:#132043;
+    --paper:#fff9ef;
+    --accent:#e8734a;
+    --accent2:#3fa796;
+    --line:#132043;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    background:linear-gradient(180deg,var(--night-deep) 0%, var(--night) 35%, var(--dusk-top) 65%, var(--dusk-bot) 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    color:var(--ink);
+    padding:0 0 60px 0;
+    position:relative;
+    overflow-x:hidden;
+  }
+  .stars{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+  }
+  .stars span{
+    position:absolute; background:var(--star); border-radius:50%;
+    box-shadow:0 0 6px var(--star);
+    animation:twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle{0%,100%{opacity:.25;} 50%{opacity:1;}}
+
+  header{
+    position:relative; z-index:1;
+    text-align:center;
+    padding:46px 20px 30px;
+    color:#fff;
+  }
+  header .emoji-row{font-size:2.2rem; margin-bottom:6px; letter-spacing:8px;}
+  header h1{
+    font-size:2.3rem; margin:0 0 8px; font-weight:800;
+    text-shadow:0 2px 12px rgba(0,0,0,.4);
+  }
+  header p{margin:0; font-size:1.05rem; opacity:.9;}
+  header .en{font-size:.95rem; opacity:.75; font-style:italic; margin-top:4px;}
+
+  nav{
+    position:sticky; top:0; z-index:5;
+    background:rgba(5,11,30,.92);
+    backdrop-filter:blur(6px);
+    display:flex; overflow-x:auto; gap:6px; padding:10px 12px;
+    scrollbar-width:thin;
+  }
+  nav button{
+    flex:0 0 auto; border:none; background:rgba(255,255,255,.08);
+    color:#fff; padding:9px 16px; border-radius:20px; font-size:.92rem;
+    cursor:pointer; white-space:nowrap; transition:.2s;
+    font-family:inherit;
+  }
+  nav button.active{background:var(--accent); font-weight:700;}
+  nav button:hover{background:var(--accent2);}
+
+  main{
+    position:relative; z-index:1;
+    max-width:760px; margin:0 auto; padding:20px 16px;
+  }
+  section{
+    display:none;
+    background:var(--paper);
+    border-radius:18px;
+    padding:26px 22px;
+    margin-bottom:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    animation:fadein .4s ease;
+  }
+  section.active{display:block;}
+  @keyframes fadein{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+  h2.section-title{
+    font-size:1.5rem; margin:0 0 4px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-title .tag{
+    font-size:.75rem; background:var(--accent2); color:#fff;
+    padding:3px 10px; border-radius:12px; font-weight:600;
+  }
+  .en-sub{color:#6b7280; font-style:italic; margin:0 0 18px; font-size:.95rem;}
+
+  table.vocab{width:100%; border-collapse:collapse; margin:14px 0 22px;}
+  table.vocab th{
+    text-align:right; font-size:.8rem; color:#fff; background:var(--ink);
+    padding:8px 10px;
+  }
+  table.vocab th:last-child, table.vocab td:last-child{text-align:left;}
+  table.vocab td{
+    padding:10px; border-bottom:1px solid #eee; font-size:1.05rem; vertical-align:top;
+  }
+  table.vocab tr:nth-child(even){background:#fbf6ec;}
+  .ar{font-weight:700; font-size:1.15rem;}
+  .pron{display:block; color:var(--accent); font-size:.85rem; font-style:italic; margin-top:2px;}
+  .en{display:block; color:#444; font-size:.9rem; margin-top:2px;}
+
+  .sentence-card{
+    background:#fff; border:1px solid #eee; border-radius:12px;
+    padding:14px 16px; margin:10px 0;
+  }
+  .sentence-card .q{font-weight:700; font-size:1.1rem;}
+  .sentence-card .a{color:var(--accent2); font-weight:700; margin-top:6px;}
+  .sentence-card .pron{margin-top:4px;}
+  .sentence-card .en{margin-top:4px;}
+
+  .dialogue{
+    background:#fff; border-radius:14px; padding:6px 16px; margin:16px 0;
+    border:1px dashed var(--accent2);
+  }
+  .line{padding:10px 0; border-bottom:1px solid #f0ede4;}
+  .line:last-child{border-bottom:none;}
+  .who{font-size:.8rem; color:#888; margin-bottom:2px;}
+  .speech{font-weight:700; font-size:1.05rem;}
+
+  .riddle-card{
+    background:#fff; border-radius:14px; padding:16px; margin:14px 0;
+    box-shadow:0 4px 12px rgba(0,0,0,.06);
+    cursor:pointer; transition:.2s;
+  }
+  .riddle-card:hover{transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,.12);}
+  .riddle-card .clue{font-size:1.05rem; margin:4px 0;}
+  .riddle-card .reveal{
+    display:none; margin-top:10px; padding-top:10px; border-top:1px dashed #ddd;
+    color:var(--accent);
+  }
+  .riddle-card.open .reveal{display:block;}
+  .riddle-card .hint{font-size:.8rem; color:#999; margin-top:8px;}
+
+  .tf-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background:#fff; border-radius:12px; padding:12px 14px; margin:10px 0;
+  }
+  .tf-row .stmt{flex:1;}
+  .tf-row .stmt .pron{margin-top:2px;}
+  .tf-buttons{display:flex; gap:6px; flex-shrink:0;}
+  .tf-buttons button{
+    border:2px solid var(--accent2); background:#fff; color:var(--accent2);
+    padding:6px 12px; border-radius:8px; font-weight:700; cursor:pointer; font-family:inherit;
+  }
+  .tf-row.answered .tf-buttons button{pointer-events:none; opacity:.5;}
+  .tf-row.correct{outline:2px solid #3fa796;}
+  .tf-row .feedback{font-size:.85rem; margin-top:6px; font-weight:700; display:none;}
+  .tf-row.answered .feedback{display:block;}
+  .feedback.good{color:#2e8b57;}
+  .feedback.bad{color:#c0392b;}
+
+  .quiz-summary{
+    text-align:center; font-weight:700; margin-top:14px; color:var(--ink);
+  }
+
+  .conv-item{
+    background:#fff; border-radius:10px; margin:8px 0; overflow:hidden;
+  }
+  .conv-q{
+    padding:12px 14px; cursor:pointer; display:flex; justify-content:space-between;
+    align-items:center; font-weight:700;
+  }
+  .conv-q .num{color:var(--accent2); margin-left:8px;}
+  .conv-q .arrow{transition:.2s; color:#aaa;}
+  .conv-item.open .arrow{transform:rotate(180deg);}
+  .conv-a{max-height:0; overflow:hidden; transition:.25s; padding:0 14px;}
+  .conv-item.open .conv-a{max-height:200px; padding:0 14px 14px;}
+  .conv-a .pron{margin-top:2px;}
+
+  .drawlist{display:flex; flex-wrap:wrap; gap:10px; margin:14px 0;}
+  .draw-chip{
+    background:#fff; border-radius:12px; padding:10px 14px; text-align:center;
+    flex:1 1 100px; box-shadow:0 3px 10px rgba(0,0,0,.05);
+  }
+  .draw-chip .emoji{font-size:1.8rem;}
+  .draw-chip .cap{font-weight:700; margin-top:4px;}
+  .draw-chip .pron, .draw-chip .en{font-size:.75rem;}
+
+  .fill-row{
+    background:#fff; border-radius:12px; padding:14px; margin:10px 0;
+  }
+  .fill-row .sent{font-size:1.05rem; font-weight:600;}
+  .fill-row input{
+    font-family:inherit; font-size:1rem; padding:6px 10px; border-radius:8px;
+    border:2px solid #ddd; width:130px; text-align:center; margin:0 4px;
+  }
+  .fill-row .en{margin-top:6px;}
+  .check-btn{
+    display:block; margin:16px auto 0; background:var(--accent); color:#fff;
+    border:none; padding:10px 26px; border-radius:24px; font-weight:700;
+    cursor:pointer; font-family:inherit; font-size:1rem;
+  }
+  .fill-row.correct input{border-color:#3fa796; background:#eafaf5;}
+  .fill-row.wrong input{border-color:#c0392b; background:#fdecea;}
+
+  .bonus-box{
+    background:linear-gradient(135deg,#fff6e5,#ffe9d1);
+    border-radius:14px; padding:16px; margin-top:14px;
+    border:1px solid #f3d9b1;
+  }
+  .bonus-box p{margin:6px 0;}
+
+  .goal-box{
+    background:#eef6f2; border-radius:12px; padding:14px 16px; margin-bottom:18px;
+  }
+  .goal-box ul{margin:8px 0 0; padding-inline-start:20px;}
+  .goal-box li{margin:4px 0;}
+
+  footer{
+    position:relative; z-index:1; text-align:center; color:#fff; opacity:.6;
+    font-size:.8rem; padding:20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<header>
+  <div class="emoji-row">☀️🌙⭐</div>
+  <h1>حصة اللهجة الأردنية: الجو والسماء والفضاء</h1>
+  <p>مع الترجمة بالإنجليزي وطريقة النطق</p>
+  <p class="en">Jordanian Dialect Lesson: Weather, Sky &amp; Space — with English translation &amp; pronunciation</p>
+</header>
+
+<nav id="nav"></nav>
+
+<main id="main"></main>
+
+<footer>يلا نطلع عالفضاء! 🚀</footer>
+
+<script>
+const sections = [
+  {id:"goal", label:"🎯 الهدف"},
+  {id:"weather", label:"🌤️ الجو"},
+  {id:"sky", label:"☀️ السما"},
+  {id:"daynight", label:"🌙 النهار والليل"},
+  {id:"space", label:"🚀 الفضاء"},
+  {id:"earth", label:"🌍 الأرض"},
+  {id:"roleplay", label:"🎭 تمثيل"},
+  {id:"riddles", label:"🎲 شو أنا؟"},
+  {id:"draw", label:"🎨 الرسم"},
+  {id:"conversation", label:"💬 حكي"},
+  {id:"challenge", label:"🧠 صح ولا غلط"},
+  {id:"homework", label:"🏠 الواجب"},
+  {id:"bonus", label:"⭐ نشرة الجو"},
+];
+
+const nav = document.getElementById("nav");
+const main = document.getElementById("main");
+
+sections.forEach((s)=>{
+  const b = document.createElement("button");
+  b.textContent = s.label;
+  b.dataset.id = s.id;
+  b.onclick = ()=>showSection(s.id);
+  nav.appendChild(b);
+});
+
+function showSection(id){
+  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active", b.dataset.id===id));
+  document.querySelectorAll("main section").forEach(sec=>sec.classList.toggle("active", sec.id===id));
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function vrow(ar,pron,en){
+  return `<tr><td><span class="ar">${ar}</span><span class="pron">${pron}</span></td><td><span class="en">${en}</span></td></tr>`;
+}
+function qa(q,qp,qe,a,ap,ae){
+  return `<div class="sentence-card">
+    <div class="q">${q}</div><div class="pron">${qp}</div><div class="en">${qe}</div>
+    <div class="a">→ ${a}</div><div class="pron">${ap}</div><div class="en">${ae}</div>
+  </div>`;
+}
+
+main.innerHTML = `
+
+<section id="goal">
+  <h2 class="section-title">🎯 هدف الحصة</h2>
+  <p class="en-sub">Lesson goal — by the end, your child will be able to:</p>
+  <div class="goal-box">
+    <ul>
+      <li>كيف الجو اليوم <span class="pron">(keef il-jaww il-yom)</span> — <span class="en">say what the weather is like today</span></li>
+      <li>شو بتشوف بالسما <span class="pron">(shu bitshoof bis-sama)</span> — <span class="en">say what she sees in the sky</span></li>
+      <li>الفرق بين الشمس والقمر والنجوم <span class="pron">(il-farq bein ish-shams w il-amar w in-nujoom)</span> — <span class="en">the difference between the sun, moon, and stars</span></li>
+      <li>أسماء أشياء بالفضاء <span class="pron">(asami ashya bil-fada)</span> — <span class="en">name some things in space</span></li>
+      <li>جمل بسيطة باللهجة الأردنية عن السماء والطقس — <span class="en">simple Jordanian-dialect sentences about sky and weather</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="weather">
+  <h2 class="section-title">🌤️ أولًا: كيف الجو؟ <span class="tag">Weather</span></h2>
+  <p class="en-sub">First: how is the weather?</p>
+  <table class="vocab">
+    <tr><th>أردني</th><th>English</th></tr>
+    ${vrow("الجو","il-jaww","Weather")}
+    ${vrow("شمس","shams","Sun")}
+    ${vrow("غيم","gheem","Clouds")}
+    ${vrow("مطر","matar","Rain")}
+    ${vrow("هوا","hawa","Wind")}
+    ${vrow("برد","bard","Cold (noun)")}
+    ${vrow("حر","harr","Heat (noun)")}
+    ${vrow("مشمس","mshammis","Sunny")}
+    ${vrow("غائم","ghayem","Cloudy")}
+    ${vrow("ممطر","mumtir","Rainy")}
+    ${vrow("بارد","bared","Cold")}
+    ${vrow("حار","har","Hot")}
+  </table>
+  <p class="en-sub">🗣️ جمل — Sentences</p>
+  ${qa("كيف الجو اليوم؟","keef il-jaww il-yom?","How is the weather today?","الجو حلو.","il-jaww helu.","The weather is nice.")}
+  ${qa("كيف الجو اليوم؟","keef il-jaww il-yom?","How is the weather today?","الجو حار.","il-jaww har.","The weather is hot.")}
+  ${qa("في شمس اليوم؟","fi shams il-yom?","Is it sunny today?","آه، في شمس.","aah, fi shams.","Yes, it is sunny.")}
+  ${qa("في مطر؟","fi matar?","Is it raining?","لا، ما في مطر.","la, ma fi matar.","No, it is not raining.")}
+  ${qa("الجو بارد؟","il-jaww bared?","Is the weather cold?","آه، الجو بارد شوي.","aah, il-jaww bared shwayy.","Yes, a little cold.")}
+  ${qa("في غيم؟","fi gheem?","Are there clouds?","آه، السما مليانة غيم.","aah, is-sama malyaneh gheem.","Yes, the sky is full of clouds.")}
+  <div class="bonus-box">
+    <p>💡 باللهجة اليومية منستخدم كثير <strong>"كيف الجو؟"</strong> و<strong>"الجو حلو/حار/بارد"</strong>، بينما "الطقس" أكثر رسمية.</p>
+    <p class="en">💡 In everyday dialect we say "keef il-jaww?" a lot. The more formal word طقس (taqs) is used less in casual speech.</p>
+  </div>
+</section>
+
+<section id="sky">
+  <h2 class="section-title">☀️ الشمس والسماء <span class="tag">Sun &amp; Sky</span></h2>
+  <p class="en-sub">The sun and the sky</p>
+  <table class="vocab">
+    <tr><th>أردني</th><th>English</th></tr>
+    ${vrow("السما","is-sama","Sky")}
+    ${vrow("الشمس","ish-shams","The sun")}
+    ${vrow("القمر","il-amar","The moon")}
+    ${vrow("نجمة","nejme","Star (one)")}
+    ${vrow("نجوم","nujoom","Stars")}
+    ${vrow("غيمة","gheime","A cloud")}
+  </table>
+  <p class="en-sub">جمل بسيطة — Simple sentences</p>
+  <div class="dialogue">
+    <div class="line"><div class="speech">☀️ الشمس طالعة.</div><div class="pron">ish-shams tale-a.</div><div class="en">The sun is up.</div></div>
+    <div class="line"><div class="speech">🌙 القمر طالع.</div><div class="pron">il-amar tale-e.</div><div class="en">The moon is up.</div></div>
+    <div class="line"><div class="speech">⭐ في نجوم بالسما.</div><div class="pron">fi nujoom bis-sama.</div><div class="en">There are stars in the sky.</div></div>
+    <div class="line"><div class="speech">☁️ في غيم بالسما.</div><div class="pron">fi gheem bis-sama.</div><div class="en">There are clouds in the sky.</div></div>
+    <div class="line"><div class="speech">🌌 السما حلوة اليوم.</div><div class="pron">is-sama helweh il-yom.</div><div class="en">The sky is beautiful today.</div></div>
+  </div>
+  ${qa("شو شايفة بالسما؟","shu shayfeh bis-sama?","What do you see in the sky?","شايفة الشمس / شايفة القمر / شايفة نجوم.","shayfeh ish-shams / il-amar / nujoom.","I see the sun / the moon / stars.")}
+</section>
+
+<section id="daynight">
+  <h2 class="section-title">🌙 النهار والليل <span class="tag">Day &amp; Night</span></h2>
+  <div class="sentence-card">
+    <div class="q">☀️ بالنهار <span class="pron">(bin-nahar) — During the day</span></div>
+    <div class="en" style="margin-top:8px">
+      • الشمس بتطلع <span class="pron">(ish-shams bitla-e)</span> — the sun rises<br>
+      • السما بتكون مضوية <span class="pron">(is-sama btkoon madwiyyeh)</span> — the sky is bright<br>
+      • بنشوف الشمس <span class="pron">(binshoof ish-shams)</span> — we see the sun
+    </div>
+  </div>
+  <div class="sentence-card">
+    <div class="q">🌙 بالليل <span class="pron">(bil-lel) — At night</span></div>
+    <div class="en" style="margin-top:8px">
+      • الشمس بتغيب <span class="pron">(ish-shams bitgheeb)</span> — the sun sets<br>
+      • القمر بطلع <span class="pron">(il-amar bitla-e)</span> — the moon rises<br>
+      • بنشوف النجوم <span class="pron">(binshoof in-nujoom)</span> — we see the stars
+    </div>
+  </div>
+  <p class="en-sub">🗣️ أسئلة — Questions</p>
+  ${qa("متى بنشوف الشمس؟","mita binshoof ish-shams?","When do we see the sun?","بالنهار.","bin-nahar.","During the day.")}
+  ${qa("متى بنشوف النجوم؟","mita binshoof in-nujoom?","When do we see the stars?","بالليل.","bil-lel.","At night.")}
+  ${qa("شو بطلع بالليل؟","shu bitla-e bil-lel?","What rises at night?","القمر والنجوم.","il-amar w in-nujoom.","The moon and the stars.")}
+  ${qa("الشمس بتطلع بالليل؟","ish-shams bitla-e bil-lel?","Does the sun rise at night?","لااا 😂","laaa 😂","Noo 😂")}
+</section>
+
+<section id="space">
+  <h2 class="section-title">🚀 نروح عالفضاء! <span class="tag">Space</span></h2>
+  <p class="en-sub">Let us go to space!</p>
+  <div class="dialogue">
+    <div class="line"><div class="speech">"يلا اليوم رح نطلع برحلة عالفضاء! 🚀"</div><div class="pron">yalla il-yom rah nitla-e bi-rihleh al-fada!</div><div class="en">"Come on, today we are going on a trip to space!"</div></div>
+  </div>
+  <table class="vocab">
+    <tr><th>عربي</th><th>English</th></tr>
+    ${vrow("فضاء","fada","Space")}
+    ${vrow("كوكب","kawkab","Planet")}
+    ${vrow("الأرض","il-ard","Earth")}
+    ${vrow("القمر","il-amar","Moon")}
+    ${vrow("الشمس","ish-shams","Sun")}
+    ${vrow("نجم","najem","Star")}
+    ${vrow("نجوم","nujoom","Stars")}
+    ${vrow("صاروخ","sarookh","Rocket")}
+    ${vrow("رائد فضاء","raed fada","Astronaut")}
+    ${vrow("مجرّة","majarra","Galaxy")}
+  </table>
+</section>
+
+<section id="earth">
+  <h2 class="section-title">🌍 كوكب الأرض <span class="tag">Planet Earth</span></h2>
+  <div class="sentence-card">
+    <div class="q">إحنا عايشين على كوكب الأرض. 🌍</div>
+    <div class="pron">ihna aayshin ala kawkab il-ard.</div>
+    <div class="en">We live on planet Earth.</div>
+  </div>
+  ${qa("إحنا وين عايشين؟","ihna wen aayshin?","Where do we live?","على الأرض.","ala il-ard.","On Earth.")}
+  ${qa("الأرض كوكب؟","il-ard kawkab?","Is Earth a planet?","آه.","aah.","Yes.")}
+  ${qa("الشمس كوكب؟","ish-shams kawkab?","Is the sun a planet?","لا، الشمس نجم.","la, ish-shams najem.","No, the sun is a star.")}
+  ${qa("القمر كوكب؟","il-amar kawkab?","Is the moon a planet?","لا، القمر قمر. 🌙","la, il-amar amar.","No, the moon is a moon.")}
+</section>
+
+<section id="roleplay">
+  <h2 class="section-title">🎭 تمثيل: رحلة إلى الفضاء 🚀 <span class="tag">Role Play</span></h2>
+  <p class="en-sub">You = mission control 👩‍🚀 &nbsp;|&nbsp; Child = astronaut 👧</p>
+  <div class="dialogue">
+    <div class="line"><div class="who">المعلمة (Teacher)</div><div class="speech">جاهزة نطلع عالفضاء؟</div><div class="pron">jahzeh nitla-e al-fada?</div><div class="en">Are you ready to go to space?</div></div>
+    <div class="line"><div class="who">الطفلة (Child)</div><div class="speech">آه، جاهزة!</div><div class="pron">aah, jahzeh!</div><div class="en">Yes, I am ready!</div></div>
+    <div class="line"><div class="who">المعلمة</div><div class="speech">شو لابسة؟</div><div class="pron">shu labseh?</div><div class="en">What are you wearing?</div></div>
+    <div class="line"><div class="who">الطفلة</div><div class="speech">لابسة بدلة الفضاء.</div><div class="pron">labseh badlet il-fada.</div><div class="en">I am wearing a spacesuit.</div></div>
+    <div class="line"><div class="who">المعلمة</div><div class="speech">وين رح نروح؟</div><div class="pron">wen rah nrooh?</div><div class="en">Where are we going?</div></div>
+    <div class="line"><div class="who">الطفلة</div><div class="speech">رح نروح عالفضاء.</div><div class="pron">rah nrooh al-fada.</div><div class="en">We are going to space.</div></div>
+    <div class="line"><div class="who">المعلمة</div><div class="speech">شو شايفة؟</div><div class="pron">shu shayfeh?</div><div class="en">What do you see?</div></div>
+    <div class="line"><div class="who">الطفلة</div><div class="speech">شايفة كواكب ونجوم.</div><div class="pron">shayfeh kawakib w nujoom.</div><div class="en">I see planets and stars.</div></div>
+    <div class="line"><div class="who">المعلمة</div><div class="speech">شايفة الشمس؟</div><div class="pron">shayfeh ish-shams?</div><div class="en">Do you see the sun?</div></div>
+    <div class="line"><div class="who">الطفلة</div><div class="speech">آه، شايفتها!</div><div class="pron">aah, shayeftha!</div><div class="en">Yes, I see it!</div></div>
+    <div class="line"><div class="who">المعلمة</div><div class="speech">شايفة القمر؟</div><div class="pron">shayfeh il-amar?</div><div class="en">Do you see the moon?</div></div>
+    <div class="line"><div class="who">الطفلة</div><div class="speech">آه!</div><div class="pron">aah!</div><div class="en">Yes!</div></div>
+    <div class="line"><div class="who">المعلمة</div><div class="speech">يلا نرجع عالأرض! 🚀</div><div class="pron">yalla nirja-e al-ard!</div><div class="en">Come on, let us go back to Earth!</div></div>
+    <div class="line"><div class="who">الطفلة</div><div class="speech">يلااا!</div><div class="pron">yallaaa!</div><div class="en">Let us go!</div></div>
+  </div>
+  <p class="en-sub">👉 اقرأوا الحوار مع بعض بالأدوار، وبعدين بدّلوا الأدوار!</p>
+  <p class="en" style="margin-top:-8px">Read the dialogue together in your roles, then swap roles!</p>
+</section>
+
+<section id="riddles">
+  <h2 class="section-title">🎲 لعبة: شو أنا؟ <span class="tag">Guess What I Am</span></h2>
+  <p class="en-sub">Tap a card to reveal the answer</p>
+  <div id="riddleList"></div>
+</section>
+
+<section id="draw">
+  <h2 class="section-title">🎨 نشاط الرسم <span class="tag">Drawing</span></h2>
+  <p class="en-sub">Draw these, then explain your drawing out loud</p>
+  <div class="drawlist" id="drawList"></div>
+  <p class="en-sub" style="margin-top:18px">وبعدها خليها تشرح الرسم — Then have her explain the drawing:</p>
+  <div class="dialogue">
+    <div class="line"><div class="speech">هاي الشمس.</div><div class="pron">hay ish-shams.</div><div class="en">This is the sun.</div></div>
+    <div class="line"><div class="speech">هاي السما.</div><div class="pron">hay is-sama.</div><div class="en">This is the sky.</div></div>
+    <div class="line"><div class="speech">هاي النجوم.</div><div class="pron">hay in-nujoom.</div><div class="en">These are the stars.</div></div>
+    <div class="line"><div class="speech">هاد القمر.</div><div class="pron">had il-amar.</div><div class="en">This is the moon.</div></div>
+    <div class="line"><div class="speech">هاي الأرض.</div><div class="pron">hay il-ard.</div><div class="en">This is the Earth.</div></div>
+    <div class="line"><div class="speech">هاد الصاروخ.</div><div class="pron">had is-sarookh.</div><div class="en">This is the rocket.</div></div>
+  </div>
+</section>
+
+<section id="conversation">
+  <h2 class="section-title">💬 حكي سوا <span class="tag">Conversation</span></h2>
+  <p class="en-sub">Tap a question to see the English + a sample answer</p>
+  <div id="convList"></div>
+  <div class="bonus-box" style="margin-top:16px">
+    <p><strong>سؤال خيالي ممتع</strong> <span class="pron">(sual khayali mumtie)</span> — Fun imaginary question:</p>
+    <p>لو عندك صاروخ 🚀، وين بتروحي؟ <span class="pron">(law indek sarookh, wen bitroohi?)</span></p>
+    <p class="en">If you had a rocket, where would you go?</p>
+    <p>بروح عالقمر 🌙 / بروح عالكوكب الأحمر 🔴 / بروح أشوف النجوم ⭐</p>
+    <p class="pron">brooh al-amar / brooh al-kawkab il-ahmar / brooh ashoof in-nujoom</p>
+    <p class="en">I would go to the moon / I would go to the red planet / I would go see the stars</p>
+  </div>
+</section>
+
+<section id="challenge">
+  <h2 class="section-title">🧠 تحدي: صح ولا غلط؟ <span class="tag">True or False</span></h2>
+  <p class="en-sub">Tap صح (true) or غلط (false) for each sentence</p>
+  <div id="tfList"></div>
+  <div class="quiz-summary" id="tfScore"></div>
+</section>
+
+<section id="homework">
+  <h2 class="section-title">🏠 الواجب <span class="tag">Homework</span></h2>
+  <p class="en-sub">ترسم السماء والفضاء، وتكمل الجمل — Draw the sky and space, then complete the sentences</p>
+  <div id="fillList"></div>
+  <button class="check-btn" onclick="checkFill()">تحقق ✅ Check</button>
+  <div class="quiz-summary" id="fillScore"></div>
+</section>
+
+<section id="bonus">
+  <h2 class="section-title">⭐ Bonus: نشرة جوية <span class="tag">Weather Report</span></h2>
+  <p class="en-sub">Have her start next lesson with her own "weather report"</p>
+  <div class="bonus-box">
+    <p style="font-weight:700">"مرحبا! أنا اليوم رح أحكيلكم عن الجو. اليوم الجو مشمس، وفي شوية غيم، والجو حلو!" 🌤️</p>
+    <p class="pron">marhaba! ana il-yom rah ahkeelkom an il-jaww. il-yom il-jaww mshammis, w fi shwayyet gheem, w il-jaww helu!</p>
+    <p class="en">"Hello! Today I will tell you about the weather. Today it is sunny, there are a few clouds, and the weather is nice!"</p>
+  </div>
+</section>
+
+`;
+
+// Riddles
+const riddles = [
+  {clues:[["أنا بطلع بالنهار.","ana bitla-e bin-nahar.","I rise during the day."],["أنا منوّر.","ana munawwar.","I give light."]], q:"شو أنا؟", qp:"shu ana?", qe:"What am I?", ans:"الشمس! ☀️", ansp:"ish-shams!", anse:"The sun!"},
+  {clues:[["أنا بطلع بالليل.","ana bitla-e bil-lel.","I rise at night."],["شكلي دائري أحيانًا.","shakli da-iri ahyanan.","My shape is round sometimes."]], q:"شو أنا؟", qp:"shu ana?", qe:"What am I?", ans:"القمر! 🌙", ansp:"il-amar!", anse:"The moon!"},
+  {clues:[["أنا صغيرة وبنشوفني بالليل.","ana sghireh w binshoofni bil-lel.","I am small and you see me at night."],["في مني كثير بالسما.","fi minni kteer bis-sama.","There are many of me in the sky."]], q:"شو أنا؟", qp:"shu ana?", qe:"What am I?", ans:"نجمة! ⭐", ansp:"nejme!", anse:"A star!"},
+  {clues:[["بطلع لفوق وبروح عالفضاء.","bitla-e lfoo w birooh al-fada.","I go up and travel to space."]], q:"شو أنا؟", qp:"shu ana?", qe:"What am I?", ans:"صاروخ! 🚀", ansp:"sarookh!", anse:"A rocket!"},
+];
+const riddleList = document.getElementById("riddleList");
+riddles.forEach((r)=>{
+  const div = document.createElement("div");
+  div.className="riddle-card";
+  div.innerHTML = `
+    ${r.clues.map(c=>`<div class="clue"><span class="ar">${c[0]}</span><span class="pron">${c[1]}</span><span class="en">${c[2]}</span></div>`).join("")}
+    <div class="clue" style="margin-top:8px;font-weight:700">${r.q} <span class="pron">${r.qp}</span> <span class="en">${r.qe}</span></div>
+    <div class="hint">👆 دوسي هون لتشوفي الجواب — tap to reveal</div>
+    <div class="reveal"><span class="ar">${r.ans}</span><span class="pron">${r.ansp}</span><span class="en">${r.anse}</span></div>
+  `;
+  div.onclick = ()=>div.classList.toggle("open");
+  riddleList.appendChild(div);
+});
+
+// Drawing chips
+const drawItems = [
+  ["🌞","الشمس","ish-shams","the sun"],
+  ["🌙","القمر","il-amar","the moon"],
+  ["⭐","النجوم","in-nujoom","the stars"],
+  ["☁️","الغيم","il-gheem","the clouds"],
+  ["🌍","الأرض","il-ard","the earth"],
+  ["🚀","الصاروخ","is-sarookh","the rocket"],
+];
+const drawList = document.getElementById("drawList");
+drawItems.forEach(d=>{
+  const div = document.createElement("div");
+  div.className="draw-chip";
+  div.innerHTML = `<div class="emoji">${d[0]}</div><div class="cap">${d[1]}</div><div class="pron">${d[2]}</div><div class="en">${d[3]}</div>`;
+  drawList.appendChild(div);
+});
+
+// Conversation accordion
+const convQs = [
+  ["كيف الجو اليوم؟","keef il-jaww il-yom?","How is the weather today?","الجو حلو / حار / بارد اليوم."],
+  ["بتحبي الجو الحار ولا البارد؟","bithibbi il-jaww il-har walla il-bared?","Do you like hot or cold weather?","بحب الجو ___."],
+  ["بتحبي المطر؟","bithibbi il-matar?","Do you like the rain?","آه بحب المطر / لا ما بحب المطر."],
+  ["شو بتشوفي بالسما؟","shu bitshoofi bis-sama?","What do you see in the sky?","شايفة الشمس / القمر / نجوم."],
+  ["متى بنشوف النجوم؟","mita binshoof in-nujoom?","When do we see the stars?","بالليل."],
+  ["شو بتحبي أكتر: الشمس ولا القمر؟","shu bithibbi aktar: ish-shams walla il-amar?","Which do you like more: the sun or the moon?","بحب ___ أكتر."],
+  ["لو رحتي عالفضاء، شو بدك تشوفي؟","law rohti al-fada, shu bidek tishoofi?","If you went to space, what would you want to see?","بدي أشوف ___."],
+  ["أي كوكب بتحبي تزوري؟","ay kawkab bithibbi tzoori?","Which planet would you like to visit?","بحب أزور ___."],
+  ["بدك تكوني رائدة فضاء؟","bidek tkooni raedet fada?","Do you want to be an astronaut?","آه أكيد! / يمكن."],
+  ["شو بتاخدي معك عالفضاء؟ 😍","shu btakhdi maek al-fada?","What would you take with you to space?","بأخد ___ معي."],
+];
+const convList = document.getElementById("convList");
+convQs.forEach((c,i)=>{
+  const div = document.createElement("div");
+  div.className="conv-item";
+  div.innerHTML = `
+    <div class="conv-q"><span><span class="num">${i+1}.</span>${c[0]}</span><span class="arrow">▾</span></div>
+    <div class="conv-a">
+      <div class="pron">${c[1]}</div>
+      <div class="en">${c[2]}</div>
+      <div class="a" style="margin-top:6px">مثال جواب: ${c[3]}</div>
+    </div>
+  `;
+  div.querySelector(".conv-q").onclick = ()=>div.classList.toggle("open");
+  convList.appendChild(div);
+});
+
+// True/False challenge
+const tfItems = [
+  {ar:"☀️ الشمس بتطلع بالليل.", pron:"ish-shams bitla-e bil-lel.", en:"The sun rises at night.", answer:false, why:"الشمس بتطلع بالنهار — The sun rises during the day."},
+  {ar:"🌙 القمر بنشوفه بالليل.", pron:"il-amar binshoofu bil-lel.", en:"We see the moon at night.", answer:true, why:"صح! — Correct!"},
+  {ar:"⭐ النجوم موجودة بالسما.", pron:"in-nujoom mawjoodeh bis-sama.", en:"Stars exist in the sky.", answer:true, why:"صح! — Correct!"},
+  {ar:"🌍 إحنا عايشين على كوكب الأرض.", pron:"ihna aayshin ala kawkab il-ard.", en:"We live on planet Earth.", answer:true, why:"صح! — Correct!"},
+  {ar:"🚀 الصاروخ بيروح عالفضاء.", pron:"is-sarookh biyrooh al-fada.", en:"The rocket goes to space.", answer:true, why:"صح! — Correct!"},
+  {ar:"☁️ الغيم موجود تحت الأرض.", pron:"il-gheem mawjood taht il-ard.", en:"Clouds are found underground.", answer:false, why:"الغيم موجود بالسما — Clouds are found in the sky."},
+];
+const tfList = document.getElementById("tfList");
+let tfCorrect = 0, tfAnswered = 0;
+tfItems.forEach((t)=>{
+  const row = document.createElement("div");
+  row.className="tf-row";
+  row.innerHTML = `
+    <div class="stmt">
+      <div class="ar">${t.ar}</div>
+      <div class="pron">${t.pron}</div>
+      <div class="en">${t.en}</div>
+      <div class="feedback"></div>
+    </div>
+    <div class="tf-buttons">
+      <button data-val="true">صح ✅</button>
+      <button data-val="false">غلط ❌</button>
+    </div>
+  `;
+  row.querySelectorAll(".tf-buttons button").forEach(btn=>{
+    btn.onclick = ()=>{
+      if(row.classList.contains("answered")) return;
+      const val = btn.dataset.val === "true";
+      row.classList.add("answered");
+      tfAnswered++;
+      const fb = row.querySelector(".feedback");
+      if(val === t.answer){
+        tfCorrect++;
+        fb.textContent = "✅ صح! " + (t.answer ? "" : t.why);
+        fb.className="feedback good";
+      } else {
+        fb.textContent = "❌ " + t.why;
+        fb.className="feedback bad";
+      }
+      updateTfScore();
+    };
+  });
+  tfList.appendChild(row);
+});
+function updateTfScore(){
+  document.getElementById("tfScore").textContent = tfAnswered===tfItems.length
+    ? `🎉 خلصتي! نتيجتك: ${tfCorrect} من ${tfItems.length} — Done! Your score: ${tfCorrect}/${tfItems.length}`
+    : `${tfAnswered} / ${tfItems.length}`;
+}
+
+// Homework fill-in-the-blank
+const fillItems = [
+  {before:"اليوم الجو", after:".", pron:"il-yom il-jaww ___.", en:"Today the weather is ___.", accept:["حلو","حار","بارد","مشمس","غائم","ممطر"]},
+  {before:"أنا شايفة", after:"بالسما.", pron:"ana shayfeh ___ bis-sama.", en:"I see ___ in the sky.", accept:["الشمس","القمر","نجوم","غيم"]},
+  {before:"بالليل بنشوف", after:".", pron:"bil-lel binshoof ___.", en:"At night we see ___.", accept:["القمر","النجوم","نجوم"]},
+  {before:"إحنا عايشين على كوكب", after:".", pron:"ihna aayshin ala kawkab ___.", en:"We live on planet ___.", accept:["الأرض"]},
+  {before:"لو عندي صاروخ، بروح على", after:". 🚀", pron:"law indi sarookh, brooh ala ___.", en:"If I had a rocket, I would go to ___.", accept:["القمر","الشمس","المريخ","كوكب"]},
+];
+const fillList = document.getElementById("fillList");
+fillItems.forEach((f,i)=>{
+  const row = document.createElement("div");
+  row.className="fill-row";
+  row.innerHTML = `
+    <div class="sent">${f.before} <input type="text" data-idx="${i}" placeholder="؟"> ${f.after}</div>
+    <div class="pron">${f.pron}</div>
+    <div class="en">${f.en}</div>
+  `;
+  fillList.appendChild(row);
+});
+function checkFill(){
+  let correct = 0;
+  fillItems.forEach((f,i)=>{
+    const input = document.querySelector(`input[data-idx="${i}"]`);
+    const row = input.closest(".fill-row");
+    const val = input.value.trim();
+    const ok = f.accept.some(a=>a===val);
+    row.classList.remove("correct","wrong");
+    if(val===""){return;}
+    if(ok){row.classList.add("correct"); correct++;}
+    else{row.classList.add("wrong");}
+  });
+  document.getElementById("fillScore").textContent = `✅ ${correct} / ${fillItems.length} — تمام! جربي مرة ثانية إذا بدك`;
+}
+
+// Stars background
+const starsDiv = document.getElementById("stars");
+for(let i=0;i<60;i++){
+  const s = document.createElement("span");
+  const size = Math.random()*2+1;
+  s.style.width = size+"px";
+  s.style.height = size+"px";
+  s.style.left = Math.random()*100+"%";
+  s.style.top = Math.random()*70+"%";
+  s.style.animationDelay = (Math.random()*3)+"s";
+  starsDiv.appendChild(s);
+}
+
+// init
+showSection("goal");
+</script>
+</body>
+</html>
