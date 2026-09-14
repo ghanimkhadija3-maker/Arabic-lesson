@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أكمل الجملة!</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Traditional Arabic', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #fff6e5, #eaf6ff);
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  .container { max-width: 750px; margin: 0 auto; }
+  h1 {
+    text-align: center;
+    color: #d1495b;
+    font-size: 2.2em;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #4a7a8c;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .note {
+    background: #eaf6ff;
+    border-right: 5px solid #2e86ab;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+  }
+  .progress { text-align: center; color: #777; margin-bottom: 10px; }
+  .prompt-emoji { text-align: center; font-size: 3.2em; margin-bottom: 10px; }
+  .sentence-line {
+    text-align: center;
+    font-size: 2.1em;
+    line-height: 2.2;
+    margin: 15px 0;
+  }
+  .blank {
+    display: inline-block;
+    min-width: 110px;
+    border-bottom: 4px dotted #d1495b;
+    color: #d1495b;
+    font-weight: bold;
+  }
+  .word-bank {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .word-tile {
+    background: #fff3cd;
+    border: 3px solid #f4d35e;
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-size: 1.7em;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+  .word-tile:hover { background: #f4d35e; transform: scale(1.06); }
+  .word-tile.used { opacity: 0.3; pointer-events: none; }
+
+  .btn-row { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+  .action-btn {
+    font-size: 1.2em;
+    padding: 10px 24px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    color: white;
+  }
+  .btn-listen { background: #f4a261; }
+  .btn-next { background: #2e86ab; display: none; }
+
+  .feedback {
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-top: 15px;
+    min-height: 35px;
+  }
+  .en-hint { text-align: center; color: #888; font-size: 1.05em; margin-top: 6px; }
+  .score-box {
+    text-align: center;
+    font-size: 1.4em;
+    background: #fff3cd;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>✏️ أكمل الجملة!</h1>
+  <p class="subtitle">اختاري الكلمة المناسبة لتُكمِلي الجملة</p>
+
+  <div class="card">
+    <div class="note">💡 اُقرئي الجملة، وانظري إلى الصورة، ثم اضغطي على الكلمة الصحيحة لتضعيها فِي الفراغ.</div>
+
+    <div class="progress" id="progress"></div>
+    <div class="prompt-emoji" id="promptEmoji"></div>
+    <div class="sentence-line" id="sentenceLine"></div>
+
+    <div class="word-bank" id="wordBank"></div>
+
+    <div class="btn-row">
+      <button class="action-btn btn-listen" onclick="listenFull()">🔊 استمعي للجملة كاملة</button>
+      <button class="action-btn btn-next" id="nextBtn" onclick="nextRound()">➡️ التالي</button>
+    </div>
+
+    <div class="feedback" id="feedback"></div>
+    <div class="en-hint" id="enHint"></div>
+  </div>
+
+  <div class="card" id="finalCard" style="display:none; text-align:center;">
+    <h2>🎉 أحسنتِ!</h2>
+    <div class="score-box" id="scoreBox"></div>
+  </div>
+</div>
+
+<script>
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ar-SA';
+    u.rate = 0.65;
+    speechSynthesis.speak(u);
+  }
+}
+
+// before: text before blank, after: text after blank, answer: correct word,
+// distractors: wrong options, emoji, full: full sentence for listening, en: meaning
+const rounds = [
+  { before: 'هٰذَا', after: '.', answer: 'بَابٌ', distractors: ['دُبٌّ', 'قَلَمٌ'], emoji: '🚪', full: 'هٰذَا بَابٌ.', en: 'This is a door.' },
+  { before: 'القِطَّةُ', after: '.', answer: 'تَنَامُ', distractors: ['تَطِيرُ', 'تَسْبَحُ'], emoji: '🐱', full: 'القِطَّةُ تَنَامُ.', en: 'The cat sleeps.' },
+  { before: 'الأَرْنَبُ يَأْكُلُ', after: '.', answer: 'الجَزَرَ', distractors: ['العَسَلَ', 'الحَلِيبَ'], emoji: '🐰', full: 'الأَرْنَبُ يَأْكُلُ الجَزَرَ.', en: 'The rabbit eats the carrot.' },
+  { before: 'القَمَرُ يُضِيءُ فِي', after: '.', answer: 'اللَّيْلِ', distractors: ['الصَّبَاحِ', 'الظُّهْرِ'], emoji: '🌙', full: 'القَمَرُ يُضِيءُ فِي اللَّيْلِ.', en: 'The moon shines at night.' },
+  { before: 'النَّحْلَةُ تَصْنَعُ', after: '.', answer: 'العَسَلَ', distractors: ['الجَزَرَ', 'الخُبْزَ'], emoji: '🐝', full: 'النَّحْلَةُ تَصْنَعُ العَسَلَ.', en: 'The bee makes honey.' },
+  { before: 'المَوْزُ لَوْنُهُ', after: '.', answer: 'أَصْفَرُ', distractors: ['أَخْضَرُ', 'أَزْرَقُ'], emoji: '🍌', full: 'المَوْزُ لَوْنُهُ أَصْفَرُ.', en: 'The banana is yellow.' },
+  { before: 'فِي الشِّتَاءِ نَلْبَسُ', after: '.', answer: 'مِعْطَفًا', distractors: ['قُبَّعَةً', 'حِذَاءً'], emoji: '🧥', full: 'فِي الشِّتَاءِ نَلْبَسُ مِعْطَفًا.', en: 'In winter we wear a coat.' },
+  { before: 'الوَلَدُ يَرْكَبُ', after: '.', answer: 'الدَّرَّاجَةَ', distractors: ['الحَقِيبَةَ', 'الكِتَابَ'], emoji: '🚲', full: 'الوَلَدُ يَرْكَبُ الدَّرَّاجَةَ.', en: 'The boy rides the bicycle.' }
+];
+
+let currentRound = 0;
+let score = 0;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function loadRound() {
+  const r = rounds[currentRound];
+  document.getElementById('progress').textContent = `الجملة ${currentRound + 1} من ${rounds.length}`;
+  document.getElementById('promptEmoji').textContent = r.emoji;
+  document.getElementById('sentenceLine').innerHTML = `${r.before} <span class="blank" id="blankSpot">____</span> ${r.after}`;
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('enHint').textContent = '';
+  document.getElementById('nextBtn').style.display = 'none';
+
+  const options = shuffle([r.answer, ...r.distractors]);
+  const bank = document.getElementById('wordBank');
+  bank.innerHTML = '';
+  options.forEach(word => {
+    const btn = document.createElement('button');
+    btn.className = 'word-tile';
+    btn.textContent = word;
+    btn.onclick = () => chooseWord(word, btn);
+    bank.appendChild(btn);
+  });
+}
+
+function chooseWord(word, btn) {
+  const r = rounds[currentRound];
+  const feedback = document.getElementById('feedback');
+  const enHint = document.getElementById('enHint');
+  document.querySelectorAll('.word-tile').forEach(t => t.classList.add('used'));
+
+  if (word === r.answer) {
+    document.getElementById('blankSpot').textContent = word;
+    feedback.textContent = '✅ أحسنتِ! إجابة صحيحة';
+    feedback.style.color = '#2d6a4f';
+    enHint.textContent = r.en;
+    score++;
+    speak(r.full);
+    document.getElementById('nextBtn').style.display = 'inline-block';
+  } else {
+    btn.style.background = '#ffb3ab';
+    feedback.textContent = '❌ حاولي كلمة أخرى';
+    feedback.style.color = '#d1495b';
+    setTimeout(() => {
+      document.querySelectorAll('.word-tile').forEach(t => t.classList.remove('used'));
+      btn.style.background = '#fff3cd';
+    }, 900);
+  }
+}
+
+function listenFull() {
+  speak(rounds[currentRound].full);
+}
+
+function nextRound() {
+  currentRound++;
+  if (currentRound >= rounds.length) {
+    document.querySelector('.card').style.display = 'none';
+    document.getElementById('finalCard').style.display = 'block';
+    document.getElementById('scoreBox').innerHTML = `⭐ نتيجتك: ${score} من ${rounds.length} ⭐`;
+  } else {
+    loadRound();
+  }
+}
+
+loadRound();
+</script>
+</body>
+</html>
