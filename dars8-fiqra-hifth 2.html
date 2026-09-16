@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فقرة إضافية وحفظ الكلمات - الدرس الثامن</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Traditional Arabic', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #fff6e5, #eaf6ff);
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  .container { max-width: 780px; margin: 0 auto; }
+  h1 {
+    text-align: center;
+    color: #d1495b;
+    font-size: 2.1em;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #4a7a8c;
+    font-size: 1.2em;
+    margin-bottom: 25px;
+  }
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .card h2 {
+    color: #2e86ab;
+    border-bottom: 3px solid #f4d35e;
+    padding-bottom: 8px;
+  }
+  .note {
+    background: #eaf6ff;
+    border-right: 5px solid #2e86ab;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 1.05em;
+  }
+  .paragraph-box {
+    background: #eafaf1;
+    border: 3px dashed #52b788;
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 1.9em;
+    line-height: 2.2;
+    text-align: right;
+    cursor: pointer;
+  }
+  .paragraph-box:hover { background: #d8f3dc; }
+  .para-en {
+    font-size: 0.5em;
+    color: #666;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* Flashcards */
+  .flashcard-area {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .flashcard {
+    width: 260px;
+    height: 200px;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+  .flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+  .flashcard-front, .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6em;
+    border: 3px solid #f4d35e;
+  }
+  .flashcard-front { background: #fff3cd; }
+  .flashcard-back {
+    background: #d8f3dc;
+    transform: rotateY(180deg);
+    font-size: 1.3em;
+    padding: 10px;
+    text-align: center;
+  }
+  .flashcard-back .emoji-big { font-size: 1.6em; margin-bottom: 8px; }
+  .flashcard-back .en-word { color: #555; font-size: 0.75em; margin-top: 5px; }
+  .flash-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+  }
+  .flash-btn {
+    font-size: 1.1em;
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: none;
+    background: #2e86ab;
+    color: white;
+    cursor: pointer;
+  }
+  .flash-progress { text-align: center; color: #777; margin-top: 8px; }
+
+  /* Memory game */
+  .memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 15px 0;
+  }
+  .memory-card {
+    aspect-ratio: 1;
+    background: #fff3cd;
+    border: 3px solid #f4d35e;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6em;
+    cursor: pointer;
+    transition: 0.2s;
+    text-align: center;
+    padding: 4px;
+  }
+  .memory-card.flipped, .memory-card.matched {
+    background: #eaf6ff;
+    font-size: 1.4em;
+  }
+  .memory-card.matched {
+    background: #d8f3dc;
+    border-color: #52b788;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  .memory-card .hidden-mark { font-size: 1.8em; color: #f4a261; }
+  .memory-status { text-align: center; margin-top: 10px; font-size: 1.2em; color: #2d6a4f; font-weight: bold; }
+  .restart-btn {
+    display: block;
+    margin: 15px auto 0;
+    font-size: 1.05em;
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: none;
+    background: #e76f51;
+    color: white;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📖 فقرة إضافية + تدريب على الحفظ</h1>
+  <p class="subtitle">تكملة الدرس الثامن: الرياضة واللعب</p>
+
+  <!-- Extra paragraph -->
+  <div class="card">
+    <h2>1️⃣ فقرة إضافية للقراءة</h2>
+    <div class="note">💡 اضغطي على الفقرة لسماعها، ثم اقرئيها جملة جملة بصوتك.</div>
+    <div class="paragraph-box" onclick="speak('يَوْمَ السَّبْتِ ذَهَبْنَا إِلَى المَلْعَبِ. لَبِسْتُ حِذَائِي الرِّيَاضِيَّ الجَدِيدَ. لَعِبْنَا كُرَةَ السَّلَّةِ مَعَ أَصْدِقَائِي. فَرِيقُنَا فَازَ بِالمُبَارَاةِ، وَكُنَّا سُعَدَاءَ جِدًّا.')">
+      يَوْمَ السَّبْتِ ذَهَبْنَا إِلَى المَلْعَبِ.<span class="para-en">On Saturday we went to the playground.</span><br>
+      لَبِسْتُ حِذَائِي الرِّيَاضِيَّ الجَدِيدَ.<span class="para-en">I wore my new sports shoes.</span><br>
+      لَعِبْنَا كُرَةَ السَّلَّةِ مَعَ أَصْدِقَائِي.<span class="para-en">We played basketball with my friends.</span><br>
+      فَرِيقُنَا فَازَ بِالمُبَارَاةِ، وَكُنَّا سُعَدَاءَ جِدًّا.<span class="para-en">Our team won the match, and we were very happy.</span>
+    </div>
+
+    <h2 style="margin-top:25px;">2️⃣ فقرة إضافية ثانية</h2>
+    <div class="note">💡 هذه فقرة أخرى بجُمل جديدة، اضغطي عليها لسماعها.</div>
+    <div class="paragraph-box" onclick="speak('بَعْدَ المُبَارَاةِ جَلَسْنَا فِي الحَدِيقَةِ. أَخِي رَكِبَ الأُرْجُوحَةَ وَضَحِكَ كَثِيرًا. أُخْتِي قَفَزَتْ بِالحَبْلِ عَشْرَ مَرَّاتٍ. شَرِبْنَا عَصِيرًا بَارِدًا وَعُدْنَا إِلَى البَيْتِ.')">
+      بَعْدَ المُبَارَاةِ جَلَسْنَا فِي الحَدِيقَةِ.<span class="para-en">After the match we sat in the park.</span><br>
+      أَخِي رَكِبَ الأُرْجُوحَةَ وَضَحِكَ كَثِيرًا.<span class="para-en">My brother rode the swing and laughed a lot.</span><br>
+      أُخْتِي قَفَزَتْ بِالحَبْلِ عَشْرَ مَرَّاتٍ.<span class="para-en">My sister jumped rope ten times.</span><br>
+      شَرِبْنَا عَصِيرًا بَارِدًا وَعُدْنَا إِلَى البَيْتِ.<span class="para-en">We drank cold juice and went back home.</span>
+    </div>
+  </div>
+
+  <!-- Flashcards for memorization -->
+  <div class="card">
+    <h2>3️⃣ بطاقات الحفظ (اقلبي البطاقة)</h2>
+    <div class="note">💡 اضغطي على البطاقة لتقلبيها وتري الصورة والمعنى، ثم حاولي تتذكري الكلمة قبل القلب في المرة القادمة.</div>
+    <div class="flash-progress" id="flashProgress"></div>
+    <div class="flashcard-area">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="flashcard-inner" id="flashcardInner">
+          <div class="flashcard-front" id="flashFront"></div>
+          <div class="flashcard-back" id="flashBack"></div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-nav">
+      <button class="flash-btn" onclick="prevCard()">⬅️ السابقة</button>
+      <button class="flash-btn" onclick="nextCard()">التالية ➡️</button>
+    </div>
+  </div>
+
+  <!-- Memory matching game -->
+  <div class="card">
+    <h2>4️⃣ لعبة الذاكرة (طابقي البطاقات)</h2>
+    <div class="note">💡 اقلبي بطاقتين فِي كل مرة. إذا كانت الكلمة تُطابق صورتها، تبقى مفتوحة!</div>
+    <div class="memory-grid" id="memoryGrid"></div>
+    <div class="memory-status" id="memoryStatus"></div>
+    <button class="restart-btn" onclick="initMemory()">🔄 ابدئي من جديد</button>
+  </div>
+</div>
+
+<script>
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ar-SA';
+    u.rate = 0.65;
+    speechSynthesis.speak(u);
+  }
+}
+
+const words = [
+  { word: 'حَبْل', emoji: '🪢', en: 'rope' },
+  { word: 'دَرَّاجَة', emoji: '🚲', en: 'bicycle' },
+  { word: 'مَسْبَح', emoji: '🏊‍♀️', en: 'pool' },
+  { word: 'أُرْجُوحَة', emoji: '🛝', en: 'swing' },
+  { word: 'فَرِيق', emoji: '👥', en: 'team' },
+  { word: 'كَأْس', emoji: '🏆', en: 'trophy/cup' },
+  { word: 'كُرَةُ سَلَّة', emoji: '🏀', en: 'basketball' },
+  { word: 'حَدِيقَة', emoji: '🌳', en: 'park/garden' }
+];
+
+// ---------- Flashcards ----------
+let flashIndex = 0;
+function renderFlash() {
+  const w = words[flashIndex];
+  document.getElementById('flashFront').textContent = w.word;
+  document.getElementById('flashBack').innerHTML = `<div class="emoji-big">${w.emoji}</div>${w.word}<div class="en-word">${w.en}</div>`;
+  document.getElementById('flashProgress').textContent = `بطاقة ${flashIndex + 1} من ${words.length}`;
+  document.getElementById('flashcard').classList.remove('flipped');
+  speak(w.word);
+}
+function flipCard() {
+  document.getElementById('flashcard').classList.toggle('flipped');
+}
+function nextCard() {
+  flashIndex = (flashIndex + 1) % words.length;
+  renderFlash();
+}
+function prevCard() {
+  flashIndex = (flashIndex - 1 + words.length) % words.length;
+  renderFlash();
+}
+renderFlash();
+
+// ---------- Memory game ----------
+let memoryCards = [];
+let flippedCards = [];
+let matchedPairs = 0;
+let lockBoard = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function initMemory() {
+  matchedPairs = 0;
+  flippedCards = [];
+  lockBoard = false;
+  document.getElementById('memoryStatus').textContent = '';
+
+  // Use 6 of the 8 words to keep the grid manageable (12 cards)
+  const selected = shuffle(words).slice(0, 6);
+  let cards = [];
+  selected.forEach((w, idx) => {
+    cards.push({ pairId: idx, type: 'word', content: w.word, speakText: w.word });
+    cards.push({ pairId: idx, type: 'emoji', content: w.emoji, speakText: w.word });
+  });
+  memoryCards = shuffle(cards);
+
+  const grid = document.getElementById('memoryGrid');
+  grid.innerHTML = '';
+  memoryCards.forEach((card, idx) => {
+    const div = document.createElement('div');
+    div.className = 'memory-card';
+    div.id = 'mem-' + idx;
+    div.innerHTML = '<span class="hidden-mark">❓</span>';
+    div.onclick = () => flipMemoryCard(idx);
+    grid.appendChild(div);
+  });
+}
+
+function flipMemoryCard(idx) {
+  if (lockBoard) return;
+  const cardEl = document.getElementById('mem-' + idx);
+  if (cardEl.classList.contains('flipped') || cardEl.classList.contains('matched')) return;
+
+  cardEl.classList.add('flipped');
+  cardEl.innerHTML = memoryCards[idx].content;
+  flippedCards.push(idx);
+
+  if (memoryCards[idx].type === 'word') speak(memoryCards[idx].speakText);
+
+  if (flippedCards.length === 2) {
+    lockBoard = true;
+    const [i1, i2] = flippedCards;
+    if (memoryCards[i1].pairId === memoryCards[i2].pairId) {
+      setTimeout(() => {
+        document.getElementById('mem-' + i1).classList.add('matched');
+        document.getElementById('mem-' + i2).classList.add('matched');
+        matchedPairs++;
+        flippedCards = [];
+        lockBoard = false;
+        if (matchedPairs === 6) {
+          document.getElementById('memoryStatus').textContent = '🎉 أحسنتِ! طابقتِ كل البطاقات!';
+        }
+      }, 500);
+    } else {
+      setTimeout(() => {
+        [i1, i2].forEach(i => {
+          const el = document.getElementById('mem-' + i);
+          el.classList.remove('flipped');
+          el.innerHTML = '<span class="hidden-mark">❓</span>';
+        });
+        flippedCards = [];
+        lockBoard = false;
+      }, 900);
+    }
+  }
+}
+
+initMemory();
+</script>
+</body>
+</html>
