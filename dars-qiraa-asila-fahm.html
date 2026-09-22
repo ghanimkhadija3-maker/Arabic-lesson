@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>درس قراءة - أسئلة الفهم</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Traditional Arabic', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #fff6e5, #eaf6ff);
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  .container { max-width: 750px; margin: 0 auto; }
+  h1 {
+    text-align: center;
+    color: #d1495b;
+    font-size: 2.1em;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #4a7a8c;
+    font-size: 1.2em;
+    margin-bottom: 25px;
+  }
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .card h2 {
+    color: #2e86ab;
+    border-bottom: 3px solid #f4d35e;
+    padding-bottom: 8px;
+  }
+  .note {
+    background: #eaf6ff;
+    border-right: 5px solid #2e86ab;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-size: 1.05em;
+  }
+  .paragraph-box {
+    background: #eafaf1;
+    border: 3px dashed #52b788;
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 1.9em;
+    line-height: 2.3;
+    text-align: right;
+    cursor: pointer;
+  }
+  .paragraph-box:hover { background: #d8f3dc; }
+
+  .quiz-question {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 18px;
+    text-align: center;
+  }
+  .q-text { font-size: 1.5em; margin-bottom: 10px; }
+  .options { display: flex; justify-content: center; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+  .option-btn {
+    font-size: 1.3em;
+    padding: 9px 20px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    background: white;
+    cursor: pointer;
+  }
+  .option-btn:hover { background: #eee; }
+  .option-btn.correct { background: #b7e4c7 !important; border-color: #2d6a4f; }
+  .option-btn.wrong { background: #ffb3ab !important; border-color: #d1495b; }
+  .feedback { text-align: center; font-size: 1.2em; font-weight: bold; margin-top: 10px; min-height: 28px; }
+  .score-box {
+    text-align: center;
+    font-size: 1.4em;
+    background: #fff3cd;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 15px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📖 درس قراءة</h1>
+  <p class="subtitle">اقرئي الفقرة ثم أجيبي عن الأسئلة</p>
+
+  <div class="card">
+    <h2>1️⃣ الفقرة</h2>
+    <div class="note">💡 اضغطي على الفقرة لسماعها، ثم اقرئيها بصوتك مرتين قبل أن تُجِيبِي عن الأسئلة.</div>
+    <div class="paragraph-box" onclick="speak('اِسْمِي نُور، وَعُمْرِي تِسْعُ سَنَوَاتٍ. عِنْدِي قِطَّةٌ صَغِيرَةٌ اِسْمُهَا لُولُو. لُولُو لَوْنُهَا أَبْيَضُ، وَتُحِبُّ اللَّعِبَ بِالكُرَةِ. كُلَّ يَوْمٍ أُطْعِمُ لُولُو، وَأَلْعَبُ مَعَهَا فِي الحَدِيقَةِ. أَنَا أُحِبُّ لُولُو كَثِيرًا.')">
+      اِسْمِي نُور، وَعُمْرِي تِسْعُ سَنَوَاتٍ. عِنْدِي قِطَّةٌ صَغِيرَةٌ اِسْمُهَا لُولُو. لُولُو لَوْنُهَا أَبْيَضُ، وَتُحِبُّ اللَّعِبَ بِالكُرَةِ. كُلَّ يَوْمٍ أُطْعِمُ لُولُو، وَأَلْعَبُ مَعَهَا فِي الحَدِيقَةِ. أَنَا أُحِبُّ لُولُو كَثِيرًا.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>2️⃣ أسئلة الفهم</h2>
+    <div id="quizArea"></div>
+    <div class="score-box" id="scoreBox" style="display:none;"></div>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <h2>🎉 أحسنتِ!</h2>
+    <p style="font-size:1.15em;">اقرئي الفقرة مرة أخرى وحاولي أن تتذكري كل التفاصيل!</p>
+  </div>
+</div>
+
+<script>
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ar-SA';
+    u.rate = 0.65;
+    speechSynthesis.speak(u);
+  }
+}
+
+const quizData = [
+  { q: 'مَا اِسْمُ البِنْتِ فِي الفِقْرَةِ؟', options: ['لَيْلَى', 'نُور', 'سَارَة'], correct: 'نُور' },
+  { q: 'كَمْ عُمْرُ نُور؟', options: ['ثَمَانِي سَنَوَاتٍ', 'تِسْعُ سَنَوَاتٍ', 'عَشْرُ سَنَوَاتٍ'], correct: 'تِسْعُ سَنَوَاتٍ' },
+  { q: 'مَا اِسْمُ القِطَّةِ؟', options: ['لُولُو', 'مِيمِي', 'بُومَة'], correct: 'لُولُو' },
+  { q: 'مَا لَوْنُ القِطَّةِ؟', options: ['أَسْوَد', 'أَبْيَض', 'أَصْفَر'], correct: 'أَبْيَض' },
+  { q: 'أَيْنَ تَلْعَبُ نُور مَعَ القِطَّةِ؟', options: ['فِي المَدْرَسَةِ', 'فِي الحَدِيقَةِ', 'فِي السُّوقِ'], correct: 'فِي الحَدِيقَةِ' }
+];
+
+let currentQ = 0, score = 0;
+const quizArea = document.getElementById('quizArea');
+const scoreBox = document.getElementById('scoreBox');
+
+function renderQuiz() {
+  if (currentQ >= quizData.length) {
+    quizArea.innerHTML = '';
+    scoreBox.style.display = 'block';
+    scoreBox.innerHTML = `⭐ نتيجتك: ${score} من ${quizData.length} ⭐`;
+    return;
+  }
+  const q = quizData[currentQ];
+  quizArea.innerHTML = `
+    <div class="quiz-question">
+      <div class="q-text">${q.q}</div>
+      <div class="options">
+        ${q.options.map(opt => `<button class="option-btn" onclick="checkAnswer(this, '${opt}', '${q.correct}')">${opt}</button>`).join('')}
+      </div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+  `;
+}
+
+function checkAnswer(btn, chosen, correct) {
+  document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+  const feedback = document.getElementById('feedback');
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    feedback.textContent = '✅ أحسنتِ! إجابة صحيحة';
+    feedback.style.color = '#2d6a4f';
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    feedback.textContent = '❌ حاولي مرة أخرى.';
+    feedback.style.color = '#d1495b';
+    document.querySelectorAll('.option-btn').forEach(b => { if (b.textContent === correct) b.classList.add('correct'); });
+  }
+  setTimeout(() => { currentQ++; renderQuiz(); }, 1600);
+}
+renderQuiz();
+</script>
+</body>
+</html>
