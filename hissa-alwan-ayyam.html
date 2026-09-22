@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حصة تفاعلية: الألوان وأيام الأسبوع</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Traditional Arabic', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #fff6e5, #eaf6ff);
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+  h1 {
+    text-align: center;
+    color: #d1495b;
+    font-size: 2.1em;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #4a7a8c;
+    font-size: 1.2em;
+    margin-bottom: 25px;
+  }
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .card h2 {
+    color: #2e86ab;
+    border-bottom: 3px solid #f4d35e;
+    padding-bottom: 8px;
+  }
+  .note {
+    background: #eaf6ff;
+    border-right: 5px solid #2e86ab;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-size: 1.05em;
+  }
+
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin: 15px 0;
+  }
+  .vocab-item {
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 3px solid #ddd;
+  }
+  .vocab-item:hover { transform: scale(1.05); }
+  .vocab-swatch {
+    width: 100%;
+    height: 45px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    border: 2px solid rgba(0,0,0,0.1);
+  }
+  .vocab-word { font-size: 1.4em; font-weight: bold; }
+  .vocab-en { font-size: 0.85em; color: #888; margin-top: 3px; }
+
+  .dialogue-line {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin: 12px 0;
+    cursor: pointer;
+  }
+  .dialogue-line:hover .bubble { background: #fff3cd; }
+  .avatar { font-size: 2em; }
+  .bubble { background: #f0f7ff; border-radius: 14px; padding: 10px 16px; flex: 1; }
+  .bubble .ar { font-size: 1.3em; }
+  .bubble .en { font-size: 0.85em; color: #888; margin-top: 3px; }
+
+  .days-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 15px 0;
+  }
+  .day-box {
+    background: #eafaf1;
+    border: 3px solid #52b788;
+    border-radius: 14px;
+    padding: 12px 16px;
+    text-align: center;
+    cursor: pointer;
+    min-width: 90px;
+  }
+  .day-box:hover { background: #d8f3dc; }
+  .day-word { font-size: 1.2em; font-weight: bold; color: #1b4332; }
+  .day-en { font-size: 0.8em; color: #666; }
+
+  .match-area { display: flex; justify-content: space-between; gap: 25px; }
+  .col { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .item-btn {
+    background: #f9f9f9;
+    border: 3px solid #f4d35e;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 1.3em;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+  .item-btn:hover { background: #fff3cd; }
+  .item-btn.selected { background: #f4d35e; transform: scale(1.05); }
+  .item-btn.matched { background: #d8f3dc; border-color: #52b788; opacity: 0.6; pointer-events: none; }
+  .item-btn.wrong-flash { background: #ffb3ab !important; border-color: #d1495b; }
+  .match-feedback { text-align: center; font-size: 1.2em; font-weight: bold; margin-top: 15px; min-height: 28px; }
+
+  .quiz-question { background: #f8f9fa; border-radius: 15px; padding: 20px; text-align: center; }
+  .q-text { font-size: 1.5em; margin-bottom: 10px; }
+  .options { display: flex; justify-content: center; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+  .option-btn { font-size: 1.2em; padding: 8px 18px; border-radius: 10px; border: 2px solid #ccc; background: white; cursor: pointer; }
+  .option-btn:hover { background: #eee; }
+  .option-btn.correct { background: #b7e4c7 !important; border-color: #2d6a4f; }
+  .option-btn.wrong { background: #ffb3ab !important; border-color: #d1495b; }
+  .feedback { text-align: center; font-size: 1.2em; font-weight: bold; margin-top: 10px; min-height: 28px; }
+  .score-box { text-align: center; font-size: 1.3em; background: #fff3cd; border-radius: 15px; padding: 15px; margin-top: 10px; }
+
+  .restart-btn {
+    display: block;
+    margin: 15px auto 0;
+    font-size: 1.05em;
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: none;
+    background: #2e86ab;
+    color: white;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🎨 حصة تفاعلية</h1>
+  <p class="subtitle">الألوان وأيام الأسبوع</p>
+
+  <!-- Section 1: Colors vocabulary -->
+  <div class="card">
+    <h2>1️⃣ الألوان</h2>
+    <div class="note">💡 اضغطي على كل بطاقة لسماع اسم اللون.</div>
+    <div class="vocab-grid" id="colorVocab"></div>
+  </div>
+
+  <!-- Section 2: Dialogue -->
+  <div class="card">
+    <h2>2️⃣ حِوار: ما لَوْنُ حَقِيبَتِكَ؟</h2>
+    <div class="note">💡 اضغطي على كل سطر لسماعه، ثم مثّلي الحوار مع صديقتك.</div>
+    <div id="dialogueArea"></div>
+  </div>
+
+  <!-- Section 3: Days of the week -->
+  <div class="card">
+    <h2>3️⃣ أَيَّامُ الأُسْبُوعِ</h2>
+    <div class="note">💡 اضغطي على كل يوم لسماعه، بالترتيب من الأحد إلى السبت.</div>
+    <div class="days-row" id="daysRow"></div>
+  </div>
+
+  <!-- Section 4: Matching game -->
+  <div class="card">
+    <h2>4️⃣ نشاط: وصّلي الكلمة بمعناها</h2>
+    <div class="note">💡 اضغطي على كلمة عربية، ثم اضغطي على معناها بالإنجليزي لتوصيليهما.</div>
+    <div class="match-area">
+      <div class="col" id="matchArCol"></div>
+      <div class="col" id="matchEnCol"></div>
+    </div>
+    <div class="match-feedback" id="matchFeedback"></div>
+    <button class="restart-btn" id="matchRestart" style="display:none;" onclick="initMatch()">🔄 العب مرة أخرى</button>
+  </div>
+
+  <!-- Section 5: Quiz -->
+  <div class="card">
+    <h2>5️⃣ اختبري نفسك!</h2>
+    <div id="quizArea"></div>
+    <div class="score-box" id="scoreBox" style="display:none;"></div>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <h2>🎉 أحسنتِ!</h2>
+    <p style="font-size:1.15em;">سمّي كل شيء حولك بلونه هذا الأسبوع!</p>
+  </div>
+</div>
+
+<script>
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ar-SA';
+    u.rate = 0.75;
+    speechSynthesis.speak(u);
+  }
+}
+
+// ---------- Section 1: Colors ----------
+const colors = [
+  { word: 'أَحْمَر', en: 'Red', hex: '#e63946' },
+  { word: 'أَزْرَق', en: 'Blue', hex: '#457b9d' },
+  { word: 'أَصْفَر', en: 'Yellow', hex: '#f4d35e' },
+  { word: 'أَخْضَر', en: 'Green', hex: '#52b788' },
+  { word: 'أَسْوَد', en: 'Black', hex: '#333333' },
+  { word: 'أَبْيَض', en: 'White', hex: '#f1f1f1' }
+];
+const colorVocab = document.getElementById('colorVocab');
+colors.forEach(c => {
+  const div = document.createElement('div');
+  div.className = 'vocab-item';
+  div.style.borderColor = c.hex;
+  div.innerHTML = `<div class="vocab-swatch" style="background:${c.hex};"></div><span class="vocab-word">${c.word}</span><br><span class="vocab-en">${c.en}</span>`;
+  div.onclick = () => speak(c.word);
+  colorVocab.appendChild(div);
+});
+
+// ---------- Section 2: Dialogue ----------
+const dialogue = [
+  { speaker: '👦', ar: 'مَا لَوْنُ حَقِيبَتِكِ؟', en: "What color is your bag?" },
+  { speaker: '👧', ar: 'حَقِيبَتِي لَوْنُهَا أَحْمَرُ. وَحَقِيبَتُكَ؟', en: "My bag is red. And yours?" },
+  { speaker: '👦', ar: 'حَقِيبَتِي لَوْنُهَا أَزْرَقُ.', en: "My bag is blue." },
+  { speaker: '👧', ar: 'وَمَا لَوْنُكَ المُفَضَّلُ؟', en: "And what is your favorite color?" },
+  { speaker: '👦', ar: 'لَوْنِي المُفَضَّلُ أَخْضَرُ. وَأَنْتِ؟', en: "My favorite color is green. And you?" },
+  { speaker: '👧', ar: 'لَوْنِي المُفَضَّلُ أَصْفَرُ!', en: "My favorite color is yellow!" }
+];
+const dialogueArea = document.getElementById('dialogueArea');
+dialogue.forEach(line => {
+  const div = document.createElement('div');
+  div.className = 'dialogue-line';
+  div.innerHTML = `<span class="avatar">${line.speaker}</span><div class="bubble"><div class="ar">${line.ar}</div><div class="en">${line.en}</div></div>`;
+  div.onclick = () => speak(line.ar);
+  dialogueArea.appendChild(div);
+});
+
+// ---------- Section 3: Days of the week ----------
+const days = [
+  { word: 'الأَحَد', en: 'Sunday' },
+  { word: 'الاِثْنَيْن', en: 'Monday' },
+  { word: 'الثُّلَاثَاء', en: 'Tuesday' },
+  { word: 'الأَرْبِعَاء', en: 'Wednesday' },
+  { word: 'الخَمِيس', en: 'Thursday' },
+  { word: 'الجُمُعَة', en: 'Friday' },
+  { word: 'السَّبْت', en: 'Saturday' }
+];
+const daysRow = document.getElementById('daysRow');
+days.forEach(d => {
+  const div = document.createElement('div');
+  div.className = 'day-box';
+  div.innerHTML = `<div class="day-word">${d.word}</div><div class="day-en">${d.en}</div>`;
+  div.onclick = () => speak(d.word);
+  daysRow.appendChild(div);
+});
+
+// ---------- Section 4: Matching game ----------
+const matchPairs = [
+  { id: 1, ar: 'أَحْمَر', en: 'Red' },
+  { id: 2, ar: 'أَزْرَق', en: 'Blue' },
+  { id: 3, ar: 'أَصْفَر', en: 'Yellow' },
+  { id: 4, ar: 'الجُمُعَة', en: 'Friday' },
+  { id: 5, ar: 'السَّبْت', en: 'Saturday' },
+  { id: 6, ar: 'الاِثْنَيْن', en: 'Monday' }
+];
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+let selectedAr = null, selectedEn = null, matchedCount = 0;
+
+function initMatch() {
+  selectedAr = null; selectedEn = null; matchedCount = 0;
+  document.getElementById('matchFeedback').textContent = '';
+  document.getElementById('matchRestart').style.display = 'none';
+
+  const arCol = document.getElementById('matchArCol');
+  const enCol = document.getElementById('matchEnCol');
+  arCol.innerHTML = ''; enCol.innerHTML = '';
+
+  shuffle(matchPairs).forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'item-btn';
+    btn.textContent = p.ar;
+    btn.onclick = () => selectAr(btn, p);
+    arCol.appendChild(btn);
+  });
+  shuffle(matchPairs).forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'item-btn';
+    btn.textContent = p.en;
+    btn.onclick = () => selectEn(btn, p);
+    enCol.appendChild(btn);
+  });
+}
+
+function selectAr(btn, pair) {
+  if (btn.classList.contains('matched')) return;
+  document.querySelectorAll('#matchArCol .item-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedAr = { btn, pair };
+  speak(pair.ar);
+  tryMatch();
+}
+function selectEn(btn, pair) {
+  if (btn.classList.contains('matched')) return;
+  document.querySelectorAll('#matchEnCol .item-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedEn = { btn, pair };
+  tryMatch();
+}
+function tryMatch() {
+  if (!selectedAr || !selectedEn) return;
+  const feedback = document.getElementById('matchFeedback');
+  if (selectedAr.pair.id === selectedEn.pair.id) {
+    selectedAr.btn.classList.remove('selected'); selectedEn.btn.classList.remove('selected');
+    selectedAr.btn.classList.add('matched'); selectedEn.btn.classList.add('matched');
+    feedback.textContent = '✅ أحسنتِ!';
+    feedback.style.color = '#2d6a4f';
+    matchedCount++;
+    selectedAr = null; selectedEn = null;
+    if (matchedCount === matchPairs.length) {
+      feedback.textContent = '🎉 وصّلتِ كل الكلمات!';
+      document.getElementById('matchRestart').style.display = 'block';
+    }
+  } else {
+    feedback.textContent = '❌ حاولي مرة أخرى';
+    feedback.style.color = '#d1495b';
+    selectedAr.btn.classList.add('wrong-flash');
+    selectedEn.btn.classList.add('wrong-flash');
+    setTimeout(() => {
+      selectedAr.btn.classList.remove('selected', 'wrong-flash');
+      selectedEn.btn.classList.remove('selected', 'wrong-flash');
+      selectedAr = null; selectedEn = null;
+    }, 700);
+  }
+}
+initMatch();
+
+// ---------- Section 5: Quiz ----------
+const quizData = [
+  { q: 'كَيْفَ نَقُولُ "Red" بِالعَرَبِيَّةِ؟', options: ['أَحْمَر', 'أَزْرَق', 'أَصْفَر'], correct: 'أَحْمَر' },
+  { q: 'مَا هُوَ أَوَّلُ يَوْمٍ فِي الأُسْبُوعِ؟', options: ['السَّبْت', 'الأَحَد', 'الجُمُعَة'], correct: 'الأَحَد' },
+  { q: 'مَا لَوْنُ السَّمَاءِ؟', options: ['أَحْمَر', 'أَزْرَق', 'أَسْوَد'], correct: 'أَزْرَق' },
+  { q: 'مَا هُوَ يَوْمُ العُطْلَةِ الأُسْبُوعِيَّةِ فِي المَدْرَسَةِ عَادَةً؟', options: ['الاِثْنَيْن', 'الجُمُعَة', 'الأَرْبِعَاء'], correct: 'الجُمُعَة' },
+  { q: 'مَا لَوْنُ العُشْبِ؟', options: ['أَصْفَر', 'أَبْيَض', 'أَخْضَر'], correct: 'أَخْضَر' }
+];
+
+let currentQ = 0, score = 0;
+const quizArea = document.getElementById('quizArea');
+const scoreBox = document.getElementById('scoreBox');
+
+function renderQuiz() {
+  if (currentQ >= quizData.length) {
+    quizArea.innerHTML = '';
+    scoreBox.style.display = 'block';
+    scoreBox.innerHTML = `⭐ نتيجتك: ${score} من ${quizData.length} ⭐`;
+    return;
+  }
+  const q = quizData[currentQ];
+  quizArea.innerHTML = `
+    <div class="quiz-question">
+      <div class="q-text">${q.q}</div>
+      <div class="options">
+        ${q.options.map(opt => `<button class="option-btn" onclick="checkAnswer(this, '${opt}', '${q.correct}')">${opt}</button>`).join('')}
+      </div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+  `;
+}
+
+function checkAnswer(btn, chosen, correct) {
+  document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+  const feedback = document.getElementById('feedback');
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    feedback.textContent = '✅ أحسنتِ! إجابة صحيحة';
+    feedback.style.color = '#2d6a4f';
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    feedback.textContent = '❌ حاولي مرة أخرى.';
+    feedback.style.color = '#d1495b';
+    document.querySelectorAll('.option-btn').forEach(b => { if (b.textContent === correct) b.classList.add('correct'); });
+  }
+  setTimeout(() => { currentQ++; renderQuiz(); }, 1600);
+}
+renderQuiz();
+</script>
+</body>
+</html>
