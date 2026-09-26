@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدرس العاشر - جُمل بسيطة</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Traditional Arabic', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #fff6e5, #eaf6ff);
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  .container { max-width: 750px; margin: 0 auto; }
+  h1 {
+    text-align: center;
+    color: #d1495b;
+    font-size: 2.2em;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #4a7a8c;
+    font-size: 1.25em;
+    margin-bottom: 25px;
+  }
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .card h2 {
+    color: #2e86ab;
+    border-bottom: 3px solid #f4d35e;
+    padding-bottom: 8px;
+  }
+  .sentence-box {
+    background: #f9f9f9;
+    border: 3px solid #f4d35e;
+    border-radius: 15px;
+    padding: 18px 20px;
+    margin: 14px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .sentence-box:hover { background: #fff3cd; transform: scale(1.02); }
+  .sentence-text-wrap { display: flex; flex-direction: column; }
+  .sentence-text {
+    font-size: 1.9em;
+    line-height: 1.9;
+  }
+  .sentence-en {
+    font-size: 0.5em;
+    color: #888;
+    margin-top: 2px;
+  }
+  .sentence-emoji { font-size: 2em; }
+  .note {
+    background: #eaf6ff;
+    border-right: 5px solid #2e86ab;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-size: 1.1em;
+  }
+  .paragraph-box {
+    background: #eafaf1;
+    border: 3px dashed #52b788;
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 1.9em;
+    line-height: 2.2;
+    text-align: right;
+    cursor: pointer;
+  }
+  .paragraph-box:hover { background: #d8f3dc; }
+  .para-en {
+    font-size: 0.5em;
+    color: #666;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .quiz-question {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .q-sentence { font-size: 1.7em; margin-bottom: 10px; }
+  .options { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+  .option-btn {
+    font-size: 1.5em;
+    padding: 10px 22px;
+    border-radius: 12px;
+    border: 2px solid #ccc;
+    background: white;
+    cursor: pointer;
+  }
+  .option-btn:hover { background: #eee; }
+  .option-btn.correct { background: #b7e4c7 !important; border-color: #2d6a4f; }
+  .option-btn.wrong { background: #ffb3ab !important; border-color: #d1495b; }
+  .feedback {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 10px;
+    min-height: 30px;
+  }
+  .score-box {
+    text-align: center;
+    font-size: 1.4em;
+    background: #fff3cd;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 15px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📖 الدرس العاشر</h1>
+  <p class="subtitle">جُمل جديدة عن المدرسة والأدوات</p>
+
+  <div class="card">
+    <h2>1️⃣ جُمل قصيرة</h2>
+    <div class="note">💡 اضغطي على الجملة لسماعها، وكرّريها بصوتٍ عالٍ.</div>
+
+    <div class="sentence-box" onclick="speak('أَكْتُبُ بِالقَلَمِ فِي دَفْتَرِي.')">
+      <span class="sentence-text-wrap">
+        <span class="sentence-text">أَكْتُبُ بِالقَلَمِ فِي دَفْتَرِي.</span>
+        <span class="sentence-en">I write with the pen in my notebook.</span>
+      </span>
+      <span class="sentence-emoji">✏️</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('حَقِيبَتِي فِيهَا كُتُبٌ كَثِيرَةٌ.')">
+      <span class="sentence-text-wrap">
+        <span class="sentence-text">حَقِيبَتِي فِيهَا كُتُبٌ كَثِيرَةٌ.</span>
+        <span class="sentence-en">My bag has many books in it.</span>
+      </span>
+      <span class="sentence-emoji">🎒</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('أَقُصُّ الوَرَقَ بِالمِقَصِّ.')">
+      <span class="sentence-text-wrap">
+        <span class="sentence-text">أَقُصُّ الوَرَقَ بِالمِقَصِّ.</span>
+        <span class="sentence-en">I cut the paper with scissors.</span>
+      </span>
+      <span class="sentence-emoji">✂️</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('أُلَوِّنُ الرَّسْمَ بِالأَلْوَانِ.')">
+      <span class="sentence-text-wrap">
+        <span class="sentence-text">أُلَوِّنُ الرَّسْمَ بِالأَلْوَانِ.</span>
+        <span class="sentence-en">I color the drawing with crayons.</span>
+      </span>
+      <span class="sentence-emoji">🖍️</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('المِسْطَرَةُ تُسَاعِدُنِي عَلَى رَسْمِ خُطُوطٍ مُسْتَقِيمَةٍ.')">
+      <span class="sentence-text-wrap">
+        <span class="sentence-text">المِسْطَرَةُ تُسَاعِدُنِي عَلَى رَسْمِ خُطُوطٍ مُسْتَقِيمَةٍ.</span>
+        <span class="sentence-en">The ruler helps me draw straight lines.</span>
+      </span>
+      <span class="sentence-emoji">📏</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('المُعَلِّمَةُ تُوَزِّعُ الكُتُبَ عَلَى الطُّلَّابِ.')">
+      <span class="sentence-text-wrap">
+        <span class="sentence-text">المُعَلِّمَةُ تُوَزِّعُ الكُتُبَ عَلَى الطُّلَّابِ.</span>
+        <span class="sentence-en">The teacher distributes the books to the students.</span>
+      </span>
+      <span class="sentence-emoji">📚</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>2️⃣ فقرة قصيرة</h2>
+    <div class="note">💡 اضغطي على الفقرة كاملة لسماعها، ثم اقرئيها جملة جملة.</div>
+    <div class="paragraph-box" onclick="speak('كُلَّ صَبَاحٍ أُحَضِّرُ حَقِيبَتِي قَبْلَ النَّوْمِ. أَضَعُ فِيهَا الكُتُبَ وَالدَّفَاتِرَ وَالأَقْلَامَ. فِي المَدْرَسَةِ أَجْلِسُ بِجَانِبِ صَدِيقَتِي. نَتَعَلَّمُ مَعًا وَنَرْسُمُ وَنُلَوِّنُ.')">
+      كُلَّ صَبَاحٍ أُحَضِّرُ حَقِيبَتِي قَبْلَ النَّوْمِ.<span class="para-en">Every morning I prepare my bag before sleeping.</span><br>
+      أَضَعُ فِيهَا الكُتُبَ وَالدَّفَاتِرَ وَالأَقْلَامَ.<span class="para-en">I put the books, notebooks, and pens in it.</span><br>
+      فِي المَدْرَسَةِ أَجْلِسُ بِجَانِبِ صَدِيقَتِي.<span class="para-en">At school I sit next to my friend.</span><br>
+      نَتَعَلَّمُ مَعًا وَنَرْسُمُ وَنُلَوِّنُ.<span class="para-en">We learn together, and we draw and color.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>3️⃣ اختبري نفسك!</h2>
+    <div id="quizArea"></div>
+    <div class="score-box" id="scoreBox" style="display:none;"></div>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <h2>🎉 أحسنتِ!</h2>
+    <p style="font-size:1.2em;">اقرئي كل جملة ثلاث مرات كل يوم، وستصبحين قارئة ماهرة قريباً!</p>
+  </div>
+</div>
+
+<script>
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ar-SA';
+    u.rate = 0.65;
+    speechSynthesis.speak(u);
+  }
+}
+
+const quizData = [
+  { sentence: 'أَكْتُبُ بِالقَلَمِ فِي دَفْتَرِي.', options: ['✏️', '✂️', '🖍️'], correct: '✏️' },
+  { sentence: 'حَقِيبَتِي فِيهَا كُتُبٌ كَثِيرَةٌ.', options: ['🎒', '📏', '📚'], correct: '🎒' },
+  { sentence: 'أَقُصُّ الوَرَقَ بِالمِقَصِّ.', options: ['✂️', '✏️', '🖍️'], correct: '✂️' },
+  { sentence: 'أُلَوِّنُ الرَّسْمَ بِالأَلْوَانِ.', options: ['🖍️', '📏', '🎒'], correct: '🖍️' },
+  { sentence: 'المُعَلِّمَةُ تُوَزِّعُ الكُتُبَ عَلَى الطُّلَّابِ.', options: ['📚', '✂️', '📏'], correct: '📚' }
+];
+
+let currentQ = 0;
+let score = 0;
+const quizArea = document.getElementById('quizArea');
+const scoreBox = document.getElementById('scoreBox');
+
+function renderQuiz() {
+  if (currentQ >= quizData.length) {
+    quizArea.innerHTML = '';
+    scoreBox.style.display = 'block';
+    scoreBox.innerHTML = `⭐ نتيجتك: ${score} من ${quizData.length} ⭐`;
+    return;
+  }
+  const q = quizData[currentQ];
+  quizArea.innerHTML = `
+    <div class="quiz-question">
+      <div class="q-sentence">${q.sentence}</div>
+      <p>اختاري الصورة المناسبة</p>
+      <div class="options">
+        ${q.options.map(opt => `<button class="option-btn" onclick="checkAnswer(this, '${opt}', '${q.correct}')">${opt}</button>`).join('')}
+      </div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+  `;
+}
+
+function checkAnswer(btn, chosen, correct) {
+  const buttons = document.querySelectorAll('.option-btn');
+  buttons.forEach(b => b.disabled = true);
+  const feedback = document.getElementById('feedback');
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    feedback.textContent = '✅ أحسنتِ! إجابة صحيحة';
+    feedback.style.color = '#2d6a4f';
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    feedback.textContent = `❌ حاولي مرة أخرى.`;
+    feedback.style.color = '#d1495b';
+    buttons.forEach(b => { if (b.textContent === correct) b.classList.add('correct'); });
+  }
+  setTimeout(() => { currentQ++; renderQuiz(); }, 1600);
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
