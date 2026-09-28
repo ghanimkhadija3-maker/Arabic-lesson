@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدرس الحادي عشر - جُمل بسيطة</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Traditional Arabic', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #fff6e5, #eaf6ff);
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  .container { max-width: 750px; margin: 0 auto; }
+  h1 {
+    text-align: center;
+    color: #d1495b;
+    font-size: 2.1em;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #4a7a8c;
+    font-size: 1.25em;
+    margin-bottom: 25px;
+  }
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .card h2 {
+    color: #2e86ab;
+    border-bottom: 3px solid #f4d35e;
+    padding-bottom: 8px;
+  }
+  .sentence-box {
+    background: #f9f9f9;
+    border: 3px solid #f4d35e;
+    border-radius: 15px;
+    padding: 18px 20px;
+    margin: 14px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .sentence-box:hover { background: #fff3cd; transform: scale(1.02); }
+  .sentence-text-wrap { display: flex; flex-direction: column; }
+  .sentence-text {
+    font-size: 1.9em;
+    line-height: 1.9;
+  }
+  .sentence-en {
+    font-size: 0.5em;
+    color: #888;
+    margin-top: 2px;
+  }
+  .sentence-emoji { font-size: 2em; }
+  .note {
+    background: #eaf6ff;
+    border-right: 5px solid #2e86ab;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-size: 1.1em;
+  }
+  .paragraph-box {
+    background: #eafaf1;
+    border: 3px dashed #52b788;
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 1.9em;
+    line-height: 2.2;
+    text-align: right;
+    cursor: pointer;
+  }
+  .paragraph-box:hover { background: #d8f3dc; }
+  .para-en {
+    font-size: 0.5em;
+    color: #666;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .quiz-question {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .q-sentence { font-size: 1.7em; margin-bottom: 10px; }
+  .options { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+  .option-btn {
+    font-size: 1.5em;
+    padding: 10px 22px;
+    border-radius: 12px;
+    border: 2px solid #ccc;
+    background: white;
+    cursor: pointer;
+  }
+  .option-btn:hover { background: #eee; }
+  .option-btn.correct { background: #b7e4c7 !important; border-color: #2d6a4f; }
+  .option-btn.wrong { background: #ffb3ab !important; border-color: #d1495b; }
+  .feedback {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 10px;
+    min-height: 30px;
+  }
+  .score-box {
+    text-align: center;
+    font-size: 1.4em;
+    background: #fff3cd;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 15px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📖 الدرس الحادي عشر</h1>
+  <p class="subtitle">جُمل جديدة عن البحر والرحلات</p>
+
+  <div class="card">
+    <h2>1️⃣ جُمل قصيرة</h2>
+    <div class="note">💡 اضغطي على الجملة لسماعها، وكرّريها بصوتٍ عالٍ.</div>
+
+    <div class="sentence-box" onclick="speak('البَحْرُ لَوْنُهُ أَزْرَقُ جَمِيلٌ.')">
+      <span class="sentence-text-wrap">
+        <span class="sentence-text">البَحْرُ لَوْنُهُ أَزْرَقُ جَمِيلٌ.</span>
+        <span class="sentence-en">The sea is a beautiful blue color.</span>
+      </span>
+      <span class="sentence-emoji">🌊</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('نَبْنِي قَلْعَةً مِنَ الرَّمْلِ.')">
+      <span class="sentence-text-wrap">
+        <span class="sentence-text">نَبْنِي قَلْعَةً مِنَ الرَّمْلِ.</span>
+        <span class="sentence-en">We build a castle out of sand.</span>
+      </span>
+      <span class="sentence-emoji">🏖️</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('السَّفِينَةُ تُبْحِرُ فِي المَاءِ.')">
+      <span class="sentence-text-wrap">
+        <span class="sentence-text">السَّفِينَةُ تُبْحِرُ فِي المَاءِ.</span>
+        <span class="sentence-en">The ship sails on the water.</span>
+      </span>
+      <span class="sentence-emoji">🚢</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('السُّلَحْفَاةُ تَسْبَحُ بِبُطْءٍ.')">
+      <span class="sentence-text-wrap">
+        <span class="sentence-text">السُّلَحْفَاةُ تَسْبَحُ بِبُطْءٍ.</span>
+        <span class="sentence-en">The turtle swims slowly.</span>
+      </span>
+      <span class="sentence-emoji">🐢</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('نَحْمِلُ حَقِيبَتَنَا وَنُسَافِرُ بِالطَّائِرَةِ.')">
+      <span class="sentence-text-wrap">
+        <span class="sentence-text">نَحْمِلُ حَقِيبَتَنَا وَنُسَافِرُ بِالطَّائِرَةِ.</span>
+        <span class="sentence-en">We carry our suitcase and travel by plane.</span>
+      </span>
+      <span class="sentence-emoji">✈️</span>
+    </div>
+
+    <div class="sentence-box" onclick="speak('نَلْتَقِطُ صُوَرًا جَمِيلَةً فِي الرِّحْلَةِ.')">
+      <span class="sentence-text-wrap">
+        <span class="sentence-text">نَلْتَقِطُ صُوَرًا جَمِيلَةً فِي الرِّحْلَةِ.</span>
+        <span class="sentence-en">We take beautiful pictures on the trip.</span>
+      </span>
+      <span class="sentence-emoji">📷</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>2️⃣ فقرة قصيرة</h2>
+    <div class="note">💡 اضغطي على الفقرة كاملة لسماعها، ثم اقرئيها جملة جملة.</div>
+    <div class="paragraph-box" onclick="speak('فِي الصَّيْفِ الماضِي سَافَرْنَا إِلَى البَحْرِ. حَمَلْنَا حَقَائِبَنَا وَذَهَبْنَا بِالسَّيَّارَةِ. بَنَيْنَا قَلْعَةً كَبِيرَةً مِنَ الرَّمْلِ. كَانَتْ رِحْلَةً مُمْتِعَةً لَا أَنْسَاهَا أَبَدًا.')">
+      فِي الصَّيْفِ الماضِي سَافَرْنَا إِلَى البَحْرِ.<span class="para-en">Last summer we traveled to the sea.</span><br>
+      حَمَلْنَا حَقَائِبَنَا وَذَهَبْنَا بِالسَّيَّارَةِ.<span class="para-en">We carried our bags and went by car.</span><br>
+      بَنَيْنَا قَلْعَةً كَبِيرَةً مِنَ الرَّمْلِ.<span class="para-en">We built a big castle out of sand.</span><br>
+      كَانَتْ رِحْلَةً مُمْتِعَةً لَا أَنْسَاهَا أَبَدًا.<span class="para-en">It was a fun trip I will never forget.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>3️⃣ اختبري نفسك!</h2>
+    <div id="quizArea"></div>
+    <div class="score-box" id="scoreBox" style="display:none;"></div>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <h2>🎉 أحسنتِ!</h2>
+    <p style="font-size:1.2em;">اقرئي كل جملة ثلاث مرات كل يوم، وستصبحين قارئة ماهرة قريباً!</p>
+  </div>
+</div>
+
+<script>
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ar-SA';
+    u.rate = 0.65;
+    speechSynthesis.speak(u);
+  }
+}
+
+const quizData = [
+  { sentence: 'البَحْرُ لَوْنُهُ أَزْرَقُ جَمِيلٌ.', options: ['🌊', '🏖️', '🚢'], correct: '🌊' },
+  { sentence: 'نَبْنِي قَلْعَةً مِنَ الرَّمْلِ.', options: ['🏖️', '🐢', '✈️'], correct: '🏖️' },
+  { sentence: 'السَّفِينَةُ تُبْحِرُ فِي المَاءِ.', options: ['🚢', '📷', '🌊'], correct: '🚢' },
+  { sentence: 'السُّلَحْفَاةُ تَسْبَحُ بِبُطْءٍ.', options: ['🐢', '✈️', '🏖️'], correct: '🐢' },
+  { sentence: 'نَحْمِلُ حَقِيبَتَنَا وَنُسَافِرُ بِالطَّائِرَةِ.', options: ['✈️', '🚢', '📷'], correct: '✈️' }
+];
+
+let currentQ = 0;
+let score = 0;
+const quizArea = document.getElementById('quizArea');
+const scoreBox = document.getElementById('scoreBox');
+
+function renderQuiz() {
+  if (currentQ >= quizData.length) {
+    quizArea.innerHTML = '';
+    scoreBox.style.display = 'block';
+    scoreBox.innerHTML = `⭐ نتيجتك: ${score} من ${quizData.length} ⭐`;
+    return;
+  }
+  const q = quizData[currentQ];
+  quizArea.innerHTML = `
+    <div class="quiz-question">
+      <div class="q-sentence">${q.sentence}</div>
+      <p>اختاري الصورة المناسبة</p>
+      <div class="options">
+        ${q.options.map(opt => `<button class="option-btn" onclick="checkAnswer(this, '${opt}', '${q.correct}')">${opt}</button>`).join('')}
+      </div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+  `;
+}
+
+function checkAnswer(btn, chosen, correct) {
+  const buttons = document.querySelectorAll('.option-btn');
+  buttons.forEach(b => b.disabled = true);
+  const feedback = document.getElementById('feedback');
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    feedback.textContent = '✅ أحسنتِ! إجابة صحيحة';
+    feedback.style.color = '#2d6a4f';
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    feedback.textContent = `❌ حاولي مرة أخرى.`;
+    feedback.style.color = '#d1495b';
+    buttons.forEach(b => { if (b.textContent === correct) b.classList.add('correct'); });
+  }
+  setTimeout(() => { currentQ++; renderQuiz(); }, 1600);
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
