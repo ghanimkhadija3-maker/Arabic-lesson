@@ -1,0 +1,1852 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lexique arabe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EAE3;
+  --panel:#F3F4EE;
+  --ink:#1C2321;
+  --muted:#6B7169;
+  --rule:#C8CCC1;
+  --rubric:#A62C2B;
+  --dialect:#2A6560;
+  --focus:#2A6560;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#15191A;
+    --panel:#1D2224;
+    --ink:#E4E6DF;
+    --muted:#8E958C;
+    --rule:#333B3C;
+    --rubric:#E07A6F;
+    --dialect:#6FC2B6;
+    --focus:#6FC2B6;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15191A; --panel:#1D2224; --ink:#E4E6DF; --muted:#8E958C;
+  --rule:#333B3C; --rubric:#E07A6F; --dialect:#6FC2B6; --focus:#6FC2B6;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:Spectral,Georgia,'Times New Roman',serif;
+  font-weight:300;font-size:17px;line-height:1.6;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px 80px}
+
+/* ---------- header ---------- */
+header{padding:38px 0 22px;border-bottom:1px solid var(--rule)}
+h1{
+  font-size:clamp(28px,5vw,40px);font-weight:400;line-height:1.1;
+  margin:0 0 6px;letter-spacing:-.01em;
+}
+h1 .ar{font-family:Amiri,serif;font-size:1.05em;margin-left:.3em}
+.lede{color:var(--muted);font-size:16px;margin:0;max-width:62ch}
+.counts{margin:16px 0 0;font-size:14px;color:var(--muted)}
+.counts b{font-weight:500;color:var(--ink)}
+
+/* ---------- tabs ---------- */
+nav.tabs{display:flex;gap:2px;margin:0;border-bottom:1px solid var(--rule);
+  position:sticky;top:env(safe-area-inset-top,0px);background:var(--paper);z-index:20;
+  overflow-x:auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{
+  appearance:none;background:none;border:none;border-bottom:2px solid transparent;
+  font-family:inherit;font-size:16px;color:var(--muted);
+  padding:14px 14px 11px;cursor:pointer;white-space:nowrap;
+}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--rubric)}
+nav.tabs button:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+
+/* ---------- controls ---------- */
+.controls{padding:20px 0 4px;display:flex;flex-direction:column;gap:14px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+input[type=search],select{
+  font-family:inherit;font-size:15px;color:var(--ink);background:var(--panel);
+  border:1px solid var(--rule);border-radius:2px;padding:7px 10px;min-width:0;
+}
+input[type=search]{flex:1 1 200px}
+select{flex:0 1 auto;max-width:100%}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+.toggles{display:flex;flex-wrap:wrap;gap:8px}
+.tog{
+  font-family:inherit;font-size:14px;background:none;color:var(--muted);
+  border:1px solid var(--rule);border-radius:2px;padding:5px 11px;cursor:pointer;
+}
+.tog[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+button.act{
+  font-family:inherit;font-size:15px;background:var(--ink);color:var(--paper);
+  border:1px solid var(--ink);border-radius:2px;padding:8px 16px;cursor:pointer;
+}
+button.act.ghost{background:none;color:var(--ink)}
+button.act:disabled{opacity:.4;cursor:default}
+
+/* ---------- module heading ---------- */
+.modhead{margin:40px 0 0;padding-top:22px;border-top:2px solid var(--ink)}
+.modhead:first-child{margin-top:18px;border-top:none;padding-top:0}
+.modhead h2{font-size:23px;font-weight:500;margin:0 0 2px;letter-spacing:-.005em}
+.modhead .meta{font-size:14px;color:var(--muted);margin:0 0 16px}
+.note{
+  background:var(--panel);border-left:3px solid var(--rubric);
+  padding:13px 16px;margin:0 0 20px;font-size:15.5px;
+}
+.note h3{font-size:15px;font-weight:600;margin:0 0 6px;letter-spacing:.005em}
+.note p{margin:0 0 7px}
+.note p:last-child{margin-bottom:0}
+.note .ar,.note .arx{font-family:Amiri,serif;font-size:1.22em}
+
+/* ---------- entry ---------- */
+.entry{padding:16px 0;border-bottom:1px solid var(--rule)}
+.entry.hide{display:none}
+.e-top{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.ar{font-family:Amiri,serif;direction:rtl;unicode-bidi:isolate}
+.e-ar{font-size:2.5rem;line-height:1.5;font-family:Amiri,serif;direction:rtl;unicode-bidi:isolate}
+.e-tr{font-style:italic;font-size:17px;color:var(--muted)}
+.e-fr{font-size:18px;font-weight:400}
+.e-gram{font-size:14.5px;color:var(--muted);margin:3px 0 0;line-height:1.5}
+.e-gram .ar{font-size:1.25em;color:var(--ink)}
+.e-lev{
+  margin:9px 0 0;padding-left:12px;border-left:2px solid var(--dialect);
+  font-size:15px;
+}
+.e-lev .tag{color:var(--dialect);font-size:13px;font-weight:600;margin-right:7px}
+.e-lev .ar{font-size:1.45em}
+.e-lev em{color:var(--muted)}
+.e-warn{color:var(--rubric);font-size:14px;margin:6px 0 0;font-style:italic}
+.e-ex{margin:10px 0 0;font-size:15px;color:var(--muted)}
+.e-ex .ar{font-size:1.5em;color:var(--ink);display:block;margin-bottom:1px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.chip{font-size:12px;color:var(--muted);border:1px solid var(--rule);border-radius:2px;padding:1px 7px}
+.chip.seen{border-color:var(--dialect);color:var(--dialect)}
+.chip.lv{border-color:var(--rubric);color:var(--rubric)}
+.masked{visibility:hidden}
+.reveal-hint{cursor:pointer}
+.h{color:var(--rubric)}
+
+/* ---------- review ---------- */
+.card{
+  background:var(--panel);border:1px solid var(--rule);
+  padding:36px 24px;text-align:center;margin:22px 0 0;min-height:230px;
+  display:flex;flex-direction:column;justify-content:center;gap:12px;
+}
+.card .big{font-family:Amiri,serif;font-size:3.2rem;line-height:1.5;direction:rtl}
+.card .bigfr{font-size:1.7rem}
+.card .sub{font-style:italic;color:var(--muted)}
+.card .back{border-top:1px solid var(--rule);padding-top:14px;margin-top:6px;text-align:left}
+.progress{font-size:14px;color:var(--muted);margin:16px 0 0}
+.bar{height:2px;background:var(--rule);margin:6px 0 0}
+.bar span{display:block;height:2px;background:var(--rubric)}
+
+/* ---------- exercises ---------- */
+.q{font-size:1.3rem;margin:24px 0 18px}
+.q .ar{font-family:Amiri,serif;font-size:2.4rem;display:block;line-height:1.5}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{
+  font-family:inherit;font-size:16px;text-align:left;background:var(--panel);
+  color:var(--ink);border:1px solid var(--rule);border-radius:2px;
+  padding:11px 14px;cursor:pointer;
+}
+.opt .ar{font-family:Amiri,serif;font-size:1.6em;line-height:1.4}
+.opt.good{border-color:var(--dialect);box-shadow:inset 3px 0 0 var(--dialect)}
+.opt.bad{border-color:var(--rubric);box-shadow:inset 3px 0 0 var(--rubric)}
+.fb{margin:16px 0 0;font-size:15.5px}
+.fb .ar{font-family:Amiri,serif;font-size:1.5em}
+
+/* ---------- export ---------- */
+textarea{
+  width:100%;height:320px;font-family:ui-monospace,Menlo,Consolas,monospace;
+  font-size:12.5px;line-height:1.5;background:var(--panel);color:var(--ink);
+  border:1px solid var(--rule);border-radius:2px;padding:12px;resize:vertical;
+}
+/* ---------- exercices : en-tete de question ---------- */
+.qmeta{font-size:13px;color:var(--muted);margin:22px 0 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.fam{border:1px solid var(--dialect);color:var(--dialect);border-radius:2px;padding:1px 8px;font-size:12px}
+.qsub{font-size:1rem;color:var(--muted);display:block;margin-top:8px;line-height:1.45}
+.q b{font-weight:400}
+
+/* ---------- barre d'action fixe ---------- */
+.qbar{position:fixed;left:0;right:0;bottom:0;z-index:40;
+  background:var(--panel);border-top:3px solid var(--rule)}
+.qbar.ok{border-top-color:var(--dialect)}
+.qbar.no{border-top-color:var(--rubric)}
+.qbar-in{max-width:900px;margin:0 auto;
+  padding:14px 20px calc(16px + env(safe-area-inset-bottom,0px));
+  display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.qbar .fbtext{flex:1 1 300px;min-width:0;font-size:15.5px;line-height:1.5;
+  max-height:32vh;overflow-y:auto}
+.qbar .fbtext:empty{display:none}
+.qbar .acts{display:flex;gap:10px;flex-wrap:wrap;margin-left:auto}
+.qbar .ar{font-family:Amiri,serif;font-size:1.45em}
+.qbar .yours{margin:6px 0 0}
+@media (max-width:560px){
+  .qbar-in{padding:12px 15px calc(14px + env(safe-area-inset-bottom,0px));gap:10px}
+  .qbar .fbtext{flex:1 1 100%;max-height:26vh}
+  .qbar .acts{width:100%}
+  .qbar .acts .act{flex:1 1 auto}
+}
+
+/* ---------- saisie au clavier ---------- */
+.answer{margin:18px 0 0}
+.ansin{width:100%;font-family:inherit;font-size:19px;color:var(--ink);background:var(--panel);
+  border:1px solid var(--rule);border-radius:2px;padding:12px 14px}
+.ansin.ar{font-family:Amiri,serif;font-size:2rem;line-height:1.7;padding:6px 14px}
+.ansin:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+.ansin:disabled{opacity:.8}
+.keys{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.kbtn{font-family:Amiri,serif;font-size:1.45rem;line-height:1.4;background:none;color:var(--ink);
+  border:1px solid var(--rule);border-radius:2px;padding:0 13px;cursor:pointer;direction:rtl}
+.kbtn:hover{border-color:var(--ink)}
+.verdict{font-weight:500}
+.verdict.ok{color:var(--dialect)}
+.verdict.no{color:var(--rubric)}
+.yours{font-size:15px;color:var(--muted);margin:9px 0 0}
+.yours .ar{font-family:Amiri,serif;font-size:1.45em;color:var(--ink)}
+
+/* ---------- barres de reussite ---------- */
+.acc{margin:14px 0 0}
+.accrow{display:flex;align-items:center;gap:12px;padding:6px 0}
+.accrow .nm{flex:1 1 150px;min-width:0;font-size:15px}
+.accrow .tr{flex:0 0 36%;height:10px;background:var(--rule)}
+.accrow .tr i{display:block;height:10px;background:var(--dialect);border-radius:0 2px 2px 0}
+.accrow .vl{flex:0 0 108px;text-align:right;font-size:14px;color:var(--muted);
+  font-variant-numeric:tabular-nums}
+.accrow.nodata .tr{opacity:.45}
+
+/* ---------- courbe des epreuves ---------- */
+.spark{width:100%;height:auto;display:block;margin:14px 0 0;overflow:visible}
+.spark .ln{fill:none;stroke:var(--dialect);stroke-width:2;stroke-linejoin:round}
+.spark .dt{fill:var(--dialect);stroke:var(--paper);stroke-width:2}
+.spark .gl{stroke:var(--rule);stroke-width:1}
+.spark text{fill:var(--muted);font-size:11px;font-family:inherit}
+
+/* ---------- statuts & progres ---------- */
+.statusrow{display:flex;gap:6px;margin:11px 0 0;flex-wrap:wrap}
+.sbtn{font-size:13px;font-family:inherit;background:none;border:1px solid var(--rule);
+  color:var(--muted);border-radius:2px;padding:3px 11px;cursor:pointer}
+.sbtn.on-k{background:var(--dialect);border-color:var(--dialect);color:var(--paper)}
+.sbtn.on-t{background:var(--rubric);border-color:var(--rubric);color:var(--paper)}
+.entry.st-k{border-left:3px solid var(--dialect);padding-left:13px}
+.entry.st-t{border-left:3px solid var(--rubric);padding-left:13px}
+.stat{display:flex;gap:30px;flex-wrap:wrap;margin:26px 0 2px}
+.stat .num{font-size:2.7rem;line-height:1;font-weight:400}
+.stat .num.k{color:var(--dialect)}
+.stat .num.t{color:var(--rubric)}
+.stat .lbl{font-size:14px;color:var(--muted);margin-top:5px}
+.mbar{height:10px;display:flex;margin:9px 0 0;background:var(--rule)}
+.mbar i{display:block;height:10px}
+.mbar i.k{background:var(--dialect)}
+.mbar i.t{background:var(--rubric)}
+.modrow{padding:16px 0;border-bottom:1px solid var(--rule)}
+.modrow .hd{display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.modrow h4{margin:0;font-size:16.5px;font-weight:400}
+.modrow .fr{font-size:14px;color:var(--muted);white-space:nowrap}
+.wordlist{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0 0}
+.wordlist b{font-family:Amiri,serif;font-size:1.5rem;font-weight:400;direction:rtl;
+  border:1px solid var(--rule);padding:0 12px;line-height:1.85;cursor:help}
+.wordlist b.k{border-color:var(--dialect)}
+.wordlist b.t{border-color:var(--rubric)}
+.subhead{margin:34px 0 0;font-size:17px;font-weight:500}
+.hint{font-size:14px;color:var(--muted);margin:3px 0 0}
+.logrow{font-size:14.5px;color:var(--muted);padding:6px 0;border-bottom:1px solid var(--rule)}
+.panel-tab{display:none}
+.panel-tab.on{display:block}
+.empty{padding:40px 0;color:var(--muted);text-align:center}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:560px){
+  .e-ar{font-size:2.1rem}
+  .card .big{font-size:2.6rem}
+  .wrap{padding:0 15px 70px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Lexique arabe<span class="ar">المُعْجَم</span></h1>
+  <p class="lede">Noyau A1–A2 en fuṣḥā vocalisé, avec l'équivalent levantin quand il diffère. Blocs livrés : <span id="cBlocs"></span>.</p>
+  <p class="counts"><b id="cTotal"></b> entrées · <b id="cMods"></b> modules · <b id="cSeen"></b> vues en leçon · translittération DIN 31635 · levantin en <span style="color:var(--dialect)">vert</span></p>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" aria-selected="true" data-tab="browse">Parcourir</button>
+  <button role="tab" aria-selected="false" data-tab="review">Réviser</button>
+  <button role="tab" aria-selected="false" data-tab="drill">Exercices</button>
+  <button role="tab" aria-selected="false" data-tab="test">Épreuve mixte</button>
+  <button role="tab" aria-selected="false" data-tab="progress">Progrès</button>
+  <button role="tab" aria-selected="false" data-tab="roots">Racines</button>
+  <button role="tab" aria-selected="false" data-tab="export">Export Anki</button>
+</nav>
+
+<!-- ================= BROWSE ================= -->
+<section class="panel-tab on" id="tab-browse">
+  <div class="controls">
+    <div class="row">
+      <input type="search" id="q" placeholder="Chercher (arabe, français, translittération, racine)" aria-label="Chercher">
+      <select id="fMod" aria-label="Module"><option value="">Tous les modules</option></select>
+      <select id="fNat" aria-label="Nature"><option value="">Toutes natures</option></select>
+      <select id="fLv" aria-label="Niveau"><option value="">Tous niveaux</option><option>A1</option><option>A2</option><option>A2+</option></select>
+      <select id="fRoot" aria-label="Racine"><option value="">Toutes racines</option></select>
+      <select id="fSeen" aria-label="Origine"><option value="">Toutes origines</option><option value="oui">Vus en leçon</option><option value="non">Pas encore vus en leçon</option><option value="anki">Déjà dans ton Anki</option><option value="noanki">Pas encore dans ton Anki</option></select>
+    </div>
+    <div class="row">
+      <div class="toggles">
+        <button class="tog" id="mAr" aria-pressed="false">Masquer l'arabe</button>
+        <button class="tog" id="mFr" aria-pressed="false">Masquer le français</button>
+        <button class="tog" id="mTr" aria-pressed="false">Masquer la translittération</button>
+        <button class="tog" id="mEx" aria-pressed="false">Masquer les exemples</button>
+        <button class="tog" id="mRub" aria-pressed="false">Voyelles en rouge</button>
+        <button class="tog" id="mTheme" aria-pressed="false">Thème sombre</button>
+      </div>
+    </div>
+    <p class="counts" id="shown"></p>
+  </div>
+  <div id="list"></div>
+</section>
+
+<!-- ================= REVIEW ================= -->
+<section class="panel-tab" id="tab-review">
+  <div class="controls">
+    <p class="lede" style="margin-top:18px">Une série tirée au sort dans ce que tu as filtré dans « Parcourir ». Format 10–15 min.</p>
+    <div class="row">
+      <select id="rSize" aria-label="Taille de la série">
+        <option value="10">10 mots</option>
+        <option value="15" selected>15 mots</option>
+        <option value="20">20 mots</option>
+      </select>
+      <select id="rDir" aria-label="Sens">
+        <option value="ar">Arabe → français</option>
+        <option value="fr">Français → arabe</option>
+      </select>
+      <select id="rScope" aria-label="Portée">
+        <option value="all">Tout le filtre</option>
+        <option value="new">Seulement les mots jamais marqués</option>
+        <option value="todo">Seulement « à revoir »</option>
+      </select>
+      <button class="act" id="rStart">Lancer la série</button>
+    </div>
+  </div>
+  <div id="rBody"></div>
+</section>
+
+<!-- ================= DRILL ================= -->
+<section class="panel-tab" id="tab-drill">
+  <div class="controls">
+    <p class="lede" style="margin-top:18px">Choisis un bloc ou un module, une longueur de série, et réponds jusqu'au bout. Le compteur repart de zéro à chaque nouvelle série. La conjugaison à l'inaccompli s'activera au Bloc H, quand les verbes arriveront.</p>
+    <div class="row">
+      <select id="dScope" aria-label="Bloc ou module"></select>
+      <select id="dSize" aria-label="Longueur de la série">
+        <option value="5">5 questions</option>
+        <option value="10" selected>10 questions</option>
+        <option value="15">15 questions</option>
+        <option value="20">20 questions</option>
+      </select>
+      <select id="dType" aria-label="Type d'exercice">
+        <option value="mix">Tous les types</option>
+        <option value="mixtype">Tous les types au clavier</option>
+        <optgroup label="À choix multiples">
+          <option value="recog">Vocabulaire — arabe → français</option>
+          <option value="theme">Vocabulaire — français → arabe</option>
+          <option value="lev">Vocabulaire — fuṣḥā → levantin</option>
+          <option value="version">Traduction — phrase arabe → français</option>
+          <option value="gap">Traduction — compléter la phrase</option>
+          <option value="letters">Lecture — repérer la bonne graphie</option>
+          <option value="sent">Lecture — phrase modèle du module</option>
+        </optgroup>
+        <optgroup label="Au clavier">
+          <option value="typeword">Écrire le mot en arabe</option>
+          <option value="typegap">Compléter la phrase en arabe</option>
+          <option value="typesent">Traduire la phrase en français</option>
+        </optgroup>
+      </select>
+      <button class="act" id="dStart">Lancer la série</button>
+      <span class="counts" id="dScore"></span>
+    </div>
+    <div class="row">
+      <div class="toggles">
+        <button class="tog" id="dAuto" aria-pressed="true">Mettre à jour les statuts automatiquement</button>
+        <button class="tog" id="dStrict" aria-pressed="false">Correction stricte</button>
+      </div>
+      <span class="counts" style="margin:0;flex:1 1 260px">Un échec renvoie le mot « à revoir », deux réussites de suite le classent « acquis ».</span>
+    </div>
+  </div>
+  <div id="dBody"></div>
+</section>
+
+<!-- ================= TEST ================= -->
+<section class="panel-tab" id="tab-test">
+  <div class="controls">
+    <p class="lede" style="margin-top:18px">Une épreuve qui pioche dans tous les blocs livrés et alterne les trois familles : vocabulaire, traduction, lecture. Chaque épreuve terminée est enregistrée et nourrit la courbe de l'onglet Progrès.</p>
+    <div class="row">
+      <select id="tSize" aria-label="Nombre de questions">
+        <option value="10">10 questions</option>
+        <option value="15" selected>15 questions</option>
+        <option value="20">20 questions</option>
+        <option value="30">30 questions</option>
+      </select>
+      <select id="tFam" aria-label="Familles">
+        <option value="all">Les trois familles</option>
+        <option value="voc">Vocabulaire seulement</option>
+        <option value="trad">Traduction seulement</option>
+        <option value="lect">Lecture seulement</option>
+      </select>
+      <select id="tMode" aria-label="Forme des questions">
+        <option value="both" selected>Choix et clavier</option>
+        <option value="mcq">Choix multiples seulement</option>
+        <option value="type">Clavier seulement</option>
+      </select>
+      <select id="tBias" aria-label="Tirage">
+        <option value="even">Tirage équilibré</option>
+        <option value="weak">Priorité aux mots fragiles</option>
+      </select>
+      <button class="act" id="tStart">Lancer l'épreuve</button>
+    </div>
+  </div>
+  <div id="tBody"></div>
+</section>
+
+<!-- ================= PROGRESS ================= -->
+<section class="panel-tab" id="tab-progress">
+  <div class="controls">
+    <p class="lede" style="margin-top:18px">Deux mesures : ce que tu as marqué toi-même, et ce que tes réponses aux exercices démontrent. Tout est gardé dans ce navigateur.</p>
+    <div class="row">
+      <button class="act ghost" id="pExportK">Copier les mots acquis</button>
+      <button class="act ghost" id="pExportT">Copier les mots à revoir</button>
+      <button class="act ghost" id="pReset">Tout remettre à zéro</button>
+      <span class="counts" id="pMsg"></span>
+    </div>
+    <div class="row">
+      <span class="counts" id="syncMsg" style="margin:0">Sauvegarde : vérification…</span>
+      <button class="act ghost" id="pBackup">Télécharger une sauvegarde</button>
+      <button class="act ghost" id="pRestore">Restaurer un fichier</button>
+      <input type="file" id="pFile" accept="application/json,.json" hidden>
+    </div>
+  </div>
+  <div id="pBody"></div>
+</section>
+
+<!-- ================= ROOTS ================= -->
+<section class="panel-tab" id="tab-roots">
+  <p class="lede" style="margin:20px 0 0">Les racines qui donnent déjà plusieurs mots dans les blocs livrés. La vue s'enrichira à chaque bloc livré — c'est là que 800 mots deviennent tenables.</p>
+  <div id="rootBody"></div>
+</section>
+
+<!-- ================= EXPORT ================= -->
+<section class="panel-tab" id="tab-export">
+  <div class="controls">
+    <p class="lede" style="margin-top:18px">TSV, huit colonnes, tabulations comme séparateur. Dans Anki : Fichier → Importer, séparateur « Tabulation », et décoche « Autoriser le HTML dans les champs » si tu ne veux aucune mise en forme.</p>
+    <div class="row">
+      <select id="xScope" aria-label="Portée de l'export"><option value="all">Tout le lexique</option><option value="noanki">Sans les mots déjà dans ton Anki</option><option value="filter">Seulement le filtre de « Parcourir »</option></select>
+      <button class="act" id="xCopy">Copier le TSV</button>
+      <button class="act ghost" id="xDl">Télécharger le fichier</button>
+      <span class="counts" id="xMsg"></span>
+    </div>
+  </div>
+  <textarea id="xText" readonly spellcheck="false" aria-label="Export TSV"></textarea>
+</section>
+
+</div>
+
+<script>
+/* =======================================================================
+   DONNÉES — Bloc A, 140 entrées
+   Champs : m module | n niveau | ar arabe vocalisé | tr translittération
+            r racine | nat nature | g infos grammaticales | fr français
+            lar/ltr levantin | lw avertissement d'usage oral
+            xa/xf phrase exemple
+   ======================================================================= */
+
+const MODULES = [
+ {id:1,b:"A",t:"Pronoms, démonstratifs, suffixes possessifs",n:26,
+  note:`<h3>Règle</h3><p>L'arabe a <em>deux</em> séries de pronoms. Les pronoms <b>isolés</b> (أَنَا، هُوَ…) ne servent que comme sujet ou attribut, jamais comme complément. Les pronoms <b>suffixes</b> (ـِي، ـكَ، ـهُ…) se collent au mot : sur un nom ils marquent la possession, sur un verbe ou une préposition ils marquent le complément.</p><p>Conséquence directe : <span class="ar">بَيْتُهُ</span> = « sa maison », <span class="ar">رَأَيْتُهُ</span> = « je l'ai vu ». Même suffixe, deux fonctions, lues d'après le support.</p><p>Le levantin garde les deux séries mais les use : les finales longues tombent (<span class="ar">ـهُ</span> → <span class="ar">ـُو</span> -o), et le duel comme le féminin pluriel disparaissent entièrement de l'oral.</p>`,
+  ph:[["أَنَا مِنْ فَرَنْسَا وَهُوَ مِنْ لُبْنَانَ.","Je suis de France et lui du Liban."],
+      ["هٰذَا بَيْتِي وَهٰذِهِ غُرْفَتُهَا.","Voici ma maison et voici sa chambre à elle."],
+      ["مَنْ هٰؤُلَاءِ؟ هُمْ أَصْدِقَائِي.","Qui sont ces gens ? Ce sont mes amis."],
+      ["الكِتَابُ الَّذِي عَلَى الطَّاوِلَةِ لَكِ.","Le livre qui est sur la table est à toi."],
+      ["نَحْنُ هُنَا وَأَنْتُمْ هُنَاكَ.","Nous sommes ici et vous là-bas."]]},
+ {id:2,b:"A",t:"Interrogatifs, conjonctions, négations",n:29,
+  note:`<h3>Règle</h3><p>La négation arabe se choisit <em>d'après le temps</em>, pas d'après le verbe : <span class="ar">لَا</span> + inaccompli pour le présent, <span class="ar">مَا</span> + accompli pour le passé, <span class="ar">لَنْ</span> + subjonctif pour le futur. <span class="ar">لَيْسَ</span> est à part : c'est un verbe, il se conjugue, et il nie les phrases sans verbe.</p><p>Pour les questions : <span class="ar">مَا</span> devant un <b>nom</b>, <span class="ar">مَاذَا</span> devant un <b>verbe</b>. C'est la confusion la plus fréquente à ce stade.</p><p>Le levantin balaie tout ce système : <span class="ar">مَا</span> ou <span class="ar">مِش</span> couvrent tous les temps, et <span class="ar">هَلْ</span> n'existe simplement pas — on pose la question à l'intonation.</p>`,
+  ph:[["مَاذَا تَفْعَلُ الآنَ؟","Que fais-tu maintenant ?"],
+      ["لَا أَفْهَمُ لِأَنَّ الدَّرْسَ صَعْبٌ.","Je ne comprends pas parce que la leçon est difficile."],
+      ["هَلْ أَنْتَ مِنْ هُنَا أَوْ مِنْ مَدِينَةٍ أُخْرَى؟","Es-tu d'ici ou d'une autre ville ?"],
+      ["لَيْسَ هٰذَا صَحِيحًا، مَا قُلْتُ ذٰلِكَ.","Ce n'est pas exact, je n'ai pas dit cela."],
+      ["أَيْنَ تَسْكُنُ وَمَتَى وَصَلْتَ؟","Où habites-tu et quand es-tu arrivé ?"]]},
+ {id:3,b:"A",t:"Prépositions et adverbes de lieu",n:28,
+  note:`<h3>Règle</h3><p>Toute préposition arabe met le mot suivant au <b>génitif</b> (kasra). C'est mécanique et sans exception : <span class="ar">فِي البَيْتِ، مِنَ المَدِينَةِ</span>.</p><p>Les adverbes de lieu (<span class="ar">أَمَامَ، تَحْتَ، فَوْقَ</span>) fonctionnent comme des prépositions mais portent eux-mêmes une fatḥa figée : ce sont des <em>ẓuruf makān</em>, à l'accusatif, suivis du génitif.</p><p>Et <span class="ar">عِنْدَ</span> mérite une attention à part : l'arabe n'a pas de verbe « avoir ». <span class="ar">عِنْدِي كِتَابٌ</span> = littéralement « chez-moi un livre » = j'ai un livre.</p>`,
+  ph:[["الكِتَابُ عَلَى الطَّاوِلَةِ أَمَامَ النَّافِذَةِ.","Le livre est sur la table devant la fenêtre."],
+      ["عِنْدِي سُؤَالٌ عَنْ هٰذَا الدَّرْسِ.","J'ai une question sur cette leçon."],
+      ["أَسْكُنُ قَرِيبًا مِنَ الجَامِعَةِ، لَيْسَ بَعِيدًا.","J'habite près de l'université, pas loin."],
+      ["هَلْ تَذْهَبُ إِلَى السُّوقِ مَعِي؟","Tu vas au marché avec moi ?"],
+      ["البَيْتُ بَيْنَ المَدْرَسَةِ وَالمُسْتَشْفَى.","La maison est entre l'école et l'hôpital."]]},
+ {id:4,b:"A",t:"Adverbes de temps et de fréquence",n:26,
+  note:`<h3>Règle</h3><p>Les adverbes de fréquence en <span class="ar">ـًا</span> (<span class="ar">دَائِمًا، أَحْيَانًا، نَادِرًا</span>) sont des noms à l'<b>accusatif indéfini</b> figé. Le tanwīn <span class="ar">ـًا</span> n'est pas décoratif : c'est la marque de cas qui fait d'un nom un adverbe. Même mécanisme que <span class="ar">شُكْرًا</span>.</p><p>Place : en arabe standard, l'adverbe se met librement, mais le plus naturel est <em>après</em> le verbe et son sujet — <span class="ar">أَشْرَبُ القَهْوَةَ دَائِمًا</span>.</p><p><span class="ar">أَبَدًا</span> est un faux ami : seul, il veut dire « jamais » uniquement <em>avec</em> une négation. Sans négation, il signifie « à jamais ».</p>`,
+  ph:[["أَشْرَبُ القَهْوَةَ دَائِمًا فِي الصَّبَاحِ.","Je bois toujours du café le matin."],
+      ["أَمْسِ كُنْتُ مَرِيضًا، وَاليَوْمَ أَنَا بِخَيْرٍ.","Hier j'étais malade, aujourd'hui je vais bien."],
+      ["نَادِرًا مَا أَخْرُجُ فِي اللَّيْلِ.","Je sors rarement le soir."],
+      ["سَأَعُودُ بَعْدَ سَاعَةٍ، لَيْسَ غَدًا.","Je reviens dans une heure, pas demain."],
+      ["كَمْ مَرَّةً فِي الأُسْبُوعِ تَدْرُسُ؟","Combien de fois par semaine étudies-tu ?"]]},
+ {id:5,b:"A",t:"Nombres, quantités, mesures",n:35,
+  note:`<h3>Règle</h3><p>Le piège structurel de l'arabe : de <b>3 à 10</b>, le nombre et le nom comptés ont des genres <em>inversés</em>. <span class="ar">ثَلَاثَةُ كُتُبٍ</span> (nombre au féminin, nom masculin) mais <span class="ar">ثَلَاثُ طَالِبَاتٍ</span> (nombre au masculin, nom féminin). C'est contre-intuitif et il faut le prendre comme une règle brute.</p><p>Le nom compté se met au <b>pluriel génitif</b> de 3 à 10, puis au <b>singulier accusatif</b> de 11 à 99 : <span class="ar">خَمْسَةُ أَيَّامٍ</span> mais <span class="ar">عِشْرُونَ يَوْمًا</span>.</p><p>Même logique après <span class="ar">كَمْ</span> : singulier accusatif — <span class="ar">كَمْ يَوْمًا؟</span>. Le levantin abandonne tout cela et fait suivre un simple pluriel.</p>`,
+  ph:[["عِنْدِي ثَلَاثَةُ كُتُبٍ وَأَرْبَعُ مَجَلَّاتٍ.","J'ai trois livres et quatre revues."],
+      ["كَمْ ثَمَنُ هٰذَا؟ خَمْسَةٌ وَعِشْرُونَ.","Combien coûte ceci ? Vingt-cinq."],
+      ["أَدْرُسُ نِصْفَ سَاعَةٍ كُلَّ يَوْمٍ.","J'étudie une demi-heure chaque jour."],
+      ["هٰذَا أَوَّلُ دَرْسٍ وَذٰلِكَ آخِرُ دَرْسٍ.","Ceci est la première leçon et cela la dernière."],
+      ["كَثِيرٌ مِنَ الطُّلَّابِ وَقَلِيلٌ مِنَ المُعَلِّمِينَ.","Beaucoup d'étudiants et peu d'enseignants."]]},
+ {id:6,b:"B",t:"Identité, nationalités, gens",n:30,
+  note:`<h3>Règle</h3><p>La <b>nisba</b> fabrique l'adjectif d'origine : on prend le nom du lieu, on retire l'article et la voyelle finale, puis on ajoute <span class="ar">ـِيّ</span>. <span class="ar">لُبْنَان</span> donne <span class="ar">لُبْنَانِيّ</span> ; <span class="ar">المَغْرِب</span> donne <span class="ar">مَغْرِبِيّ</span>. Féminin en <span class="ar">ـِيَّة</span>, pluriel en <span class="ar">ـِيُّونَ</span>, ou brisé pour quelques peuples : <span class="ar">عَرَب، مَغَارِبَة</span>.</p><p>Les noms de pays étrangers sont presque tous <b>diptotes</b> : jamais de tanwīn, fatḥa au génitif — <span class="ar">مِنْ لُبْنَانَ، مِنْ مِصْرَ</span>. Ceux qui finissent en <span class="ar">ـَا</span> (<span class="ar">فَرَنْسَا، سُورِيَا</span>) sont invariables.</p><p>Pour le nom et l'âge, pas de verbe : <span class="ar">اِسْمِي…</span> « mon nom [est]… », <span class="ar">عُمْرِي…</span> « mon âge [est]… ».</p>`,
+  ph:[["مِنْ أَيْنَ أَنْتِ؟ أَنَا فَرَنْسِيَّةٌ مِنْ بَارِيسَ.","D'où es-tu ? Je suis française, de Paris."],
+      ["مَا اسْمُكَ؟ اِسْمِي سَمِيرٌ.","Comment t'appelles-tu ? Je m'appelle Samir."],
+      ["كَمْ عُمْرُكِ؟ عُمْرِي عِشْرُونَ سَنَةً.","Quel âge as-tu ? J'ai vingt ans."],
+      ["هُوَ طَالِبٌ لُبْنَانِيٌّ فِي جَامِعَةِ بَيْرُوتَ.","C'est un étudiant libanais à l'université de Beyrouth."],
+      ["هَلْ هٰؤُلَاءِ النَّاسُ أَجَانِبُ؟","Ces gens sont-ils étrangers ?"]]},
+ {id:7,b:"B",t:"Famille et relations",n:30,
+  note:`<h3>Règle</h3><p>Les liens de parenté se disent par l'<b>annexion</b> (iḍāfa) : <span class="ar">اِبْنُ العَمِّ</span> « le fils de l'oncle » = le cousin. Le premier terme ne prend ni article ni tanwīn ; le second passe au génitif.</p><p><span class="ar">أَب</span> et <span class="ar">أَخ</span> font partie des <b>cinq noms</b> : suivis d'un complément ou d'un suffixe autre que <span class="ar">ـِي</span>, ils marquent le cas par une voyelle longue — <span class="ar">أَبُوهُ</span> (nominatif), <span class="ar">أَبَاهُ</span> (accusatif), <span class="ar">أَبِيهِ</span> (génitif).</p><p>Attention au trio <span class="ar">أَخَوَانِ</span> (duel, « deux frères »), <span class="ar">إِخْوَة</span> et <span class="ar">إِخْوَان</span> (pluriels). Et l'arabe sépare toujours le côté du père (<span class="ar">عَمّ، عَمَّة</span>) du côté de la mère (<span class="ar">خَال، خَالَة</span>) : il n'existe pas de mot neutre pour « oncle ».</p>`,
+  ph:[["لِي أَخٌ وَأُخْتَانِ.","J'ai un frère et deux sœurs."],
+      ["أَبِي وَأُمِّي فِي البَيْتِ.","Mon père et ma mère sont à la maison."],
+      ["اِبْنُ خَالِي يَسْكُنُ فِي بَيْرُوتَ.","Mon cousin (du côté de ma mère) habite à Beyrouth."],
+      ["هَلْ أَنْتِ مُتَزَوِّجَةٌ؟ لَا، أَنَا عَزْبَاءُ.","Es-tu mariée ? Non, je suis célibataire."],
+      ["أَذْهَبُ مَعَ صَدِيقِي إِلَى بَيْتِ جَدِّهِ.","Je vais avec mon ami chez son grand-père."]]},
+ {id:8,b:"B",t:"Salutations et formules figées",n:32,
+  note:`<h3>Règle</h3><p>Beaucoup de formules fonctionnent en <b>miroir</b> : la réponse garde la structure et change un mot — <span class="ar">صَبَاحُ الخَيْرِ</span> → <span class="ar">صَبَاحُ النُّورِ</span> ; <span class="ar">السَّلَامُ عَلَيْكُمْ</span> → <span class="ar">وَعَلَيْكُمُ السَّلَامُ</span>.</p><p>Toute formule qui contient un « tu » s'<b>accorde</b> avec la personne à qui l'on parle : <span class="ar">ـكَ</span> pour un homme, <span class="ar">ـكِ</span> pour une femme, <span class="ar">ـكُمْ</span> pour plusieurs — <span class="ar">كَيْفَ حَالُكِ؟، مِنْ فَضْلِكُمْ</span>.</p><p>C'est le module où fuṣḥā et levantin divergent le plus : l'oral a ses propres formules (<span class="ar">كِيفَك، مَعْلِيش، صَحْتَين</span>). Apprends les deux colonnes ensemble, la verte en priorité pour parler.</p>`,
+  ph:[["مَرْحَبًا، كَيْفَ حَالُكِ؟ — بِخَيْرٍ، الحَمْدُ لِلّٰهِ.","Salut, comment vas-tu ? — Bien, Dieu merci."],
+      ["أَنَا نُورَةُ. — تَشَرَّفْنَا، أَنَا سَمِيرٌ.","Je suis Noura. — Enchanté, je suis Samir."],
+      ["قَهْوَةً مِنْ فَضْلِكَ. — تَفَضَّلِي.","Un café s'il vous plaît. — Voici."],
+      ["آسِفَةٌ، لَا أَفْهَمُ. — لَا بَأْسَ.","Désolée, je ne comprends pas. — Ce n'est pas grave."],
+      ["مَعَ السَّلَامَةِ، إِلَى اللِّقَاءِ غَدًا إِنْ شَاءَ اللّٰهُ.","Au revoir, à demain j'espère."]]},
+ {id:9,b:"B",t:"Émotions et états intérieurs",n:28,
+  note:`<h3>Règle</h3><p>Un état se dit par une <b>phrase nominale</b>, sans verbe « être » ni « avoir » : <span class="ar">أَنَا جَائِعٌ</span> = « j'ai faim », littéralement « moi affamé ». L'attribut s'accorde en genre et en nombre avec le sujet, et reste indéfini : <span class="ar">هِيَ مُتْعَبَةٌ</span>.</p><p>Deux familles de formes reviennent partout. Le schème <span class="ar">فَعْلَان</span> / fém. <span class="ar">فَعْلَى</span> pour les états passagers (<span class="ar">عَطْشَان، نَعْسَان، كَسْلَان</span>) : ce sont des diptotes, sans tanwīn. Et les <b>participes</b> (<span class="ar">خَائِف</span> actif, <span class="ar">مَشْغُول</span> passif, <span class="ar">مُتَحَمِّس</span> de forme dérivée), qui se comportent exactement comme des adjectifs.</p><p>Au passé, on ajoute <span class="ar">كَانَ</span> et l'attribut passe à l'accusatif : <span class="ar">كُنْتُ مَرِيضًا</span>.</p>`,
+  ph:[["أَنَا جَائِعَةٌ وَعَطْشَى.","J'ai faim et soif."],
+      ["لِمَاذَا أَنْتَ حَزِينٌ اليَوْمَ؟","Pourquoi es-tu triste aujourd'hui ?"],
+      ["هِيَ مَشْغُولَةٌ جِدًّا هٰذَا الأُسْبُوعَ.","Elle est très occupée cette semaine."],
+      ["كُنْتُ مُتْعَبَةً أَمْسِ، وَاليَوْمَ أَنَا مُرْتَاحَةٌ.","J'étais fatiguée hier, aujourd'hui je suis reposée."],
+      ["أَنَا مُشْتَاقٌ إِلَى أَهْلِي فِي لُبْنَانَ.","Ma famille au Liban me manque."]]},
+ {id:10,b:"B",t:"Adjectifs : physique et caractère",n:32,
+  note:`<h3>Règle</h3><p>L'adjectif <b>épithète</b> suit le nom et s'accorde avec lui en tout : genre, nombre, cas et définitude — <span class="ar">بَيْتٌ كَبِيرٌ</span> « une grande maison », <span class="ar">البَيْتُ الكَبِيرُ</span> « la grande maison ». L'adjectif <b>attribut</b> reste indéfini : <span class="ar">البَيْتُ كَبِيرٌ</span> « la maison est grande ». Un seul article sépare les deux phrases.</p><p>Règle clé : un <b>pluriel de choses</b> prend l'adjectif au <b>féminin singulier</b> — <span class="ar">كُتُبٌ جَدِيدَةٌ</span>. Les pluriels d'adjectifs donnés ici servent donc pour les personnes.</p><p>Couleurs et traits physiques suivent le schème <span class="ar">أَفْعَلُ</span> / fém. <span class="ar">فَعْلَاءُ</span> / plur. <span class="ar">فُعْلٌ</span> : <span class="ar">أَشْقَرُ، شَقْرَاءُ، شُقْرٌ</span>. Diptotes eux aussi.</p>`,
+  ph:[["بَيْتُنَا قَدِيمٌ لٰكِنَّهُ جَمِيلٌ.","Notre maison est vieille mais elle est belle."],
+      ["أُخْتِي طَوِيلَةٌ وَأَخِي قَصِيرٌ.","Ma sœur est grande et mon frère est petit."],
+      ["هٰذِهِ كُتُبٌ جَدِيدَةٌ.","Ce sont des livres neufs."],
+      ["المُعَلِّمَةُ لَطِيفَةٌ جِدًّا.","L'enseignante est très gentille."],
+      ["الدَّرْسُ لَيْسَ صَعْبًا، هُوَ سَهْلٌ.","La leçon n'est pas difficile, elle est facile."]]}
+];
+
+const D = [
+/* ---------- MODULE 1 ---------- */
+{id:1,m:1,n:"A1",ar:"أَنَا",tr:"anā",r:"—",nat:"pronom",g:"Pronom isolé, 1re pers. sing., identique au masculin et au féminin",fr:"je, moi",lar:"أَنَا",ltr:"anā",lw:"",xa:"أَنَا مِنْ فَرَنْسَا.",xf:"Je suis de France."},
+{id:2,m:1,n:"A1",ar:"أَنْتَ",tr:"anta",r:"—",nat:"pronom",g:"Pronom isolé, 2e pers. masc. sing.",fr:"tu, toi (m)",lar:"إِنْتَ",ltr:"inta",lw:"",xa:"أَنْتَ طَالِبٌ.",xf:"Tu es étudiant."},
+{id:3,m:1,n:"A1",ar:"أَنْتِ",tr:"anti",r:"—",nat:"pronom",g:"Pronom isolé, 2e pers. fém. sing. ; seule la voyelle finale distingue du masculin",fr:"tu, toi (f)",lar:"إِنْتِ",ltr:"inti",lw:"",xa:"أَنْتِ مِنْ لُبْنَانَ.",xf:"Tu es du Liban."},
+{id:4,m:1,n:"A1",ar:"هُوَ",tr:"huwa",r:"—",nat:"pronom",g:"Pronom isolé, 3e pers. masc. sing.",fr:"il, lui",lar:"هُوِّ",ltr:"huwwe",lw:"",xa:"هُوَ فِي البَيْتِ.",xf:"Il est à la maison."},
+{id:5,m:1,n:"A1",ar:"هِيَ",tr:"hiya",r:"—",nat:"pronom",g:"Pronom isolé, 3e pers. fém. sing. ; sert aussi pour les pluriels d'objets inanimés",fr:"elle",lar:"هِيِّ",ltr:"hiyye",lw:"",xa:"هِيَ مُعَلِّمَةٌ.",xf:"Elle est enseignante."},
+{id:6,m:1,n:"A1",ar:"نَحْنُ",tr:"naḥnu",r:"—",nat:"pronom",g:"Pronom isolé, 1re pers. plur., masculin et féminin",fr:"nous",lar:"نِحْنَا",ltr:"niḥna",lw:"",xa:"نَحْنُ هُنَا.",xf:"Nous sommes ici."},
+{id:7,m:1,n:"A1",ar:"أَنْتُمْ",tr:"antum",r:"—",nat:"pronom",g:"Pronom isolé, 2e pers. masc. plur.",fr:"vous (m)",lar:"إِنْتُو",ltr:"intu",lw:"",xa:"أَنْتُمْ أَصْدِقَائِي.",xf:"Vous êtes mes amis."},
+{id:8,m:1,n:"A2",ar:"أَنْتُنَّ",tr:"antunna",r:"—",nat:"pronom",g:"Pronom isolé, 2e pers. fém. plur.",fr:"vous (f)",lar:"",ltr:"",lw:"N'existe pas à l'oral levantin : إِنْتُو couvre les deux genres.",xa:"أَنْتُنَّ مُعَلِّمَاتٌ.",xf:"Vous êtes enseignantes."},
+{id:9,m:1,n:"A1",ar:"هُمْ",tr:"hum",r:"—",nat:"pronom",g:"Pronom isolé, 3e pers. masc. plur.",fr:"ils, eux",lar:"هِنِّ",ltr:"hinne",lw:"",xa:"هُمْ فِي الجَامِعَةِ.",xf:"Ils sont à l'université."},
+{id:10,m:1,n:"A2",ar:"هُنَّ",tr:"hunna",r:"—",nat:"pronom",g:"Pronom isolé, 3e pers. fém. plur.",fr:"elles",lar:"",ltr:"",lw:"Fondu dans هِنِّ à l'oral levantin.",xa:"هُنَّ طَالِبَاتٌ.",xf:"Elles sont étudiantes."},
+{id:11,m:1,n:"A2+",ar:"هُمَا",tr:"humā",r:"—",nat:"pronom",g:"Pronom isolé du duel, 3e pers. ; masculin et féminin",fr:"eux deux, elles deux",lar:"",ltr:"",lw:"Le duel a totalement disparu des pronoms en levantin.",xa:"هُمَا أَخَوَانِ.",xf:"Ils sont deux frères."},
+{id:12,m:1,n:"A1",ar:"ـِي",tr:"-ī",r:"—",nat:"pronom suffixe",g:"1re pers. sing. ; absorbe la voyelle de cas du nom : بَيْتِي et non بَيْتُي",fr:"mon, ma, mes",lar:"ـِي",ltr:"-i",lw:"",xa:"بَيْتِي كَبِيرٌ.",xf:"Ma maison est grande."},
+{id:13,m:1,n:"A1",ar:"ـكَ",tr:"-ka",r:"—",nat:"pronom suffixe",g:"2e pers. masc. sing. ; sur un verbe ou une préposition, vaut complément : « te »",fr:"ton, ta (m)",lar:"ـَك",ltr:"-ak",lw:"",xa:"كِتَابُكَ جَدِيدٌ.",xf:"Ton livre est neuf."},
+{id:14,m:1,n:"A1",ar:"ـكِ",tr:"-ki",r:"—",nat:"pronom suffixe",g:"2e pers. fém. sing.",fr:"ton, ta (f)",lar:"ـِك",ltr:"-ik",lw:"",xa:"بَيْتُكِ جَمِيلٌ.",xf:"Ta maison est jolie."},
+{id:15,m:1,n:"A1",ar:"ـهُ",tr:"-hu",r:"—",nat:"pronom suffixe",g:"3e pers. masc. sing. ; devient ـهِ après une kasra ou un yāʾ : فِيهِ",fr:"son, sa (à lui) ; le",lar:"ـُو",ltr:"-o",lw:"",xa:"اِسْمُهُ كَرِيمٌ.",xf:"Il s'appelle Karim."},
+{id:16,m:1,n:"A1",ar:"ـهَا",tr:"-hā",r:"—",nat:"pronom suffixe",g:"3e pers. fém. sing.",fr:"son, sa (à elle) ; la",lar:"ـَا",ltr:"-a",lw:"",xa:"اِسْمُهَا سَلْمَى.",xf:"Elle s'appelle Salma."},
+{id:17,m:1,n:"A1",ar:"ـنَا",tr:"-nā",r:"—",nat:"pronom suffixe",g:"1re pers. plur.",fr:"notre, nos ; nous",lar:"ـنَا",ltr:"-na",lw:"",xa:"مَدِينَتُنَا صَغِيرَةٌ.",xf:"Notre ville est petite."},
+{id:18,m:1,n:"A1",ar:"ـكُمْ",tr:"-kum",r:"—",nat:"pronom suffixe",g:"2e pers. masc. plur.",fr:"votre, vos ; vous",lar:"ـكُن",ltr:"-kon",lw:"",xa:"أَيْنَ بَيْتُكُمْ؟",xf:"Où est votre maison ?"},
+{id:19,m:1,n:"A1",ar:"ـهُمْ",tr:"-hum",r:"—",nat:"pronom suffixe",g:"3e pers. masc. plur. ; devient ـهِمْ après une kasra : عَلَيْهِمْ",fr:"leur, leurs ; les",lar:"ـهُن",ltr:"-hon",lw:"",xa:"سَيَّارَتُهُمْ حَمْرَاءُ.",xf:"Leur voiture est rouge."},
+{id:20,m:1,n:"A1",ar:"هٰذَا",tr:"hāḏā",r:"—",nat:"démonstratif",g:"Proche, masc. sing. ; l'alif est sous-entendu (alif suscrit), on écrit هذا",fr:"ce, cet, celui-ci",lar:"هَيْدَا",ltr:"hayda",lw:"",xa:"هٰذَا كِتَابٌ.",xf:"Ceci est un livre."},
+{id:21,m:1,n:"A1",ar:"هٰذِهِ",tr:"hāḏihi",r:"—",nat:"démonstratif",g:"Proche, fém. sing. ; sert aussi pour un pluriel d'inanimés",fr:"cette, celle-ci",lar:"هَيْدِي",ltr:"haydi",lw:"",xa:"هٰذِهِ مَدْرَسَةٌ.",xf:"Ceci est une école."},
+{id:22,m:1,n:"A1",ar:"هٰؤُلَاءِ",tr:"hāʾulāʾi",r:"—",nat:"démonstratif",g:"Proche, pluriel ; réservé aux êtres animés",fr:"ces, ceux-ci",lar:"هَدَوْل",ltr:"hadōl",lw:"",xa:"هٰؤُلَاءِ أَصْدِقَائِي.",xf:"Ce sont mes amis."},
+{id:23,m:1,n:"A2",ar:"ذٰلِكَ",tr:"ḏālika",r:"—",nat:"démonstratif",g:"Lointain, masc. sing.",fr:"celui-là, cela",lar:"هَيْدَاك",ltr:"haydāk",lw:"",xa:"ذٰلِكَ الرَّجُلُ طَوِيلٌ.",xf:"Cet homme-là est grand."},
+{id:24,m:1,n:"A2",ar:"تِلْكَ",tr:"tilka",r:"—",nat:"démonstratif",g:"Lointain, fém. sing.",fr:"celle-là",lar:"هَيْدِيك",ltr:"haydīk",lw:"",xa:"تِلْكَ المَدِينَةُ بَعِيدَةٌ.",xf:"Cette ville-là est loin."},
+{id:25,m:1,n:"A2",ar:"الَّذِي",tr:"allaḏī",r:"—",nat:"pronom relatif",g:"Masc. sing. ; ne s'emploie qu'après un antécédent défini",fr:"qui, lequel",lar:"يَلِّي",ltr:"yalli",lw:"Le levantin a un seul relatif invariable, يَلِّي ou اللِّي.",xa:"الرَّجُلُ الَّذِي يَعْمَلُ هُنَا.",xf:"L'homme qui travaille ici."},
+{id:26,m:1,n:"A2",ar:"الَّتِي",tr:"allatī",r:"—",nat:"pronom relatif",g:"Fém. sing. ; sert aussi pour les pluriels d'inanimés",fr:"qui, laquelle",lar:"يَلِّي",ltr:"yalli",lw:"",xa:"المَرْأَةُ الَّتِي تَسْكُنُ هُنَا.",xf:"La femme qui habite ici."},
+
+/* ---------- MODULE 2 ---------- */
+{id:27,m:2,n:"A1",ar:"مَنْ",tr:"man",r:"—",nat:"interrogatif",g:"Invariable ; porte sur une personne",fr:"qui",lar:"مِين",ltr:"mīn",lw:"",xa:"مَنْ هٰذَا؟",xf:"Qui est-ce ?"},
+{id:28,m:2,n:"A1",ar:"مَا",tr:"mā",r:"—",nat:"interrogatif",g:"Se place devant un NOM ; à ne pas confondre avec مَاذَا",fr:"quoi, quel",lar:"شُو",ltr:"šū",lw:"",xa:"مَا اسْمُكَ؟",xf:"Quel est ton nom ?"},
+{id:29,m:2,n:"A1",ar:"مَاذَا",tr:"māḏā",r:"—",nat:"interrogatif",g:"Se place devant un VERBE",fr:"que, qu'est-ce que",lar:"شُو",ltr:"šū",lw:"Le levantin ne distingue pas : شُو couvre مَا et مَاذَا.",xa:"مَاذَا تَقْرَأُ؟",xf:"Que lis-tu ?"},
+{id:30,m:2,n:"A1",ar:"أَيْنَ",tr:"ayna",r:"—",nat:"interrogatif",g:"Invariable ; se combine en مِنْ أَيْنَ « d'où »",fr:"où",lar:"وَيْن",ltr:"wēn",lw:"",xa:"أَيْنَ الكِتَابُ؟",xf:"Où est le livre ?"},
+{id:31,m:2,n:"A1",ar:"مَتَى",tr:"matā",r:"—",nat:"interrogatif",g:"Se termine par un alif maqṣūra",fr:"quand",lar:"إِيمْتَى",ltr:"ēmta",lw:"",xa:"مَتَى تَذْهَبُ؟",xf:"Quand pars-tu ?"},
+{id:32,m:2,n:"A1",ar:"كَيْفَ",tr:"kayfa",r:"—",nat:"interrogatif",g:"Invariable ; fatḥa finale figée",fr:"comment",lar:"كِيف",ltr:"kīf",lw:"",xa:"كَيْفَ حَالُكَ؟",xf:"Comment vas-tu ?"},
+{id:33,m:2,n:"A1",ar:"لِمَاذَا",tr:"limāḏā",r:"—",nat:"interrogatif",g:"Composé de لِ + مَاذَا",fr:"pourquoi",lar:"لَيْش",ltr:"lēš",lw:"",xa:"لِمَاذَا أَنْتَ هُنَا؟",xf:"Pourquoi es-tu ici ?"},
+{id:34,m:2,n:"A1",ar:"كَمْ",tr:"kam",r:"—",nat:"interrogatif",g:"Suivi d'un nom au SINGULIER accusatif indéfini : كَمْ سَاعَةً",fr:"combien",lar:"كَم / قَدَّيْش",ltr:"kam / ʾaddēš",lw:"قَدَّيْش s'emploie surtout pour un prix ou une quantité continue.",xa:"كَمْ سَاعَةً تَعْمَلُ؟",xf:"Combien d'heures travailles-tu ?"},
+{id:35,m:2,n:"A2",ar:"أَيّ",tr:"ayy",r:"—",nat:"interrogatif",g:"Premier terme d'une annexion, donc suivi d'un génitif indéfini ; fém. أَيَّة",fr:"quel, quelle",lar:"أَيَّا",ltr:"ayya",lw:"",xa:"أَيُّ كِتَابٍ تُرِيدُ؟",xf:"Quel livre veux-tu ?"},
+{id:36,m:2,n:"A1",ar:"هَلْ",tr:"hal",r:"—",nat:"particule interrogative",g:"Ouvre une question fermée ; sans traduction en français",fr:"est-ce que",lar:"",ltr:"",lw:"N'existe pas en levantin : la question se marque à l'intonation seule.",xa:"هَلْ أَنْتَ جَاهِزٌ؟",xf:"Es-tu prêt ?"},
+{id:37,m:2,n:"A1",ar:"وَ",tr:"wa",r:"—",nat:"conjonction",g:"Toujours soudée au mot suivant, jamais détachée",fr:"et",lar:"وْ",ltr:"w",lw:"",xa:"أَنَا وَأَنْتَ.",xf:"Toi et moi."},
+{id:38,m:2,n:"A1",ar:"أَوْ",tr:"aw",r:"—",nat:"conjonction",g:"Coordination entre deux termes équivalents",fr:"ou",lar:"أَو",ltr:"aw",lw:"",xa:"شَايٌ أَوْ قَهْوَةٌ؟",xf:"Thé ou café ?"},
+{id:39,m:2,n:"A1",ar:"لٰكِنْ",tr:"lākin",r:"—",nat:"conjonction",g:"Forme لٰكِنَّ + accusatif quand elle introduit une proposition complète",fr:"mais",lar:"بَسّ",ltr:"bass",lw:"لٰكِنْ est compris mais بَسّ domine largement l'oral.",xa:"أُرِيدُ لٰكِنْ لَا أَسْتَطِيعُ.",xf:"Je veux mais je ne peux pas."},
+{id:40,m:2,n:"A1",ar:"لِأَنَّ",tr:"liʾanna",r:"—",nat:"conjonction",g:"Régit l'accusatif ou un pronom suffixe : لِأَنَّنِي",fr:"parce que",lar:"لَأَنُّو",ltr:"laʾanno",lw:"",xa:"لَا أَذْهَبُ لِأَنَّنِي مَرِيضٌ.",xf:"Je n'y vais pas parce que je suis malade."},
+{id:41,m:2,n:"A1",ar:"إِذَا",tr:"iḏā",r:"—",nat:"conjonction",g:"Hypothèse réelle, suivie normalement de l'accompli",fr:"si",lar:"إِزَا",ltr:"iza",lw:"",xa:"إِذَا أَرَدْتَ، نَذْهَبُ.",xf:"Si tu veux, on y va."},
+{id:42,m:2,n:"A2",ar:"أَنَّ",tr:"anna",r:"—",nat:"conjonction",g:"Complétive après un verbe de déclaration ou de savoir ; met son sujet à l'accusatif",fr:"que",lar:"إِنُّو",ltr:"inno",lw:"",xa:"أَعْرِفُ أَنَّ البَيْتَ كَبِيرٌ.",xf:"Je sais que la maison est grande."},
+{id:43,m:2,n:"A2",ar:"أَنْ",tr:"an",r:"—",nat:"conjonction",g:"Suivie du subjonctif ; équivaut à l'infinitif français",fr:"que, de",lar:"إِنُّو",ltr:"inno",lw:"",xa:"أُرِيدُ أَنْ أَذْهَبَ.",xf:"Je veux partir."},
+{id:44,m:2,n:"A2",ar:"حَتَّى",tr:"ḥattā",r:"—",nat:"particule",g:"Préposition (+ génitif) au sens de « jusqu'à » ; adverbe au sens de « même »",fr:"jusqu'à ; même",lar:"حَتَّى",ltr:"ḥatta",lw:"",xa:"عَمِلْتُ حَتَّى المَسَاءِ.",xf:"J'ai travaillé jusqu'au soir."},
+{id:45,m:2,n:"A1",ar:"ثُمَّ",tr:"ṯumma",r:"—",nat:"conjonction",g:"Succession avec intervalle, à la différence de فَ (succession immédiate)",fr:"puis, ensuite",lar:"بَعْدَيْن",ltr:"baʿdēn",lw:"",xa:"أَكَلْتُ ثُمَّ خَرَجْتُ.",xf:"J'ai mangé puis je suis sorti."},
+{id:46,m:2,n:"A1",ar:"أَيْضًا",tr:"ayḍan",r:"أ-ي-ض",nat:"adverbe",g:"Accusatif indéfini figé ; se place en fin de proposition",fr:"aussi, également",lar:"كَمَان",ltr:"kamān",lw:"",xa:"أَنَا أَيْضًا طَالِبٌ.",xf:"Moi aussi je suis étudiant."},
+{id:47,m:2,n:"A1",ar:"طَبْعًا",tr:"ṭabʿan",r:"ط-ب-ع",nat:"adverbe",g:"Accusatif indéfini figé, du nom طَبْع « nature, caractère »",fr:"bien sûr",lar:"طَبْعًا",ltr:"ṭabʿan",lw:"",xa:"طَبْعًا أَعْرِفُهُ.",xf:"Bien sûr que je le connais."},
+{id:48,m:2,n:"A2",ar:"لِكَيْ",tr:"likay",r:"—",nat:"conjonction",g:"But ; suivie du subjonctif",fr:"afin que, pour",lar:"تَا",ltr:"ta",lw:"",xa:"أَدْرُسُ لِكَيْ أَنْجَحَ.",xf:"J'étudie pour réussir."},
+{id:49,m:2,n:"A1",ar:"لَا",tr:"lā",r:"—",nat:"négation",g:"« Non » en réponse ; négation du présent devant l'inaccompli indicatif",fr:"non ; ne… pas",lar:"لَأ / مَا",ltr:"laʾ / mā",lw:"لَأ pour « non », مَا pour la négation du verbe.",xa:"لَا أَفْهَمُ.",xf:"Je ne comprends pas."},
+{id:141,vl:1,m:2,n:"A2",ar:"إِلَّا",tr:"illā",r:"—",nat:"particule",g:"Exception ; après une phrase affirmative complète, le mot suivant passe à l'accusatif. Ne pas confondre avec إِلَى « vers » : إِلَّا = lām redoublé + alif",fr:"sauf, excepté",lar:"إِلَّا / غَيْر",ltr:"illa / ġēr",lw:"",xa:"كُلُّ الطُّلَّابِ هُنَا إِلَّا سَمِيرًا.",xf:"Tous les étudiants sont là sauf Samir."},
+{id:50,m:2,n:"A1",ar:"مَا",tr:"mā",r:"—",nat:"négation",g:"Négation du passé, devant un verbe à l'accompli",fr:"ne… pas (passé)",lar:"مَا",ltr:"mā",lw:"",xa:"مَا فَهِمْتُ.",xf:"Je n'ai pas compris."},
+{id:51,m:2,n:"A2",ar:"لَمْ",tr:"lam",r:"—",nat:"négation",g:"Négation du passé, suivie de l'inaccompli APOCOPÉ : لَمْ أَفْهَمْ",fr:"ne… pas (passé)",lar:"",ltr:"",lw:"Inusité à l'oral : le levantin dit مَا + accompli.",xa:"لَمْ أَفْهَمْ.",xf:"Je n'ai pas compris."},
+{id:52,m:2,n:"A2",ar:"لَنْ",tr:"lan",r:"—",nat:"négation",g:"Négation du futur, suivie du subjonctif : لَنْ أَذْهَبَ",fr:"ne… pas (futur)",lar:"مَا رَح",ltr:"mā raḥ",lw:"Inusité à l'oral.",xa:"لَنْ أَذْهَبَ.",xf:"Je n'irai pas."},
+{id:53,m:2,n:"A1",ar:"لَيْسَ",tr:"laysa",r:"ل-ي-س",nat:"verbe défectif",g:"Se conjugue à l'accompli seulement : لَيْسَ، لَيْسَتْ، لَسْتُ، لَسْنَا… ; nie les phrases nominales et met l'attribut à l'accusatif",fr:"ne pas être",lar:"مِش",ltr:"miš",lw:"Le levantin remplace cette conjugaison par مِش, invariable.",xa:"لَيْسَ هٰذَا صَحِيحًا.",xf:"Ce n'est pas exact."},
+{id:54,m:2,n:"A1",ar:"نَعَمْ",tr:"naʿam",r:"—",nat:"particule",g:"Réponse affirmative ; alternative plus soutenue : أَجَلْ",fr:"oui",lar:"أَيْوَا",ltr:"aywa",lw:"",xa:"نَعَمْ، أَفْهَمُ.",xf:"Oui, je comprends."},
+
+/* ---------- MODULE 3 ---------- */
+{id:55,m:3,n:"A1",ar:"فِي",tr:"fī",r:"—",nat:"préposition",g:"Régit le génitif ; suffixée : فِيهِ، فِيهَا",fr:"dans, à, en",lar:"بِـ / فِي",ltr:"bi- / fī",lw:"",xa:"أَنَا فِي البَيْتِ.",xf:"Je suis à la maison."},
+{id:56,m:3,n:"A1",ar:"مِنْ",tr:"min",r:"—",nat:"préposition",g:"Régit le génitif ; devient مِنَ devant l'article : مِنَ المَدِينَةِ",fr:"de, depuis (origine)",lar:"مِن",ltr:"min",lw:"",xa:"هُوَ مِنْ لُبْنَانَ.",xf:"Il est du Liban."},
+{id:57,m:3,n:"A1",ar:"إِلَى",tr:"ilā",r:"—",nat:"préposition",g:"Régit le génitif ; suffixée en إِلَيْهِ. À ne pas confondre avec إِلَّا « sauf »",fr:"vers, à, jusqu'à",lar:"لَـ / عَ",ltr:"la- / ʿa",lw:"إِلَى ne se dit pratiquement pas à l'oral.",xa:"أَذْهَبُ إِلَى السُّوقِ.",xf:"Je vais au marché."},
+{id:58,m:3,n:"A1",ar:"عَلَى",tr:"ʿalā",r:"—",nat:"préposition",g:"Régit le génitif ; suffixée en عَلَيْهِ، عَلَيْكَ",fr:"sur",lar:"عَ",ltr:"ʿa",lw:"",xa:"الكِتَابُ عَلَى الطَّاوِلَةِ.",xf:"Le livre est sur la table."},
+{id:59,m:3,n:"A1",ar:"بِـ",tr:"bi-",r:"—",nat:"préposition",g:"Soudée au mot suivant, qui passe au génitif",fr:"avec (moyen), par, à",lar:"بِـ",ltr:"bi-",lw:"",xa:"أَكْتُبُ بِالقَلَمِ.",xf:"J'écris avec le stylo."},
+{id:60,m:3,n:"A1",ar:"لِـ",tr:"li-",r:"—",nat:"préposition",g:"Soudée ; devient لَـ devant un pronom suffixe : لَهُ، لَكَ",fr:"pour, à (appartenance)",lar:"لَـ",ltr:"la-",lw:"",xa:"هٰذَا الكِتَابُ لِي.",xf:"Ce livre est à moi."},
+{id:61,m:3,n:"A1",ar:"مَعَ",tr:"maʿa",r:"—",nat:"préposition",g:"Accompagnement ; suffixée en مَعِي، مَعَهُ",fr:"avec (compagnie)",lar:"مَع",ltr:"maʿ",lw:"",xa:"تَعَالَ مَعِي.",xf:"Viens avec moi."},
+{id:143,vl:1,m:3,n:"A1",ar:"مَعًا",tr:"maʿan",r:"—",nat:"adverbe",g:"Accusatif indéfini figé formé sur مَعَ ; se place en fin de phrase",fr:"ensemble",lar:"سَوَا",ltr:"sawa",lw:"مَعًا est écrit ; l'oral dit سَوَا.",xa:"نَشْرَبُ الشَّايَ مَعًا.",xf:"Nous buvons le thé ensemble."},
+{id:62,m:3,n:"A2",ar:"عَنْ",tr:"ʿan",r:"—",nat:"préposition",g:"Régit le génitif ; suffixée en عَنْهُ",fr:"au sujet de ; loin de",lar:"عَن",ltr:"ʿan",lw:"",xa:"نَتَكَلَّمُ عَنِ الدَّرْسِ.",xf:"Nous parlons de la leçon."},
+{id:63,m:3,n:"A1",ar:"عِنْدَ",tr:"ʿinda",r:"ع-ن-د",nat:"préposition",g:"Sert à exprimer la possession, l'arabe n'ayant pas de verbe « avoir » : عِنْدِي، عِنْدَكَ، عِنْدَهُ",fr:"chez ; avoir",lar:"عِنْد",ltr:"ʿind",lw:"",xa:"عِنْدِي سُؤَالٌ.",xf:"J'ai une question."},
+{id:64,m:3,n:"A1",ar:"بَيْنَ",tr:"bayna",r:"ب-ي-ن",nat:"adverbe de lieu",g:"Ẓarf makān, accusatif figé, suivi du génitif ; se répète avec وَ pour deux termes",fr:"entre",lar:"بَين",ltr:"bēn",lw:"",xa:"البَيْتُ بَيْنَ المَدْرَسَةِ وَالسُّوقِ.",xf:"La maison est entre l'école et le marché."},
+{id:65,m:3,n:"A1",ar:"أَمَامَ",tr:"amāma",r:"أ-م-م",nat:"adverbe de lieu",g:"Ẓarf makān, accusatif figé, suivi du génitif",fr:"devant",lar:"قُدَّام",ltr:"ʾuddām",lw:"",xa:"أَنَا أَمَامَ البَابِ.",xf:"Je suis devant la porte."},
+{id:66,m:3,n:"A1",ar:"وَرَاءَ",tr:"warāʾa",r:"و-ر-ي",nat:"adverbe de lieu",g:"Ẓarf makān, accusatif figé ; synonyme خَلْفَ",fr:"derrière",lar:"وَرَا",ltr:"wara",lw:"",xa:"الحَدِيقَةُ وَرَاءَ البَيْتِ.",xf:"Le jardin est derrière la maison."},
+{id:67,m:3,n:"A1",ar:"تَحْتَ",tr:"taḥta",r:"ت-ح-ت",nat:"adverbe de lieu",g:"Ẓarf makān, accusatif figé, suivi du génitif",fr:"sous",lar:"تَحْت",ltr:"taḥt",lw:"",xa:"القِطُّ تَحْتَ الطَّاوِلَةِ.",xf:"Le chat est sous la table."},
+{id:68,m:3,n:"A1",ar:"فَوْقَ",tr:"fawqa",r:"ف-و-ق",nat:"adverbe de lieu",g:"Ẓarf makān ; « au-dessus de », sans contact, à la différence de عَلَى",fr:"au-dessus de",lar:"فَوْق",ltr:"fōʾ",lw:"",xa:"الصُّورَةُ فَوْقَ السَّرِيرِ.",xf:"Le tableau est au-dessus du lit."},
+{id:69,m:3,n:"A1",ar:"بِجَانِبِ",tr:"biǧānibi",r:"ج-ن-ب",nat:"locution prépositive",g:"Composé de بِ + جَانِب « côté » ; suivi du génitif",fr:"à côté de",lar:"جَنْب / حَدّ",ltr:"ǧanb / ḥadd",lw:"",xa:"المَقْهَى بِجَانِبِ البَنْكِ.",xf:"Le café est à côté de la banque."},
+{id:70,m:3,n:"A2",ar:"مُقَابِلَ",tr:"muqābila",r:"ق-ب-ل",nat:"adverbe de lieu",g:"Participe actif de forme III employé comme ẓarf",fr:"en face de",lar:"قْبَال",ltr:"ʾbāl",lw:"",xa:"المَحَطَّةُ مُقَابِلَ الفُنْدُقِ.",xf:"La gare est en face de l'hôtel."},
+{id:71,m:3,n:"A2",ar:"حَوْلَ",tr:"ḥawla",r:"ح-و-ل",nat:"adverbe de lieu",g:"Ẓarf makān ; aussi « au sujet de » dans la langue écrite",fr:"autour de",lar:"حَوَالَيْن",ltr:"ḥawalēn",lw:"",xa:"جَلَسْنَا حَوْلَ الطَّاوِلَةِ.",xf:"Nous nous sommes assis autour de la table."},
+{id:72,m:3,n:"A1",ar:"قَرِيب",tr:"qarīb",r:"ق-ر-ب",nat:"adjectif",g:"Fém. قَرِيبَة، plur. قَرِيبُونَ / أَقْرِبَاء ; se construit avec مِنْ",fr:"proche, près",lar:"قْرِيب",ltr:"ʾrīb",lw:"",xa:"البَيْتُ قَرِيبٌ مِنَ الجَامِعَةِ.",xf:"La maison est près de l'université."},
+{id:142,vl:1,m:3,n:"A2",ar:"قُرْبَ",tr:"qurba",r:"ق-ر-ب",nat:"adverbe de lieu",g:"Ẓarf makān, accusatif figé, suivi du génitif ; même racine que قَرِيب, mais sans مِنْ",fr:"près de",lar:"قْرِيب مِن",ltr:"ʾrīb min",lw:"L'oral passe par l'adjectif : قْرِيب مِن.",xa:"تَسْكُنُ فِي بَيْتٍ قُرْبَ النَّهْرِ.",xf:"Elle habite une maison près du fleuve."},
+{id:73,m:3,n:"A1",ar:"بَعِيد",tr:"baʿīd",r:"ب-ع-د",nat:"adjectif",g:"Fém. بَعِيدَة، plur. بَعِيدُونَ ; se construit avec عَنْ",fr:"loin, éloigné",lar:"بْعِيد",ltr:"bʿīd",lw:"",xa:"السُّوقُ بَعِيدٌ عَنْ هُنَا.",xf:"Le marché est loin d'ici."},
+{id:74,m:3,n:"A2",ar:"دَاخِل",tr:"dāḫil",r:"د-خ-ل",nat:"nom / adverbe",g:"Masc. ; participe actif de دَخَلَ, employé comme adverbe à l'accusatif : دَاخِلَ البَيْتِ",fr:"intérieur, à l'intérieur",lar:"جُوَّا",ltr:"ǧuwwa",lw:"",xa:"اِنْتَظِرْ دَاخِلَ المَحَطَّةِ.",xf:"Attends à l'intérieur de la gare."},
+{id:75,m:3,n:"A2",ar:"خَارِج",tr:"ḫāriǧ",r:"خ-ر-ج",nat:"nom / adverbe",g:"Masc. ; participe actif de خَرَجَ",fr:"extérieur, dehors",lar:"بَرَّا",ltr:"barra",lw:"",xa:"هُمْ خَارِجَ البَيْتِ.",xf:"Ils sont dehors."},
+{id:76,m:3,n:"A1",ar:"هُنَا",tr:"hunā",r:"—",nat:"adverbe de lieu",g:"Invariable",fr:"ici",lar:"هَوْن",ltr:"hōn",lw:"",xa:"تَعَالَ هُنَا.",xf:"Viens ici."},
+{id:77,m:3,n:"A1",ar:"هُنَاكَ",tr:"hunāka",r:"—",nat:"adverbe de lieu",g:"Invariable ; sert aussi de présentatif « il y a »",fr:"là-bas ; il y a",lar:"هُنِيك",ltr:"hunīk",lw:"Pour « il y a », le levantin dit فِي fī.",xa:"هُنَاكَ مَطْعَمٌ جَيِّدٌ.",xf:"Il y a un bon restaurant."},
+{id:78,m:3,n:"A1",ar:"يَمِين",tr:"yamīn",r:"ي-م-ن",nat:"nom",g:"Masc., plur. أَيْمَان ; s'emploie surtout dans عَلَى اليَمِينِ",fr:"droite",lar:"يَمِين",ltr:"yamīn",lw:"",xa:"اِلْبَنْكُ عَلَى اليَمِينِ.",xf:"La banque est à droite."},
+{id:79,m:3,n:"A1",ar:"يَسَار",tr:"yasār",r:"ي-س-ر",nat:"nom",g:"Masc. ; s'emploie surtout dans عَلَى اليَسَارِ",fr:"gauche",lar:"شْمَال",ltr:"šmāl",lw:"Le levantin préfère شْمَال ; يَسَار reste compris.",xa:"البَيْتُ عَلَى اليَسَارِ.",xf:"La maison est à gauche."},
+{id:80,m:3,n:"A2",ar:"وَسَط",tr:"wasaṭ",r:"و-س-ط",nat:"nom",g:"Masc., plur. أَوْسَاط ; employé en annexion : وَسَطَ المَدِينَةِ",fr:"milieu, centre",lar:"وَسَط",ltr:"wasaṭ",lw:"",xa:"نَسْكُنُ فِي وَسَطِ المَدِينَةِ.",xf:"Nous habitons au centre-ville."},
+
+/* ---------- MODULE 4 ---------- */
+{id:81,m:4,n:"A1",ar:"اليَوْم",tr:"al-yawm",r:"ي-و-م",nat:"adverbe",g:"Nom déterminé employé adverbialement, à l'accusatif : اليَوْمَ",fr:"aujourd'hui",lar:"اليَوم",ltr:"il-yōm",lw:"",xa:"اليَوْمَ عِنْدِي دَرْسٌ.",xf:"Aujourd'hui j'ai un cours."},
+{id:82,m:4,n:"A1",ar:"أَمْسِ",tr:"amsi",r:"—",nat:"adverbe",g:"Invariable, toujours terminé par une kasra",fr:"hier",lar:"مْبَارِح",ltr:"mbāriḥ",lw:"أَمْسِ est purement écrit en levantin.",xa:"أَمْسِ كُنْتُ مَرِيضًا.",xf:"Hier j'étais malade."},
+{id:83,m:4,n:"A1",ar:"غَدًا",tr:"ġadan",r:"غ-د-و",nat:"adverbe",g:"Accusatif indéfini du nom غَد « lendemain »",fr:"demain",lar:"بُكْرَا",ltr:"bukra",lw:"",xa:"سَأَذْهَبُ غَدًا.",xf:"J'irai demain."},
+{id:84,m:4,n:"A1",ar:"الآنَ",tr:"al-āna",r:"—",nat:"adverbe",g:"Accusatif figé ; s'écrit avec un alif madda",fr:"maintenant",lar:"هَلَّق",ltr:"hallaʾ",lw:"",xa:"مَاذَا تَفْعَلُ الآنَ؟",xf:"Que fais-tu maintenant ?"},
+{id:85,m:4,n:"A1",ar:"بَعْدَ",tr:"baʿda",r:"ب-ع-د",nat:"adverbe de temps",g:"Ẓarf zamān, accusatif figé, suivi du génitif",fr:"après",lar:"بَعْد",ltr:"baʿd",lw:"",xa:"سَأَعُودُ بَعْدَ سَاعَةٍ.",xf:"Je reviens dans une heure."},
+{id:86,m:4,n:"A1",ar:"قَبْلَ",tr:"qabla",r:"ق-ب-ل",nat:"adverbe de temps",g:"Ẓarf zamān, accusatif figé, suivi du génitif",fr:"avant",lar:"قَبِل",ltr:"ʾabl",lw:"",xa:"وَصَلْتُ قَبْلَ الدَّرْسِ.",xf:"Je suis arrivé avant le cours."},
+{id:87,m:4,n:"A1",ar:"دَائِمًا",tr:"dāʾiman",r:"د-و-م",nat:"adverbe de fréquence",g:"Accusatif indéfini du participe دَائِم « permanent »",fr:"toujours",lar:"دَايْمًا",ltr:"dāyman",lw:"",xa:"أَشْرَبُ القَهْوَةَ دَائِمًا.",xf:"Je bois toujours du café."},
+{id:88,m:4,n:"A1",ar:"أَحْيَانًا",tr:"aḥyānan",r:"ح-ي-ن",nat:"adverbe de fréquence",g:"Accusatif indéfini du pluriel أَحْيَان « moments ». Variante vue en leçon : فِي بَعْضِ الأَحْيَانِ",fr:"parfois",lar:"أَحْيَانًا / مَرَّات",ltr:"aḥyānan / marrāt",lw:"",xa:"أَحْيَانًا أَذْهَبُ إِلَى السِّينَمَا.",xf:"Parfois je vais au cinéma."},
+{id:89,m:4,n:"A1",ar:"نَادِرًا",tr:"nādiran",r:"ن-د-ر",nat:"adverbe de fréquence",g:"Accusatif indéfini ; souvent renforcé en نَادِرًا مَا",fr:"rarement",lar:"نَادِرًا",ltr:"nādiran",lw:"L'oral préfère une tournure comme مِش كْتِير « pas beaucoup ».",xa:"نَادِرًا مَا أَخْرُجُ لَيْلًا.",xf:"Je sors rarement le soir."},
+{id:90,m:4,n:"A1",ar:"أَبَدًا",tr:"abadan",r:"أ-ب-د",nat:"adverbe de fréquence",g:"Accusatif indéfini ; signifie « jamais » SEULEMENT avec une négation, sinon « à jamais »",fr:"jamais (avec négation)",lar:"أَبَدًا",ltr:"abadan",lw:"",xa:"لَا أَشْرَبُ الشَّايَ أَبَدًا.",xf:"Je ne bois jamais de thé."},
+{id:91,m:4,n:"A1",ar:"عَادَةً",tr:"ʿādatan",r:"ع-و-د",nat:"adverbe de fréquence",g:"Accusatif indéfini du nom عَادَة « habitude ». Variante vue en leçon : بِالعَادَةِ",fr:"d'habitude",lar:"عَادَةً",ltr:"ʿādatan",lw:"",xa:"عَادَةً أَسْتَيْقِظُ مُبَكِّرًا.",xf:"D'habitude je me lève tôt."},
+{id:92,m:4,n:"A2",ar:"مُبَكِّرًا",tr:"mubakkiran",r:"ب-ك-ر",nat:"adverbe",g:"Accusatif indéfini du participe de forme II",fr:"tôt",lar:"بَكِّير",ltr:"bakkīr",lw:"",xa:"وَصَلْتُ مُبَكِّرًا.",xf:"Je suis arrivé tôt."},
+{id:93,m:4,n:"A2",ar:"مُتَأَخِّرًا",tr:"mutaʾaḫḫiran",r:"أ-خ-ر",nat:"adverbe",g:"Accusatif indéfini du participe de forme V",fr:"tard, en retard",lar:"مْتَأَخِّر",ltr:"mtaʾaḫḫir",lw:"",xa:"وَصَلَ مُتَأَخِّرًا.",xf:"Il est arrivé en retard."},
+{id:94,m:4,n:"A1",ar:"حَالًا",tr:"ḥālan",r:"ح-و-ل",nat:"adverbe",g:"Accusatif indéfini du nom حَال « état »",fr:"tout de suite",lar:"هَلَّق / حَالًا",ltr:"hallaʾ / ḥālan",lw:"",xa:"سَآتِي حَالًا.",xf:"J'arrive tout de suite."},
+{id:95,m:4,n:"A1",ar:"صَبَاح",tr:"ṣabāḥ",r:"ص-ب-ح",nat:"nom",g:"Masc. ; adverbial dans صَبَاحًا « le matin »",fr:"matin",lar:"صُبْح",ltr:"ṣubḥ",lw:"",xa:"أَدْرُسُ فِي الصَّبَاحِ.",xf:"J'étudie le matin."},
+{id:96,m:4,n:"A1",ar:"ظُهْر",tr:"ẓuhr",r:"ظ-ه-ر",nat:"nom",g:"Masc. ; adverbial dans ظُهْرًا « à midi »",fr:"midi",lar:"ضُهْر",ltr:"ḍuhr",lw:"",xa:"نَأْكُلُ فِي الظُّهْرِ.",xf:"Nous mangeons à midi."},
+{id:97,m:4,n:"A1",ar:"مَسَاء",tr:"masāʾ",r:"م-س-و",nat:"nom",g:"Masc., plur. أَمْسِيَة ; adverbial dans مَسَاءً « le soir »",fr:"soir",lar:"مَسَا",ltr:"masa",lw:"",xa:"أَعُودُ فِي المَسَاءِ.",xf:"Je rentre le soir."},
+{id:98,m:4,n:"A1",ar:"لَيْل",tr:"layl",r:"ل-ي-ل",nat:"nom",g:"Masc., collectif ; l'unité est لَيْلَة (fém.), plur. لَيَالٍ",fr:"nuit",lar:"لَيل",ltr:"lēl",lw:"",xa:"أَقْرَأُ فِي اللَّيْلِ.",xf:"Je lis la nuit."},
+{id:99,m:4,n:"A1",ar:"يَوْم",tr:"yawm",r:"ي-و-م",nat:"nom",g:"Masc., plur. أَيَّام",fr:"jour",lar:"يَوم",ltr:"yōm",lw:"",xa:"كُلَّ يَوْمٍ أَدْرُسُ.",xf:"Chaque jour j'étudie."},
+{id:100,m:4,n:"A1",ar:"أُسْبُوع",tr:"usbūʿ",r:"س-ب-ع",nat:"nom",g:"Masc., plur. أَسَابِيع",fr:"semaine",lar:"أُسْبُوع / جُمْعَة",ltr:"usbūʿ / ǧumʿa",lw:"",xa:"فِي الأُسْبُوعِ سَبْعَةُ أَيَّامٍ.",xf:"La semaine a sept jours."},
+{id:101,m:4,n:"A1",ar:"شَهْر",tr:"šahr",r:"ش-ه-ر",nat:"nom",g:"Masc., plur. شُهُور ou أَشْهُر",fr:"mois",lar:"شَهِر",ltr:"šahr",lw:"",xa:"سَأَبْقَى شَهْرًا.",xf:"Je resterai un mois."},
+{id:102,m:4,n:"A1",ar:"سَنَة",tr:"sana",r:"س-ن-و",nat:"nom",g:"Fém., plur. سَنَوَات (aussi سِنُون)",fr:"année, an",lar:"سِنِة",ltr:"sine",lw:"",xa:"أَدْرُسُ العَرَبِيَّةَ مُنْذُ سَنَةٍ.",xf:"J'étudie l'arabe depuis un an."},
+{id:103,m:4,n:"A1",ar:"سَاعَة",tr:"sāʿa",r:"س-و-ع",nat:"nom",g:"Fém., plur. سَاعَات ; signifie aussi « montre, horloge »",fr:"heure",lar:"سَاعَة",ltr:"sāʿa",lw:"",xa:"سَأَعُودُ بَعْدَ سَاعَةٍ.",xf:"Je reviens dans une heure."},
+{id:104,m:4,n:"A2",ar:"دَقِيقَة",tr:"daqīqa",r:"د-ق-ق",nat:"nom",g:"Fém., plur. دَقَائِق",fr:"minute",lar:"دْقِيقَة",ltr:"dʾīʾa",lw:"",xa:"اِنْتَظِرْ خَمْسَ دَقَائِقَ.",xf:"Attends cinq minutes."},
+{id:105,m:4,n:"A1",ar:"مَرَّة",tr:"marra",r:"م-ر-ر",nat:"nom",g:"Fém., plur. مَرَّات ; nom de fois (ism al-marra)",fr:"fois",lar:"مَرَّة",ltr:"marra",lw:"",xa:"كَمْ مَرَّةً فِي الأُسْبُوعِ؟",xf:"Combien de fois par semaine ?"},
+{id:106,m:4,n:"A2",ar:"لَحْظَة",tr:"laḥẓa",r:"ل-ح-ظ",nat:"nom",g:"Fém., plur. لَحَظَات",fr:"instant, moment",lar:"لَحْظَة",ltr:"laḥẓa",lw:"",xa:"لَحْظَةً مِنْ فَضْلِكَ.",xf:"Un instant s'il te plaît."},
+
+/* ---------- MODULE 5 ---------- */
+{id:107,m:5,n:"A1",ar:"وَاحِد",tr:"wāḥid",r:"و-ح-د",nat:"numéral",g:"Fém. وَاحِدَة ; se place APRÈS le nom, comme un adjectif : كِتَابٌ وَاحِدٌ",fr:"un, une",lar:"وَاحَد",ltr:"wāḥad",lw:"",xa:"عِنْدِي كِتَابٌ وَاحِدٌ.",xf:"J'ai un seul livre."},
+{id:108,m:5,n:"A1",ar:"اِثْنَان",tr:"iṯnān",r:"ث-ن-ي",nat:"numéral",g:"Fém. اِثْنَتَانِ ; rarement exprimé, le duel du nom suffit",fr:"deux",lar:"تْنَين",ltr:"tnēn",lw:"",xa:"عِنْدِي كِتَابَانِ.",xf:"J'ai deux livres."},
+{id:109,m:5,n:"A1",ar:"ثَلَاثَة",tr:"ṯalāṯa",r:"ث-ل-ث",nat:"numéral",g:"Forme en ـة avec un nom MASCULIN ; forme ثَلَاث avec un nom féminin",fr:"trois",lar:"تْلَاتِة",ltr:"tlāte",lw:"",xa:"ثَلَاثَةُ كُتُبٍ.",xf:"Trois livres."},
+{id:110,m:5,n:"A1",ar:"أَرْبَعَة",tr:"arbaʿa",r:"ر-ب-ع",nat:"numéral",g:"Fém. أَرْبَع ; même inversion de genre",fr:"quatre",lar:"أَرْبْعَة",ltr:"arbʿa",lw:"",xa:"أَرْبَعُ طَالِبَاتٍ.",xf:"Quatre étudiantes."},
+{id:111,m:5,n:"A1",ar:"خَمْسَة",tr:"ḫamsa",r:"خ-م-س",nat:"numéral",g:"Fém. خَمْس",fr:"cinq",lar:"خَمْسِة",ltr:"ḫamse",lw:"",xa:"خَمْسَةُ أَيَّامٍ.",xf:"Cinq jours."},
+{id:112,m:5,n:"A1",ar:"سِتَّة",tr:"sitta",r:"س-د-س",nat:"numéral",g:"Fém. سِتّ ; racine irrégulière, l'ordinal est سَادِس",fr:"six",lar:"سِتِّة",ltr:"sitte",lw:"",xa:"سِتَّةُ أَشْهُرٍ.",xf:"Six mois."},
+{id:113,m:5,n:"A1",ar:"سَبْعَة",tr:"sabʿa",r:"س-ب-ع",nat:"numéral",g:"Fém. سَبْع",fr:"sept",lar:"سَبْعَة",ltr:"sabʿa",lw:"",xa:"سَبْعَةُ أَيَّامٍ فِي الأُسْبُوعِ.",xf:"Sept jours dans la semaine."},
+{id:114,m:5,n:"A1",ar:"ثَمَانِيَة",tr:"ṯamāniya",r:"ث-م-ن",nat:"numéral",g:"Fém. ثَمَانٍ",fr:"huit",lar:"تْمَانِة",ltr:"tmāne",lw:"",xa:"ثَمَانِيَةُ طُلَّابٍ.",xf:"Huit étudiants."},
+{id:115,m:5,n:"A1",ar:"تِسْعَة",tr:"tisʿa",r:"ت-س-ع",nat:"numéral",g:"Fém. تِسْع",fr:"neuf",lar:"تِسْعَة",ltr:"tisʿa",lw:"",xa:"تِسْعَةُ أَشْخَاصٍ.",xf:"Neuf personnes."},
+{id:116,m:5,n:"A1",ar:"عَشَرَة",tr:"ʿašara",r:"ع-ش-ر",nat:"numéral",g:"Fém. عَشْر ; dernier numéral à inverser le genre",fr:"dix",lar:"عَشْرَة",ltr:"ʿašra",lw:"",xa:"عَشَرَةُ كُتُبٍ.",xf:"Dix livres."},
+{id:117,m:5,n:"A1",ar:"عِشْرُونَ",tr:"ʿišrūna",r:"ع-ش-ر",nat:"numéral",g:"Invariable en genre ; se décline comme un pluriel régulier (عِشْرِينَ aux cas obliques) ; nom compté au singulier accusatif",fr:"vingt",lar:"عِشْرِين",ltr:"ʿišrīn",lw:"",xa:"عِشْرُونَ يَوْمًا.",xf:"Vingt jours."},
+{id:118,m:5,n:"A1",ar:"ثَلَاثُونَ",tr:"ṯalāṯūna",r:"ث-ل-ث",nat:"numéral",g:"Invariable en genre",fr:"trente",lar:"تْلَاتِين",ltr:"tlātīn",lw:"",xa:"ثَلَاثُونَ دَقِيقَةً.",xf:"Trente minutes."},
+{id:119,m:5,n:"A2",ar:"أَرْبَعُونَ",tr:"arbaʿūna",r:"ر-ب-ع",nat:"numéral",g:"Invariable en genre",fr:"quarante",lar:"أَرْبْعِين",ltr:"arbʿīn",lw:"",xa:"أَرْبَعُونَ سَنَةً.",xf:"Quarante ans."},
+{id:120,m:5,n:"A2",ar:"خَمْسُونَ",tr:"ḫamsūna",r:"خ-م-س",nat:"numéral",g:"Invariable en genre",fr:"cinquante",lar:"خَمْسِين",ltr:"ḫamsīn",lw:"",xa:"خَمْسُونَ شَخْصًا.",xf:"Cinquante personnes."},
+{id:121,m:5,n:"A1",ar:"مِائَة",tr:"miʾa",r:"م-أ-ي",nat:"nom de nombre",g:"Fém., plur. مِئَات ; s'écrit traditionnellement مائة mais se prononce miʾa ; suivi du singulier génitif",fr:"cent",lar:"مِيِّة",ltr:"miyye",lw:"",xa:"مِائَةُ كِتَابٍ.",xf:"Cent livres."},
+{id:122,m:5,n:"A1",ar:"أَلْف",tr:"alf",r:"أ-ل-ف",nat:"nom de nombre",g:"Masc., plur. آلَاف ; suivi du singulier génitif",fr:"mille",lar:"أَلْف",ltr:"alf",lw:"",xa:"أَلْفُ شُكْرٍ.",xf:"Mille mercis."},
+{id:123,m:5,n:"A2",ar:"مِلْيُون",tr:"milyūn",r:"—",nat:"nom de nombre",g:"Masc., plur. مَلَايِين ; emprunt",fr:"million",lar:"مِلْيُون",ltr:"milyōn",lw:"",xa:"مِلْيُونُ نَسَمَةٍ.",xf:"Un million d'habitants."},
+{id:124,m:5,n:"A1",ar:"أَوَّل",tr:"awwal",r:"أ-و-ل",nat:"ordinal",g:"Fém. أُولَى، plur. أَوَائِل ; diptote ; se place avant le nom en annexion : أَوَّلُ دَرْسٍ",fr:"premier",lar:"أَوَّل",ltr:"awwal",lw:"",xa:"هٰذَا أَوَّلُ دَرْسٍ.",xf:"C'est la première leçon."},
+{id:125,m:5,n:"A2",ar:"ثَانٍ",tr:"ṯānin",r:"ث-ن-ي",nat:"ordinal",g:"Nom défectif : الثَّانِي à l'état déterminé ; fém. ثَانِيَة",fr:"deuxième",lar:"تَانِي",ltr:"tāni",lw:"",xa:"الدَّرْسُ الثَّانِي صَعْبٌ.",xf:"La deuxième leçon est difficile."},
+{id:126,m:5,n:"A2",ar:"ثَالِث",tr:"ṯāliṯ",r:"ث-ل-ث",nat:"ordinal",g:"Fém. ثَالِثَة ; schème فَاعِل, régulier pour les ordinaux 2 à 10",fr:"troisième",lar:"تَالِت",ltr:"tālit",lw:"",xa:"الطَّابِقُ الثَّالِثُ.",xf:"Le troisième étage."},
+{id:127,m:5,n:"A2",ar:"رَابِع",tr:"rābiʿ",r:"ر-ب-ع",nat:"ordinal",g:"Fém. رَابِعَة",fr:"quatrième",lar:"رَابِع",ltr:"rābiʿ",lw:"",xa:"المَرَّةُ الرَّابِعَةُ.",xf:"La quatrième fois."},
+{id:128,m:5,n:"A1",ar:"أَخِير",tr:"aḫīr",r:"أ-خ-ر",nat:"adjectif",g:"Fém. أَخِيرَة ; souvent en annexion : آخِرُ دَرْسٍ",fr:"dernier",lar:"أَخِير",ltr:"aḫīr",lw:"",xa:"هٰذَا الدَّرْسُ الأَخِيرُ.",xf:"C'est la dernière leçon."},
+{id:129,m:5,n:"A1",ar:"كُلّ",tr:"kull",r:"ك-ل-ل",nat:"quantifieur",g:"Premier terme d'annexion ; + indéfini = « chaque », + défini = « tout le »",fr:"tout, chaque",lar:"كِلّ",ltr:"kill",lw:"",xa:"كُلَّ يَوْمٍ أَدْرُسُ.",xf:"Chaque jour j'étudie."},
+{id:130,m:5,n:"A2",ar:"بَعْض",tr:"baʿḍ",r:"ب-ع-ض",nat:"quantifieur",g:"Premier terme d'annexion, suivi d'un pluriel génitif défini",fr:"quelques, certains",lar:"بَعْض / كَم",ltr:"baʿḍ / kam",lw:"",xa:"بَعْضُ الطُّلَّابِ غَائِبُونَ.",xf:"Certains étudiants sont absents."},
+{id:131,m:5,n:"A1",ar:"كَثِير",tr:"kaṯīr",r:"ك-ث-ر",nat:"adjectif / quantifieur",g:"Fém. كَثِيرَة ; suivi de مِنْ pour quantifier",fr:"beaucoup, nombreux",lar:"كْتِير",ltr:"ktīr",lw:"",xa:"كَثِيرٌ مِنَ الطُّلَّابِ.",xf:"Beaucoup d'étudiants."},
+{id:144,vl:1,m:5,n:"A1",ar:"جِدًّا",tr:"ǧiddan",r:"ج-د-د",nat:"adverbe",g:"Accusatif indéfini figé ; se place APRÈS l'adjectif : كَبِيرٌ جِدًّا",fr:"très",lar:"كْتِير",ltr:"ktīr",lw:"L'oral dit كْتِير, toujours après l'adjectif : كْبِير كْتِير.",xa:"هُوَ سَعِيدٌ جِدًّا.",xf:"Il est très heureux."},
+{id:132,m:5,n:"A1",ar:"قَلِيل",tr:"qalīl",r:"ق-ل-ل",nat:"adjectif / quantifieur",g:"Fém. قَلِيلَة ; suivi de مِنْ",fr:"peu, peu nombreux",lar:"شْوَيّ",ltr:"šwayy",lw:"",xa:"قَلِيلٌ مِنَ المَاءِ.",xf:"Un peu d'eau."},
+{id:133,m:5,n:"A2",ar:"أَكْثَر",tr:"akṯar",r:"ك-ث-ر",nat:"élatif",g:"Comparatif de كَثِير ; diptote ; suivi de مِنْ pour comparer",fr:"plus, davantage",lar:"أَكْتَر",ltr:"aktar",lw:"",xa:"هٰذَا أَكْثَرُ مِنْ ذٰلِكَ.",xf:"Ceci est plus que cela."},
+{id:134,m:5,n:"A2",ar:"أَقَلّ",tr:"aqall",r:"ق-ل-ل",nat:"élatif",g:"Comparatif de قَلِيل ; diptote",fr:"moins",lar:"أَقَلّ",ltr:"aʾall",lw:"",xa:"أَقَلُّ مِنْ سَاعَةٍ.",xf:"Moins d'une heure."},
+{id:135,m:5,n:"A1",ar:"نِصْف",tr:"niṣf",r:"ن-ص-ف",nat:"nom",g:"Masc., plur. أَنْصَاف ; en annexion : نِصْفُ سَاعَةٍ",fr:"moitié, demi",lar:"نُصّ",ltr:"nuṣṣ",lw:"",xa:"نِصْفُ سَاعَةٍ.",xf:"Une demi-heure."},
+{id:136,m:5,n:"A2",ar:"رُبْع",tr:"rubʿ",r:"ر-ب-ع",nat:"nom",g:"Masc., plur. أَرْبَاع",fr:"quart",lar:"رُبْع",ltr:"rubʿ",lw:"",xa:"رُبْعُ سَاعَةٍ.",xf:"Un quart d'heure."},
+{id:137,m:5,n:"A1",ar:"كِيلُو",tr:"kīlū",r:"—",nat:"nom",g:"Masc., invariable ; emprunt, abrégé de كِيلُوغْرَام",fr:"kilo",lar:"كِيلُو",ltr:"kīlo",lw:"",xa:"كِيلُو مِنَ الطَّمَاطِمِ.",xf:"Un kilo de tomates."},
+{id:138,m:5,n:"A2",ar:"مِتْر",tr:"mitr",r:"—",nat:"nom",g:"Masc., plur. أَمْتَار ; emprunt",fr:"mètre",lar:"مِتِر",ltr:"mitr",lw:"",xa:"مِائَةُ مِتْرٍ.",xf:"Cent mètres."},
+{id:139,m:5,n:"A2",ar:"لِتْر",tr:"litr",r:"—",nat:"nom",g:"Masc., plur. لِتْرَات ; emprunt",fr:"litre",lar:"لِتِر",ltr:"litr",lw:"",xa:"لِتْرُ حَلِيبٍ.",xf:"Un litre de lait."},
+{id:140,m:5,n:"A2",ar:"عَدَد",tr:"ʿadad",r:"ع-د-د",nat:"nom",g:"Masc., plur. أَعْدَاد",fr:"nombre, quantité",lar:"عَدَد",ltr:"ʿadad",lw:"",xa:"عَدَدُ الطُّلَّابِ كَبِيرٌ.",xf:"Le nombre d'étudiants est élevé."},
+/* ---------- MODULE 6 ---------- */
+{id:201,vl:1,m:6,n:"A1",ar:"اِسْم",tr:"ism",r:"س-م-و",nat:"nom",g:"Masc., plur. أَسْمَاء ; hamza instable : l'alif ne se prononce pas après un autre mot (مَا اسْمُكَ = mā-smuka)",fr:"nom, prénom",lar:"اِسِم",ltr:"ism",lw:"",xa:"مَا اسْمُكِ؟",xf:"Comment t'appelles-tu ? (à une femme)"},
+{id:202,ak:1,m:6,n:"A1",ar:"رَجُل",tr:"raǧul",r:"ر-ج-ل",nat:"nom",g:"Masc., plur. رِجَال",fr:"homme",lar:"رِجَّال / زَلَمِة",ltr:"riǧǧāl / zalame",lw:"زَلَمِة est le mot familier le plus courant.",xa:"هٰذَا الرَّجُلُ مُعَلِّمٌ.",xf:"Cet homme est enseignant."},
+{id:203,ak:1,m:6,n:"A1",ar:"اِمْرَأَة",tr:"imraʾa",r:"م-ر-أ",nat:"nom",g:"Fém., plur. نِسَاء (tiré d'une autre racine) ; avec l'article : المَرْأَةُ, sans alif initial",fr:"femme",lar:"مَرَا",ltr:"mara",lw:"Plur. oral : نِسْوَان niswān.",xa:"المَرْأَةُ فِي البَيْتِ.",xf:"La femme est à la maison."},
+{id:204,ak:1,m:6,n:"A1",ar:"وَلَد",tr:"walad",r:"و-ل-د",nat:"nom",g:"Masc., plur. أَوْلَاد",fr:"garçon ; enfant",lar:"وَلَد",ltr:"walad",lw:"Plur. oral : وْلَاد wlād, qui veut dire aussi « les enfants » en général.",xa:"عِنْدِي وَلَدٌ وَبِنْتٌ.",xf:"J'ai un garçon et une fille."},
+{id:205,m:6,n:"A2",ar:"فَتَاة",tr:"fatāt",r:"ف-ت-ي",nat:"nom",g:"Fém., plur. فَتَيَات",fr:"jeune fille",lar:"صَبِيِّة",ltr:"ṣabiyye",lw:"فَتَاة est surtout écrit.",xa:"الفَتَاةُ طَالِبَةٌ.",xf:"La jeune fille est étudiante."},
+{id:206,m:6,n:"A1",ar:"طِفْل",tr:"ṭifl",r:"ط-ف-ل",nat:"nom",g:"Masc., plur. أَطْفَال ; fém. طِفْلَة",fr:"enfant (petit)",lar:"طِفِل / وَلَد",ltr:"ṭifil / walad",lw:"",xa:"الطِّفْلُ صَغِيرٌ.",xf:"L'enfant est petit."},
+{id:207,m:6,n:"A1",ar:"شَخْص",tr:"šaḫṣ",r:"ش-خ-ص",nat:"nom",g:"Masc., plur. أَشْخَاص ; sert à compter les gens",fr:"personne",lar:"شَخِص",ltr:"šaḫṣ",lw:"",xa:"فِي الغُرْفَةِ خَمْسَةُ أَشْخَاصٍ.",xf:"Il y a cinq personnes dans la pièce."},
+{id:208,m:6,n:"A1",ar:"نَاس",tr:"nās",r:"ن-و-س",nat:"nom",g:"Collectif, sans singulier ; accord au pluriel",fr:"les gens",lar:"نَاس / عَالَم",ltr:"nās / ʿālam",lw:"",xa:"النَّاسُ هُنَا لُطَفَاءُ.",xf:"Les gens ici sont gentils."},
+{id:209,vl:1,m:6,n:"A1",ar:"طَالِب",tr:"ṭālib",r:"ط-ل-ب",nat:"nom",g:"Masc., plur. طُلَّاب ; fém. طَالِبَة, plur. طَالِبَات",fr:"étudiant(e), élève",lar:"طَالِب / طَالْبِة",ltr:"ṭālib / ṭālbe",lw:"",xa:"أَنَا طَالِبَةٌ فِي الجَامِعَةِ.",xf:"Je suis étudiante à l'université."},
+{id:210,m:6,n:"A1",ar:"عُمْر",tr:"ʿumr",r:"ع-م-ر",nat:"nom",g:"Masc., plur. أَعْمَار ; l'âge se dit avec un suffixe : عُمْرِي",fr:"âge",lar:"عُمُر",ltr:"ʿumr",lw:"« Quel âge as-tu ? » se dit قَدَّيْش عُمْرَك؟",xa:"كَمْ عُمْرُكَ؟",xf:"Quel âge as-tu ?"},
+{id:211,vl:1,m:6,n:"A1",ar:"بَلَد",tr:"balad",r:"ب-ل-د",nat:"nom",g:"Masc. (parfois fém.), plur. بِلَاد / بُلْدَان",fr:"pays",lar:"بَلَد",ltr:"balad",lw:"À l'oral, بَلَد désigne aussi la ville ou le village d'origine.",xa:"مِنْ أَيِّ بَلَدٍ أَنْتَ؟",xf:"De quel pays es-tu ?"},
+{id:212,m:6,n:"A1",ar:"مَدِينَة",tr:"madīna",r:"م-د-ن",nat:"nom",g:"Fém., plur. مُدُن",fr:"ville",lar:"مَدِينِة",ltr:"madīne",lw:"",xa:"بَيْرُوتُ مَدِينَةٌ كَبِيرَةٌ.",xf:"Beyrouth est une grande ville."},
+{id:213,m:6,n:"A2",ar:"جِنْسِيَّة",tr:"ǧinsiyya",r:"ج-ن-س",nat:"nom",g:"Fém., plur. جِنْسِيَّات",fr:"nationalité",lar:"جِنْسِيِّة",ltr:"ǧinsiyye",lw:"",xa:"مَا جِنْسِيَّتُكَ؟",xf:"Quelle est ta nationalité ?"},
+{id:214,vl:1,ak:1,m:6,n:"A1",ar:"عَرَبِيّ",tr:"ʿarabiyy",r:"ع-ر-ب",nat:"adjectif",g:"Nisba ; fém. عَرَبِيَّة, plur. عَرَب (les Arabes). العَرَبِيَّةُ seul = la langue arabe",fr:"arabe",lar:"عَرَبِي",ltr:"ʿarabi",lw:"",xa:"أَدْرُسُ اللُّغَةَ العَرَبِيَّةَ.",xf:"J'étudie la langue arabe."},
+{id:215,vl:1,m:6,n:"A1",ar:"فَرَنْسِيّ",tr:"faransiyy",r:"—",nat:"adjectif",g:"Nisba ; fém. فَرَنْسِيَّة, plur. فَرَنْسِيُّونَ. الفَرَنْسِيَّةُ seul = le français",fr:"français",lar:"فْرَنْسَاوِي",ltr:"fransāwi",lw:"فَرَنْسِي se comprend, mais l'oral dit فْرَنْسَاوِي.",xa:"هِيَ فَرَنْسِيَّةٌ مِنْ بَارِيسَ.",xf:"Elle est française, de Paris."},
+{id:216,vl:1,m:6,n:"A1",ar:"سُورِيّ",tr:"sūriyy",r:"—",nat:"adjectif",g:"Nisba ; fém. سُورِيَّة, plur. سُورِيُّونَ",fr:"syrien",lar:"سُورِي",ltr:"sūri",lw:"",xa:"صَدِيقِي سُورِيٌّ.",xf:"Mon ami est syrien."},
+{id:217,m:6,n:"A1",ar:"لُبْنَانِيّ",tr:"lubnāniyy",r:"—",nat:"adjectif",g:"Nisba ; fém. لُبْنَانِيَّة, plur. لُبْنَانِيُّونَ",fr:"libanais",lar:"لِبْنَانِي",ltr:"libnāni",lw:"",xa:"المُغَنِّيَةُ لُبْنَانِيَّةٌ.",xf:"La chanteuse est libanaise."},
+{id:218,m:6,n:"A1",ar:"مِصْرِيّ",tr:"miṣriyy",r:"م-ص-ر",nat:"adjectif",g:"Nisba ; fém. مِصْرِيَّة, plur. مِصْرِيُّونَ",fr:"égyptien",lar:"مَصْرِي",ltr:"maṣri",lw:"Même forme en égyptien : مَصْرِي maṣri.",xa:"هٰذَا الفِيلْمُ مِصْرِيٌّ.",xf:"Ce film est égyptien."},
+{id:219,vl:1,m:6,n:"A1",ar:"مَغْرِبِيّ",tr:"maġribiyy",r:"غ-ر-ب",nat:"adjectif",g:"Nisba de المَغْرِب, dont on retire l'article ; fém. مَغْرِبِيَّة, plur. مَغَارِبَة",fr:"marocain",lar:"مَغْرِبِي",ltr:"maġribi",lw:"",xa:"هَلْ أَنْتِ مَغْرِبِيَّةٌ؟",xf:"Es-tu marocaine ?"},
+{id:220,vl:1,m:6,n:"A1",ar:"تُونِسِيّ",tr:"tūnisiyy",r:"—",nat:"adjectif",g:"Nisba ; fém. تُونِسِيَّة, plur. تُونِسِيُّونَ",fr:"tunisien",lar:"تُونْسِي",ltr:"tūnsi",lw:"",xa:"نَبِيلٌ تُونِسِيٌّ.",xf:"Nabil est tunisien."},
+{id:221,m:6,n:"A2",ar:"أَجْنَبِيّ",tr:"aǧnabiyy",r:"ج-ن-ب",nat:"adjectif",g:"Fém. أَجْنَبِيَّة, plur. أَجَانِب (diptote) ; même racine que بِجَانِبِ",fr:"étranger",lar:"أَجْنَبِي",ltr:"aǧnabi",lw:"",xa:"أَنَا أَجْنَبِيَّةٌ هُنَا.",xf:"Je suis étrangère ici."},
+{id:222,m:6,n:"A1",ar:"فَرَنْسَا",tr:"faransā",r:"—",nat:"nom propre",g:"Fém., invariable ; jamais de tanwīn",fr:"France",lar:"فْرَنْسَا",ltr:"fransa",lw:"",xa:"أَنَا مِنْ فَرَنْسَا.",xf:"Je suis de France."},
+{id:223,vl:1,m:6,n:"A1",ar:"لُبْنَان",tr:"lubnān",r:"—",nat:"nom propre",g:"Masc. ; diptote : pas de tanwīn, fatḥa au génitif (مِنْ لُبْنَانَ)",fr:"Liban",lar:"لِبْنَان",ltr:"libnān",lw:"",xa:"أُحِبُّ لُبْنَانَ كَثِيرًا.",xf:"J'aime beaucoup le Liban."},
+{id:224,vl:1,m:6,n:"A1",ar:"سُورِيَا",tr:"sūriyā",r:"—",nat:"nom propre",g:"Fém., invariable ; s'écrit aussi سُورِيَة",fr:"Syrie",lar:"سُورْيَا",ltr:"sūrya",lw:"",xa:"دِمَشْقُ فِي سُورِيَا.",xf:"Damas est en Syrie."},
+{id:225,m:6,n:"A1",ar:"مِصْر",tr:"miṣr",r:"م-ص-ر",nat:"nom propre",g:"Fém. ; diptote (مِنْ مِصْرَ)",fr:"Égypte",lar:"مَصِر",ltr:"maṣr",lw:"",xa:"القَاهِرَةُ عَاصِمَةُ مِصْرَ.",xf:"Le Caire est la capitale de l'Égypte."},
+{id:226,m:6,n:"A2",ar:"عُنْوَان",tr:"ʿunwān",r:"ع-ن-و-ن",nat:"nom",g:"Masc., plur. عَنَاوِين ; veut aussi dire « titre »",fr:"adresse",lar:"عِنْوَان",ltr:"ʿinwān",lw:"",xa:"مَا عُنْوَانُكَ؟",xf:"Quelle est ton adresse ?"},
+{id:227,m:6,n:"A1",ar:"رَقْم",tr:"raqm",r:"ر-ق-م",nat:"nom",g:"Masc., plur. أَرْقَام",fr:"numéro, chiffre",lar:"رَقِم",ltr:"raʾm",lw:"",xa:"مَا رَقْمُ هَاتِفِكِ؟",xf:"Quel est ton numéro de téléphone ?"},
+{id:228,m:6,n:"A1",ar:"شَابّ",tr:"šābb",r:"ش-ب-ب",nat:"nom / adjectif",g:"Masc., plur. شَبَاب / شُبَّان ; fém. شَابَّة, plur. شَابَّات",fr:"jeune (homme)",lar:"شَبّ",ltr:"šabb",lw:"الشَّبَاب à l'oral = « les jeunes, les gars ».",xa:"هُوَ شَابٌّ لَطِيفٌ.",xf:"C'est un jeune homme gentil."},
+{id:229,m:6,n:"A2",ar:"سَيِّد",tr:"sayyid",r:"س-و-د",nat:"nom",g:"Masc., plur. سَادَة ; formule d'adresse : السَّيِّدُ + nom",fr:"monsieur",lar:"أُسْتَاز",ltr:"ʾistāz",lw:"سَيِّد reste écrit et formel ; à l'oral, on dit أُسْتَاز ou le prénom.",xa:"السَّيِّدُ كَرِيمٌ فِي المَكْتَبِ.",xf:"Monsieur Karim est au bureau."},
+{id:230,m:6,n:"A2",ar:"سَيِّدَة",tr:"sayyida",r:"س-و-د",nat:"nom",g:"Fém., plur. سَيِّدَات ; سَيِّدَاتِي سَادَتِي « mesdames et messieurs »",fr:"madame, dame",lar:"مَدَام",ltr:"madām",lw:"",xa:"السَّيِّدَةُ سَلْمَى مُدِيرَةٌ.",xf:"Madame Salma est directrice."},
+
+/* ---------- MODULE 7 ---------- */
+{id:231,m:7,n:"A1",ar:"عَائِلَة",tr:"ʿāʾila",r:"ع-و-ل",nat:"nom",g:"Fém., plur. عَائِلَات",fr:"famille",lar:"عَيْلِة",ltr:"ʿēle",lw:"",xa:"عَائِلَتِي كَبِيرَةٌ.",xf:"Ma famille est grande."},
+{id:232,vl:1,ak:1,m:7,n:"A1",ar:"أَب",tr:"ab",r:"أ-ب-و",nat:"nom",g:"Masc., plur. آبَاء. L'un des cinq noms : أَبُوهُ / أَبَاهُ / أَبِيهِ ; avec ـِي : أَبِي",fr:"père",lar:"بَيّ / بَابَا",ltr:"bayy / bāba",lw:"أَبُو + prénom de l'aîné (« Abou Karim ») sert de surnom très courant.",xa:"أَبِي يَعْمَلُ فِي بَنْكٍ.",xf:"Mon père travaille dans une banque."},
+{id:233,vl:1,ak:1,m:7,n:"A1",ar:"أُمّ",tr:"umm",r:"أ-م-م",nat:"nom",g:"Fém., plur. أُمَّهَات ; avec suffixe : أُمِّي، أُمُّكَ",fr:"mère",lar:"إِمّ / مَامَا",ltr:"imm / māma",lw:"إِمّ + prénom de l'aîné sert aussi de surnom : إِمّ كَرِيم.",xa:"أُمِّي مُعَلِّمَةٌ.",xf:"Ma mère est enseignante."},
+{id:234,vl:1,ak:1,m:7,n:"A1",ar:"أَخ",tr:"aḫ",r:"أ-خ-و",nat:"nom",g:"Masc., plur. إِخْوَة / إِخْوَان. L'un des cinq noms : أَخُوكَ / أَخَاكَ / أَخِيكَ ; avec ـِي : أَخِي. أَخَوَانِ = duel, « deux frères »",fr:"frère",lar:"خَيّ",ltr:"ḫayy",lw:"Plur. oral : إِخْوِة iḫwe.",xa:"أَخِي أَكْبَرُ مِنِّي.",xf:"Mon frère est plus âgé que moi."},
+{id:235,vl:1,ak:1,m:7,n:"A1",ar:"أُخْت",tr:"uḫt",r:"أ-خ-و",nat:"nom",g:"Fém., plur. أَخَوَات ; même racine que أَخ",fr:"sœur",lar:"إِخْت",ltr:"iḫt",lw:"",xa:"لِي أُخْتٌ وَاحِدَةٌ.",xf:"J'ai une seule sœur."},
+{id:236,vl:1,m:7,n:"A1",ar:"اِبْن",tr:"ibn",r:"ب-ن-و",nat:"nom",g:"Masc., plur. أَبْنَاء ; hamza instable ; entre deux noms propres, s'écrit sans alif : مُحَمَّدُ بْنُ عَلِيٍّ",fr:"fils",lar:"اِبِن",ltr:"ibn",lw:"",xa:"اِبْنِي طِفْلٌ صَغِيرٌ.",xf:"Mon fils est un petit enfant."},
+{id:237,vl:1,ak:1,m:7,n:"A1",ar:"بِنْت",tr:"bint",r:"ب-ن-و",nat:"nom",g:"Fém., plur. بَنَات ; double sens : « fille de » et « jeune fille »",fr:"fille",lar:"بِنْت",ltr:"bint",lw:"",xa:"بِنْتُهَا فِي المَدْرَسَةِ.",xf:"Sa fille est à l'école."},
+{id:238,vl:1,m:7,n:"A1",ar:"زَوْج",tr:"zawǧ",r:"ز-و-ج",nat:"nom",g:"Masc., plur. أَزْوَاج ; veut aussi dire « paire »",fr:"mari, époux",lar:"جُوز",ltr:"ǧōz",lw:"Les lettres s'inversent à l'oral : جُوزِي « mon mari ».",xa:"زَوْجُهَا مُهَنْدِسٌ.",xf:"Son mari est ingénieur."},
+{id:239,vl:1,m:7,n:"A1",ar:"زَوْجَة",tr:"zawǧa",r:"ز-و-ج",nat:"nom",g:"Fém., plur. زَوْجَات",fr:"épouse, femme",lar:"مَرَا",ltr:"mara",lw:"À l'oral, « ma femme » se dit مَرْتِي marti.",xa:"زَوْجَتُهُ لُبْنَانِيَّةٌ.",xf:"Sa femme est libanaise."},
+{id:240,vl:1,m:7,n:"A1",ar:"جَدّ",tr:"ǧadd",r:"ج-د-د",nat:"nom",g:"Masc., plur. أَجْدَاد",fr:"grand-père",lar:"جِدّ / جِدُّو",ltr:"ǧidd / ǧiddo",lw:"",xa:"جَدِّي يَسْكُنُ فِي القَرْيَةِ.",xf:"Mon grand-père habite au village."},
+{id:241,vl:1,m:7,n:"A1",ar:"جَدَّة",tr:"ǧadda",r:"ج-د-د",nat:"nom",g:"Fém., plur. جَدَّات",fr:"grand-mère",lar:"سِتّ / تِيتَا",ltr:"sitt / tēta",lw:"جَدَّة est compris, mais l'oral dit سِتِّي sitti ou تِيتَا.",xa:"جَدَّتِي تُحِبُّ القَهْوَةَ.",xf:"Ma grand-mère aime le café."},
+{id:242,vl:1,m:7,n:"A1",ar:"عَمّ",tr:"ʿamm",r:"ع-م-م",nat:"nom",g:"Masc., plur. أَعْمَام ; le frère du père",fr:"oncle paternel",lar:"عَمّ / عَمُّو",ltr:"ʿamm / ʿammo",lw:"عَمُّو sert aussi à interpeller poliment un homme plus âgé.",xa:"عَمِّي يَعْمَلُ دَائِمًا فِي الصَّبَاحِ.",xf:"Mon oncle travaille toujours le matin."},
+{id:243,vl:1,m:7,n:"A1",ar:"عَمَّة",tr:"ʿamma",r:"ع-م-م",nat:"nom",g:"Fém., plur. عَمَّات ; la sœur du père",fr:"tante paternelle",lar:"عَمِّة",ltr:"ʿamme",lw:"",xa:"عَمَّتِي فِي بَيْرُوتَ.",xf:"Ma tante est à Beyrouth."},
+{id:244,vl:1,m:7,n:"A1",ar:"خَال",tr:"ḫāl",r:"خ-و-ل",nat:"nom",g:"Masc., plur. أَخْوَال ; le frère de la mère",fr:"oncle maternel",lar:"خَال / خَالُو",ltr:"ḫāl / ḫālo",lw:"",xa:"خَالِي طَبِيبٌ.",xf:"Mon oncle est médecin."},
+{id:245,vl:1,m:7,n:"A1",ar:"خَالَة",tr:"ḫāla",r:"خ-و-ل",nat:"nom",g:"Fém., plur. خَالَات ; la sœur de la mère",fr:"tante maternelle",lar:"خَالِة",ltr:"ḫāle",lw:"خَالْتِي sert aussi à interpeller une femme plus âgée.",xa:"خَالَتِي تَسْكُنُ قَرِيبًا مِنَّا.",xf:"Ma tante habite près de chez nous."},
+{id:246,m:7,n:"A1",ar:"أَهْل",tr:"ahl",r:"أ-ه-ل",nat:"nom",g:"Masc., plur. أَهَالٍ ; même racine que أَهْلًا",fr:"famille proche, parents",lar:"أَهِل",ltr:"ahl",lw:"À l'oral, أَهْلِي = « mes parents ».",xa:"أَهْلِي فِي فَرَنْسَا.",xf:"Mes parents sont en France."},
+{id:247,m:7,n:"A2",ar:"اِبْنُ العَمِّ",tr:"ibnu l-ʿamm",r:"ب-ن-و",nat:"nom (annexion)",g:"Annexion ; fém. بِنْتُ العَمِّ, plur. أَبْنَاءُ العَمِّ. Même modèle côté mère : اِبْنُ الخَالِ",fr:"cousin (paternel)",lar:"اِبِن عَمّ",ltr:"ibn ʿamm",lw:"",xa:"اِبْنُ عَمِّي طَالِبٌ.",xf:"Mon cousin est étudiant."},
+{id:248,vl:1,ak:1,m:7,n:"A1",ar:"صَدِيق",tr:"ṣadīq",r:"ص-د-ق",nat:"nom",g:"Masc., plur. أَصْدِقَاء (diptote) ; fém. صَدِيقَة, plur. صَدِيقَات",fr:"ami(e)",lar:"صَاحِب / رْفِيق",ltr:"ṣāḥib / rfīʾ",lw:"صَدِيق est compris ; l'oral préfère صَاحِب (fém. صَاحْبِة).",xa:"أَذْهَبُ إِلَى بَيْتِ صَدِيقَتِي.",xf:"Je vais chez mon amie."},
+{id:249,m:7,n:"A2",ar:"حَبِيب",tr:"ḥabīb",r:"ح-ب-ب",nat:"nom / adjectif",g:"Masc., plur. أَحِبَّاء / أَحْبَاب ; fém. حَبِيبَة",fr:"bien-aimé, chéri",lar:"حَبِيب",ltr:"ḥabīb",lw:"حَبِيبِي / حَبِيبْتِي s'emploie aussi entre amis, sans nuance amoureuse.",xa:"هُوَ حَبِيبُهَا.",xf:"C'est son amoureux."},
+{id:250,m:7,n:"A1",ar:"جَار",tr:"ǧār",r:"ج-و-ر",nat:"nom",g:"Masc., plur. جِيرَان ; fém. جَارَة",fr:"voisin",lar:"جَار",ltr:"ǧār",lw:"",xa:"جَارِي لَطِيفٌ جِدًّا.",xf:"Mon voisin est très gentil."},
+{id:251,m:7,n:"A2",ar:"زَمِيل",tr:"zamīl",r:"ز-م-ل",nat:"nom",g:"Masc., plur. زُمَلَاء (diptote) ; fém. زَمِيلَة",fr:"collègue, camarade",lar:"زْمِيل",ltr:"zmīl",lw:"",xa:"زَمِيلِي فِي العَمَلِ سُورِيٌّ.",xf:"Mon collègue est syrien."},
+{id:252,m:7,n:"A2",ar:"ضَيْف",tr:"ḍayf",r:"ض-ي-ف",nat:"nom",g:"Masc., plur. ضُيُوف",fr:"invité",lar:"ضَيْف",ltr:"ḍēf",lw:"",xa:"عِنْدَنَا ضُيُوفٌ اليَوْمَ.",xf:"Nous avons des invités aujourd'hui."},
+{id:253,m:7,n:"A2",ar:"مُتَزَوِّج",tr:"mutazawwiǧ",r:"ز-و-ج",nat:"adjectif",g:"Fém. مُتَزَوِّجَة, plur. مُتَزَوِّجُونَ ; participe de forme V",fr:"marié",lar:"مْجَوَّز",ltr:"mǧawwaz",lw:"",xa:"هَلْ أَنْتِ مُتَزَوِّجَةٌ؟",xf:"Es-tu mariée ?"},
+{id:254,m:7,n:"A2",ar:"أَعْزَب",tr:"aʿzab",r:"ع-ز-ب",nat:"adjectif",g:"Fém. عَزْبَاء, plur. عُزَّاب ; diptote",fr:"célibataire",lar:"عَازِب / أَعْزَب",ltr:"ʿāzib / aʿzab",lw:"",xa:"أَخِي مَا زَالَ أَعْزَبَ.",xf:"Mon frère est toujours célibataire."},
+{id:255,m:7,n:"A2",ar:"حَفِيد",tr:"ḥafīd",r:"ح-ف-د",nat:"nom",g:"Masc., plur. أَحْفَاد ; fém. حَفِيدَة",fr:"petit-fils",lar:"حَفِيد",ltr:"ḥafīd",lw:"",xa:"لِجَدِّي عَشَرَةُ أَحْفَادٍ.",xf:"Mon grand-père a dix petits-enfants."},
+{id:256,m:7,n:"A2",ar:"أُسْرَة",tr:"usra",r:"أ-س-ر",nat:"nom",g:"Fém., plur. أُسَر",fr:"famille (foyer)",lar:"عَيْلِة",ltr:"ʿēle",lw:"أُسْرَة est écrit ; l'oral dit عَيْلِة.",xa:"أُسْرَتُهُ صَغِيرَةٌ.",xf:"Sa famille est petite."},
+{id:257,m:7,n:"A2",ar:"زَوَاج",tr:"zawāǧ",r:"ز-و-ج",nat:"nom",g:"Masc. ; masdar, sans pluriel courant",fr:"mariage",lar:"زَوَاج / عِرْس",ltr:"zawāǧ / ʿirs",lw:"عِرْس = la fête de mariage.",xa:"الزَّوَاجُ فِي الصَّيْفِ.",xf:"Le mariage a lieu en été."},
+{id:258,m:7,n:"A1",ar:"حُبّ",tr:"ḥubb",r:"ح-ب-ب",nat:"nom",g:"Masc. ; masdar de أَحَبَّ, sans pluriel courant",fr:"amour",lar:"حُبّ",ltr:"ḥubb",lw:"",xa:"الحُبُّ جَمِيلٌ.",xf:"L'amour est beau."},
+{id:259,m:7,n:"A2",ar:"قَرِيب",tr:"qarīb",r:"ق-ر-ب",nat:"nom",g:"Masc., plur. أَقَارِب (diptote) ; même mot que l'adjectif « proche »",fr:"parent (membre de la famille)",lar:"قَرِيب",ltr:"ʾarīb",lw:"Plur. oral : قَرَايِب ʾarāyib.",xa:"عِنْدِي أَقَارِبُ فِي لُبْنَانَ.",xf:"J'ai de la famille au Liban."},
+{id:260,m:7,n:"A2",ar:"وَحِيد",tr:"waḥīd",r:"و-ح-د",nat:"adjectif",g:"Fém. وَحِيدَة ; pluriel peu usité ; même racine que وَاحِد et que وَحْدِي « seul(e) »",fr:"unique, seul",lar:"وْحِيد",ltr:"wḥīd",lw:"",xa:"هُوَ الاِبْنُ الوَحِيدُ.",xf:"C'est le fils unique."},
+
+/* ---------- MODULE 8 ---------- */
+{id:261,ak:1,m:8,n:"A1",ar:"السَّلَامُ عَلَيْكُمْ",tr:"as-salāmu ʿalaykum",r:"س-ل-م",nat:"formule",g:"Réponse : وَعَلَيْكُمُ السَّلَامُ. Toujours au pluriel ـكُمْ, même pour une seule personne",fr:"bonjour (« la paix sur vous »)",lar:"السَّلَامُ عَلَيْكُم",ltr:"is-salāmu ʿalēkum",lw:"",xa:"السَّلَامُ عَلَيْكُمْ، كَيْفَ حَالُكُمْ؟",xf:"Bonjour, comment allez-vous ?"},
+{id:262,ak:1,m:8,n:"A1",ar:"مَرْحَبًا",tr:"marḥaban",r:"ر-ح-ب",nat:"formule",g:"Accusatif figé ; réponse : مَرْحَبًا بِكَ / أَهْلًا",fr:"salut, bonjour",lar:"مَرْحَبَا",ltr:"marḥaba",lw:"Réponse orale typique : مَرْحَبْتَيْن « deux saluts ».",xa:"مَرْحَبًا يَا سَمِيرُ!",xf:"Salut Samir !"},
+{id:263,m:8,n:"A1",ar:"أَهْلًا",tr:"ahlan",r:"أ-ه-ل",nat:"formule",g:"Accusatif figé ; forme longue : أَهْلًا وَسَهْلًا « bienvenue »",fr:"salut ; bienvenue",lar:"أَهْلَا / أَهْلِين",ltr:"ahla / ahlēn",lw:"أَهْلِين sert souvent de réponse.",xa:"أَهْلًا وَسَهْلًا فِي بَيْتِنَا.",xf:"Bienvenue chez nous."},
+{id:264,ak:1,m:8,n:"A1",ar:"صَبَاحُ الخَيْرِ",tr:"ṣabāḥu l-ḫayr",r:"ص-ب-ح",nat:"formule",g:"Annexion ; réponse : صَبَاحُ النُّورِ « matin de lumière »",fr:"bonjour (le matin)",lar:"صَبَاح الخِير",ltr:"ṣabāḥ il-ḫēr",lw:"",xa:"صَبَاحُ الخَيْرِ يَا أُمِّي.",xf:"Bonjour maman."},
+{id:265,ak:1,m:8,n:"A1",ar:"مَسَاءُ الخَيْرِ",tr:"masāʾu l-ḫayr",r:"م-س-و",nat:"formule",g:"Annexion ; réponse : مَسَاءُ النُّورِ",fr:"bonsoir",lar:"مَسَا الخِير",ltr:"masa l-ḫēr",lw:"",xa:"مَسَاءُ الخَيْرِ، أَنَا نُورَةُ.",xf:"Bonsoir, je suis Noura."},
+{id:266,m:8,n:"A1",ar:"كَيْفَ حَالُكَ؟",tr:"kayfa ḥāluka",r:"ح-و-ل",nat:"formule",g:"Suffixe accordé : حَالُكِ (à une femme), حَالُكُمْ (à plusieurs)",fr:"comment vas-tu ?",lar:"كِيفَك؟ / كِيفِك؟",ltr:"kīfak / kīfik",lw:"",xa:"كَيْفَ حَالُكِ اليَوْمَ؟",xf:"Comment vas-tu aujourd'hui ?"},
+{id:267,m:8,n:"A1",ar:"بِخَيْرٍ",tr:"bi-ḫayrin",r:"خ-ي-ر",nat:"formule",g:"بِـ + nom au génitif ; réponse à كَيْفَ حَالُكَ",fr:"bien (je vais bien)",lar:"مْنِيح / مْنِيحَة",ltr:"mnīḥ / mnīḥa",lw:"بِخِير se dit aussi, mais مْنِيح (fém. مْنِيحَة) domine.",xa:"أَنَا بِخَيْرٍ، شُكْرًا.",xf:"Je vais bien, merci."},
+{id:268,m:8,n:"A1",ar:"الحَمْدُ لِلّٰهِ",tr:"al-ḥamdu li-llāh",r:"ح-م-د",nat:"formule",g:"Formule figée ; réponse habituelle à « ça va ? », employée par tous, sans nuance dévote marquée",fr:"Dieu merci ; ça va",lar:"الحَمْدِلَّه",ltr:"il-ḥamdilla",lw:"",xa:"بِخَيْرٍ، الحَمْدُ لِلّٰهِ.",xf:"Bien, Dieu merci."},
+{id:269,ak:1,m:8,n:"A1",ar:"شُكْرًا",tr:"šukran",r:"ش-ك-ر",nat:"formule",g:"Accusatif figé ; شُكْرًا جَزِيلًا « merci beaucoup »",fr:"merci",lar:"شُكْرًا / مِرْسِي",ltr:"šukran / mersi",lw:"مِرْسِي est très courant au Liban.",xa:"شُكْرًا جَزِيلًا!",xf:"Merci beaucoup !"},
+{id:270,m:8,n:"A1",ar:"عَفْوًا",tr:"ʿafwan",r:"ع-ف-و",nat:"formule",g:"Accusatif figé ; « de rien » en réponse à un merci, et aussi « pardon »",fr:"de rien ; pardon",lar:"عَفْوًا",ltr:"ʿafwan",lw:"",xa:"— شُكْرًا. — عَفْوًا.",xf:"— Merci. — De rien."},
+{id:271,m:8,n:"A1",ar:"مِنْ فَضْلِكَ",tr:"min faḍlika",r:"ف-ض-ل",nat:"formule",g:"Suffixe accordé : فَضْلِكِ (fém.), فَضْلِكُمْ (plur.)",fr:"s'il te plaît",lar:"لَو سَمَحْت / مِن فَضْلَك",ltr:"law samaḥt / min faḍlak",lw:"",xa:"قَهْوَةً مِنْ فَضْلِكَ.",xf:"Un café, s'il te plaît."},
+{id:272,m:8,n:"A1",ar:"آسِف",tr:"āsif",r:"أ-س-ف",nat:"adjectif",g:"Fém. آسِفَة, plur. آسِفُونَ ; s'accorde avec la personne qui parle",fr:"désolé(e)",lar:"آسِف / آسْفِة",ltr:"āsif / āsfe",lw:"",xa:"أَنَا آسِفَةٌ، لَا أَفْهَمُ.",xf:"Je suis désolée, je ne comprends pas."},
+{id:273,m:8,n:"A1",ar:"مَعَ السَّلَامَةِ",tr:"maʿa s-salāma",r:"س-ل-م",nat:"formule",g:"Formule de départ ; réponse : اللّٰهُ يُسَلِّمُكَ",fr:"au revoir",lar:"مَعَ السَّلَامِة / بَاي",ltr:"maʿ is-salāme / bāy",lw:"",xa:"مَعَ السَّلَامَةِ، إِلَى الغَدِ!",xf:"Au revoir, à demain !"},
+{id:274,m:8,n:"A1",ar:"إِلَى اللِّقَاءِ",tr:"ilā l-liqāʾ",r:"ل-ق-ي",nat:"formule",g:"إِلَى + masdar au génitif",fr:"à bientôt, au revoir",lar:"بْشُوفَك",ltr:"bšūfak",lw:"إِلَى اللِّقَاء est écrit ; à l'oral : بْشُوفَك « je te vois ».",xa:"إِلَى اللِّقَاءِ يَا صَدِيقِي.",xf:"À bientôt, mon ami."},
+{id:275,m:8,n:"A2",ar:"تُصْبِحُ عَلَى خَيْرٍ",tr:"tuṣbiḥu ʿalā ḫayr",r:"ص-ب-ح",nat:"formule",g:"Verbe accordé : تُصْبِحِينَ (à une femme) ; réponse : وَأَنْتَ مِنْ أَهْلِهِ",fr:"bonne nuit",lar:"تِصْبَح عَلَى خِير",ltr:"tiṣbaḥ ʿala ḫēr",lw:"",xa:"تُصْبِحِينَ عَلَى خَيْرٍ يَا أُمِّي.",xf:"Bonne nuit maman."},
+{id:276,m:8,n:"A1",ar:"تَشَرَّفْنَا",tr:"tašarrafnā",r:"ش-ر-ف",nat:"formule",g:"Verbe de forme V à l'accompli, 1re pers. plur. : « nous sommes honorés »",fr:"enchanté(e)",lar:"تْشَرَّفْنَا",ltr:"tšarrafna",lw:"",xa:"أَنَا نُورَةُ. — تَشَرَّفْنَا!",xf:"Je suis Noura. — Enchanté !"},
+{id:277,m:8,n:"A2",ar:"فُرْصَة سَعِيدَة",tr:"furṣa saʿīda",r:"ف-ر-ص",nat:"formule",g:"Nom + adjectif ; se dit en fin de première rencontre",fr:"ravi(e) de faire ta connaissance",lar:"فُرْصَة سَعِيدِة",ltr:"furṣa saʿīde",lw:"",xa:"فُرْصَةٌ سَعِيدَةٌ!",xf:"Ravie de t'avoir rencontré !"},
+{id:278,m:8,n:"A1",ar:"إِنْ شَاءَ اللّٰهُ",tr:"in šāʾa llāh",r:"ش-ي-أ",nat:"formule",g:"Formule figée ; accompagne tout projet futur, souvent sans nuance religieuse",fr:"si Dieu le veut ; j'espère",lar:"إِنْشَالَّه",ltr:"inšalla",lw:"",xa:"أَرَاكَ غَدًا إِنْ شَاءَ اللّٰهُ.",xf:"Je te vois demain, j'espère."},
+{id:279,m:8,n:"A2",ar:"مَا شَاءَ اللّٰهُ",tr:"mā šāʾa llāh",r:"ش-ي-أ",nat:"formule",g:"Formule figée ; accompagne un compliment",fr:"formidable (« ce que Dieu a voulu »)",lar:"مَاشَالَّه",ltr:"māšalla",lw:"",xa:"مَا شَاءَ اللّٰهُ، بَيْتُكَ جَمِيلٌ!",xf:"Formidable, ta maison est belle !"},
+{id:280,m:8,n:"A1",ar:"تَفَضَّلْ",tr:"tafaḍḍal",r:"ف-ض-ل",nat:"formule",g:"Impératif de forme V ; fém. تَفَضَّلِي, plur. تَفَضَّلُوا",fr:"je t'en prie ; entre ; sers-toi",lar:"تْفَضَّل",ltr:"tfaḍḍal",lw:"",xa:"تَفَضَّلِي، اُدْخُلِي!",xf:"Je t'en prie, entre !"},
+{id:281,m:8,n:"A2",ar:"عَنْ إِذْنِكَ",tr:"ʿan iḏnika",r:"أ-ذ-ن",nat:"formule",g:"Suffixe accordé : إِذْنِكِ، إِذْنِكُمْ",fr:"excuse-moi (pour passer, pour partir)",lar:"عَن إِذْنَك",ltr:"ʿan iznak",lw:"",xa:"عَنْ إِذْنِكَ، أَيْنَ المَحَطَّةُ؟",xf:"Excuse-moi, où est la gare ?"},
+{id:282,m:8,n:"A2",ar:"لَا بَأْسَ",tr:"lā baʾsa",r:"ب-أ-س",nat:"formule",g:"لَا de négation absolue + nom à l'accusatif sans tanwīn",fr:"ce n'est pas grave ; pas de problème",lar:"مَعْلِيش",ltr:"maʿlēš",lw:"L'oral dit مَعْلِيش.",xa:"لَا بَأْسَ، سَأَعُودُ غَدًا.",xf:"Pas grave, je reviendrai demain."},
+{id:283,m:8,n:"A1",ar:"طَيِّب",tr:"ṭayyib",r:"ط-ي-ب",nat:"adjectif",g:"Fém. طَيِّبَة, plur. طَيِّبُونَ ; employé seul, vaut « entendu »",fr:"bon ; d'accord",lar:"طَيِّب / مَاشِي",ltr:"ṭayyib / māši",lw:"",xa:"طَيِّب، نَذْهَبُ مَعًا.",xf:"D'accord, on y va ensemble."},
+{id:284,m:8,n:"A1",ar:"حَسَنًا",tr:"ḥasanan",r:"ح-س-ن",nat:"formule",g:"Accusatif figé",fr:"d'accord, bien",lar:"مَاشِي / أُوكَي",ltr:"māši / okē",lw:"حَسَنًا est écrit ; l'oral dit مَاشِي.",xa:"حَسَنًا، أَفْهَمُ.",xf:"D'accord, je comprends."},
+{id:285,m:8,n:"A2",ar:"مَعَ الأَسَفِ",tr:"maʿa l-asaf",r:"أ-س-ف",nat:"formule",g:"مَعَ + nom au génitif ; même racine que آسِف",fr:"malheureusement",lar:"لَلْأَسَف",ltr:"lal-asaf",lw:"",xa:"مَعَ الأَسَفِ، لَا أَسْتَطِيعُ.",xf:"Malheureusement, je ne peux pas."},
+{id:286,m:8,n:"A2",ar:"بِالتَّوْفِيقِ",tr:"bi-t-tawfīq",r:"و-ف-ق",nat:"formule",g:"بِـ + masdar de forme II",fr:"bonne chance",lar:"بِالتَّوْفِيق",ltr:"bit-tawfīʾ",lw:"",xa:"بِالتَّوْفِيقِ فِي الاِمْتِحَانِ!",xf:"Bonne chance pour l'examen !"},
+{id:287,m:8,n:"A1",ar:"مَبْرُوك",tr:"mabrūk",r:"ب-ر-ك",nat:"formule",g:"Participe passif figé ; réponse : اللّٰهُ يُبَارِكُ فِيكَ",fr:"félicitations",lar:"مَبْرُوك",ltr:"mabrūk",lw:"",xa:"مَبْرُوك عَلَى البَيْتِ الجَدِيدِ!",xf:"Félicitations pour la nouvelle maison !"},
+{id:288,m:8,n:"A2",ar:"كُلُّ عَامٍ وَأَنْتَ بِخَيْرٍ",tr:"kullu ʿāmin wa-anta bi-ḫayr",r:"ع-و-م",nat:"formule",g:"Accord : وَأَنْتِ (fém.), وَأَنْتُمْ (plur.) ; pour un anniversaire ou une fête",fr:"bonne fête ; joyeux anniversaire",lar:"كِلّ سِنِة وْإِنْتَ سَالِم",ltr:"kill sine w-inta sālim",lw:"",xa:"كُلُّ عَامٍ وَأَنْتِ بِخَيْرٍ!",xf:"Joyeux anniversaire !"},
+{id:289,m:8,n:"A2",ar:"سَلَامَتُكَ",tr:"salāmatuka",r:"س-ل-م",nat:"formule",g:"Suffixe accordé : سَلَامَتُكِ ; se dit à un malade",fr:"prompt rétablissement",lar:"سَلَامْتَك",ltr:"salāmtak",lw:"",xa:"سَلَامَتُكَ، هَلْ أَنْتَ بِخَيْرٍ الآنَ؟",xf:"Prompt rétablissement, tu vas mieux ?"},
+{id:290,m:8,n:"A2",ar:"بِالهَنَاءِ وَالشِّفَاءِ",tr:"bi-l-hanāʾi wa-š-šifāʾ",r:"ه-ن-أ",nat:"formule",g:"Formule figée, pendant ou après le repas",fr:"bon appétit",lar:"صَحْتَين",ltr:"ṣaḥtēn",lw:"La formule fuṣḥā est très écrite ; l'oral dit صَحْتَين « deux santés ».",xa:"بِالهَنَاءِ وَالشِّفَاءِ!",xf:"Bon appétit !"},
+{id:291,m:8,n:"A1",ar:"يَا",tr:"yā",r:"—",nat:"particule vocative",g:"Suivie du nom interpellé, sans article : يَا سَمِيرُ، يَا أُمِّي",fr:"ô (pour interpeller)",lar:"يَا",ltr:"yā",lw:"",xa:"يَا صَدِيقِي، تَعَالَ هُنَا.",xf:"Mon ami, viens ici."},
+{id:292,m:8,n:"A2",ar:"لَا شُكْرَ عَلَى وَاجِبٍ",tr:"lā šukra ʿalā wāǧib",r:"ش-ك-ر",nat:"formule",g:"لَا de négation absolue + accusatif sans tanwīn",fr:"il n'y a pas de quoi (« pas de merci pour un devoir »)",lar:"وَلَو",ltr:"walaw",lw:"وَلَو « voyons ! » est la réponse levantine typique à un merci.",xa:"— شُكْرًا عَلَى المُسَاعَدَةِ. — لَا شُكْرَ عَلَى وَاجِبٍ.",xf:"— Merci pour l'aide. — Il n'y a pas de quoi."},
+
+/* ---------- MODULE 9 ---------- */
+{id:293,vl:1,m:9,n:"A1",ar:"سَعِيد",tr:"saʿīd",r:"س-ع-د",nat:"adjectif",g:"Fém. سَعِيدَة, plur. سُعَدَاء (diptote)",fr:"heureux",lar:"مَبْسُوط",ltr:"mabsūṭ",lw:"سَعِيد se comprend ; l'oral dit مَبْسُوط (fém. مَبْسُوطَة).",xa:"الآنَ هُوَ سَعِيدٌ جِدًّا.",xf:"Maintenant il est très heureux."},
+{id:294,m:9,n:"A1",ar:"حَزِين",tr:"ḥazīn",r:"ح-ز-ن",nat:"adjectif",g:"Fém. حَزِينَة, plur. حُزَنَاء / حَزَانَى",fr:"triste",lar:"زَعْلَان / حَزِين",ltr:"zaʿlān / ḥazīn",lw:"زَعْلَان couvre à la fois « triste » et « fâché ».",xa:"لِمَاذَا أَنْتِ حَزِينَةٌ؟",xf:"Pourquoi es-tu triste ?"},
+{id:295,m:9,n:"A2",ar:"فَرَح",tr:"faraḥ",r:"ف-ر-ح",nat:"nom",g:"Masc., plur. أَفْرَاح, qui veut aussi dire « les noces »",fr:"joie",lar:"فَرَح",ltr:"faraḥ",lw:"",xa:"فِي البَيْتِ فَرَحٌ كَبِيرٌ.",xf:"Il y a une grande joie à la maison."},
+{id:296,m:9,n:"A1",ar:"غَاضِب",tr:"ġāḍib",r:"غ-ض-ب",nat:"adjectif",g:"Fém. غَاضِبَة, plur. غَاضِبُونَ ; se construit avec مِنْ",fr:"en colère",lar:"مْعَصَّب / زَعْلَان",ltr:"mʿaṣṣab / zaʿlān",lw:"",xa:"أَبِي غَاضِبٌ مِنِّي.",xf:"Mon père est en colère contre moi."},
+{id:297,m:9,n:"A1",ar:"مُتْعَب",tr:"mutʿab",r:"ت-ع-ب",nat:"adjectif",g:"Fém. مُتْعَبَة, plur. مُتْعَبُونَ ; participe passif de forme IV",fr:"fatigué",lar:"تَعْبَان",ltr:"taʿbān",lw:"L'oral dit تَعْبَان (fém. تَعْبَانِة).",xa:"أَنَا مُتْعَبَةٌ بَعْدَ العَمَلِ.",xf:"Je suis fatiguée après le travail."},
+{id:298,m:9,n:"A1",ar:"خَائِف",tr:"ḫāʾif",r:"خ-و-ف",nat:"adjectif",g:"Fém. خَائِفَة, plur. خَائِفُونَ ; se construit avec مِنْ",fr:"qui a peur",lar:"خَايِف",ltr:"ḫāyif",lw:"",xa:"الطِّفْلُ خَائِفٌ مِنَ القِطَّةِ.",xf:"L'enfant a peur de la chatte."},
+{id:299,m:9,n:"A2",ar:"قَلِق",tr:"qaliq",r:"ق-ل-ق",nat:"adjectif",g:"Fém. قَلِقَة, plur. قَلِقُونَ ; se construit avec عَلَى pour quelqu'un",fr:"inquiet",lar:"قَلْقَان",ltr:"ʾalʾān",lw:"",xa:"أُمِّي قَلِقَةٌ عَلَيَّ.",xf:"Ma mère s'inquiète pour moi."},
+{id:300,m:9,n:"A1",ar:"مَشْغُول",tr:"mašġūl",r:"ش-غ-ل",nat:"adjectif",g:"Fém. مَشْغُولَة, plur. مَشْغُولُونَ ; participe passif",fr:"occupé",lar:"مَشْغُول",ltr:"mašġūl",lw:"",xa:"أَنَا مَشْغُولَةٌ الآنَ.",xf:"Je suis occupée maintenant."},
+{id:301,m:9,n:"A1",ar:"جَائِع",tr:"ǧāʾiʿ",r:"ج-و-ع",nat:"adjectif",g:"Fém. جَائِعَة, plur. جِيَاع",fr:"qui a faim",lar:"جُوعَان",ltr:"ǧūʿān",lw:"L'oral dit جُوعَان (fém. جُوعَانِة).",xa:"هَلْ أَنْتَ جَائِعٌ؟",xf:"As-tu faim ?"},
+{id:302,m:9,n:"A1",ar:"عَطْشَان",tr:"ʿaṭšān",r:"ع-ط-ش",nat:"adjectif",g:"Fém. عَطْشَى, plur. عِطَاش ; schème فَعْلَان, diptote",fr:"qui a soif",lar:"عَطْشَان",ltr:"ʿaṭšān",lw:"",xa:"أَنَا عَطْشَانُ، أُرِيدُ مَاءً.",xf:"J'ai soif, je veux de l'eau."},
+{id:303,m:9,n:"A1",ar:"مَرِيض",tr:"marīḍ",r:"م-ر-ض",nat:"adjectif",g:"Fém. مَرِيضَة, plur. مَرْضَى",fr:"malade",lar:"مَرِيض",ltr:"marīḍ",lw:"",xa:"أَمْسِ كُنْتُ مَرِيضًا.",xf:"Hier j'étais malade."},
+{id:304,m:9,n:"A2",ar:"مُرْتَاح",tr:"murtāḥ",r:"ر-و-ح",nat:"adjectif",g:"Fém. مُرْتَاحَة, plur. مُرْتَاحُونَ ; participe de forme VIII",fr:"reposé, à l'aise",lar:"مِرْتَاح",ltr:"mirtāḥ",lw:"",xa:"أَنَا مُرْتَاحٌ هُنَا.",xf:"Je suis bien ici."},
+{id:305,m:9,n:"A2",ar:"مُنْزَعِج",tr:"munzaʿiǧ",r:"ز-ع-ج",nat:"adjectif",g:"Fém. مُنْزَعِجَة, plur. مُنْزَعِجُونَ ; participe de forme VII, avec مِنْ",fr:"contrarié, dérangé",lar:"مِنْزْعِج",ltr:"minziʿiǧ",lw:"",xa:"هُوَ مُنْزَعِجٌ مِنَ الضَّجِيجِ.",xf:"Le bruit le dérange."},
+{id:306,m:9,n:"A2",ar:"مُتَحَمِّس",tr:"mutaḥammis",r:"ح-م-س",nat:"adjectif",g:"Fém. مُتَحَمِّسَة, plur. مُتَحَمِّسُونَ ; participe de forme V, avec لِـ",fr:"enthousiaste",lar:"مِتْحَمِّس",ltr:"mitḥammis",lw:"",xa:"أَنَا مُتَحَمِّسَةٌ لِلسَّفَرِ.",xf:"J'ai hâte de partir en voyage."},
+{id:307,m:9,n:"A2",ar:"خَوْف",tr:"ḫawf",r:"خ-و-ف",nat:"nom",g:"Masc., plur. مَخَاوِف ; même racine que خَائِف",fr:"peur",lar:"خَوْف",ltr:"ḫōf",lw:"",xa:"لَا خَوْفَ عَلَيْكَ.",xf:"N'aie pas peur (« pas de peur pour toi »)."},
+{id:308,m:9,n:"A2",ar:"حُزْن",tr:"ḥuzn",r:"ح-ز-ن",nat:"nom",g:"Masc., plur. أَحْزَان ; même racine que حَزِين",fr:"tristesse",lar:"حُزُن",ltr:"ḥuzn",lw:"",xa:"فِي عَيْنَيْهِ حُزْنٌ.",xf:"Il y a de la tristesse dans ses yeux."},
+{id:309,m:9,n:"A2",ar:"سَعَادَة",tr:"saʿāda",r:"س-ع-د",nat:"nom",g:"Fém., sans pluriel courant ; même racine que سَعِيد",fr:"bonheur",lar:"سَعَادِة",ltr:"saʿāde",lw:"",xa:"السَّعَادَةُ فِي البَسَاطَةِ.",xf:"Le bonheur est dans la simplicité."},
+{id:310,m:9,n:"A2",ar:"مُمِلّ",tr:"mumill",r:"م-ل-ل",nat:"adjectif",g:"Fém. مُمِلَّة, plur. مُمِلُّونَ ; participe de forme IV",fr:"ennuyeux",lar:"مُمِلّ",ltr:"mumill",lw:"",xa:"هٰذَا الفِيلْمُ مُمِلٌّ.",xf:"Ce film est ennuyeux."},
+{id:311,m:9,n:"A2",ar:"مُتَأَكِّد",tr:"mutaʾakkid",r:"أ-ك-د",nat:"adjectif",g:"Fém. مُتَأَكِّدَة, plur. مُتَأَكِّدُونَ ; avec مِنْ",fr:"sûr, certain",lar:"مِتْأَكِّد",ltr:"mitʾakkid",lw:"",xa:"هَلْ أَنْتِ مُتَأَكِّدَةٌ؟",xf:"Tu es sûre ?"},
+{id:312,m:9,n:"A2",ar:"مَسْرُور",tr:"masrūr",r:"س-ر-ر",nat:"adjectif",g:"Fém. مَسْرُورَة, plur. مَسْرُورُونَ ; avec بِـ",fr:"content, ravi",lar:"مَبْسُوط",ltr:"mabsūṭ",lw:"مَسْرُور est écrit ; l'oral dit مَبْسُوط.",xa:"أَنَا مَسْرُورٌ بِلِقَائِكَ.",xf:"Je suis ravi de te rencontrer."},
+{id:313,m:9,n:"A2",ar:"نَعْسَان",tr:"naʿsān",r:"ن-ع-س",nat:"adjectif",g:"Fém. نَعْسَى ; schème فَعْلَان, diptote ; pluriel peu usité",fr:"qui a sommeil",lar:"نَعْسَان",ltr:"naʿsān",lw:"",xa:"الطِّفْلُ نَعْسَانُ.",xf:"L'enfant a sommeil."},
+{id:314,m:9,n:"A1",ar:"جَاهِز",tr:"ǧāhiz",r:"ج-ه-ز",nat:"adjectif",g:"Fém. جَاهِزَة, plur. جَاهِزُونَ",fr:"prêt",lar:"جَاهِز / حَاضِر",ltr:"ǧāhiz / ḥāḍir",lw:"",xa:"هَلْ أَنْتَ جَاهِزٌ؟",xf:"Es-tu prêt ?"},
+{id:315,m:9,n:"A2",ar:"مُشْتَاق",tr:"muštāq",r:"ش-و-ق",nat:"adjectif",g:"Fém. مُشْتَاقَة, plur. مُشْتَاقُونَ ; avec إِلَى : مُشْتَاقٌ إِلَيْكَ « tu me manques »",fr:"à qui quelqu'un manque",lar:"مِشْتَاق",ltr:"mištāʾ",lw:"Oral : مِشْتَاقْلَك mištāʾ-lak « tu me manques ».",xa:"أَنَا مُشْتَاقَةٌ إِلَى أَهْلِي.",xf:"Ma famille me manque."},
+{id:316,m:9,n:"A2",ar:"مُحْرَج",tr:"muḥraǧ",r:"ح-ر-ج",nat:"adjectif",g:"Fém. مُحْرَجَة, plur. مُحْرَجُونَ",fr:"gêné, embarrassé",lar:"مِسْتِحِي / مِحْرَج",ltr:"mistiḥi / miḥraǧ",lw:"",xa:"كُنْتُ مُحْرَجَةً جِدًّا.",xf:"J'étais très gênée."},
+{id:317,m:9,n:"A2",ar:"شُعُور",tr:"šuʿūr",r:"ش-ع-ر",nat:"nom",g:"Masc., plur. مَشَاعِر (diptote)",fr:"sentiment",lar:"شُعُور",ltr:"šuʿūr",lw:"",xa:"عِنْدِي شُعُورٌ جَمِيلٌ.",xf:"J'ai un beau sentiment."},
+{id:318,m:9,n:"A1",ar:"حَال",tr:"ḥāl",r:"ح-و-ل",nat:"nom",g:"Masc. ou fém., plur. أَحْوَال ; même racine que حَالًا",fr:"état, situation",lar:"حَال",ltr:"ḥāl",lw:"",xa:"كَيْفَ الحَالُ؟",xf:"Comment ça va ?"},
+{id:319,m:9,n:"A2",ar:"مِزَاج",tr:"mizāǧ",r:"م-ز-ج",nat:"nom",g:"Masc., plur. أَمْزِجَة",fr:"humeur",lar:"مَزَاج",ltr:"mazāǧ",lw:"Oral : مَا إِلِي مَزَاج « je n'ai pas envie ».",xa:"مِزَاجُهُ جَيِّدٌ اليَوْمَ.",xf:"Il est de bonne humeur aujourd'hui."},
+{id:320,m:9,n:"A2",ar:"مُتَوَتِّر",tr:"mutawattir",r:"و-ت-ر",nat:"adjectif",g:"Fém. مُتَوَتِّرَة, plur. مُتَوَتِّرُونَ ; participe de forme V",fr:"stressé, tendu",lar:"مِتْوَتِّر",ltr:"mitwattir",lw:"",xa:"أَنَا مُتَوَتِّرَةٌ قَبْلَ الاِمْتِحَانِ.",xf:"Je suis stressée avant l'examen."},
+
+/* ---------- MODULE 10 ---------- */
+{id:321,vl:1,m:10,n:"A1",ar:"كَبِير",tr:"kabīr",r:"ك-ب-ر",nat:"adjectif",g:"Fém. كَبِيرَة, plur. كِبَار ; élatif أَكْبَر « plus grand, aîné »",fr:"grand ; âgé",lar:"كْبِير",ltr:"kbīr",lw:"",xa:"تَسْكُنُ فِي بَيْتٍ كَبِيرٍ.",xf:"Elle habite une grande maison."},
+{id:322,vl:1,m:10,n:"A1",ar:"صَغِير",tr:"ṣaġīr",r:"ص-غ-ر",nat:"adjectif",g:"Fém. صَغِيرَة, plur. صِغَار ; élatif أَصْغَر",fr:"petit ; jeune",lar:"زْغِير",ltr:"zġīr",lw:"",xa:"أُخْتُهُ بِنْتٌ صَغِيرَةٌ.",xf:"Sa sœur est une petite fille."},
+{id:323,m:10,n:"A1",ar:"طَوِيل",tr:"ṭawīl",r:"ط-و-ل",nat:"adjectif",g:"Fém. طَوِيلَة, plur. طِوَال",fr:"long ; grand (de taille)",lar:"طَوِيل",ltr:"ṭawīl",lw:"",xa:"أَخِي طَوِيلٌ.",xf:"Mon frère est grand."},
+{id:324,m:10,n:"A1",ar:"قَصِير",tr:"qaṣīr",r:"ق-ص-ر",nat:"adjectif",g:"Fém. قَصِيرَة, plur. قِصَار",fr:"court ; petit (de taille)",lar:"قَصِير",ltr:"ʾaṣīr",lw:"",xa:"الطَّرِيقُ قَصِيرٌ.",xf:"Le chemin est court."},
+{id:325,vl:1,m:10,n:"A1",ar:"جَمِيل",tr:"ǧamīl",r:"ج-م-ل",nat:"adjectif",g:"Fém. جَمِيلَة, plur. جَمِيلُونَ / جَمِيلَات (personnes)",fr:"beau, joli",lar:"حِلْو",ltr:"ḥilu",lw:"جَمِيل se comprend ; l'oral dit حِلْو (fém. حِلْوِة).",xa:"الكِتَابُ صَعْبٌ لٰكِنَّهُ جَمِيلٌ.",xf:"Le livre est difficile mais il est beau."},
+{id:326,m:10,n:"A2",ar:"قَبِيح",tr:"qabīḥ",r:"ق-ب-ح",nat:"adjectif",g:"Fém. قَبِيحَة, plur. قِبَاح",fr:"laid",lar:"بَشِع",ltr:"bašiʿ",lw:"",xa:"هٰذَا البِنَاءُ قَبِيحٌ.",xf:"Ce bâtiment est laid."},
+{id:327,vl:1,m:10,n:"A1",ar:"جَدِيد",tr:"ǧadīd",r:"ج-د-د",nat:"adjectif",g:"Fém. جَدِيدَة, plur. جُدُد ; même racine que جَدّ et جِدًّا",fr:"nouveau, neuf",lar:"جْدِيد",ltr:"ǧdīd",lw:"",xa:"تَقْرَأُ نُورَةُ كِتَابًا جَدِيدًا.",xf:"Noura lit un nouveau livre."},
+{id:328,m:10,n:"A1",ar:"قَدِيم",tr:"qadīm",r:"ق-د-م",nat:"adjectif",g:"Fém. قَدِيمَة, plur. قُدَامَى / قُدَمَاء (personnes)",fr:"ancien, vieux (chose)",lar:"قَدِيم / عَتِيق",ltr:"ʾadīm / ʿatīʾ",lw:"",xa:"المَدِينَةُ القَدِيمَةُ جَمِيلَةٌ.",xf:"La vieille ville est belle."},
+{id:329,vl:1,m:10,n:"A1",ar:"صَعْب",tr:"ṣaʿb",r:"ص-ع-ب",nat:"adjectif",g:"Fém. صَعْبَة, plur. صِعَاب",fr:"difficile",lar:"صَعِب",ltr:"ṣaʿb",lw:"",xa:"الدَّرْسُ صَعْبٌ.",xf:"La leçon est difficile."},
+{id:330,m:10,n:"A1",ar:"سَهْل",tr:"sahl",r:"س-ه-ل",nat:"adjectif",g:"Fém. سَهْلَة ; pluriel peu usité ; même racine que أَهْلًا وَسَهْلًا",fr:"facile",lar:"سَهِل / هَيِّن",ltr:"sahil / hayyin",lw:"",xa:"هٰذَا التَّمْرِينُ سَهْلٌ.",xf:"Cet exercice est facile."},
+{id:331,m:10,n:"A1",ar:"جَيِّد",tr:"ǧayyid",r:"ج-و-د",nat:"adjectif",g:"Fém. جَيِّدَة, plur. جِيَاد (choses) / جَيِّدُونَ",fr:"bon",lar:"مْنِيح",ltr:"mnīḥ",lw:"جَيِّد est surtout écrit ; l'oral dit مْنِيح.",xa:"هٰذَا مَطْعَمٌ جَيِّدٌ.",xf:"C'est un bon restaurant."},
+{id:332,m:10,n:"A1",ar:"سَيِّئ",tr:"sayyiʾ",r:"س-و-أ",nat:"adjectif",g:"Fém. سَيِّئَة, plur. سَيِّئُونَ",fr:"mauvais",lar:"عَاطِل / مِش مْنِيح",ltr:"ʿāṭil / miš mnīḥ",lw:"",xa:"الطَّقْسُ سَيِّئٌ اليَوْمَ.",xf:"Il fait mauvais aujourd'hui."},
+{id:333,m:10,n:"A2",ar:"سَمِين",tr:"samīn",r:"س-م-ن",nat:"adjectif",g:"Fém. سَمِينَة, plur. سِمَان",fr:"gros",lar:"تْخِين / سَمِين",ltr:"tḫīn / samīn",lw:"",xa:"القِطُّ سَمِينٌ.",xf:"Le chat est gros."},
+{id:334,m:10,n:"A2",ar:"نَحِيف",tr:"naḥīf",r:"ن-ح-ف",nat:"adjectif",g:"Fém. نَحِيفَة, plur. نِحَاف",fr:"mince, maigre",lar:"ضْعِيف / نَحِيف",ltr:"ḍʿīf / naḥīf",lw:"À l'oral, ضْعِيف veut dire « maigre », pas seulement « faible ».",xa:"هِيَ طَوِيلَةٌ وَنَحِيفَةٌ.",xf:"Elle est grande et mince."},
+{id:335,m:10,n:"A2",ar:"عَجُوز",tr:"ʿaǧūz",r:"ع-ج-ز",nat:"nom / adjectif",g:"Masc. et fém., plur. عَجَائِز (diptote)",fr:"vieux, vieille (personne)",lar:"خِتْيَار / خِتْيَارَة",ltr:"ḫityār / ḫityāra",lw:"",xa:"جَدَّتِي عَجُوزٌ لٰكِنَّهَا نَشِيطَةٌ.",xf:"Ma grand-mère est âgée mais elle est active."},
+{id:336,m:10,n:"A1",ar:"ذَكِيّ",tr:"ḏakiyy",r:"ذ-ك-و",nat:"adjectif",g:"Fém. ذَكِيَّة, plur. أَذْكِيَاء (diptote)",fr:"intelligent",lar:"ذَكِي / شَاطِر",ltr:"zaki / šāṭir",lw:"",xa:"اِبْنُهَا ذَكِيٌّ جِدًّا.",xf:"Son fils est très intelligent."},
+{id:337,m:10,n:"A1",ar:"شَاطِر",tr:"šāṭir",r:"ش-ط-ر",nat:"adjectif",g:"Fém. شَاطِرَة, plur. شُطَّار",fr:"doué, habile, bon élève",lar:"شَاطِر",ltr:"šāṭir",lw:"",xa:"أَنْتِ طَالِبَةٌ شَاطِرَةٌ.",xf:"Tu es une élève douée."},
+{id:338,m:10,n:"A2",ar:"كَسْلَان",tr:"kaslān",r:"ك-س-ل",nat:"adjectif",g:"Fém. كَسْلَى, plur. كُسَالَى ; schème فَعْلَان, diptote",fr:"paresseux",lar:"كَسْلَان",ltr:"kaslān",lw:"",xa:"لَسْتُ كَسْلَانَ، أَنَا مُتْعَبٌ.",xf:"Je ne suis pas paresseux, je suis fatigué."},
+{id:339,m:10,n:"A1",ar:"نَشِيط",tr:"našīṭ",r:"ن-ش-ط",nat:"adjectif",g:"Fém. نَشِيطَة, plur. نَشِيطُونَ",fr:"actif, dynamique",lar:"نَشِيط",ltr:"našīṭ",lw:"",xa:"جَدِّي نَشِيطٌ جِدًّا.",xf:"Mon grand-père est très actif."},
+{id:340,m:10,n:"A1",ar:"لَطِيف",tr:"laṭīf",r:"ل-ط-ف",nat:"adjectif",g:"Fém. لَطِيفَة, plur. لُطَفَاء (diptote)",fr:"gentil, agréable",lar:"لَطِيف / مَهْضُوم",ltr:"laṭīf / mahḍūm",lw:"مَهْضُوم « sympa, drôle » est très libanais.",xa:"جَارُنَا لَطِيفٌ.",xf:"Notre voisin est gentil."},
+{id:341,m:10,n:"A2",ar:"كَرِيم",tr:"karīm",r:"ك-ر-م",nat:"adjectif",g:"Fém. كَرِيمَة, plur. كِرَام / كُرَمَاء",fr:"généreux",lar:"كَرِيم",ltr:"karīm",lw:"",xa:"أَهْلُ القَرْيَةِ كُرَمَاءُ.",xf:"Les gens du village sont généreux."},
+{id:342,m:10,n:"A2",ar:"بَخِيل",tr:"baḫīl",r:"ب-خ-ل",nat:"adjectif",g:"Fém. بَخِيلَة, plur. بُخَلَاء (diptote)",fr:"avare",lar:"بَخِيل",ltr:"baḫīl",lw:"",xa:"لَيْسَ بَخِيلًا.",xf:"Il n'est pas avare."},
+{id:343,m:10,n:"A1",ar:"هَادِئ",tr:"hādiʾ",r:"ه-د-أ",nat:"adjectif",g:"Fém. هَادِئَة, plur. هَادِئُونَ",fr:"calme",lar:"هَادِي",ltr:"hādi",lw:"",xa:"الحَيُّ هَادِئٌ فِي اللَّيْلِ.",xf:"Le quartier est calme la nuit."},
+{id:344,m:10,n:"A2",ar:"مُهَذَّب",tr:"muhaḏḏab",r:"ه-ذ-ب",nat:"adjectif",g:"Fém. مُهَذَّبَة, plur. مُهَذَّبُونَ ; participe passif de forme II",fr:"poli, bien élevé",lar:"مْهَذَّب",ltr:"mhazzab",lw:"",xa:"الأَطْفَالُ مُهَذَّبُونَ.",xf:"Les enfants sont polis."},
+{id:345,m:10,n:"A2",ar:"خَجُول",tr:"ḫaǧūl",r:"خ-ج-ل",nat:"adjectif",g:"Fém. خَجُولَة ; pluriel peu usité",fr:"timide",lar:"خَجُول / مِسْتِحِي",ltr:"ḫaǧūl / mistiḥi",lw:"",xa:"أُخْتِي خَجُولَةٌ.",xf:"Ma sœur est timide."},
+{id:346,m:10,n:"A1",ar:"قَوِيّ",tr:"qawiyy",r:"ق-و-ي",nat:"adjectif",g:"Fém. قَوِيَّة, plur. أَقْوِيَاء (diptote)",fr:"fort",lar:"قَوِي",ltr:"ʾawi",lw:"",xa:"هِيَ قَوِيَّةٌ جِدًّا.",xf:"Elle est très forte."},
+{id:347,m:10,n:"A1",ar:"ضَعِيف",tr:"ḍaʿīf",r:"ض-ع-ف",nat:"adjectif",g:"Fém. ضَعِيفَة, plur. ضُعَفَاء (diptote)",fr:"faible",lar:"ضْعِيف",ltr:"ḍʿīf",lw:"",xa:"صَوْتُهُ ضَعِيفٌ.",xf:"Sa voix est faible."},
+{id:348,m:10,n:"A2",ar:"غَنِيّ",tr:"ġaniyy",r:"غ-ن-ي",nat:"adjectif",g:"Fém. غَنِيَّة, plur. أَغْنِيَاء (diptote)",fr:"riche",lar:"غَنِي",ltr:"ġani",lw:"",xa:"هُوَ رَجُلٌ غَنِيٌّ.",xf:"C'est un homme riche."},
+{id:349,m:10,n:"A2",ar:"فَقِير",tr:"faqīr",r:"ف-ق-ر",nat:"adjectif",g:"Fém. فَقِيرَة, plur. فُقَرَاء (diptote)",fr:"pauvre",lar:"فَقِير",ltr:"faʾīr",lw:"",xa:"كَانَتْ عَائِلَتُهُ فَقِيرَةً.",xf:"Sa famille était pauvre."},
+{id:350,m:10,n:"A2",ar:"مَشْهُور",tr:"mašhūr",r:"ش-ه-ر",nat:"adjectif",g:"Fém. مَشْهُورَة, plur. مَشْهُورُونَ ; même racine que شَهْر « mois »",fr:"célèbre",lar:"مَشْهُور",ltr:"mašhūr",lw:"",xa:"هٰذِهِ المُغَنِّيَةُ مَشْهُورَةٌ.",xf:"Cette chanteuse est célèbre."},
+{id:351,m:10,n:"A2",ar:"أَشْقَر",tr:"ašqar",r:"ش-ق-ر",nat:"adjectif",g:"Fém. شَقْرَاء, plur. شُقْر ; schème des couleurs أَفْعَل / فَعْلَاء, diptote",fr:"blond",lar:"أَشْقَر / شَقْرَا",ltr:"ašʾar / šaʾra",lw:"",xa:"شَعْرُهَا أَشْقَرُ.",xf:"Ses cheveux sont blonds."},
+{id:352,m:10,n:"A2",ar:"أَسْمَر",tr:"asmar",r:"س-م-ر",nat:"adjectif",g:"Fém. سَمْرَاء, plur. سُمْر ; même schème, diptote",fr:"brun, au teint mat",lar:"أَسْمَر / سَمْرَا",ltr:"asmar / samra",lw:"",xa:"هُوَ أَسْمَرُ وَطَوِيلٌ.",xf:"Il est brun et grand."}
+];
+
+/* =======================================================================
+   OUTILS
+   ======================================================================= */
+D.forEach((e,i)=>{ if(!e.id) e.id=100000+i; });
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const HARAKAT=/([\u064B-\u0655\u0670])/g;
+let RUBRIC=false;
+function arHTML(t){
+  const s=esc(t);
+  return RUBRIC? s.replace(HARAKAT,'<span class="h">$1</span>') : s;
+}
+function store(k,v){try{ if(v===undefined) return localStorage.getItem('lexA:'+k); localStorage.setItem('lexA:'+k,v);}catch(e){return null}}
+const shuffle=a=>{const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
+
+let TODO=new Set(), KNOWN=new Set(), LOG=[];
+try{const s=store('todo'); if(s) TODO=new Set(JSON.parse(s));}catch(e){}
+try{const s=store('known'); if(s) KNOWN=new Set(JSON.parse(s));}catch(e){}
+try{const s=store('log'); if(s) LOG=JSON.parse(s);}catch(e){}
+const saveTodo=()=>{store('todo',JSON.stringify([...TODO]));schedulePush();};
+const saveKnown=()=>{store('known',JSON.stringify([...KNOWN]));schedulePush();};
+const saveLog=()=>{LOG=LOG.slice(-80);store('log',JSON.stringify(LOG));schedulePush();};
+/* un mot ne porte qu'un statut a la fois */
+function setStatus(id,st){
+  TODO.delete(id); KNOWN.delete(id);
+  if(st==='k') KNOWN.add(id);
+  if(st==='t') TODO.add(id);
+  saveTodo(); saveKnown();
+}
+const statusOf=id=>KNOWN.has(id)?'k':(TODO.has(id)?'t':'');
+const dkey=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+function logSession(n,ok){ LOG.push({d:dkey(new Date()),n:n,ok:ok}); saveLog(); }
+
+/* ---------- vu en leçon (sessions de juin à septembre 2026) ---------- */
+const SEEN=new Set(["أَنَا", "أَنْتَ", "أَنْتِ", "هُوَ", "هِيَ", "نَحْنُ", "أَنْتُمْ", "أَنْتُنَّ", "هُمْ", "هُنَّ", "ـِي", "ـكَ", "ـكِ", "ـهُ", "ـهَا", "ـنَا", "مَنْ", "مَا", "مَاذَا", "أَيْنَ", "مَتَى", "كَيْفَ", "لِمَاذَا", "كَمْ", "أَيّ", "هَلْ", "وَ", "لٰكِنْ", "لِأَنَّ", "ثُمَّ", "أَيْضًا", "لَا", "نَعَمْ", "فِي", "مِنْ", "إِلَى", "بِـ", "مَعَ", "عَنْ", "عِنْدَ", "بَعْدَ", "قَبْلَ", "قَرِيب", "هُنَا", "اليَوْم", "أَمْسِ", "غَدًا", "الآنَ", "دَائِمًا", "أَحْيَانًا", "نَادِرًا", "أَبَدًا", "عَادَةً", "مُبَكِّرًا", "صَبَاح", "مَسَاء", "يَوْم", "كُلّ"]);
+D.forEach(e=>{ if(e.m<=5 && SEEN.has(e.ar) && !(e.ar==='مَا'&&e.nat==='négation')) e.vl=1; });
+/* ---------- déjà dans le paquet Anki « Arabe Phase 1 » (juillet 2026, relevé partiel) ---------- */
+const ANKI=new Set(["هٰذِهِ","هُوَ","هِيَ","أَنَا","أَنْتَ","أَنْتِ","نَحْنُ","مَاذَا","مَنْ","أَيْنَ","مَتَى","كَيْفَ","لِمَاذَا","كَمْ","نَعَمْ","لَا","اليَوْم","غَدًا"]);
+D.forEach(e=>{ if(e.m<=5 && ANKI.has(e.ar) && e.nat!=='négation') e.ak=1; if(e.ar==='لَا') e.ak=1; });
+const BLOCS={A:"A · l'ossature",B:"B · les personnes"};
+
+/* ---------- filtres ---------- */
+const fSeen=$('#fSeen'),fMod=$('#fMod'),fNat=$('#fNat'),fLv=$('#fLv'),fRoot=$('#fRoot'),q=$('#q');
+Object.keys(BLOCS).forEach(b=>{ const g=document.createElement('optgroup'); g.label='Bloc '+BLOCS[b];
+  MODULES.filter(m=>m.b===b).forEach(m=>g.appendChild(new Option(m.id+'. '+m.t,m.id))); fMod.appendChild(g); });
+$('#cTotal').textContent=D.length; $('#cMods').textContent=MODULES.length;
+$('#cSeen').textContent=D.filter(e=>e.vl).length; $('#cBlocs').textContent=Object.values(BLOCS).join(' ; ');
+[...new Set(D.map(e=>e.nat))].sort((a,b)=>a.localeCompare(b,'fr')).forEach(n=>fNat.add(new Option(n,n)));
+const rootCount={};
+D.forEach(e=>{if(e.r!=='—') rootCount[e.r]=(rootCount[e.r]||0)+1});
+Object.keys(rootCount).sort().forEach(r=>fRoot.add(new Option(r+(rootCount[r]>1?' ('+rootCount[r]+')':''),r)));
+
+function filtered(){
+  const s=q.value.trim().toLowerCase();
+  return D.filter(e=>{
+    if(fMod.value && e.m!=+fMod.value) return false;
+    if(fNat.value && e.nat!==fNat.value) return false;
+    if(fLv.value && e.n!==fLv.value) return false;
+    if(fRoot.value && e.r!==fRoot.value) return false;
+    if(fSeen.value==='oui' && !e.vl) return false;
+    if(fSeen.value==='non' && e.vl) return false;
+    if(fSeen.value==='anki' && !e.ak) return false;
+    if(fSeen.value==='noanki' && e.ak) return false;
+    if(s && !(e.ar+' '+e.tr+' '+e.fr+' '+e.r+' '+e.lar+' '+e.ltr).toLowerCase().includes(s)) return false;
+    return true;
+  });
+}
+
+/* ---------- rendu Parcourir ---------- */
+const M={ar:false,fr:false,tr:false,ex:false};
+function entryHTML(e){
+  const cls=k=>M[k]?' masked':'';
+  const st=statusOf(e.id);
+  return `<article class="entry${st?' st-'+st:''}" data-id="${e.id}">
+    <div class="e-top">
+      <div class="e-ar reveal-hint${cls('ar')}" data-f="ar">${arHTML(e.ar)}</div>
+      <div>
+        <div class="e-tr reveal-hint${cls('tr')}" data-f="tr">${esc(e.tr)}</div>
+        <div class="e-fr reveal-hint${cls('fr')}" data-f="fr">${esc(e.fr)}</div>
+      </div>
+      <div class="chips">
+        <span class="chip">${esc(e.nat)}</span>
+        <span class="chip lv">${esc(e.n)}</span>
+        ${e.vl?'<span class="chip seen">vu en leçon</span>':''}${e.ak?'<span class="chip">dans ton Anki</span>':''}
+        ${e.r!=='—'?`<span class="chip">${esc(e.r)}</span>`:''}
+      </div>
+    </div>
+    <p class="e-gram">${e.g.replace(/([\u0600-\u06FF][\u0600-\u06FF\s\u064B-\u0652]*)/g,'<span class="ar">$1</span>')}</p>
+    ${e.lar?`<div class="e-lev"><span class="tag">levantin</span><span class="ar">${arHTML(e.lar)}</span> <em>${esc(e.ltr)}</em></div>`:''}
+    ${e.lw?`<p class="e-warn">${esc(e.lw)}</p>`:''}
+    <div class="e-ex${cls('ex')}"><span class="ar">${arHTML(e.xa)}</span>${esc(e.xf)}</div>
+    <div class="statusrow">${statusBtns(st)}</div>
+  </article>`;
+}
+function renderBrowse(){
+  const f=filtered();
+  const byMod={};
+  f.forEach(e=>{(byMod[e.m]=byMod[e.m]||[]).push(e)});
+  let out='';
+  MODULES.forEach(m=>{
+    const list=byMod[m.id]; if(!list) return;
+    out+=`<div class="modhead"><h2>${m.id}. ${esc(m.t)}</h2>
+      <p class="meta">${list.length} entrée${list.length>1?'s':''} affichée${list.length>1?'s':''} sur ${m.n}</p>
+      <div class="note">${m.note}</div>`;
+    out+=list.map(entryHTML).join('');
+    if(list.length===m.n){
+      out+=`<div class="note" style="margin-top:22px;border-left-color:var(--dialect)"><h3>Cinq phrases à réemployer</h3>`+
+        m.ph.map(p=>`<p><span class="arx" dir="rtl">${arHTML(p[0])}</span><br>${esc(p[1])}</p>`).join('')+`</div>`;
+    }
+    out+=`</div>`;
+  });
+  $('#list').innerHTML=out||'<p class="empty">Aucune entrée ne correspond à ce filtre.</p>';
+  $('#shown').textContent=f.length+' entrée'+(f.length>1?'s':'')+' affichée'+(f.length>1?'s':'')+' sur '+D.length;
+}
+[q,fMod,fNat,fLv,fRoot,fSeen].forEach(el=>el.addEventListener('input',renderBrowse));
+
+function statusBtns(st){
+  return `<button class="sbtn${st==='k'?' on-k':''}" data-st="k">Acquis</button>`+
+         `<button class="sbtn${st==='t'?' on-t':''}" data-st="t">À revoir</button>`+
+         (st?`<button class="sbtn" data-st="">Effacer</button>`:'');
+}
+/* révélation au clic d'un champ masqué, et marquage du statut */
+$('#list').addEventListener('click',ev=>{
+  const b=ev.target.closest('.sbtn');
+  if(b){
+    const art=b.closest('.entry'), id=+art.dataset.id, want=b.dataset.st;
+    setStatus(id, statusOf(id)===want ? '' : want);
+    const st=statusOf(id);
+    art.className='entry'+(st?' st-'+st:'');
+    art.querySelector('.statusrow').innerHTML=statusBtns(st);
+    return;
+  }
+  const t=ev.target.closest('.reveal-hint,.e-ex');
+  if(t&&t.classList.contains('masked')) t.classList.remove('masked');
+});
+
+/* ---------- toggles ---------- */
+function bindTog(id,fn){
+  const b=$(id);
+  b.addEventListener('click',()=>{
+    const on=b.getAttribute('aria-pressed')==='true';
+    b.setAttribute('aria-pressed',String(!on)); fn(!on);
+  });
+}
+bindTog('#mAr',v=>{M.ar=v;renderBrowse()});
+bindTog('#mFr',v=>{M.fr=v;renderBrowse()});
+bindTog('#mTr',v=>{M.tr=v;renderBrowse()});
+bindTog('#mEx',v=>{M.ex=v;renderBrowse()});
+bindTog('#mRub',v=>{RUBRIC=v;renderBrowse()});
+bindTog('#mTheme',v=>{document.documentElement.setAttribute('data-theme',v?'dark':'light')});
+
+/* ---------- onglets ---------- */
+$$('nav.tabs button').forEach(b=>b.addEventListener('click',()=>{
+  hideBar();
+  $$('nav.tabs button').forEach(x=>x.setAttribute('aria-selected',String(x===b)));
+  $$('.panel-tab').forEach(p=>p.classList.toggle('on',p.id==='tab-'+b.dataset.tab));
+  if(b.dataset.tab==='roots') renderRoots();
+  if(b.dataset.tab==='progress') renderProgress();
+  if(b.dataset.tab==='export') renderExport();
+}));
+
+/* ---------- réviser ---------- */
+let R={list:[],i:0,flipped:false,ok:0};
+$('#rStart').addEventListener('click',()=>{
+  let pool=filtered();
+  if($('#rScope').value==='todo') pool=pool.filter(e=>TODO.has(e.id));
+  if($('#rScope').value==='new') pool=pool.filter(e=>!statusOf(e.id));
+  if(!pool.length){$('#rBody').innerHTML='<p class="empty">Rien à réviser avec ce filtre.</p>';return}
+  hideBar();
+  R={list:shuffle(pool).slice(0,+$('#rSize').value),i:0,flipped:false,ok:0,logged:false};
+  drawCard();
+});
+function drawCard(){
+  if(R.i>=R.list.length){
+    hideBar();
+    if(R.list.length && !R.logged){ logSession(R.list.length,R.ok); R.logged=true; }
+    $('#rBody').innerHTML=`<div class="card"><p class="bigfr">Série terminée</p>
+      <p class="sub">${R.ok} acquis · ${R.list.length-R.ok} à revoir</p>
+      <p class="sub">${KNOWN.size} acquis au total · ${TODO.size} dans la pile « à revoir »</p></div>`;
+    return;
+  }
+  const e=R.list[R.i], dir=$('#rDir').value;
+  const front = dir==='ar' ? `<div class="big">${arHTML(e.ar)}</div>` : `<div class="bigfr">${esc(e.fr)}</div>`;
+  const back = R.flipped ? `<div class="back">
+      <div class="big" style="text-align:center">${arHTML(e.ar)}</div>
+      <p class="sub" style="text-align:center">${esc(e.tr)} — ${esc(e.fr)}</p>
+      <p style="font-size:14.5px;color:var(--muted)">${esc(e.g)}</p>
+      ${e.lar?`<p class="e-lev" style="margin-left:0"><span class="tag">levantin</span><span class="ar">${arHTML(e.lar)}</span> <em>${esc(e.ltr)}</em></p>`:''}
+      <p class="e-ex"><span class="ar">${arHTML(e.xa)}</span>${esc(e.xf)}</p>
+    </div>` : '';
+  $('#rBody').innerHTML=`<div class="card">${front}${back}</div>
+    <p class="progress">${R.i+1} / ${R.list.length}</p>
+    <div class="bar"><span style="width:${(R.i/R.list.length)*100}%"></span></div>`;
+  if(R.flipped){
+    showBar('<span class="counts">Tu savais ce mot ?</span>','',[
+      {label:'Je savais', fn:()=>{setStatus(R.list[R.i].id,'k');R.ok++;R.i++;R.flipped=false;drawCard();}},
+      {label:'À revoir', ghost:true, fn:()=>{setStatus(R.list[R.i].id,'t');R.i++;R.flipped=false;drawCard();}}
+    ]);
+  } else {
+    showBar('',''  ,[{label:'Retourner la carte', fn:()=>{R.flipped=true;drawCard();}}]);
+  }
+}
+
+/* =======================================================================
+   MOTEUR D'EXERCICES — partagé par l'onglet Exercices et l'Épreuve mixte
+   ======================================================================= */
+const MODBLOC={}; MODULES.forEach(m=>MODBLOC[m.id]=m.b);
+const FAMNAME={voc:'vocabulaire',trad:'traduction',lect:'lecture'};
+const TYPEFAM={recog:'voc',theme:'voc',lev:'voc',typeword:'voc',
+  version:'trad',gap:'trad',typegap:'trad',typesent:'trad',letters:'lect',sent:'lect'};
+const FAMTYPES={voc:['recog','theme','lev','typeword'],
+  trad:['version','gap','typegap','typesent'],lect:['letters','sent']};
+const ALLTYPES=['recog','theme','lev','typeword','version','gap','typegap','typesent','letters','sent'];
+const TYPED=new Set(['typeword','typegap','typesent']);
+const TYPENAME={recog:'arabe → français',theme:'français → arabe',lev:'fuṣḥā → levantin',
+  version:'phrase arabe → français',gap:'compléter la phrase',
+  letters:'repérer la bonne graphie',sent:'phrase modèle',
+  typeword:'écrire le mot en arabe',typegap:'compléter au clavier',
+  typesent:'traduire la phrase au clavier'};
+function typeList(fam,mode){
+  let t=(fam&&fam!=='all') ? FAMTYPES[fam].slice() : ALLTYPES.slice();
+  if(mode==='mcq')  t=t.filter(x=>!TYPED.has(x));
+  if(mode==='type') t=t.filter(x=>TYPED.has(x));
+  return t;
+}
+
+/* ---------- correction des réponses tapées ---------- */
+/* les voyelles brèves ne sont jamais exigées : elles ne se tapent pas
+   sur un clavier arabe ordinaire. L'alif maqṣūra est tolérée pour la même
+   raison. Les hamzas et le tāʾ marbūṭa, eux, sont de vraies différences. */
+const stripH=t=>String(t).replace(/[ً-ٰٕـ‎‏]/g,'');
+const normAr=t=>stripH(t).replace(/ى/g,'ي')
+  .replace(/[.،؟!:…؛]/g,'').replace(/\s+/g,' ').trim();
+const foldAr=t=>normAr(t)
+  .replace(/[أإآٱ]/g,'ا')
+  .replace(/ؤ/g,'و').replace(/ئ/g,'ي')
+  .replace(/ة/g,'ه').replace(/ء/g,'');
+function gradeAr(given,accept){
+  if(!normAr(given)) return 'empty';
+  if(accept.some(a=>normAr(a)===normAr(given))) return 'ok';
+  if(accept.some(a=>foldAr(a)===foldAr(given))) return 'close';
+  return 'no';
+}
+const normFr=t=>String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
+  .replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+const STOPFR=new Set(['le','la','les','l','un','une','des','de','du','d','a','au','aux','et','est','ce','c','se','que','qu','en','y','il','elle','je','tu','on','nous','vous','ils','elles','mon','ma','mes','ton','ta','tes','son','sa','ses']);
+function gradeFr(given,expected){
+  const g=normFr(given), x=normFr(expected);
+  if(!g) return 'empty';
+  if(g===x) return 'ok';
+  const cut=v=>v.split(' ').filter(w=>w&&!STOPFR.has(w));
+  const G=cut(g), X=cut(x);
+  if(!X.length) return 'no';
+  const r=X.filter(w=>G.includes(w)).length/X.length;
+  return r>=0.75 ? 'ok' : (r>=0.45 ? 'close' : 'no');
+}
+const AIDE=['ء','أ','إ','آ','ؤ','ئ','ى','ة','ـ'];
+let STRICT = store('strict')==='1';
+
+/* phrases modèles de chaque module : matière de lecture */
+const SENT=[];
+MODULES.forEach(m=>m.ph.forEach((ph,i)=>SENT.push({k:'s'+m.id+'-'+i,m:m.id,ar:ph[0],fr:ph[1]})));
+
+/* graphies voisines : lettres qui partagent le même squelette */
+const SKEL=[['ب','ت','ث','ن'],['ج','ح','خ'],['د','ذ'],['ر','ز'],
+            ['س','ش'],['ص','ض'],['ط','ظ'],['ع','غ'],['ف','ق']];
+const bare=t=>t.replace(/[ً-ٰٕـ]/g,'');
+const REAL=new Set(); D.forEach(e=>{REAL.add(bare(e.ar)); if(e.lar) REAL.add(bare(e.lar));});
+SENT.forEach(x=>REAL.add(bare(x.ar)));
+/* variantes obtenues en déplaçant les points, jamais un autre mot réel */
+function dotVariants(word){
+  const out=[], chars=[...word];
+  for(let i=0;i<chars.length;i++){
+    const g=SKEL.find(gr=>gr.includes(chars[i]));
+    if(!g) continue;
+    for(const alt of g){
+      if(alt===chars[i]) continue;
+      const v=chars.slice(); v[i]=alt;
+      const w=v.join('');
+      if(REAL.has(bare(w)) || out.includes(w)) continue;
+      out.push(w);
+    }
+  }
+  return out;
+}
+const lettersOK=e=>!e.ar.startsWith('ـ') && bare(e.ar).length>=3;
+/* le trou avale le mot entier, article et voyelle finale compris,
+   pour ne pas laisser traîner la marque de cas */
+function gapParts(e){
+  if(!e.xa) return null;
+  const toks=e.xa.split(/(\s+)/), target=bare(e.ar);
+  const i=toks.findIndex(t=>t.trim() && bare(t).includes(target));
+  if(i<0) return null;
+  const punct=(toks[i].match(/[\u060C.\u061F!:\u2026]+$/)||[''])[0];
+  return {hole:toks.map((t,k)=>k===i?'______'+punct:t).join(''),
+          word:toks[i].slice(0,toks[i].length-punct.length)};
+}
+function gapHole(e){ const g=gapParts(e); return g?g.hole:null; }
+/* le levantin ne vaut comme question que s'il diffère vraiment du fuṣḥā */
+function levDiff(e){
+  if(!e.lar) return false;
+  return !bare(e.lar).split('/').map(x=>x.trim()).includes(bare(e.ar));
+}
+
+/* ---------- performances mesurées ---------- */
+let PERF={}, TESTS=[];
+try{const v=store('perf'); if(v) PERF=JSON.parse(v);}catch(e){}
+try{const v=store('tests'); if(v) TESTS=JSON.parse(v);}catch(e){}
+const savePerf=()=>{store('perf',JSON.stringify(PERF));schedulePush();};
+const saveTests=()=>{TESTS=TESTS.slice(-80);store('tests',JSON.stringify(TESTS));schedulePush();};
+let AUTOST = store('autost')!=='0';
+
+/* =======================================================================
+   SAUVEGARDE DURABLE — le navigateur sert de miroir rapide,
+   le compte Claude de mémoire de référence
+   ======================================================================= */
+async function useCap(n){
+  try{ return (typeof claude!=='undefined' && claude && claude.use) ? await claude.use(n) : null; }
+  catch(e){ return null; }
+}
+const SNAP=()=>({v:1,savedAt:new Date().toISOString(),
+  known:[...KNOWN],todo:[...TODO],log:LOG,tests:TESTS,perf:PERF,auto:AUTOST});
+function mirrorLocal(){
+  store('known',JSON.stringify([...KNOWN])); store('todo',JSON.stringify([...TODO]));
+  store('log',JSON.stringify(LOG)); store('tests',JSON.stringify(TESTS));
+  store('perf',JSON.stringify(PERF)); store('autost',AUTOST?'1':'0');
+}
+function applySnap(d){
+  if(!d||typeof d!=='object') return false;
+  if(Array.isArray(d.known)) KNOWN=new Set(d.known);
+  if(Array.isArray(d.todo))  TODO=new Set(d.todo);
+  if(Array.isArray(d.log))   LOG=d.log;
+  if(Array.isArray(d.tests)) TESTS=d.tests;
+  if(d.perf&&typeof d.perf==='object') PERF=d.perf;
+  if(typeof d.auto==='boolean') AUTOST=d.auto;
+  mirrorLocal();
+  return true;
+}
+const SYNCTXT={
+  local:'Sauvegarde : ce navigateur seulement',
+  saving:'Sauvegarde en cours…',
+  saved:'Sauvegarde : enregistrée sur ton compte',
+  error:'Sauvegarde : le dernier enregistrement a échoué'};
+function setSync(k){
+  const el=document.getElementById('syncMsg');
+  if(el) el.textContent=SYNCTXT[k]||SYNCTXT.local;
+}
+let DBDOC=null, pushTimer=null, pushing=false, dirty=false;
+function schedulePush(){
+  if(!DBDOC) return;
+  dirty=true; clearTimeout(pushTimer); pushTimer=setTimeout(pushNow,1200);
+}
+async function pushNow(){
+  if(!DBDOC||pushing||!dirty) return;
+  pushing=true; dirty=false; setSync('saving');
+  try{ await DBDOC.set(SNAP()); setSync('saved'); }
+  catch(e){ dirty=true; setSync('error'); }
+  finally{ pushing=false; if(dirty){ clearTimeout(pushTimer); pushTimer=setTimeout(pushNow,2500); } }
+}
+(async()=>{
+  const db=await useCap('db');
+  if(!db){ setSync('local'); return; }
+  try{
+    DBDOC=db.doc('progress/state');
+    const snap=await DBDOC.get();
+    if(snap.exists && snap.data()){
+      applySnap(snap.data()); setSync('saved');
+      renderBrowse();
+      if(document.querySelector('#tab-progress.on')) renderProgress();
+    } else {
+      /* rien en ligne : on y envoie ce que ce navigateur gardait déjà */
+      dirty=true; await pushNow();
+    }
+  }catch(e){ DBDOC=null; setSync('error'); }
+})();
+
+function record(key,fam,ok){
+  const p=PERF[key]=PERF[key]||{a:0,k:0,s:0,f:{}};
+  p.a++; if(ok){p.k++;p.s++;} else {p.s=0;}
+  const f=p.f[fam]=p.f[fam]||{a:0,k:0}; f.a++; if(ok) f.k++;
+  p.d=dkey(new Date());
+  savePerf();
+  /* le statut suit les réussites : un échec renvoie le mot à revoir,
+     deux réussites de suite le classent acquis */
+  if(AUTOST && typeof key==='number'){
+    if(!ok) setStatus(key,'t');
+    else if(p.s>=2) setStatus(key,'k');
+  }
+}
+const accOf=key=>{const p=PERF[key]; return p&&p.a? p.k/p.a : null;};
+
+/* ---------- fabrique d'une question ---------- */
+function buildQuestion(list,type){
+  const pick=a=>a[Math.floor(Math.random()*a.length)];
+  const wrap=t=>`<span class="ar">${arHTML(t)}</span>`;
+
+  /* --- réponses tapées au clavier --- */
+  if(type==='typeword'){
+    const e=pick(list);
+    return {key:e.id,fam:'voc',type:type,m:e.m,mode:'type',script:'ar',
+      stem:`<b>${esc(e.fr)}</b><span class="qsub">Écris le mot en arabe. Les voyelles brèves ne sont pas attendues.</span>`,
+      hint:`translittération : ${esc(e.tr)}`,
+      accept:[e.ar],
+      sol:`${wrap(e.ar)} <em>${esc(e.tr)}</em> — ${esc(e.fr)}`};
+  }
+  if(type==='typegap'){
+    const pool=list.filter(e=>gapParts(e));
+    if(!pool.length) return null;
+    const e=pick(pool), g=gapParts(e);
+    return {key:e.id,fam:'trad',type:type,m:e.m,mode:'type',script:'ar',
+      stem:`${wrap(g.hole)}<span class="qsub">${esc(e.xf)}</span>`,
+      hint:`${esc(e.fr)} — ${esc(e.tr)}`,
+      accept:[e.ar,g.word],
+      sol:`${wrap(e.xa)}<br>${esc(e.xf)}`};
+  }
+  if(type==='typesent'){
+    const mods0=new Set(list.map(e=>e.m));
+    const pool=SENT.filter(x=>mods0.has(x.m));
+    if(!pool.length) return null;
+    const x=pick(pool);
+    return {key:x.k,fam:'trad',type:type,m:x.m,mode:'type',script:'fr',
+      stem:`${wrap(x.ar)}<span class="qsub">Traduis la phrase en français.</span>`,
+      hint:'',
+      accept:[x.fr],
+      sol:`${wrap(x.ar)}<br>${esc(x.fr)}`};
+  }
+
+  if(type==='sent'){
+    const mods=new Set(list.map(e=>e.m));
+    const pool=SENT.filter(x=>mods.has(x.m));
+    if(pool.length<4) return null;
+    const x=pick(pool), others=shuffle(pool.filter(y=>y.k!==x.k)).slice(0,3);
+    return {key:x.k,fam:'lect',type:type,m:x.m,stem:wrap(x.ar),
+      opts:[{h:esc(x.fr),ok:true},...others.map(y=>({h:esc(y.fr),ok:false}))],
+      sol:`${wrap(x.ar)}<br>${esc(x.fr)}`};
+  }
+
+  if(type==='letters'){
+    const cands=shuffle(list.filter(e=>lettersOK(e)&&dotVariants(e.ar).length>=3));
+    if(!cands.length) return null;
+    const e=cands[0], vs=shuffle(dotVariants(e.ar)).slice(0,3);
+    return {key:e.id,fam:'lect',type:type,m:e.m,
+      stem:`<b>${esc(e.fr)}</b><span class="qsub">${esc(e.tr)} — laquelle de ces graphies est la bonne ?</span>`,
+      opts:[{h:wrap(e.ar),ok:true},...vs.map(v=>({h:wrap(v),ok:false}))],
+      sol:`${wrap(e.ar)} <em>${esc(e.tr)}</em> — ${esc(e.fr)}`};
+  }
+
+  let pool=list;
+  if(type==='lev') pool=list.filter(levDiff);
+  if(type==='version') pool=list.filter(e=>e.xa);
+  if(type==='gap') pool=list.filter(e=>gapHole(e));
+  if(pool.length<4) return null;
+  const e=pick(pool);
+  let others=shuffle(pool.filter(x=>x.id!==e.id)).slice(0,3);
+  let stem='',good='',bad=[];
+  if(type==='recog'){stem=wrap(e.ar);good=esc(e.fr);bad=others.map(x=>esc(x.fr));}
+  if(type==='theme'){stem=`<b>${esc(e.fr)}</b>`;good=wrap(e.ar);bad=others.map(x=>wrap(x.ar));}
+  if(type==='lev'){stem=`${wrap(e.ar)}<span class="qsub">« ${esc(e.fr)} » — comment le dit-on à l'oral levantin ?</span>`;
+    good=wrap(e.lar);bad=others.map(x=>wrap(x.lar));}
+  if(type==='version'){stem=wrap(e.xa);good=esc(e.xf);bad=others.map(x=>esc(x.xf));}
+  if(type==='gap'){stem=`${wrap(gapHole(e))}<span class="qsub">${esc(e.xf)}</span>`;
+    good=wrap(e.ar);bad=others.map(x=>wrap(x.ar));}
+  return {key:e.id,fam:TYPEFAM[type],type:type,m:e.m,stem:stem,
+    opts:[{h:good,ok:true},...bad.map(h=>({h:h,ok:false}))],
+    sol:`${wrap(e.ar)} <em>${esc(e.tr)}</em> — ${esc(e.fr)}`};
+}
+
+/* tire une question valide : quatre propositions distinctes */
+function nextQuestion(list,type,fam,skip,mode){
+  const types = (type && type!=='mix' && type!=='mixtype') ? [type]
+    : typeList(fam, type==='mixtype' ? 'type' : (mode||'both'));
+  if(!types.length) return null;
+  const plain=h=>h.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+  for(let i=0;i<40;i++){
+    const q=buildQuestion(list,types[Math.floor(Math.random()*types.length)]);
+    if(!q) continue;
+    if(skip&&skip.has(q.key)) continue;
+    if(q.mode==='type') return q;
+    const good=q.opts.find(o=>o.ok), seen=new Set([plain(good.h)]);
+    const rest=q.opts.filter(o=>!o.ok).filter(o=>{
+      const t=plain(o.h); if(!t||seen.has(t)) return false; seen.add(t); return true;});
+    if(rest.length<3) continue;
+    q.opts=shuffle([good,...rest.slice(0,3)]);
+    return q;
+  }
+  return null;
+}
+
+/* ---------- barre d'action : la réponse et le bouton suivant ---------- */
+let BARKEY=null;
+function hideBar(){
+  const b=document.getElementById('qbar');
+  if(b) b.remove();
+  document.body.style.paddingBottom='';
+  BARKEY=null;
+}
+/* actions : [{label, fn, ghost}] — la première est celle que déclenche Entrée */
+function showBar(html,kind,actions){
+  hideBar();
+  const bar=document.createElement('div');
+  bar.id='qbar'; bar.className='qbar'+(kind?' '+kind:'');
+  bar.innerHTML=`<div class="qbar-in">
+      <div class="fbtext">${html||''}</div>
+      <div class="acts">${actions.map((a,i)=>
+        `<button class="act${a.ghost?' ghost':''}" data-i="${i}">${esc(a.label)}</button>`).join('')}</div>
+    </div>`;
+  document.body.appendChild(bar);
+  document.body.style.paddingBottom=(bar.offsetHeight+24)+'px';
+  bar.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{
+    const a=actions[+btn.dataset.i];
+    hideBar(); a.fn();
+  }));
+  BARKEY=()=>{ const a=actions[0]; hideBar(); a.fn(); };
+  const first=bar.querySelector('button');
+  if(first) first.focus();
+}
+document.addEventListener('keydown',ev=>{
+  if(!BARKEY) return;
+  if(ev.key==='Enter'||ev.key===' '){
+    const t=ev.target;
+    if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT')) return;
+    ev.preventDefault(); BARKEY();
+  }
+});
+
+/* ---------- affichage d'une question ---------- */
+function qHead(q){
+  const mod=MODULES.find(m=>m.id===q.m);
+  return `<p class="qmeta"><span class="fam">${FAMNAME[q.fam]}</span>
+      <span>${TYPENAME[q.type]}</span><span>·</span>
+      <span>bloc ${esc(MODBLOC[q.m])} — module ${q.m}${mod?', '+esc(mod.t.toLowerCase()):''}</span></p>`;
+}
+function renderQ(host,q,onAnswer){
+  if(q.mode==='type') return renderTyped(host,q,onAnswer);
+  host.innerHTML=`${qHead(q)}
+    <p class="q">${q.stem}</p>
+    <div class="opts">${q.opts.map(o=>`<button class="opt" data-ok="${o.ok}">${o.h}</button>`).join('')}</div>`;
+  let done=false;
+  host.querySelectorAll('.opt').forEach(btn=>btn.addEventListener('click',()=>{
+    if(done) return;
+    done=true;
+    const ok=btn.dataset.ok==='true';
+    host.querySelectorAll('.opt').forEach(x=>{
+      x.disabled=true;
+      if(x.dataset.ok==='true') x.classList.add('good');
+      else if(x===btn) x.classList.add('bad');
+    });
+    onAnswer(ok, ok ? '<span class="verdict ok">Exact.</span>'
+                    : `<span class="verdict no">Réponse :</span> ${q.sol}`);
+  }));
+}
+function renderTyped(host,q,onAnswer){
+  const ar=q.script==='ar';
+  host.innerHTML=`${qHead(q)}
+    <p class="q">${q.stem}</p>
+    <div class="answer">
+      <input type="text" class="ansin${ar?' ar':''}" dir="${ar?'rtl':'ltr'}" lang="${ar?'ar':'fr'}"
+        autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        aria-label="${ar?'Ta réponse en arabe':'Ta traduction en français'}"
+        placeholder="${ar?'ta réponse en arabe…':'ta traduction…'}">
+      ${ar?`<div class="keys">${AIDE.map(c=>`<button type="button" class="kbtn" data-c="${c}">${c}</button>`).join('')}</div>`:''}
+      <div class="row" style="margin-top:12px">
+        <button class="act" data-act="ok">Valider</button>
+        ${q.hint?`<button class="act ghost" data-act="hint">Indice</button>`:''}
+        <span class="counts" data-slot="hint" style="margin:0"></span>
+      </div>
+    </div>`;
+  const inp=host.querySelector('.ansin');
+  const hintSlot=host.querySelector('[data-slot="hint"]');
+  let usedHint=false, done=false;
+  host.querySelectorAll('.kbtn').forEach(k=>k.addEventListener('click',()=>{
+    const c=k.dataset.c, a=inp.selectionStart??inp.value.length, b=inp.selectionEnd??a;
+    inp.value=inp.value.slice(0,a)+c+inp.value.slice(b);
+    inp.focus(); const n=a+c.length; inp.setSelectionRange(n,n);
+  }));
+  const hintBtn=host.querySelector('[data-act="hint"]');
+  if(hintBtn) hintBtn.addEventListener('click',()=>{
+    usedHint=true; hintSlot.textContent=q.hint; hintBtn.disabled=true; inp.focus();
+  });
+  function submit(){
+    if(done) return;
+    const given=inp.value;
+    const v = q.script==='ar' ? gradeAr(given,q.accept) : gradeFr(given,q.accept[0]);
+    if(v==='empty'){ hintSlot.textContent='Écris quelque chose avant de valider.'; inp.focus(); return; }
+    done=true;
+    inp.disabled=true;
+    host.querySelectorAll('.kbtn,[data-act]').forEach(b=>b.disabled=true);
+    const ok = v==='ok' || (v==='close' && !STRICT);
+    let msg;
+    if(v==='ok') msg='<span class="verdict ok">Exact.</span>';
+    else if(v==='close'){
+      msg=`<span class="verdict ${STRICT?'no':'ok'}">Presque${STRICT?' — compté faux en correction stricte':''}.</span> `
+        + (q.script==='ar'
+           ? `La différence porte sur une hamza, un tāʾ marbūṭa ou un alif : ${q.sol}`
+           : `Le sens y est : ${q.sol}`);
+    } else {
+      msg=`<span class="verdict no">Pas tout à fait.</span> ${q.sol}`;
+    }
+    const mine = given.trim();
+    const yours = (mine && v!=='ok') ? `<p class="yours">Ta réponse : ${q.script==='ar'?`<span class="ar">${esc(mine)}</span>`:esc(mine)}</p>` : '';
+    onAnswer(ok, msg + yours + (usedHint && ok ? '<p class="yours">Indice utilisé.</p>' : ''));
+  }
+  host.querySelector('[data-act="ok"]').addEventListener('click',submit);
+  inp.addEventListener('keydown',ev=>{ if(ev.key==='Enter'){ ev.preventDefault(); submit(); } });
+  setTimeout(()=>inp.focus(),0);
+}
+
+/* ---------- onglet Exercices : par bloc ou par module ---------- */
+const dScope=$('#dScope');
+dScope.add(new Option('Tous les blocs','all'));
+Object.keys(BLOCS).forEach(b=>{
+  dScope.add(new Option('Bloc '+BLOCS[b],b));
+  const g=document.createElement('optgroup'); g.label='Bloc '+BLOCS[b];
+  MODULES.filter(m=>m.b===b).forEach(m=>g.appendChild(new Option('   '+m.id+'. '+m.t,'m'+m.id)));
+  dScope.appendChild(g);
+});
+function scopePool(v){
+  if(v==='all') return D.slice();
+  if(v[0]==='m') return D.filter(e=>e.m===+v.slice(1));
+  return D.filter(e=>MODBLOC[e.m]===v);
+}
+$('#dAuto').setAttribute('aria-pressed',String(AUTOST));
+bindTog('#dAuto',v=>{AUTOST=v; store('autost',v?'1':'0'); schedulePush();});
+$('#dStrict').setAttribute('aria-pressed',String(STRICT));
+bindTog('#dStrict',v=>{STRICT=v; store('strict',v?'1':'0');});
+
+/* série de longueur fixe : on répond jusqu'au bout, puis tout repart de zéro */
+let DR=null;
+function startDrill(){
+  hideBar();
+  const size=+$('#dSize').value, type=$('#dType').value, list=scopePool(dScope.value);
+  const qs=[], used=new Set();
+  for(let i=0; qs.length<size && i<size*12; i++){
+    const q=nextQuestion(list,type,null,used,'both');
+    if(q){ used.add(q.key); qs.push(q); }
+  }
+  $('#dScore').textContent='';
+  if(!qs.length){
+    DR=null;
+    $('#dBody').innerHTML='<p class="empty">Pas assez d\'entrées compatibles dans cette portée pour ce type d\'exercice. Élargis le bloc ou change de type.</p>';
+    return;
+  }
+  DR={qs:qs,i:0,ok:0,asked:size};
+  drawDrill();
+}
+function drawDrill(){
+  const host=$('#dBody');
+  if(DR.i>=DR.qs.length){
+    hideBar();
+    const n=DR.qs.length, ok=DR.ok, pc=Math.round(ok/n*100);
+    const mot = pc>=80 ? 'Série solide.' : pc>=50 ? 'Série correcte — les ratés sont passés dans « à revoir ».'
+              : 'Série difficile : ces mots méritent un passage dans Parcourir avant d\'y revenir.';
+    host.innerHTML=`<div class="card">
+        <p class="bigfr">${ok} / ${n} — ${pc} %</p>
+        <p class="sub">${mot}</p></div>
+      <div class="row" style="margin-top:16px">
+        <button class="act" id="dAgain">Nouvelle série</button>
+        <span class="counts" style="margin:0">Le compteur est remis à zéro.</span>
+      </div>`;
+    $('#dScore').textContent='';
+    $('#dAgain').addEventListener('click',startDrill);
+    DR=null;
+    return;
+  }
+  const q=DR.qs[DR.i];
+  const court = DR.i===0 && DR.qs.length<DR.asked
+    ? `<p class="hint">Série de ${DR.qs.length} questions : cette portée n'en permet pas davantage pour ce type.</p>` : '';
+  host.innerHTML=`${court}<div id="dQ"></div>
+    <p class="progress">question ${DR.i+1} / ${DR.qs.length}</p>
+    <div class="bar"><span style="width:${DR.i/DR.qs.length*100}%"></span></div>`;
+  $('#dScore').textContent = DR.i ? `${DR.ok} / ${DR.i}` : '';
+  renderQ($('#dQ'),q,(ok,html)=>{
+    if(ok) DR.ok++;
+    record(q.key,q.fam,ok);
+    DR.i++;
+    $('#dScore').textContent=`${DR.ok} / ${DR.i}`;
+    showBar(html, ok?'ok':'no',
+      [{label: DR.i>=DR.qs.length ? 'Voir le résultat' : 'Suivant', fn:drawDrill}]);
+  });
+}
+$('#dStart').addEventListener('click',startDrill);
+/* changer de réglage interrompt la série en cours */
+[dScope,$('#dType'),$('#dSize')].forEach(el=>el.addEventListener('change',()=>{
+  if(DR){ hideBar(); DR=null; $('#dBody').innerHTML=''; $('#dScore').textContent=''; }
+}));
+
+/* ---------- onglet Épreuve mixte ---------- */
+let T=null;
+$('#tStart').addEventListener('click',()=>{
+  const size=+$('#tSize').value, fam=$('#tFam').value, bias=$('#tBias').value, mode=$('#tMode').value;
+  let list=D.slice();
+  if(bias==='weak'){
+    const weak=D.filter(e=>{const a=accOf(e.id); return TODO.has(e.id)||(a!==null&&a<0.7);});
+    if(weak.length>=12) list=weak;
+  }
+  let fams = (fam==='all' ? ['voc','trad','lect'] : [fam]).filter(f=>typeList(f,mode).length);
+  if(!fams.length){
+    $('#tBody').innerHTML='<p class="empty">Cette famille n\'a pas d\'exercice au clavier. Choisis « Choix et clavier », ou une autre famille.</p>';
+    return;
+  }
+  const qs=[], used=new Set();
+  for(let i=0;qs.length<size && i<size*8;i++){
+    const q=nextQuestion(list,'mix',fams[qs.length%fams.length],used,mode);
+    if(q){ used.add(q.key); qs.push(q); }
+  }
+  if(qs.length<4){
+    $('#tBody').innerHTML='<p class="empty">Pas assez de matière pour composer une épreuve avec ces réglages.</p>';
+    return;
+  }
+  hideBar();
+  T={qs:shuffle(qs),i:0,ok:0,fam:{},bloc:{},logged:false};
+  drawTest();
+});
+function drawTest(){
+  const host=$('#tBody');
+  if(T.i>=T.qs.length){
+    hideBar();
+    if(!T.logged){
+      T.logged=true;
+      TESTS.push({d:dkey(new Date()),n:T.qs.length,ok:T.ok,fam:T.fam,bloc:T.bloc});
+      saveTests();
+    }
+    const pc=Math.round(T.ok/T.qs.length*100);
+    const byFam=Object.keys(T.fam).map(f=>`${FAMNAME[f]} ${T.fam[f].ok}/${T.fam[f].n}`).join(' · ');
+    const byBloc=Object.keys(T.bloc).sort().map(b=>`bloc ${b} ${T.bloc[b].ok}/${T.bloc[b].n}`).join(' · ');
+    host.innerHTML=`<div class="card">
+        <p class="bigfr">${T.ok} / ${T.qs.length} — ${pc} %</p>
+        <p class="sub">${byFam}</p><p class="sub">${byBloc}</p></div>
+      <p class="hint">Épreuve enregistrée. La courbe de tes scores est dans l'onglet Progrès.</p>`;
+    return;
+  }
+  const q=T.qs[T.i];
+  host.innerHTML=`<div id="tQ"></div>
+    <p class="progress">question ${T.i+1} / ${T.qs.length} · ${T.ok} juste${T.ok>1?'s':''} jusqu'ici</p>
+    <div class="bar"><span style="width:${T.i/T.qs.length*100}%"></span></div>`;
+  renderQ($('#tQ'),q,(ok,html)=>{
+    if(ok) T.ok++;
+    const f=T.fam[q.fam]=T.fam[q.fam]||{n:0,ok:0}; f.n++; if(ok) f.ok++;
+    const bl=MODBLOC[q.m], bb=T.bloc[bl]=T.bloc[bl]||{n:0,ok:0}; bb.n++; if(ok) bb.ok++;
+    record(q.key,q.fam,ok);
+    T.i++;
+    showBar(html, ok?'ok':'no',
+      [{label: T.i>=T.qs.length ? 'Voir le résultat' : 'Suivant', fn:drawTest}]);
+  });
+}
+
+/* ---------- progres ---------- */
+function perfByFam(){
+  const r={voc:{a:0,k:0},trad:{a:0,k:0},lect:{a:0,k:0}};
+  Object.keys(PERF).forEach(k=>{
+    const f=PERF[k].f||{};
+    Object.keys(f).forEach(x=>{ if(r[x]){ r[x].a+=f[x].a; r[x].k+=f[x].k; } });
+  });
+  return r;
+}
+function perfByModule(){
+  const r={}; MODULES.forEach(m=>r[m.id]={a:0,k:0});
+  D.forEach(e=>{const q=PERF[e.id]; if(q&&r[e.m]){r[e.m].a+=q.a; r[e.m].k+=q.k;}});
+  SENT.forEach(x=>{const q=PERF[x.k]; if(q&&r[x.m]){r[x.m].a+=q.a; r[x.m].k+=q.k;}});
+  return r;
+}
+/* barres de réussite : une seule mesure, valeur toujours écrite à côté */
+function accRows(rows){
+  return `<div class="acc">`+rows.map(r=>{
+    const has=r.a>0, pc=has?Math.round(r.k/r.a*100):0;
+    return `<div class="accrow${has?'':' nodata'}">
+      <span class="nm">${esc(r.nm)}</span>
+      <span class="tr"><i style="width:${has?pc:0}%"></i></span>
+      <span class="vl">${has?r.k+' / '+r.a+' · '+pc+' %':'jamais posé'}</span>
+    </div>`;
+  }).join('')+`</div>`;
+}
+/* courbe des scores d'épreuve, une seule série */
+function sparkTests(){
+  if(TESTS.length<2) return '';
+  const W=640,H=150,L=36,R=8,TP=12,B=26;
+  const n=TESTS.length;
+  const sx=i=>L+(n<2?0:i*(W-L-R)/(n-1));
+  const sy=v=>TP+(100-v)*(H-TP-B)/100;
+  let g='';
+  [0,50,100].forEach(v=>{
+    g+=`<line class="gl" x1="${L}" y1="${sy(v).toFixed(1)}" x2="${W-R}" y2="${sy(v).toFixed(1)}"/>`
+      +`<text x="${L-7}" y="${(sy(v)+4).toFixed(1)}" text-anchor="end">${v}</text>`;
+  });
+  const val=t=>t.ok/t.n*100;
+  const d=TESTS.map((t,i)=>(i?'L':'M')+sx(i).toFixed(1)+' '+sy(val(t)).toFixed(1)).join(' ');
+  const dots=TESTS.map((t,i)=>
+    `<circle class="dt" cx="${sx(i).toFixed(1)}" cy="${sy(val(t)).toFixed(1)}" r="4.5">`
+    +`<title>${esc(t.d)} — ${t.ok}/${t.n} (${Math.round(val(t))} %)</title></circle>`).join('');
+  const first=esc(TESTS[0].d), last=esc(TESTS[n-1].d);
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" role="img"
+    aria-label="Score de chaque épreuve en pourcentage, de la plus ancienne à la plus récente">
+    ${g}<path class="ln" d="${d}"/>${dots}
+    <text x="${L}" y="${H-6}">${first}</text>
+    <text x="${W-R}" y="${H-6}" text-anchor="end">${last}</text></svg>`;
+}
+
+function renderProgress(){
+  const tot=D.length, k=KNOWN.size, t=TODO.size, rest=tot-k-t;
+  const pct=n=>Math.round(n/tot*100);
+  let out=`<div class="stat">
+    <div><div class="num k">${k}</div><div class="lbl">acquis · ${pct(k)} %</div></div>
+    <div><div class="num t">${t}</div><div class="lbl">à revoir · ${pct(t)} %</div></div>
+    <div><div class="num">${rest}</div><div class="lbl">pas encore marqués</div></div>
+    <div><div class="num">${D.filter(e=>e.vl).length}</div><div class="lbl">vus en leçon</div></div>
+  </div>
+  <div class="mbar"><i class="k" style="width:${k/tot*100}%"></i><i class="t" style="width:${t/tot*100}%"></i></div>`;
+
+  /* ---- acquisition par module ---- */
+  Object.keys(BLOCS).forEach(b=>{
+    const mods=MODULES.filter(m=>m.b===b);
+    const ids=D.filter(e=>MODBLOC[e.m]===b);
+    const bk=ids.filter(e=>KNOWN.has(e.id)).length;
+    out+=`<p class="subhead">Bloc ${esc(BLOCS[b])}</p><p class="hint">${bk} acquis sur ${ids.length}</p>`;
+    mods.forEach(m=>{
+      const list=D.filter(e=>e.m===m.id);
+      const mk=list.filter(e=>KNOWN.has(e.id)).length, mt=list.filter(e=>TODO.has(e.id)).length;
+      out+=`<div class="modrow">
+        <div class="hd"><h4>${m.id}. ${esc(m.t)}</h4><span class="fr">${mk} / ${list.length}</span></div>
+        <div class="mbar"><i class="k" style="width:${mk/list.length*100}%"></i><i class="t" style="width:${mt/list.length*100}%"></i></div>
+      </div>`;
+    });
+  });
+
+  /* ---- réussite mesurée aux exercices ---- */
+  let TA=0,TK=0; Object.keys(PERF).forEach(x=>{TA+=PERF[x].a; TK+=PERF[x].k;});
+  out+=`<p class="subhead">Réussite aux exercices</p>`;
+  if(!TA){
+    out+=`<p class="hint">Aucune question répondue pour l'instant. Les onglets Exercices et Épreuve mixte alimentent cette section.</p>`;
+  } else {
+    const fam=perfByFam(), mod=perfByModule();
+    out+=`<div class="stat">
+      <div><div class="num">${TA}</div><div class="lbl">questions répondues</div></div>
+      <div><div class="num k">${Math.round(TK/TA*100)} %</div><div class="lbl">de réponses justes</div></div>
+      <div><div class="num">${TESTS.length}</div><div class="lbl">épreuve${TESTS.length>1?'s':''} passée${TESTS.length>1?'s':''}</div></div>
+    </div>`;
+    out+=`<p class="hint" style="margin-top:20px">Par famille d'exercice</p>`;
+    out+=accRows(['voc','trad','lect'].map(f=>({nm:FAMNAME[f][0].toUpperCase()+FAMNAME[f].slice(1),a:fam[f].a,k:fam[f].k})));
+    out+=`<p class="hint" style="margin-top:20px">Par bloc</p>`;
+    out+=accRows(Object.keys(BLOCS).map(b=>{
+      let a=0,kk=0; MODULES.filter(m=>m.b===b).forEach(m=>{a+=mod[m.id].a; kk+=mod[m.id].k;});
+      return {nm:'Bloc '+BLOCS[b],a:a,k:kk};
+    }));
+    out+=`<p class="hint" style="margin-top:20px">Par module</p>`;
+    out+=accRows(MODULES.map(m=>({nm:m.id+'. '+m.t,a:mod[m.id].a,k:mod[m.id].k})));
+  }
+
+  /* ---- mots fragiles, mesurés et non déclarés ---- */
+  const frag=D.filter(e=>{const q=PERF[e.id]; return q&&q.a>=2&&q.k/q.a<0.6;})
+              .sort((x,y)=>(PERF[x.id].k/PERF[x.id].a)-(PERF[y.id].k/PERF[y.id].a));
+  out+=`<p class="subhead">Mots fragiles</p>`;
+  out+= frag.length
+    ? `<p class="hint">Au moins deux passages, moins de 60 % de réussite.</p>
+       <div class="wordlist">${frag.map(e=>`<b class="t" title="${esc(e.tr)} — ${esc(e.fr)} · ${PERF[e.id].k}/${PERF[e.id].a} réussites">${arHTML(e.ar)}</b>`).join('')}</div>`
+    : `<p class="hint">Aucun mot ne décroche encore sur plusieurs passages.</p>`;
+
+  /* ---- listes de statut ---- */
+  const kl=D.filter(e=>KNOWN.has(e.id)), tl=D.filter(e=>TODO.has(e.id));
+  const chip=(e,c)=>{const q=PERF[e.id];
+    return `<b class="${c}" title="${esc(e.tr)} — ${esc(e.fr)}${q?' · '+q.k+'/'+q.a+' réussites':''}">${arHTML(e.ar)}</b>`;};
+  out+=`<p class="subhead">Vocabulaire acquis</p>`;
+  out+= kl.length ? `<div class="wordlist">${kl.map(e=>chip(e,'k')).join('')}</div>`
+    : `<p class="hint">Rien encore. Marque « Acquis » sur un mot dans Parcourir, réponds « Je savais » en révision, ou réussis-le deux fois de suite en exercice.</p>`;
+  out+=`<p class="subhead">À revoir</p>`;
+  out+= tl.length ? `<div class="wordlist">${tl.map(e=>chip(e,'t')).join('')}</div>`
+    : `<p class="hint">Pile vide.</p>`;
+
+  /* ---- épreuves ---- */
+  out+=`<p class="subhead">Courbe des épreuves</p>`;
+  if(TESTS.length){
+    out+= TESTS.length>1
+      ? `<p class="hint">Score de chaque épreuve mixte, en pourcentage.</p>`+sparkTests()
+      : `<p class="hint">Une seule épreuve pour l'instant — la courbe apparaîtra à la deuxième.</p>`;
+    out+=TESTS.slice().reverse().slice(0,12).map(x=>{
+      const det=Object.keys(x.fam||{}).map(f=>`${FAMNAME[f]} ${x.fam[f].ok}/${x.fam[f].n}`).join(' · ');
+      return `<p class="logrow">${esc(x.d)} — ${x.ok}/${x.n} · ${Math.round(x.ok/x.n*100)} %${det?' — '+det:''}</p>`;
+    }).join('');
+  } else out+=`<p class="hint">Aucune épreuve passée pour l'instant.</p>`;
+
+  /* ---- séries de révision ---- */
+  out+=`<p class="subhead">Séries de révision</p>`;
+  if(LOG.length){
+    const byDay={};
+    LOG.forEach(x=>{const d=byDay[x.d]=byDay[x.d]||{n:0,ok:0,s:0}; d.n+=x.n; d.ok+=x.ok; d.s++;});
+    const days=Object.keys(byDay).sort().reverse();
+    let streak=0; const cur=new Date();
+    while(byDay[dkey(cur)]){ streak++; cur.setDate(cur.getDate()-1); }
+    out+=`<p class="hint">${LOG.length} série${LOG.length>1?'s':''} sur ${days.length} jour${days.length>1?'s':''}${streak>1?` · ${streak} jours d'affilée`:''}</p>`;
+    out+=days.slice(0,14).map(d=>{const v=byDay[d];
+      return `<p class="logrow">${d} — ${v.s} série${v.s>1?'s':''}, ${v.n} mots, ${Math.round(v.ok/v.n*100)} % acquis</p>`;}).join('');
+  } else out+=`<p class="hint">Aucune série terminée pour l'instant.</p>`;
+
+  $('#pBody').innerHTML=out;
+}
+function copyWords(set,label){
+  const rows=D.filter(e=>set.has(e.id)).map(e=>[e.ar,e.tr,e.fr].join('\t')).join('\n');
+  if(!rows){ $('#pMsg').textContent='Liste vide.'; return; }
+  navigator.clipboard.writeText(rows).then(
+    ()=>{$('#pMsg').textContent=label+' copiés ('+set.size+').';},
+    ()=>{$('#pMsg').textContent='Copie refusée par le navigateur.';});
+}
+$('#pExportK').addEventListener('click',()=>copyWords(KNOWN,'Mots acquis'));
+$('#pExportT').addEventListener('click',()=>copyWords(TODO,'Mots à revoir'));
+$('#pBackup').addEventListener('click',async()=>{
+  const data=JSON.stringify(SNAP(),null,1);
+  const dl=await useCap('downloads');
+  if(dl){
+    try{ await dl.save({filename:'lexique-arabe-progression.json',data:data});
+         $('#pMsg').textContent='Sauvegarde téléchargée.'; return; }catch(e){}
+  }
+  try{ await navigator.clipboard.writeText(data);
+       $('#pMsg').textContent='Sauvegarde copiée dans le presse-papier.'; }
+  catch(e){ $('#pMsg').textContent='Impossible de produire le fichier ici.'; }
+});
+$('#pRestore').addEventListener('click',()=>$('#pFile').click());
+$('#pFile').addEventListener('change',ev=>{
+  const f=ev.target.files&&ev.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const d=JSON.parse(String(r.result));
+      if(!d||!Array.isArray(d.known)) throw new Error('forme inattendue');
+      applySnap(d); schedulePush();
+      $('#pMsg').textContent='Progression restaurée.';
+      renderProgress(); renderBrowse();
+    }catch(e){ $('#pMsg').textContent="Fichier illisible : ce n'est pas une sauvegarde de cette page."; }
+    ev.target.value='';
+  };
+  r.onerror=()=>{ $('#pMsg').textContent='Lecture du fichier impossible.'; };
+  r.readAsText(f);
+});
+$('#pReset').addEventListener('click',()=>{
+  if(!confirm("Effacer les statuts, les résultats d'exercices et tout l'historique ?")) return;
+  KNOWN.clear(); TODO.clear(); LOG=[]; PERF={}; TESTS=[];
+  saveKnown(); saveTodo(); saveLog(); savePerf(); saveTests();
+  $('#pMsg').textContent='Remis à zéro.'; renderProgress(); renderBrowse();
+});
+
+/* ---------- racines ---------- */
+function renderRoots(){
+  const g={};
+  D.forEach(e=>{if(e.r!=='—')(g[e.r]=g[e.r]||[]).push(e)});
+  const multi=Object.keys(g).filter(r=>g[r].length>1).sort();
+  const single=Object.keys(g).filter(r=>g[r].length===1).sort();
+  let out='';
+  if(multi.length){
+    out+='<div class="modhead" style="border-top:none;padding-top:24px"><h2>Racines productives</h2><p class="meta">'+multi.length+' racines donnent déjà plusieurs mots</p></div>';
+    multi.forEach(r=>{
+      out+=`<div class="entry"><div class="e-top"><div class="e-ar">${esc(r)}</div></div>`+
+        g[r].map(e=>`<p class="e-ex"><span class="ar">${arHTML(e.ar)}</span>${esc(e.tr)} — ${esc(e.fr)}</p>`).join('')+`</div>`;
+    });
+  }
+  out+=`<div class="modhead"><h2>Racines à un seul mot</h2><p class="meta">${single.length} racines en attente des blocs suivants</p></div>
+    <p style="font-size:1.4rem;line-height:2.2;direction:rtl;font-family:Amiri,serif">${single.map(esc).join(' · ')}</p>`;
+  $('#rootBody').innerHTML=out;
+}
+
+/* ---------- export ---------- */
+const MOD={}; MODULES.forEach(m=>MOD[m.id]=m);
+const HEAD=['arabe','translitteration','francais','racine','grammaire','exemple','module','niveau'];
+function tsv(){
+  const clean=s=>String(s).replace(/[\t\r\n]+/g,' ').trim();
+  const rows=[HEAD.join('\t')];
+  const scope=$('#xScope').value;
+  const pool= scope==='noanki'? D.filter(e=>!e.ak) : scope==='filter'? filtered() : D;
+  pool.forEach(e=>{
+    const gram=[e.nat,e.g,e.lar?('levantin : '+e.lar+' '+e.ltr):'',e.lw].filter(Boolean).join(' | ');
+    rows.push([e.ar,e.tr,e.fr,e.r,gram,e.xa+' — '+e.xf,MOD[e.m].id+'. '+MOD[e.m].t,e.n].map(clean).join('\t'));
+  });
+  return rows.join('\n');
+}
+function renderExport(){ $('#xText').value=tsv(); }
+$('#xScope').addEventListener('input',renderExport);
+$('#xCopy').addEventListener('click',async()=>{
+  try{ await navigator.clipboard.writeText(tsv()); $('#xMsg').textContent='Copié — '+(tsv().split('\n').length-1)+' lignes.'; }
+  catch(e){ $('#xText').select(); $('#xMsg').textContent='Sélectionné : fais ⌘C.'; }
+});
+$('#xDl').addEventListener('click',async()=>{
+  const dl=await useCap('downloads');
+  if(!dl){ $('#xMsg').textContent="Téléchargement indisponible ici — utilise « Copier le TSV »."; return; }
+  try{ await dl.save({filename:'lexique-arabe.tsv',data:tsv()}); $('#xMsg').textContent='Fichier enregistré.'; }
+  catch(e){ $('#xMsg').textContent="Enregistrement annulé — « Copier le TSV » marche toujours."; }
+});
+
+renderBrowse();
+</script>
+</body>
+</html>
+</body></html>
