@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>يلّا نتعلّم الحروف والعائلة</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF8E6;--card:#fff;--ink:#2B2A4C;--soft:#6b6a8a;--line:#e9dfc2;--c1:#FF6B6B;--c2:#3BA7E0;--c3:#2FB88A;--c4:#9B6BFF;--c5:#E89A00;--ok:#2FB36D;--bad:#E8545C;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1E1D33;--card:#2B2A4C;--ink:#FFF4D6;--soft:#B9B8D8;--line:#403f68;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1E1D33;--card:#2B2A4C;--ink:#FFF4D6;--soft:#B9B8D8;--line:#403f68;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Baloo Bhaijaan 2",Tahoma,"Segoe UI",sans-serif;font-weight:500;line-height:1.7;padding:0 14px 40px;max-width:640px;margin:0 auto}
+header{display:flex;align-items:center;justify-content:space-between;padding:14px 0 6px}
+h1{margin:0;font-size:26px;font-weight:800}
+#st{background:var(--c5);color:#fff;font-weight:800;font-size:20px;padding:2px 14px;border-radius:99px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
+nav button{flex:1;min-width:52px;font:inherit;font-weight:800;font-size:26px;border:3px solid var(--line);background:var(--card);color:var(--ink);border-radius:18px;padding:2px 0;cursor:pointer}
+nav button.on{border-color:var(--c);background:var(--c);color:#fff}
+section{display:none}
+section.on{display:block}
+h2{font-size:19px;margin:20px 0 8px;color:var(--soft);font-weight:700}
+.hero{display:flex;gap:14px;align-items:center;justify-content:center}
+.big{font:inherit;font-size:130px;line-height:1.2;font-weight:800;color:#fff;background:var(--c);border:0;border-radius:36px;width:170px;height:170px;cursor:pointer}
+.pill{font:inherit;font-size:22px;font-weight:800;color:var(--c);background:var(--card);border:3px solid var(--c);border-radius:99px;padding:6px 18px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{font:inherit;color:var(--ink);background:var(--card);border:3px solid var(--line);border-radius:24px;padding:10px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:center}
+.card:active{transform:scale(.96)}
+.card i{font-style:normal;font-size:56px;line-height:1.3}
+.card span{font-size:30px;font-weight:800}
+.card b{color:var(--c)}
+.padw{position:relative;background:var(--card);border:3px dashed var(--c);border-radius:24px;overflow:hidden}
+.guide{position:absolute;inset:0;display:grid;place-items:center;font-size:190px;font-weight:800;color:var(--c);opacity:.2;pointer-events:none}
+canvas.pad{display:block;width:100%;aspect-ratio:2/1;height:auto;touch-action:none;position:relative}
+.tools{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.col{width:38px;height:38px;border-radius:50%;border:3px solid var(--card);box-shadow:0 0 0 2px var(--line);cursor:pointer}
+.tools .clr,.tools .done{font:inherit;font-weight:700;font-size:17px;border:0;border-radius:99px;padding:4px 16px;cursor:pointer;color:#fff}
+.clr{background:var(--soft)}
+.done{background:var(--ok);margin-inline-start:auto}
+.quiz p{font-size:22px;font-weight:700;margin:0 0 8px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.opt{font:inherit;color:var(--ink);background:var(--card);border:3px solid var(--line);border-radius:20px;padding:8px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center}
+.opt i{font-style:normal;font-size:46px;line-height:1.3}
+.opt span{font-size:22px;font-weight:800}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 25%,var(--card))}
+.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 25%,var(--card))}
+.sent{display:block;width:100%;font:inherit;font-size:24px;font-weight:800;color:var(--ink);background:var(--card);border:3px solid var(--line);border-radius:20px;padding:8px 14px;margin-bottom:10px;cursor:pointer;text-align:center}
+.sent:active{transform:scale(.97)}
+.names{font-size:15px;color:var(--soft);font-weight:500}
+@media (prefers-reduced-motion:no-preference){.card,.opt,.sent{transition:transform .12s}}
+button:focus-visible{outline:4px solid var(--c5);outline-offset:2px}
+</style>
+</head>
+<body>
+<header><h1>يلّا نتعلّم 🌈</h1><div id="st">⭐ 0</div></header>
+<nav id="nav"></nav>
+
+<script>
+const $=id=>document.getElementById(id),S=s=>s.replace(/[\u064B-\u0652\u0670]/g,""),R=a=>[...a].sort(()=>Math.random()-.5);
+const L=[
+{k:"ج",n:"جِيم",c:"var(--c1)",w:[["جَمَل","🐪"],["شَجَرَة","🌳"],["ثَلْج","🧊"],["بُرْج","🏙️"]]},
+{k:"ح",n:"حَاء",c:"var(--c2)",w:[["حِصَان","🐴"],["بَحْر","🌊"],["تُفَّاح","🍎"],["فَلَّاح","🧑‍🌾"]]},
+{k:"ر",n:"رَاء",c:"var(--c3)",w:[["قِرْد","🐵"],["زَرَافَة","🦒"],["خَرُوف","🐑"],["مَدْرَسَة","🏫"]]},
+{k:"ي",n:"يَاء",c:"var(--c4)",w:[["دِيك","🐓"],["يَد","✋"],["لَيْمُون","🍋"],["بُيُوت","🏠"]]}];
+const F=[["أَبِي","👨","سَعْد"],["أُمِّي","👩","دَانَة"],["أَخِي","👦","عُمَر"],["أُخْتِي","👧","رِيم"],["جَدِّي","👴",""],["جَدَّتِي","👵",""]];
+const SEN=["أَنَا أُحِبُّ أُسْرَتِي.","أَنَا أُحِبُّ أَبِي.","أَنَا أُحِبُّ أُمِّي."];
+let stars=0;
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="ar-SA";u.rate=.7;speechSynthesis.speak(u)}catch(e){}}
+function star(){stars++;$("st").textContent="⭐ "+stars}
+const hl=(w,k)=>w.replace(/[\u0621-\u064A][\u064B-\u0652\u0670]*/g,m=>m[0]===k?"<b>"+m+"</b>":m);
+const padHTML=k=>`<div class="padbox"><div class="padw"><div class="guide">${k}</div><canvas class="pad" width="600" height="300"></canvas></div><div class="tools"><button class="col" data-c="#FF6B6B" style="background:#FF6B6B" aria-label="أحمر"></button><button class="col" data-c="#3BA7E0" style="background:#3BA7E0" aria-label="أزرق"></button><button class="col" data-c="#2FB88A" style="background:#2FB88A" aria-label="أخضر"></button><button class="col" data-c="#9B6BFF" style="background:#9B6BFF" aria-label="بنفسجي"></button><button class="clr">🧽 مسح</button><button class="done">✔ خلصت</button></div></div>`;
+
+L.forEach((l,i)=>{
+  const s=document.createElement("section");s.id="t"+i;s.style.setProperty("--c",l.c);
+  s.innerHTML=`<div class="hero"><button class="big" onclick="say('${l.n}')">${l.k}</button><button class="pill" onclick="say('${l.n}')">🔊 ${l.n}</button></div>
+<h2>كلمات فيها حرف ${l.k} (اضغطي واسمعي)</h2>
+<div class="grid">${l.w.map(w=>`<button class="card" onclick="say('${w[0]}')"><i>${w[1]}</i><span>${hl(w[0],l.k)}</span></button>`).join("")}</div>
+<h2>تتبّعي الحرف بإصبعك ✏️</h2>${padHTML(l.k)}
+<h2>لعبة: وين الحرف؟</h2><div class="quiz" id="q${i}"></div>`;
+  document.body.append(s);
+  const b=document.createElement("button");b.textContent=l.k;b.dataset.i=i;b.style.setProperty("--c",l.c);$("nav").append(b);
+});
+const fs=document.createElement("section");fs.id="t4";fs.style.setProperty("--c","var(--c5)");
+fs.innerHTML=`<h2>أُسْرَتِي 👨‍👩‍👧‍👦 (اضغطي واسمعي)</h2>
+<div class="grid">${F.map(f=>`<button class="card" onclick="say('${f[0]}')"><i>${f[1]}</i><span>${f[0]}</span><small class="names">${f[2]}</small></button>`).join("")}</div>
+<h2>جُمَل نقرأها ❤️</h2>${SEN.map(t=>`<button class="sent" onclick="say('${t}')">❤️ ${t}</button>`).join("")}
+<h2>لعبة: وين...؟</h2><div class="quiz" id="fq"></div>
+<h2>ارسمي أسرتك 🎨</h2>${padHTML("")}`;
+document.body.append(fs);
+const fb=document.createElement("button");fb.textContent="👨‍👩‍👧";fb.dataset.i=4;fb.style.setProperty("--c","var(--c5)");$("nav").append(fb);
+
+function go(i){document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id==="t"+i));[...$("nav").children].forEach(b=>b.classList.toggle("on",+b.dataset.i===+i));window.scrollTo(0,0)}
+function q(i){
+  const l=L[i],all=L.flatMap(x=>x.w),ok=l.w[Math.random()*4|0],bad=R(all.filter(w=>!S(w[0]).includes(l.k))).slice(0,2),o=R([ok,...bad]);
+  $("q"+i).innerHTML=`<p>أيّ كلمة فيها حرف <b style="color:${l.c}">${l.k}</b>؟ 🤔</p><div class="opts">${o.map(w=>`<button class="opt" data-i="${i}" data-r="${w===ok?1:0}"><i>${w[1]}</i><span>${w[0]}</span></button>`).join("")}</div>`;
+}
+function fq(quiet){
+  const m=F[Math.random()*6|0],o=R([m,...R(F.filter(f=>f!==m)).slice(0,3)]);
+  $("fq").innerHTML=`<p>وين ${m[0]}؟ 🔍</p><div class="opts" style="grid-template-columns:repeat(4,1fr)">${o.map(f=>`<button class="opt" data-f="1" data-r="${f===m?1:0}"><i>${f[1]}</i></button>`).join("")}</div>`;
+  if(!quiet)say("وَيْنَ "+m[0]);
+}
+document.addEventListener("click",e=>{
+  const t=e.target,o=t.closest(".opt"),n=t.closest("nav button"),box=t.closest(".padbox");
+  if(n)go(n.dataset.i);
+  if(o&&!o.classList.contains("ok")){
+    if(o.dataset.r==="1"){o.classList.add("ok");star();say("برافو");setTimeout(()=>o.dataset.f?fq():q(+o.dataset.i),1300)}
+    else{o.classList.add("bad");say("جرّبي مرة ثانية")}
+  }
+  if(box){
+    const c=box.querySelector("canvas");
+    if(t.classList.contains("col"))c.dataset.col=t.dataset.c;
+    if(t.classList.contains("clr"))c.getContext("2d").clearRect(0,0,c.width,c.height);
+    if(t.classList.contains("done")){star();say("برافو، رسمك حلو")}
+  }
+});
+document.querySelectorAll("canvas.pad").forEach(c=>{
+  const x=c.getContext("2d");let d=0;
+  const p=e=>{const b=c.getBoundingClientRect();return[(e.clientX-b.left)*c.width/b.width,(e.clientY-b.top)*c.height/b.height]};
+  c.onpointerdown=e=>{d=1;c.setPointerCapture(e.pointerId);const[a,b]=p(e);x.beginPath();x.moveTo(a,b);x.lineTo(a+.1,b);x.lineWidth=14;x.lineCap=x.lineJoin="round";x.strokeStyle=c.dataset.col||"#FF6B6B";x.stroke()};
+  c.onpointermove=e=>{if(!d)return;const[a,b]=p(e);x.lineTo(a,b);x.stroke()};
+  c.onpointerup=c.onpointercancel=()=>{d=0};
+});
+L.forEach((_,i)=>q(i));fq(1);
+go(0);
+</script>
+</body>
+</html>
