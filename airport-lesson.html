@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>✈️ السفر والمطار</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--sky:#dff1fb;--ink:#17324d;--blue:#1f78c8;--sun:#ffb627;--coral:#ff6b5b;--green:#2fb36d;--card:#fff;--line:#bcd9ee}
+@media (prefers-color-scheme:dark){:root{--sky:#12253a;--ink:#eaf4fc;--blue:#6cb8f2;--card:#1b3550;--line:#35597d}}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Baloo Bhaijaan 2',Tahoma,sans-serif;background:var(--sky);color:var(--ink);line-height:1.6;font-size:18px}
+.wrap{max-width:760px;margin:auto;padding:14px}
+header{text-align:center;padding:26px 10px 8px}
+header h1{font-size:2.2rem;margin:0;color:var(--blue)}
+.plane{display:inline-block;font-size:3rem;animation:fly 3s ease-in-out infinite}
+@keyframes fly{50%{transform:translate(-14px,-10px) rotate(-6deg)}}
+@media (prefers-reduced-motion:reduce){.plane{animation:none}}
+nav{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+nav button,.btn{font:inherit;border:2px solid var(--blue);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
+nav button.on,.btn{background:var(--blue);color:#fff}
+.btn:hover{filter:brightness(1.1)}
+.btn.alt{background:var(--sun);border-color:var(--sun);color:#17324d}
+section{display:none;background:var(--card);border:2px dashed var(--line);border-radius:22px;padding:18px;margin-top:10px}
+section.on{display:block}
+h2{margin:0 0 8px;color:var(--coral)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.w{border:2px solid var(--line);border-radius:16px;padding:10px;text-align:center;cursor:pointer;background:var(--card);font:inherit;color:inherit}
+.w:hover,.w:focus-visible{border-color:var(--sun);outline:none;transform:scale(1.03)}
+.w .e{font-size:2.2rem;display:block}.w .a{font-size:1.5rem;font-weight:800;display:block}
+.w .p{color:var(--blue);font-size:.95rem;display:block;direction:ltr}.w .en{font-size:.9rem;opacity:.8;display:block;direction:ltr}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding:8px 0;cursor:pointer}
+.ph .a{font-weight:700;font-size:1.25rem}.ph small{display:block;direction:ltr;text-align:left;color:var(--blue)}
+.ph .en{direction:ltr;opacity:.8;font-size:.9rem}
+.line{padding:8px 12px;border-radius:16px;margin:8px 0;max-width:88%;cursor:pointer}
+.t{background:#e6f2fc;color:#17324d;margin-inline-end:auto}.k{background:#fff0c9;color:#17324d;margin-inline-start:auto}
+.line small{display:block;direction:ltr;text-align:left;color:#1f78c8}.line .en{direction:ltr;text-align:left;font-size:.85rem;opacity:.8}
+.who{font-weight:800;font-size:.85rem}
+.bag{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.item{font-size:2rem;border:2px solid var(--line);border-radius:14px;padding:4px 10px;background:var(--card);cursor:pointer}
+.suit{border:3px solid var(--blue);border-radius:20px;min-height:90px;padding:10px;background:rgba(31,120,200,.08);font-size:2rem}
+.q{font-size:1.4rem;font-weight:700;margin:8px 0;text-align:center}
+.opts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.msg{text-align:center;font-weight:800;min-height:1.8em}
+.ok{color:var(--green)}.no{color:var(--coral)}
+.score{text-align:center;font-size:1.2rem}
+.big{font-size:4rem;text-align:center}
+.ticket{border:2px solid var(--blue);border-radius:16px;padding:12px;background:var(--card);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="plane">✈️</div>
+<h1>السفر والمطار</h1>
+<div>Travel & the Airport · <span style="direction:ltr;display:inline-block">Jordanian Arabic</span></div>
+<div class="score">⭐ النجوم / Stars: <b id="stars">0</b></div>
+</header>
+<nav id="nav"></nav>
+
+<section id="s0" class="on">
+<h2>🎯 شو رح نتعلم؟ <small>What will we learn?</small></h2>
+<div class="ph"><div><span class="a">كلمات السفر والمطار</span><small>Travel and airport words</small></div></div>
+<div class="ph"><div><span class="a">نحكي عن وين بدنا نسافر</span><small>Say where we want to travel</small></div></div>
+<div class="ph"><div><span class="a">نسأل عن التذكرة والشنطة والطيارة</span><small>Ask about the ticket, bag and plane</small></div></div>
+<div class="ph"><div><span class="a">حوار بسيط في المطار</span><small>A simple airport dialogue</small></div></div>
+<p>👆 اضغطي على أي كلمة أو جملة لتسمعيها. <br><small>Tap any word or sentence to hear it.</small></p>
+<button class="btn" onclick="go(1)">يلا نبدأ! ▶</button>
+</section>
+
+<section id="s1"><h2>🧳 كلمات جديدة <small>New words</small></h2><div class="grid" id="words"></div></section>
+
+<section id="s2"><h2>🌍 وين بدك تسافري؟ <small>Where do you want to travel?</small></h2>
+<div class="grid" id="places"></div>
+<h3>جمل مهمة · Key sentences</h3><div id="sent"></div></section>
+
+<section id="s3"><h2>🗣️ عبارات في المطار <small>Airport phrases</small></h2><div id="phr"></div></section>
+
+<section id="s4"><h2>🎭 في المطار <small>Role play</small></h2>
+<p>اضغطي على السطر لتسمعيه. اقرأي دور الطفلة! <br><small>Tap a line to hear it. Read the child's part!</small></p>
+<div id="dlg"></div>
+<div class="ticket">🎫 التذكرة: عمّان ← إسطنبول<br>البوابة <b>٥</b> · Gate 5</div></section>
+
+<section id="s5"><h2>🎒 شو بتحطي بشنطة السفر؟ <small>What do you pack?</small></h2>
+<p class="q">اضغطي على الأغراض لتحطيها بالشنطة! <br><small>Tap things to put them in the suitcase.</small></p>
+<div class="bag" id="bag"></div>
+<div class="suit" id="suit">🧳</div>
+<p class="msg" id="bmsg"></p>
+<button class="btn alt" onclick="resetBag()">من جديد · Again</button></section>
+
+<section id="s6"><h2>🎲 وين رح نسافر؟ <small>Guess the country</small></h2>
+<div class="q" id="gclue"></div>
+<div class="opts" id="gopts"></div>
+<p class="msg" id="gmsg"></p>
+<button class="btn" onclick="nextG()">التالي · Next ▶</button></section>
+
+<section id="s7"><h2>🧠 صح أو غلط؟ <small>True or false?</small></h2>
+<div class="q" id="tq"></div><div class="q" style="font-size:1rem;direction:ltr" id="ten"></div>
+<div class="opts"><button class="btn" style="background:var(--green);border-color:var(--green)" onclick="tf(true)">✅ صح · True</button><button class="btn" style="background:var(--coral);border-color:var(--coral)" onclick="tf(false)">❌ غلط · False</button></div>
+<p class="msg" id="tmsg"></p></section>
+
+<section id="s8"><h2>💬 احكي معي! <small>Let's talk!</small></h2>
+<div id="conv"></div></section>
+
+<section id="s9"><h2>⭐ تحدّي: أنا مسافرة! <small>Challenge</small></h2>
+<p>احكي لمدة دقيقة · <small>Speak for one minute</small></p>
+<div class="line k" onclick="say('مرحبا! أنا بكرا رح أسافر على ______. رح أروح على المطار مع ______. رح آخد معي ______. أنا كتير متحمسة لأني رح أشوف ______.')">
+مرحبا! أنا بكرا رح أسافر على ______. رح أروح على المطار مع ______. رح آخد معي ______. أنا كتير متحمسة لأني رح أشوف ______.
+<small>marHaba! ana bukra ra7 asaafir 3ala ___. ra7 aroo7 3al-maTaar ma3 ___. ra7 aakhud ma3i ___. ana kteer mutaHammise la2inni ra7 ashoof ___.</small>
+<div class="en">Hello! Tomorrow I'm traveling to ___. I'll go to the airport with ___. I'll take ___ with me. I'm very excited because I'll see ___.</div></div>
+<h3>🏠 الواجب · Homework: رحلتي المفضلة</h3>
+<p>ارسمي البلد اللي نفسك تزوريه واكتبي: <br><small>Draw the country you want to visit and write:</small></p>
+<div class="ph"><span>البلد: ______ · Country</span></div>
+<div class="ph"><span>رح أسافر مع: ______ · I'll travel with</span></div>
+<div class="ph"><span>رح آخد معي: ______ · I'll take</span></div>
+<div class="ph"><span>نفسي أشوف: ______ · I want to see</span></div>
+<div class="ph"><span>نفسي آكل: ______ · I want to eat</span></div>
+<div class="big">🏆</div><p class="score">نجومك · Your stars: <b id="fin">0</b> ⭐</p>
+<p class="msg ok">برافو! رحلة سعيدة! ✈️ · Bravo! Have a nice trip!</p></section>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+let stars=0;
+function star(n=1){stars+=n;$('stars').textContent=stars;$('fin').textContent=stars}
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ar-JO';u.rate=.8;speechSynthesis.speak(u)}catch(e){}}
+const tabs=['البداية','كلمات','بلدان','عبارات','حوار','شنطة','تخمين','صح/غلط','محادثة','تحدّي'];
+tabs.forEach((t,i)=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>go(i);$('nav').appendChild(b)});
+function go(i){document.querySelectorAll('section').forEach((s,j)=>s.classList.toggle('on',i===j));document.querySelectorAll('nav button').forEach((b,j)=>b.classList.toggle('on',i===j));window.scrollTo({top:0})}
+go(0);
+
+const words=[['🧳','سفر','safar','Travel'],['🛫','مطار','maTaar','Airport'],['✈️','طيارة','Tayyaara','Airplane'],['🎫','تذكرة','tazkara','Ticket'],['📘','جواز سفر','jawaaz safar','Passport'],['🧳','شنطة سفر','shanTit safar','Suitcase'],['🎒','شنطة ظهر','shanTit Dahr','Backpack'],['🙂','مسافر','musaafir','Traveler'],['👨‍✈️','طيّار','Tayyaar','Pilot'],['💁‍♀️','مضيفة طيران','muDeefit Tayaraan','Flight attendant'],['💺','مقعد','ma3ad','Seat'],['🚪','بوابة','bawwaaba','Gate'],['🌍','رحلة','rihle','Trip / Flight'],['🛫','إقلاع','iqlaa3','Takeoff'],['🛬','هبوط','hubooT','Landing']];
+$('words').innerHTML=words.map((w,i)=>`<button class="w" onclick="say('${w[1]}')"><span class="e">${w[0]}</span><span class="a">${w[1]}</span><span class="p">${w[2]}</span><span class="en">${w[3]}</span></button>`).join('');
+
+const places=[['🕌','الأردن','al-urdun','Jordan'],['🕌','فلسطين','falasTeen','Palestine'],['🔺','مصر','miSr','Egypt'],['🎈','تركيا','turkiya','Turkey'],['🕋','السعودية','as-sa3oodiya','Saudi Arabia'],['🗼','فرنسا','faransa','France'],['🍕','إيطاليا','iTaalya','Italy'],['🗽','أمريكا','amreeka','America']];
+$('places').innerHTML=places.map(p=>`<button class="w" onclick="say('${p[1]}')"><span class="e">${p[0]}</span><span class="a">${p[1]}</span><span class="p">${p[2]}</span><span class="en">${p[3]}</span></button>`).join('');
+const line=(a,p,e)=>`<div class="ph" onclick="say('${a}')"><div><span class="a">${a}</span><small>${p}</small></div><span class="en">${e}</span></div>`;
+$('sent').innerHTML=[['بدي أسافر على تركيا.','biddi usaafir 3ala turkiya','I want to travel to Turkey.'],['نفسي أزور إيطاليا.','nafsi azoor iTaalya','I wish to visit Italy.'],['بدي أروح على البحر.','biddi aroo7 3al-ba7er','I want to go to the sea.'],['بحب أسافر مع عيلتي.','bi7ebb usaafir ma3 3eilti','I love traveling with my family.'],['هاي أول مرة بسافر بالطيارة.','haay awwal marra bsaafir bit-Tayyaara','This is my first time on a plane.']].map(x=>line(...x)).join('');
+$('phr').innerHTML=[['وين المطار؟','ween il-maTaar?','Where is the airport?'],['وين بوابة الطيارة؟','ween bawwabit iT-Tayyaara?','Where is the boarding gate?'],['هاي تذكرتي.','haay tazkarti','This is my ticket.'],['وين مقعدي؟','ween ma3adi?','Where is my seat?'],['إمتى الطيارة بتطلع؟','imta iT-Tayyaara bitTla3?','When does the plane leave?'],['قديش مدة الرحلة؟','addeish muddit ir-rihle?','How long is the flight?'],['وين شنطتي؟','ween shanTti?','Where is my suitcase?'],['أنا جاهزة للسفر!','ana jaahze lis-safar!','I\'m ready to travel!']].map(x=>line(...x)).join('');
+
+const dlg=[['t','مرحبا، وين بدك تسافري؟','marHaba, ween biddik tsaafri?','Hello, where are you traveling?'],['k','بدي أسافر على تركيا.','biddi usaafir 3ala turkiya.','I want to travel to Turkey.'],['t','معك جواز السفر؟','ma3ik jawaaz is-safar?','Do you have your passport?'],['k','آه، معي جواز السفر والتذكرة.','aah, ma3i jawaaz is-safar wit-tazkara.','Yes, I have my passport and ticket.'],['t','وين شنطتك؟','ween shanTtik?','Where is your suitcase?'],['k','هاي شنطتي.','haay shanTti.','This is my suitcase.'],['t','تفضلي، هاي تذكرتك. بوابتك رقم ٥.','tfaDDali, haay tazkartik. bawwabtik raqam khamse.','Here is your ticket. Your gate is number 5.'],['k','وين بوابة رقم ٥؟','ween bawwabit raqam khamse?','Where is gate 5?'],['t','دغري وبعدين عاليمين.','dughri w-ba3dein 3al-yameen.','Straight, then right.'],['k','شكراً!','shukran!','Thank you!'],['t','رحلة سعيدة!','rihle sa3eede!','Have a nice trip!'],['k','شكراً كتير!','shukran kteer!','Thank you very much!']];
+$('dlg').innerHTML=dlg.map(d=>`<div class="line ${d[0]}" onclick="say('${d[1]}')"><div class="who">${d[0]=='t'?'👩‍🏫 المعلمة':'👧 الطفلة'}</div>${d[1]}<small>${d[2]}</small><div class="en">${d[3]}</div></div>`).join('');
+
+// packing
+const things=[['👕','ملابس','malaabis','clothes'],['🪥','فرشاية أسنان','fershayit asnaan','toothbrush'],['📖','كتاب','kitaab','book'],['🧸','ألعاب','al3aab','toys'],['📷','كاميرا','kamera','camera'],['🕶️','نظارة شمسية','naDDaara shamseyye','sunglasses'],['👟','حذاء','7idaa2','shoes'],['👚','بيجاما','bijaama','pajamas'],['🍔','برغر','burger','burger'],['🪨','حجر كبير','7ajar kbeer','big rock']];
+let packed=0;
+function resetBag(){packed=0;$('suit').textContent='🧳';$('bmsg').textContent='';$('bag').innerHTML=things.map((t,i)=>`<button class="item" id="it${i}" title="${t[3]}" onclick="pack(${i})">${t[0]}</button>`).join('')}
+function pack(i){const t=things[i];say('بدي أحط '+t[1]);
+ if(i>=8){$('bmsg').innerHTML='<span class="no">ما بنحط '+t[1]+' بالشنطة! 😄 · Not for the suitcase!</span>';return}
+ $('it'+i).style.display='none';$('suit').textContent+=' '+t[0];packed++;
+ $('bmsg').innerHTML=`<span class="ok">بدي أحط ${t[1]}. · <span style="direction:ltr;display:inline-block">biddi a7oTT ${t[2]} (${t[3]})</span></span>`;
+ if(packed==8){$('bmsg').innerHTML='<span class="ok">🎉 الشنطة جاهزة! · Suitcase ready!</span>';star(3)}}
+resetBag();
+
+// guess
+const gq=[['فيه برج إيفل 🗼','فرنسا',['فرنسا','مصر','تركيا']],['مشهور بالبيتزا 🍕','إيطاليا',['إيطاليا','السعودية','أمريكا']],['فيه أهرامات 🔺','مصر',['فرنسا','مصر','الأردن']],['فيه الكعبة المشرفة 🕋','السعودية',['السعودية','تركيا','إيطاليا']]];
+let gi=0;
+function showG(){const q=gq[gi];$('gclue').textContent='البلد '+q[0];$('gmsg').textContent='';$('gopts').innerHTML=q[2].map(o=>`<button class="btn" onclick="guess('${o}')">${o}</button>`).join('')}
+function guess(o){say(o);if(o==gq[gi][1]){$('gmsg').innerHTML='<span class="ok">برافو! ✅ Bravo!</span>';star()}else $('gmsg').innerHTML='<span class="no">جرّبي مرة ثانية · Try again</span>'}
+function nextG(){gi=(gi+1)%gq.length;showG()}showG();
+
+// true/false
+const tfq=[['بنحتاج جواز سفر عشان نسافر دوليًا.','We need a passport to travel abroad.',true],['الطيارة بتمشي تحت البحر.','The plane goes under the sea.',false],['الطيّار بسوق الطيارة.','The pilot drives (flies) the plane.',true],['بنحط ملابسنا بشنطة السفر.','We put our clothes in the suitcase.',true],['بنروح على المطار عشان نركب الطيارة.','We go to the airport to board the plane.',true]];
+let ti=0;
+function showT(){const q=tfq[ti];$('tq').textContent=(ti+1)+'. '+q[0];$('ten').textContent=q[1];$('tmsg').textContent='';say(q[0])}
+function tf(a){if(a===tfq[ti][2]){$('tmsg').innerHTML='<span class="ok">صح! ✅ Correct!</span>';star();setTimeout(()=>{ti=(ti+1)%tfq.length;showT()},1100)}else $('tmsg').innerHTML='<span class="no">فكّري مرة ثانية 🤔 · Think again</span>'}
+showT();
+
+// conversation
+$('conv').innerHTML=[['بتحبي السفر؟','bti7ibbi is-safar?','Do you like traveling?'],['وين نفسك تسافري؟','ween nafsik tsaafri?','Where do you wish to travel?'],['مع مين بتحبي تسافري؟','ma3 meen bti7ibbi tsaafri?','Who do you like to travel with?'],['بتحبي الطيارة ولا السيارة؟','bti7ibbi iT-Tayyaara wala is-sayyaara?','Do you like planes or cars?'],['شو بتعملي بالطيارة؟','shu bti3mali biT-Tayyaara?','What do you do on the plane?'],['شو بتاخدي معك بالسفر؟','shu bta5di ma3ik bis-safar?','What do you take with you?'],['بتحبي تجربي أكلات جديدة لما تسافري؟','bti7ibbi tjarrbi aklaat jdeede lamma tsaafri?','Do you like trying new foods when you travel?'],['لو سافرتي على جزيرة، شو رح تعملي هناك؟','law saafarti 3ala jazeere, shu ra7 ti3mali hunaak?','If you traveled to an island, what would you do there?']].map(x=>line(...x)).join('');
+</script>
+</body>
+</html>
