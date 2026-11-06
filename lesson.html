@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>أحب مدرستي – حصة تفاعلية</title>
+<style>
+:root{--bg:#fff8ec;--card:#ffffff;--ink:#2b2b3a;--pri:#ff7a59;--grn:#3cb371;--blu:#4a90e2;--line:#f0d9b5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1b2a;--card:#2a2840;--ink:#f4f1ff;--line:#46426b}}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Tajawal","Segoe UI",Tahoma,sans-serif;text-align:center;padding:12px;max-width:560px;margin:auto}
+h1{font-size:24px;margin:6px 0}
+.tabs{display:flex;gap:6px;justify-content:center;margin:10px 0}
+.tabs button{flex:1;font-size:15px;padding:10px 4px;border:2px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font-family:inherit}
+.tabs button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:14px;margin:10px 0}
+.big{font-size:84px;line-height:1.1}.word{font-size:52px;font-weight:700}
+.btn{font-family:inherit;font-size:18px;border:0;border-radius:14px;padding:10px 18px;margin:4px;background:var(--blu);color:#fff}
+.btn.g{background:var(--grn)}.btn.o{background:var(--pri)}
+.lt{display:inline-block;font-size:44px;font-weight:700;margin:2px 6px;padding:2px 10px;border-radius:12px;color:#fff}
+canvas{width:100%;height:260px;background:repeating-linear-gradient(transparent 0 129px,var(--line) 129px 131px);border:3px dashed var(--pri);border-radius:18px;touch-action:none}
+.sw{width:34px;height:34px;border-radius:50%;border:3px solid #fff;margin:3px;display:inline-block}
+.opt{display:block;width:100%;font-size:34px;font-family:inherit;margin:8px 0;padding:10px;border-radius:16px;border:3px solid var(--line);background:var(--card);color:var(--ink)}
+.opt.e{font-size:54px;display:inline-block;width:30%}
+.ok{border-color:var(--grn)!important;background:#d9f7e4!important;color:#1a5e36!important}.no{border-color:#e55!important;background:#fde2e2!important;color:#7a1c1c!important}
+.star{font-size:40px}.hide{display:none}.tip{font-size:15px;opacity:.8}
+</style></head><body>
+<h1>🏫 أُحِبُّ مَدْرَسَتِي</h1>
+<div class="tabs"><button class="on" data-t="learn">1 تعلّم 👀</button><button data-t="draw">2 ارسم ✏️</button><button data-t="talk">3 احكي 🎤</button><button data-t="quiz">4 كويز ⭐</button></div>
+
+<section id="learn"><div class="card"><div class="big" id="le"></div><div class="word" id="lw"></div><div id="ll"></div>
+<button class="btn o" onclick="say(cur.w)">🔊 اسمعي</button><button class="btn g" onclick="nxt()">الكلمة التالية ⬅️</button>
+<p class="tip">اضغطي على كل حرف لتسمعي اسمه، وعلى الصورة لتسمعي الكلمة!</p></div></section>
+
+<section id="draw" class="hide"><div class="card"><div class="word" id="dw"></div>
+<p>ارسمي الكلمة بإصبعك، أو ارسمي صورتها 🎨</p>
+<canvas id="cv"></canvas><div id="cols"></div>
+<button class="btn" onclick="clr()">🧽 امسحي</button><button class="btn g" onclick="dn()">كلمة أخرى ➡️</button></div></section>
+
+<section id="talk" class="hide"><div class="card"><div class="big" id="te"></div>
+<p>شو هاي؟ احكي الكلمة بصوت واضح، وبعدين جيبي جملة من عندك!</p>
+<div class="word" id="tw"></div>
+<button class="btn o" onclick="say(tcur.w)">🔊 اسمعي أول</button><button class="btn g" onclick="tn()">✅ حكيتها! التالية</button>
+<p class="tip" id="tc"></p></div></section>
+
+<section id="quiz" class="hide"><div class="card"><div id="qh">النتيجة: 0</div><div id="qq" style="margin:10px 0"></div><div id="qo"></div></div></section>
+
+<script>
+const W=[{w:"عَلَمُ",p:"علم",e:"🚩"},{w:"بَلَدِي",p:"بلدي",e:"🇶🇦"},{w:"يُرَفْرِفُ",p:"يرفرف",e:"🎏"},{w:"مَدْرَسَتِي",p:"مدرستي",e:"🏫"},{w:"أَتَعَلَّمُ",p:"أتعلم",e:"📚"}];
+const N={ع:"عين",ل:"لام",م:"ميم",ب:"باء",د:"دال",ي:"ياء",ر:"راء",ف:"فاء",س:"سين",ت:"تاء",أ:"همزة"};
+const C=["#ff7a59","#4a90e2","#3cb371","#b266d9","#e6a700","#e55"];
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="ar-SA";u.rate=.7;speechSynthesis.speak(u)}catch(e){}}
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x==b));["learn","draw","talk","quiz"].forEach(i=>document.getElementById(i).classList.toggle("hide",i!=b.dataset.t));if(b.dataset.t=="draw")setup()});
+let li=0,cur=W[0];
+function showL(){cur=W[li];le.textContent=cur.e;le.onclick=()=>say(cur.w);lw.textContent=cur.w;
+ll.innerHTML="";[...cur.p].forEach((c,i)=>{const s=document.createElement("span");s.className="lt";s.style.background=C[i%C.length];s.textContent=c;s.onclick=()=>say(N[c]||c);ll.appendChild(s)})}
+function nxt(){li=(li+1)%W.length;showL();say(cur.w)}showL();
+// draw
+let di=0,ctx,col=C[1],down=false;
+cols.innerHTML=C.map(c=>`<span class="sw" style="background:${c}" onclick="col='${c}'"></span>`).join("");
+function setup(){const c=cv,r=c.getBoundingClientRect();c.width=r.width*2;c.height=r.height*2;ctx=c.getContext("2d");ctx.lineWidth=10;ctx.lineCap="round";dw.textContent=W[di].w}
+function pos(e){const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*2,(e.clientY-r.top)*2]}
+cv.onpointerdown=e=>{down=true;cv.setPointerCapture(e.pointerId);ctx.strokeStyle=col;ctx.beginPath();ctx.moveTo(...pos(e))};
+cv.onpointermove=e=>{if(down){ctx.lineTo(...pos(e));ctx.stroke()}};
+cv.onpointerup=()=>down=false;
+function clr(){ctx.clearRect(0,0,cv.width,cv.height)}
+function dn(){di=(di+1)%W.length;clr();dw.textContent=W[di].w;say(W[di].w)}
+// talk
+let ti=0,tcur=W[0];const prompts=["قولي الكلمة 3 مرات 🗣️","قولي الكلمة بصوت هامس 🤫","قولي الكلمة بصوت عالي 📢","احكي جملة فيها الكلمة 💬","ارسمي الكلمة بالهوا ✨"];
+function showT(){tcur=W[ti];te.textContent=tcur.e;tw.textContent=tcur.w;tc.textContent=prompts[ti%prompts.length]}
+function tn(){ti=(ti+1)%W.length;showT();say(tcur.w)}showT();
+// quiz
+let Q=[],qi=0,sc=0;
+const sh=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+function startQ(){Q=[];W.forEach((x,i)=>{Q.push({t:0,a:i});Q.push({t:1,a:i})});Q=sh(Q);qi=0;sc=0;showQ()}
+function showQ(){if(qi>=Q.length){const s=Math.round(sc/Q.length*5);qh.textContent="";qq.innerHTML=`<div class="big">${"⭐".repeat(s)||"💪"}</div><h2>نتيجتك ${sc} من ${Q.length}</h2><p>${sc>=8?"ممتازة! 🏆 حافظة الكلمات!":"حلوة! جرّبي مرة ثانية 🌈"}</p>`;qo.innerHTML='<button class="btn o" onclick="startQ()">🔄 من جديد</button>';say(sc>=8?"ممتاز":"أحسنتِ");return}
+const q=Q[qi],ans=W[q.a],os=sh([q.a,...sh(W.map((_,i)=>i).filter(i=>i!=q.a)).slice(0,2)]);
+qh.textContent=`سؤال ${qi+1}/${Q.length}  |  النتيجة: ${sc} ⭐`;
+qq.innerHTML=q.t==0?`<div class="big">${ans.e}</div><p>أي كلمة تناسب الصورة؟</p>`:`<div class="word">${ans.w}</div><p>أي صورة تناسب الكلمة؟</p>`;
+if(q.t==0)say("");else say(ans.w);
+qo.innerHTML=os.map(i=>`<button class="opt ${q.t?"e":""}" data-i="${i}">${q.t?W[i].e:W[i].w}</button>`).join("");
+qo.querySelectorAll("button").forEach(b=>b.onclick=()=>{const ok=+b.dataset.i==q.a;b.classList.add(ok?"ok":"no");qo.querySelectorAll("button").forEach(x=>x.onclick=null);if(ok)sc++;say(ok?"أحسنت":ans.w);setTimeout(()=>{qi++;showQ()},1100)})}
+startQ();
+</script></body></html>
